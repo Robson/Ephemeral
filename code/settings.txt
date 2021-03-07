@@ -1,0 +1,3 @@
+﻿output=..\..\..\..\testing\
+# for testing we just use the middle of england
+tad=11609021

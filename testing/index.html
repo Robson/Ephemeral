@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Ephemeral - 7 March</title>		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://d3js.org/d3.v3.min.js"></script>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"> 		
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500&display=swap"> 	
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<div id="container">
+		</div>
+		<div id="cls">&nbsp;</div>
+		<script>
+					
+			var inside = 210;
+			var padding = 8;
+			var length = padding + inside + padding;
+			var columns;
+			var offsetX;
+			var offsetY;
+			var filled = [,];
+			var low = 0;
+			var modules = [];
+								
+			function random(start, end) {
+				return start + Math.floor(Math.random() * (end - start));
+			}
+			
+			function makeBox(width, height) {			
+				var startX = 0, startY = 0;
+				var hasLocation = false;
+				for (var a = 0; a + height < filled.length && !hasLocation; a++) {
+					for (var b = 0; b + width <= columns && !hasLocation; b++) {					
+						var isValid = true;
+						for (var c = 0; c < height && isValid; c++) {
+							for (var d = 0; d < width && isValid; d++) {
+								if (filled[a + c][b + d] > 0) {
+									isValid = false;
+								}
+							}
+						}
+						if (isValid) {
+							hasLocation = true;							
+							startX = b;
+							startY = a;
+						}						
+					}
+				}				
+				if (hasLocation) {
+					for (var c = startY; c < startY + height && isValid; c++) {
+						for (var d = startX; d < startX + width && isValid; d++) {
+							filled[c][d] = 1;
+						}
+					}
+					low = Math.max(low, offsetY + (startY * length) + ((height * length) - (padding * 2)));				
+					return d3
+						.select('#container')
+						.append('div')
+						.attr('class', 'box')
+						.style('top', offsetY + startY * length + 'px')
+						.style('left', offsetX + startX * length + 'px')						
+						.style('width', ((width * length) - (padding * 2)) + 'px')
+						.style('height', ((height * length) - (padding * 2)) + 'px');
+				}
+			}
+			
+			function createPage() {
+				low = 0;
+				d3.selectAll('.box').remove();
+				var docWidth = document.body.clientWidth;		
+				columns = ~~((docWidth - 20) / length);
+				columns = Math.min(6, columns);
+				offsetX = ((docWidth - (columns * length)) / 2) + 5;				
+				offsetY = 100;
+				for (var a = 0; a < 50; a++) {
+					filled[a] = new Array(columns);
+					for (var b = 0; b < columns; b++) {
+						filled[a][b] = 0;
+					}
+				}
+				for (var func of modules) {
+					func();
+				}
+				d3.select('#cls').style('top', low + 'px').style('height', ((padding * 2) + offsetY) + 'px');
+			}
+			
+			d3.select(window).on('resize', createPage);
+			
+		</script>
+
+<script src='modules/astronomy.js'></script>
+<script src='modules/bitcoin.js'></script>
+<script src='modules/moon.js'></script>
+<script src='modules/singles.js'></script>
+<script src='modules/weather.js'></script>
+<script src='modules/sun.js'></script>
+<script src='modules/vanguard.js'></script>
+<script src='modules/word.js'></script>
+
+		<!--
+		<script src="modules/f1.js"></script>	
+		Eclipse
+		-->
+		<script>		
+			//modules.sort(x => Math.random() > 0.5);			
+			createPage();			
+		</script>
+	</body>
+</html>
