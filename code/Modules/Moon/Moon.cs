@@ -24,7 +24,7 @@
                     .Replace("{{PERCENT}}", data.percent)
                     .Replace("{{TYPE}}", data.type)
                     .Replace("{{URL}}", data.url)
-                    .Replace("{{LOCATION}}", settings["tad"]);
+                    .Replace("{{LOCATION}}", settings["moon_location"]);
 
                 File.WriteAllText(outputFolder + @"\moon.js", javascript);
 
@@ -39,7 +39,7 @@
         private Data GetMoonData(Dictionary<string, string> settings, WebClient webClient)
         {
             var data = new Data();
-            var html = webClient.DownloadString("https://www.timeanddate.com/moon/@" + settings["tad"]);
+            var html = webClient.DownloadString("https://www.timeanddate.com/moon/@" + settings["moon_location"]);
 
             //<span id="cur-moon-percent">41.5%</span>
             data.percent = Regex.Match(html, "<span id=cur-moon-percent>([\\d\\.]+)%").Groups[1].Value;

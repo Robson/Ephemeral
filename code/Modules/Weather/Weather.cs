@@ -21,7 +21,7 @@
                 string javascript = File.ReadAllText(sourceFolder + "template.js");
 
                 javascript = javascript
-                    .Replace("{{LOCATION}}", settings["tad"])
+                    .Replace("{{LOCATION}}", settings["weather_location"])
                     .Replace("{{DATA}}", data.javascript);
 
                 File.WriteAllText(outputFolder + @"\weather.js", javascript);
@@ -37,7 +37,7 @@
         private Data GetWeatherData(Dictionary<string, string> settings, WebClient webClient)
         {
             var data = new Data();
-            var html = webClient.DownloadString("https://www.timeanddate.com/weather/@" + settings["tad"] + "/ext");
+            var html = webClient.DownloadString("https://www.timeanddate.com/weather/@" + settings["weather_location"] + "/ext");
 
             data.javascript = Regex.Match(html, "(var data=\\{\"copyright\":[^<]+)<").Groups[1].Value;
 
