@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Net;
     using System.Text.RegularExpressions;
 
@@ -67,9 +68,9 @@
             data.week = FormatPercent(((latest / week) - 1) * 100);
             data.dateWeek = rows[5].Groups[1].Value;
 
-            var month = double.Parse(rows[20].Groups[2].Value);
+            var month = double.Parse(rows.Last().Groups[2].Value);
             data.month = FormatPercent(((latest / month) - 1) * 100);
-            data.dateMonth = rows[20].Groups[1].Value;
+            data.dateMonth = rows.Last().Groups[1].Value;
 
             var yearAgo = Regex.Match(html, "1 Year change(<[^>]+>){5}(\\-|\\+)([\\d\\.]+)%").Groups[3].Value;
             var year = FormatPercent(double.Parse(yearAgo));
