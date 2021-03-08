@@ -68,6 +68,7 @@
             var html = File.ReadAllText(@"Templates\template.html");
             html = html.Replace("{{ADDITIONS}}", string.Join(Environment.NewLine, pageLines.ToArray()));
             html = html.Replace("{{DATE}}", DateTime.Today.ToString("d MMMM"));
+            html = html.Replace("{{GENERATED}}", DateTime.Now.ToString("R"));
             File.WriteAllText(settings["output"] + @"\index.html", html);
         }
 

@@ -1,6 +1,6 @@
 var sunData = {
-	Rise:     '06:38',
-	Set:      '17:56',
+	Rise:     '06:36',
+	Set:      '17:58',
 	Location: '11609021'
 }
 
