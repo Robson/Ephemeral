@@ -20,7 +20,8 @@
             new Weather(),
             new Sun(),
             new Vanguard(),            
-            new Word()
+            new Word(),
+            new Nature()
         };
 
         private static Dictionary<string, string> settings = new Dictionary<string, string>();

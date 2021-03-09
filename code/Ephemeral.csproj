@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="Modules\Nature\template.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Modules\Astronomy\template.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

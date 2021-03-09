@@ -1,10 +1,10 @@
 var wordData = {
 	Word:       'luminary',
-	Definition: '<p><strong>1:</strong> a person of prominence or brilliant achievement</p><p><strong>2:</strong> a body that gives light; <em>especially</em>  one of the celestial bodies</p>'
+	Definition: '<p><strong>1 :</strong> a person of prominence or brilliant achievement</p><p><strong>2 :</strong> a body that gives light; <em>especially</em>  one of the celestial bodies</p>'
 }
 
 function word() {
-	var box = makeBox(wordData.Definition.length > 250 ? 2 : 1, 1);
+	var box = makeBox(2, 1);
 	box
 		.append('div')
 		.attr('class', 'title')
