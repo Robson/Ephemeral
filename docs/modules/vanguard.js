@@ -11,7 +11,7 @@ var vanguardValues = {
 	'vs Previous': "-0.28%",
 	'vs Week': "-1.38%",
 	'vs Month': "-3.28%",
-	'vs Year': "+23.04%"
+	'vs Year': "+33.19%"
 };
 
 function vanguard() {
