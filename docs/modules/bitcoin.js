@@ -1,9 +1,9 @@
 var bitcoinData = {
-	"Today's Open": "£37,199.72",
+	"Today's Open": "£37,707.62",
 	'vs Yesterday': "NA",
-	'vs Week':      "+1.2%",
-	'vs Month':     "+1.3%",
-	'vs Year':      "+5.4%"
+	'vs Week':      "+1.1%",
+	'vs Month':     "+1.1%",
+	'vs Year':      "+6.1%"
 };
 
 function bitcoin() {

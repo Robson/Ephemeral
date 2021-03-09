@@ -1,6 +1,8 @@
 var imageData = {
-	Title:  ' Pillars of the Eagle Nebula in Infrared ',
-	Source: 'https://apod.nasa.gov/apod/image/2103/M16Ir_HubbleRomero_960.jpg'
+	Title:     ' Three Tails of Comet NEOWISE ',
+	Source:    'https://apod.nasa.gov/apod/image/2103/Neowise3Tails_Lefaudeux_960.jpg',
+	LinkImage: 'https://apod.nasa.gov/apod/image/2103/Neowise3Tails_Lefaudeux_1088.jpg',
+	LinkPage:  'https://apod.nasa.gov/apod/ap210308.html'
 }
 
 function word() {
@@ -16,6 +18,8 @@ function word() {
 		.append('div');
 	inside
 		.append('p')
+		.append('a')
+		.attr('href', imageData.LinkImage)
 		.append('img')
 		.style('width', 'auto')
 		.style('height', 'auto')
@@ -24,7 +28,12 @@ function word() {
 		.attr('src', imageData.Source);
 	inside
 		.append('p')
-		.html('&nbsp;<br/>' + imageData.Title);
+		.html('&nbsp;');
+	inside
+		.append('p')
+		.append('a')
+		.attr('href', imageData.LinkPage)
+		.html(imageData.Title);
 }
 
 modules.push(word);

@@ -1,18 +1,18 @@
-var vanguardValues = {
-	"Latest":      "£155.08/share",
-	'vs Previous': "+1.89%",
-	'vs Week':     "+1.29%",
-	'vs Month':    "-2.25%",
-	'vs Year':     "+23.39%"
-};
-
 var vanguardDates = {
 	"Latest":      "Fri, Mar 05, 2021",
 	"vs Previous": "Thu, Mar 04, 2021",
 	"vs Week":     "Fri, Feb 26, 2021",
-	"vs Month":    "Fri, Feb 05, 2021",
+	"vs Month":    "Mon, Feb 08, 2021",
 	"vs Year":     ""
 }
+
+var vanguardValues = {
+	"Latest": "£155.08/share",
+	'vs Previous': "+1.89%",
+	'vs Week': "+1.29%",
+	'vs Month': "-3.01%",
+	'vs Year': "+23.39%"
+};
 
 function vanguard() {
 	var box = makeBox(1, 1);

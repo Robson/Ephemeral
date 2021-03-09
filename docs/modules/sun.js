@@ -1,6 +1,6 @@
 var sunData = {
-	Rise:     '06:36',
-	Set:      '17:58',
+	Rise:     '06:34',
+	Set:      '18:00',
 	Location: '11609021'
 }
 
@@ -23,7 +23,7 @@ function sun() {
 		.style('font-size', '300%');
 	row
 		.append('td')
-		.html(Math.random() > .5 ? '&#127749;' : '&#127748;')
+		.html('&#127748;')
 	row
 		.append('td')
 		.html('&#127751;')
