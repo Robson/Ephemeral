@@ -57,7 +57,17 @@
             foreach (var module in modules)
             {
                 var sourceFolder = AppContext.BaseDirectory + @"\Modules\" + module.GetName() + @"\";
-                scripts.AddRange(module.Run(settings, sourceFolder, settings["output"] + "modules", webClient));
+                var lines = new List<string>();
+                try
+                {
+                    lines.AddRange(module.Run(settings, sourceFolder, settings["output"] + "modules", webClient));
+                }
+                catch (Exception e)
+                {
+                    lines.Add("<script>console.log('Error in " + module.GetName() + " module: " + e.Message + "');</script>");
+                }
+
+                scripts.AddRange(lines);
             }
 
             return scripts;

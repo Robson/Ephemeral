@@ -1,48 +1,31 @@
 ﻿namespace Ephemeral
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Net;
     using System.Text.RegularExpressions;
 
-    internal class Singles : IModule
+    internal class Singles : ModuleMaster, IModule
     {
         public string GetName()
         {
-            return "Singles";
+            return "singles";
         }
 
         public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
         {
-            try
-            {
-                var data = GetSinglesData(webClient);
-                string javascript = File.ReadAllText(sourceFolder + "template.js");
+            var data = GetSinglesData(webClient);
+            var javascript = File.ReadAllText(sourceFolder + "template.js")
+                .Replace("{{WHEN}}", data.when)
+                .Replace("{{DATA}}", data.javascript);
 
-                javascript = javascript
-                    .Replace("{{WHEN}}", data.when)
-                    .Replace("{{DATA}}", data.javascript);
-
-                File.WriteAllText(outputFolder + @"\singles.js", javascript);
-
-                return new List<string>() { @"<script src='modules/singles.js'></script>" };
-            }
-            catch (Exception e)
-            {
-                return new List<string>() { "<script>console.log('Error in singles module: " + e.Message + "');</script>" };
-            }
+            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
         }
 
         private Data GetSinglesData(WebClient webClient)
-        {
-            var data = new Data();
+        {   
             var url = "https://www.officialcharts.com/charts/singles-chart/";
-
             var html = webClient.DownloadString(url);
-
-            data.when = Regex.Match(html, "<p class=\"article-date\">([^<]+)<").Groups[1].Value.Trim();
-
             var images = Regex.Matches(html, "<div class=\"cover\"[^>]+>\\s+<img src=\"([^\"]+)\"");
             var titles = Regex.Matches(html, "<div class=\"title\">\\s+(<a [^>]+>[^>]+</a>)");
             var artists = Regex.Matches(html, "<div class=\"artist\">\\s+(<a [^>]+>[^>]+</a>)");
@@ -59,9 +42,11 @@
 
             javascript = javascript.Replace("href='", "href='https://www.officialcharts.com");
 
-            data.javascript = javascript;            
-
-            return data;
+            return new Data
+            {
+                when = Regex.Match(html, "<p class=\"article-date\">([^<]+)<").Groups[1].Value.Trim(),
+                javascript = javascript
+            };
         }
 
         private struct Data

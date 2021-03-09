@@ -1,47 +1,37 @@
 ﻿namespace Ephemeral
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Net;
     using System.Text.RegularExpressions;
 
-    class Sun : IModule
+    internal class Sun : ModuleMaster, IModule
     {
         public string GetName()
         {
-            return "Sun";
+            return "sun";
         }
 
         public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
         {
-            try
-            {
-                var data = GetSunData(settings, webClient);
-                string javascript = File.ReadAllText(sourceFolder + "template.js");
+            var data = GetSunData(settings, webClient);
+            var javascript = File.ReadAllText(sourceFolder + "template.js")
+                .Replace("{{RISE}}", data.rise)
+                .Replace("{{SET}}", data.set)
+                .Replace("{{LOCATION}}", settings["sun_location"]);
 
-                javascript = javascript
-                    .Replace("{{RISE}}", data.rise)
-                    .Replace("{{SET}}", data.set)
-                    .Replace("{{LOCATION}}", settings["sun_location"]);
-
-                File.WriteAllText(outputFolder + @"\sun.js", javascript);
-
-                return new List<string>() { @"<script src='modules/sun.js'></script>" };
-            }
-            catch(Exception e)
-            {
-                return new List<string>() { "<script>console.log('Error in sun module: " + e.Message + "');</script>" };
-            }
+            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
         }
 
         private Data GetSunData(Dictionary<string, string> settings, WebClient webClient)
-        {
-            var data = new Data();
+        {   
             var html = webClient.DownloadString("https://www.timeanddate.com/sun/@" + settings["sun_location"]);
-            data.rise = Regex.Match(html, @"<th>Sunrise Today: ?</th><td>(\d\d:\d\d)").Groups[1].Value;
-            data.set = Regex.Match(html, @"<th>Sunset Today: ?</th><td>(\d\d:\d\d)").Groups[1].Value;
-            return data;
+
+            return new Data
+            {
+                rise = Regex.Match(html, @"<th>Sunrise Today: ?</th><td>(\d\d:\d\d)").Groups[1].Value,
+                set = Regex.Match(html, @"<th>Sunset Today: ?</th><td>(\d\d:\d\d)").Groups[1].Value
+            };
         }
 
         private struct Data

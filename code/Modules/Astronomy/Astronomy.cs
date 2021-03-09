@@ -1,54 +1,49 @@
 ﻿namespace Ephemeral
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Net;
     using System.Text.RegularExpressions;
 
-    internal class Astronomy : IModule
+    internal class Astronomy : ModuleMaster, IModule
     {
         public string GetName()
         {
-            return "Astronomy";
+            return "astronomy";
         }
 
         public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
         {
-            try
-            { 
-                var data = GetAstronomyData(webClient);
-                string javascript = File.ReadAllText(sourceFolder + "template.js");
-            
-                javascript = javascript
-                    .Replace("{{TITLE}}", data.title)
-                    .Replace("{{SOURCE}}", data.source);
+            var data = GetAstronomyData(webClient);
+            var javascript = File.ReadAllText(sourceFolder + "template.js")
+                .Replace("{{LINK_IMAGE}}", data.linkImage)
+                .Replace("{{LINK_PAGE}}", data.linkPage)
+                .Replace("{{TITLE}}", data.title)
+                .Replace("{{SOURCE}}", data.source);
 
-                File.WriteAllText(outputFolder + @"\astronomy.js", javascript);
-
-                return new List<string>() { @"<script src='modules/astronomy.js'></script>" };
-            }
-            catch (Exception e)
-            {
-                return new List<string>() { "<script>console.log('Error in astronomy module: " + e.Message + "');</script>" };
-            }
+            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
         }
 
         private Data GetAstronomyData(WebClient webClient)
         {
-            var data = new Data();
-            var html = webClient.DownloadString("https://apod.nasa.gov/apod/astropix.html");
+            var url = "https://apod.nasa.gov/apod/astropix.html";
+            var html = webClient.DownloadString(url);
 
-            data.source = "https://apod.nasa.gov/apod/" + Regex.Match(html, "<IMG SRC=\"([^\"]+)\"").Groups[1].Value;
-            data.title = Regex.Match(html, "<center>\\s+<b>([^<]+)</b>").Groups[1].Value;
-
-            return data;
+            return new Data
+            {
+                linkImage = "https://apod.nasa.gov/apod/" + Regex.Match(html, "<a href=\"(image/[^\"]+)\"").Groups[1].Value,
+                linkPage = "https://apod.nasa.gov/apod/ap" + Regex.Match(html, "(\\d+)\">Discuss</a>").Groups[1].Value + ".html",
+                source = "https://apod.nasa.gov/apod/" + Regex.Match(html, "<IMG SRC=\"([^\"]+)\"").Groups[1].Value,
+                title = Regex.Match(html, "<center>\\s+<b>([^<]+)</b>").Groups[1].Value
+            };
         }
 
         private struct Data
         {
-            internal string title;
+            internal string linkImage;
+            internal string linkPage;
             internal string source;
+            internal string title;
         }
     }
 }

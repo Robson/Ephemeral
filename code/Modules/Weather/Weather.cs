@@ -1,47 +1,35 @@
 ﻿namespace Ephemeral
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Net;
     using System.Text.RegularExpressions;
 
-    class Weather : IModule
+    internal class Weather : ModuleMaster, IModule
     {
         public string GetName()
         {
-            return "Weather";
+            return "weather";
         }
 
         public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
         {
-            try
-            {
-                var data = GetWeatherData(settings, webClient);
-                string javascript = File.ReadAllText(sourceFolder + "template.js");
+            var data = GetWeatherData(settings, webClient);
+            var javascript = File.ReadAllText(sourceFolder + "template.js")
+                .Replace("{{LOCATION}}", settings["weather_location"])
+                .Replace("{{DATA}}", data.javascript);
 
-                javascript = javascript
-                    .Replace("{{LOCATION}}", settings["weather_location"])
-                    .Replace("{{DATA}}", data.javascript);
-
-                File.WriteAllText(outputFolder + @"\weather.js", javascript);
-
-                return new List<string>() { @"<script src='modules/weather.js'></script>" };
-            }
-            catch(Exception e)
-            {
-                return new List<string>() { "<script>console.log('Error in weather module: " + e.Message + "');</script>" };
-            }
+            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
         }
 
         private Data GetWeatherData(Dictionary<string, string> settings, WebClient webClient)
-        {
-            var data = new Data();
+        {            
             var html = webClient.DownloadString("https://www.timeanddate.com/weather/@" + settings["weather_location"] + "/ext");
 
-            data.javascript = Regex.Match(html, "(var data=\\{\"copyright\":[^<]+)<").Groups[1].Value;
-
-            return data;
+            return new Data
+            {
+                javascript = Regex.Match(html, "(var data=\\{\"copyright\":[^<]+)<").Groups[1].Value
+            };
         }
 
         private struct Data

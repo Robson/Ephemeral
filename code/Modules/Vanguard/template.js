@@ -1,11 +1,3 @@
-var vanguardValues = {
-	"Latest":      "{{LATEST}}",
-	'vs Previous': "{{PREVIOUS}}",
-	'vs Week':     "{{WEEK}}",
-	'vs Month':    "{{MONTH}}",
-	'vs Year':     "{{YEAR}}"
-};
-
 var vanguardDates = {
 	"Latest":      "{{DATE_LATEST}}",
 	"vs Previous": "{{DATE_PREVIOUS}}",
@@ -13,6 +5,14 @@ var vanguardDates = {
 	"vs Month":    "{{DATE_MONTH}}",
 	"vs Year":     "{{DATE_YEAR}}"
 }
+
+var vanguardValues = {
+	"Latest": "{{VALUE_LATEST}}",
+	'vs Previous': "{{VALUE_PREVIOUS}}",
+	'vs Week': "{{VALUE_WEEK}}",
+	'vs Month': "{{VALUE_MONTH}}",
+	'vs Year': "{{VALUE_YEAR}}"
+};
 
 function vanguard() {
 	var box = makeBox(1, 1);

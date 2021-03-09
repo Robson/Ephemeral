@@ -4,7 +4,7 @@ var wordData = {
 }
 
 function word() {
-	var box = makeBox(1, 2);
+	var box = makeBox(2, 1);
 	box
 		.append('div')
 		.attr('class', 'title')
