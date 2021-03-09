@@ -1,7 +1,7 @@
 var moonData = {
-	Percent:  '19.6',
-	Type:     '<a href="/astronomy/moon/waning-crescent.html" title="Waning Crescent on the night between 8 March and 9 March">Waning Crescent</a>',
-	Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.196&p=3.633&r=0.513',
+	Percent:  '16.7',
+	Type:     '<a href="/astronomy/moon/waning-crescent.html" title="Waning Crescent on the night between 9 March and 10 March">Waning Crescent</a>',
+	Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.167&p=2.809&r=5.989',
 	Location: '11609021'
 }
 
