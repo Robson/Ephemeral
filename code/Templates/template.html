@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Ephemeral - {{DATE}}</title>		
+		<title>Ephemeral - {{GENERATED}}</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,6 @@
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	<body>
-		<!-- Generated at {{GENERATED}} +-->
 		<div id="container">
 		</div>
 		<div id="cls">&nbsp;</div>
@@ -87,7 +86,10 @@
 				for (var func of modules) {
 					func();
 				}
-				d3.select('#cls').style('top', low + 'px').style('height', ((padding * 2) + offsetY) + 'px');
+				d3
+					.select('#cls')
+					.style('top', (low) + 'px')
+					.style('height', ((padding * 2) + offsetY) + 'px');
 			}
 			
 			d3.select(window).on('resize', createPage);

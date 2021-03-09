@@ -11,6 +11,9 @@
     <None Update="Modules\Astronomy\template.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Modules\Twitter\template.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Modules\Word\template.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

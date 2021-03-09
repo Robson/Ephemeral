@@ -39,8 +39,10 @@ body {
 
 #cls {
 	position: absolute;
-	width: 200px;
+	width: 100%;
 	left: 0px;
+	font-size: 12px;
+	opacity: 0.75;
 }
 
 /***** LINKS *****/
@@ -94,4 +96,11 @@ p {
 table {
 	margin: 0 auto;
 	font-size: 80%;	
+}
+
+.condensed tr,
+.condensed td, 
+.condensed table {
+	padding: 0;
+	margin: 0;
 }

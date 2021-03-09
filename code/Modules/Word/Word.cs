@@ -25,6 +25,7 @@
         private Data GetWordData(WebClient webClient)
         {           
             var html = webClient.DownloadString("https://www.merriam-webster.com/word-of-the-day")
+                .Replace(" :", ":")
                 .Replace("\r", "")
                 .Replace("\n", "");
             
