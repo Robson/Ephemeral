@@ -1,6 +1,6 @@
-var imageData = {
-	Title:     '{{TITLE}}',
+var imageData = {	
 	Source:    '{{SOURCE}}',
+	Title:     '{{TITLE}}',
 	LinkImage: '{{LINK_IMAGE}}',
 	LinkPage:  '{{LINK_PAGE}}'
 }
