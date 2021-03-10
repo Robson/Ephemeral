@@ -5,6 +5,7 @@
 
 # Project-specific files
 settings.txt
+code\settings.txt
 
 # User-specific files
 *.rsuser
