@@ -1,6 +1,6 @@
 var wordData = {
-	Word:       'luminary',
-	Definition: '<p><strong>1:</strong> a person of prominence or brilliant achievement</p><p><strong>2:</strong> a body that gives light; <em>especially</em>  one of the celestial bodies</p>'
+	Word:       'felicitate',
+	Definition: '<p><strong>1</strong> <em>archaic</em>  to make happy</p><p><strong>2 a:</strong> to consider happy or fortunate</p><p><strong>b:</strong> to offer congratulations to</p>'
 }
 
 function word() {
