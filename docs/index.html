@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Ephemeral - 9 March</title>		
+		<title>Ephemeral - 10 Mar 00:00</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,6 @@
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	<body>
-		<!-- Generated at Tue, 09 Mar 2021 23:54:06 GMT +-->
 		<div id="container">
 		</div>
 		<div id="cls">&nbsp;</div>
@@ -87,7 +86,10 @@
 				for (var func of modules) {
 					func();
 				}
-				d3.select('#cls').style('top', low + 'px').style('height', ((padding * 2) + offsetY) + 'px');
+				d3
+					.select('#cls')
+					.style('top', (low) + 'px')
+					.style('height', ((padding * 2) + offsetY) + 'px');
 			}
 			
 			d3.select(window).on('resize', createPage);
@@ -95,13 +97,15 @@
 		</script>
 
 <script src='modules/astronomy.js'></script>
-<script src='modules/bitcoin.js'></script>
+<script>console.log('Error in bitcoin module: Sequence contains no elements');</script>
 <script src='modules/moon.js'></script>
+<script src='modules/twitter.js'></script>
 <script src='modules/singles.js'></script>
 <script src='modules/weather.js'></script>
 <script src='modules/sun.js'></script>
 <script src='modules/vanguard.js'></script>
 <script src='modules/word.js'></script>
+<script src='modules/nature.js'></script>
 
 		<script>		
 			modules.sort(x => Math.random() > 0.5);			
