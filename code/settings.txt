@@ -1,6 +1,0 @@
-﻿output=..\..\..\..\docs\
-
-# for testing we just use the middle of england
-moon_location=11609021
-sun_location=11609021
-weather_location=11609021
