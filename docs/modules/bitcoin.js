@@ -1,5 +1,5 @@
 var bitcoinData = {
-	"Today's Open": "£39,371.91",
+	"Today's Open": "£39,585.34",
 	'vs Yesterday': "+1.0%",
 	'vs Week':      "+1.1%",
 	'vs Month':     "+1.2%",
