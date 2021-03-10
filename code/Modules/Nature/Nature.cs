@@ -12,7 +12,7 @@
             return "nature";
         }
 
-        public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
+        public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient)
         {
             var data = GetData(webClient);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
@@ -20,7 +20,7 @@
                 .Replace("{{TITLE}}", data.title)
                 .Replace("{{LINK_PAGE}}", data.linkPage);
 
-            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
+            return javascript;
         }
 
         private Data GetData(WebClient webClient)

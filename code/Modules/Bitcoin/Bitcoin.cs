@@ -13,7 +13,7 @@
             return "bitcoin";
         }
 
-        public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
+        public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient)
         {
             var data = GetBitcoinData(webClient);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
@@ -23,7 +23,7 @@
                 .Replace("{{MONTH}}", data.month)
                 .Replace("{{YEAR}}", data.year);
 
-            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
+            return javascript;
         }
 
         private string FormatPercent(double first, double second)

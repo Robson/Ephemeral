@@ -1,12 +1,12 @@
-var bitcoinData = {
-	"Today's Open": "{{TODAY}}",
-	'vs Yesterday': "{{YESTERDAY}}",
-	'vs Week':      "{{WEEK}}",
-	'vs Month':     "{{MONTH}}",
-	'vs Year':      "{{YEAR}}"
-};
+modules.push(function bitcoin() {
+	var bitcoinData = {
+		"Today's Open": "{{TODAY}}",
+		'vs Yesterday': "{{YESTERDAY}}",
+		'vs Week':      "{{WEEK}}",
+		'vs Month':     "{{MONTH}}",
+		'vs Year':      "{{YEAR}}"
+	};
 
-function bitcoin() {
 	var box = makeBox(1, 1);
 	box
 		.append('div')
@@ -35,6 +35,4 @@ function bitcoin() {
 			.attr('class', 'code')
 			.html(bitcoinData[item]);
 	}
-}
-
-modules.push(bitcoin);
+});

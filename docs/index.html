@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Ephemeral - 10 Mar 14:48</title>		
+		<title>Ephemeral - 10 Mar 22:12</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -93,23 +93,472 @@
 			}
 			
 			d3.select(window).on('resize', createPage);
+
+//////////////////////////////////////////////////
 			
-		</script>
+modules.push(function word() {
+	var imageData = {
+		Source:    'https://apod.nasa.gov/apod/image/2103/NGC1499_Akar_960.jpg',
+		Title:     'NGC 1499: The California Nebula',
+		LinkImage: 'https://apod.nasa.gov/apod/image/2103/NGC1499_Akar_3296.jpg',
+		LinkPage:  'https://apod.nasa.gov/apod/ap210310.html'
+	}
 
-<script src='modules/astronomy.js'></script>
-<script src='modules/bitcoin.js'></script>
-<script src='modules/moon.js'></script>
-<script src='modules/twitter.js'></script>
-<script src='modules/singles.js'></script>
-<script src='modules/weather.js'></script>
-<script src='modules/sun.js'></script>
-<script src='modules/vanguard.js'></script>
-<script src='modules/word.js'></script>
-<script src='modules/nature.js'></script>
+	if (!imageData.Source.endsWith('/')) {
+		var box = makeBox(2, 2);
+		box
+			.append('div')
+			.attr('class', 'title')
+			.html('&#x1F6F8;<a href="https://apod.nasa.gov/apod/astropix.html">Astronomy Picture of the Day</a>')
+		box = box
+			.append('div')
+			.attr('class', 'inside');
+		var inside = box
+			.append('div');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', imageData.LinkImage)
+			.append('img')
+			.style('width', 'auto')
+			.style('height', 'auto')
+			.style('max-width', '400px')
+			.style('max-height', '320px')
+			.attr('src', imageData.Source);
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', imageData.LinkPage)
+			.html(imageData.Title);
+	}
+});
 
-		<script>		
-			modules.sort(x => Math.random() > 0.5);			
-			createPage();			
+//////////////////////////////////////////////////
+
+modules.push(function weather() {
+    var weatherLocation = "11609021";
+
+    var data={"copyright":"Contents are strictly for use by timeanddate.com","units":{"temp":"°C","prec":"mm","wind":"mph","baro":"mbar"},"detail":[{"hl":true,"hls":"8 Mar - 14 Mar","date":16154208E5,"ts":"Thu, 11","ds":"Thu, 11 Mar","icon":21,"desc":"Isolated tstorms. Cloudy.","temp":10,"templow":4,"cf":3,"wind":22,"wd":253,"hum":73,"pc":82,"rain":3.3 },{"date":16155072E5,"ts":"Fri, 12","ds":"Fri, 12 Mar","icon":18,"desc":"Light rain. Breaks of sun late.","temp":8,"templow":4,"cf":3,"wind":20,"wd":237,"hum":68,"pc":79,"rain":4.6 },{"date":16155936E5,"ts":"Sat, 13","ds":"Sat, 13 Mar","icon":33,"desc":"Light showers. Broken clouds.","temp":8,"templow":3,"cf":2,"wind":24,"wd":263,"hum":70,"pc":72,"rain":5.6 },{"date":161568E7,"ts":"Sun, 14","ds":"Sun, 14 Mar","icon":33,"desc":"Light showers. Mostly cloudy.","temp":9,"templow":2,"cf":5,"wind":14,"wd":280,"hum":69,"pc":80,"rain":3.1 },{"hl":true,"hls":"15 Mar - 21 Mar","date":16157664E5,"ts":"Mon, 15","ds":"Mon, 15 Mar","icon":33,"desc":"Showers late. Scattered clouds.","temp":8,"templow":1,"cf":4,"wind":13,"wd":312,"hum":65,"pc":50,"rain":0.5 },{"date":16158528E5,"ts":"Tue, 16","ds":"Tue, 16 Mar","icon":2,"desc":"Mostly sunny.","temp":9,"templow":2,"cf":7,"wind":6,"wd":10,"hum":53,"pc":6},{"date":16159392E5,"ts":"Wed, 17","ds":"Wed, 17 Mar","icon":33,"desc":"Light showers. Decreasing cloudiness.","temp":11,"templow":4,"cf":9,"wind":9,"wd":350,"hum":76,"pc":54,"rain":2},{"date":16160256E5,"ts":"Thu, 18","ds":"Thu, 18 Mar","icon":33,"desc":"Showers late. Increasing cloudiness.","temp":9,"templow":4,"cf":8,"wind":6,"wd":240,"hum":96,"pc":59,"rain":0.9 },{"date":1616112E6,"ts":"Fri, 19","ds":"Fri, 19 Mar","icon":4,"desc":"Breaks of sun late.","temp":11,"templow":6,"cf":10,"wind":4,"wd":330,"hum":60,"pc":6},{"date":16161984E5,"ts":"Sat, 20","ds":"Sat, 20 Mar","icon":2,"desc":"Clearing skies.","temp":12,"templow":6,"cf":11,"wind":5,"wd":310,"hum":60,"pc":6},{"date":16162848E5,"ts":"Sun, 21","ds":"Sun, 21 Mar","icon":18,"desc":"Light rain. Broken clouds.","temp":10,"templow":6,"cf":8,"wind":10,"wd":300,"hum":76,"pc":47,"rain":2.3 },{"hl":true,"hls":"22 Mar - 28 Mar","date":16163712E5,"ts":"Mon, 22","ds":"Mon, 22 Mar","icon":18,"desc":"Sprinkles. Broken clouds.","temp":10,"templow":5,"cf":9,"wind":6,"wd":330,"hum":71,"pc":51,"rain":1.2 },{"date":16164576E5,"ts":"Tue, 23","ds":"Tue, 23 Mar","icon":33,"desc":"Light showers. Mostly cloudy.","temp":11,"templow":5,"cf":10,"wind":5,"wd":10,"hum":68,"pc":68,"rain":1.3 },{"date":1616544E6,"ts":"Wed, 24","ds":"Wed, 24 Mar","icon":33,"desc":"Showers late. Afternoon clouds.","temp":11,"templow":5,"cf":11,"wind":4,"wd":60,"hum":66,"pc":61,"rain":1.2 },{"date":16166304E5,"ts":"Thu, 25","ds":"Thu, 25 Mar","icon":6,"desc":"Broken clouds.","temp":12,"templow":5,"cf":9,"wind":15,"wd":70,"hum":72,"pc":52,"rain":0.3 }],"grid":{"temp":{"low":1,"high":12,"range":11},"prec":{"high":5.6},"time":86400000,"sections":15},"conv":{"prec":{"offset":0,"scale":1},"temp":{"offset":0,"scale":1},"wind":{"offset":0,"scale":0.869},"baro":{"offset":0,"scale":1}}};
+
+
+    var box = makeBox(2, 2);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#127746;<a href="https://www.timeanddate.com/weather/@' + weatherLocation + '/ext">Weather</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div');
+    var table = inside
+        .append('table');
+
+    for (var day of data.detail.slice(0, 7)) {
+        var row = table
+            .append('tr');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .style('font-weight', 'bold')
+            .html(day.ds.split(',')[0] + ':&nbsp;');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html(day.templow + '&#xb0;');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html('to');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html(day.temp + '&#xb0;');
+        row
+            .append('td')
+            .style('text-align', 'center')
+            .append('img')
+            .attr('src', 'https://c.tadst.com/gfx/w/svg/wt-' + day.icon + '.svg')
+            .attr('width', '32px')
+            .attr('height', '32px');
+        row
+            .append('td')
+            .style('text-align', 'left')
+            .html(day.desc)
+    }
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function bitcoin() {
+	var bitcoinData = {
+		"Today's Open": "£39,585.34",
+		'vs Yesterday': "+1.0%",
+		'vs Week':      "+1.1%",
+		'vs Month':     "+1.2%",
+		'vs Year':      "+6.5%"
+	};
+
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4B1;<a href="https://finance.yahoo.com/quote/BTC-GBP/history">Bitcoin</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');		
+	var inside = box
+		.append('div');
+	var table = inside
+		.append('table');	
+	
+	for (var item of Object.keys(bitcoinData)) {
+		var row = table
+			.append('tr')
+			.style('font-weight', item.startsWith("Today") ? "bold" : "normal")
+			.style('border-bottom', '1px solid #000');
+		row
+			.append('td')
+			.style('text-align', 'left')
+			.html(item + ':&nbsp;');
+		row
+			.append('td')
+			.style('text-align', 'right')
+			.attr('class', 'code')
+			.html(bitcoinData[item]);
+	}
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function vanguard() {
+
+	var vanguardDates = {
+		"Latest":      "Tue, Mar 09, 2021",
+		"vs Previous": "Mon, Mar 08, 2021",
+		"vs Week":     "Tue, Mar 02, 2021",
+		"vs Month":    "Mon, Feb 08, 2021",
+		"vs Year":     ""
+	}
+
+	var vanguardValues = {
+		"Latest":      "£155.75/share",
+		'vs Previous': "+0.72%",
+		'vs Week':     "-0.04%",
+		'vs Month':    "-2.59%",
+		'vs Year':     "+29.10%"
+	};
+
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#128200;<a href="https://www.vanguardinvestor.co.uk">Vanguard</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');		
+	var inside = box
+		.append('div');
+	inside
+		.append('p')
+		.append('a')
+		.attr('href', 'https://www.vanguardinvestor.co.uk/investments/vanguard-ftse-global-all-cap-index-fund-gbp-acc')
+		.html('FTSE Global All Cap<br/>Index Fund - Accumulation');
+	inside
+		.append('p')
+		.html('&nbsp;');
+	var table = inside
+		.append('table');	
+	
+	for (var item of Object.keys(vanguardValues)) {
+		var row = table
+			.append('tr')
+			.attr('title', vanguardDates[item])
+			.style('font-weight', item.startsWith("Latest") ? "bold" : "normal");
+		row
+			.append('td')
+			.style('text-align', 'left')
+			.html(item + ':&nbsp;');
+		row
+			.append('td')
+			.style('text-align', 'right')
+			.attr('class', 'code')
+			.html(vanguardValues[item]);
+	}
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function moon() {
+	var moonData = {
+		Percent:  '6.6',
+		Type:     '<a href="/astronomy/moon/waning-crescent.html" title="Waning Crescent on the night between 10 March and 11 March">Waning Crescent</a>',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.066&p=2.577&r=5.848',
+		Location: '11609021'
+	}
+
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#127769;<a href="https://www.timeanddate.com/moon/@' + moonData.Location + '">Moon</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');	
+	var inside = box
+		.append('div');
+	inside
+		.append('img')
+		.attr('src', moonData.Image)
+		.attr('width', '75%')
+		.attr('height', '75%');		
+	inside
+		.append('p')
+		.html(moonData.Type + ' (' + moonData.Percent + '%)');	
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function nature() {
+	var natureData = {
+		Source:   'https://cdn2.outdoorphotographer.com/2021/03/Cattails-By-Walt-Mather.jpg',
+		Title:    'Cattails By Walt Mather',
+		LinkPage: 'https://www.outdoorphotographer.com/blog/photo-of-the-day-by-walt-mather-2/'
+	}
+
+	if (natureData.Source.length > 0) {
+		var box = makeBox(2, 2);
+		box
+			.append('div')
+			.attr('class', 'title')
+			.html('&#x26FA;<a href="https://www.outdoorphotographer.com/blog/category/photo-of-the-day/">Outdoor Photo of the Day</a>')
+		box = box
+			.append('div')
+			.attr('class', 'inside');
+		var inside = box
+			.append('div');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', natureData.Source)
+			.append('img')
+			.style('width', 'auto')
+			.style('height', 'auto')
+			.style('max-width', '400px')
+			.style('max-height', '320px')
+			.attr('src', natureData.Source);
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', natureData.LinkPage)
+			.html(natureData.Title);
+	}
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function singles() {
+	var when = "05 March 2021 -  11 March 2021"
+	var singlesData = {
+		1: { Artist: "<a href='https://www.officialcharts.com/artist/56921/olivia-rodrigo/'>olivia rodrigo</a>", Title: "<a href='https://www.officialcharts.com/search/singles/drivers-license/'>DRIVERS LICENSE</a>", Image: "https://d35iaml2i6ojwd.cloudfront.net/img/small?url=https://m.media-amazon.com/images/I/51nA4UxF15L._SL75_.jpg" },
+2: { Artist: "<a href='https://www.officialcharts.com/artist/59389/nathan-evans-220kid-billen-ted/'>nathan evans/220kid/billen ted</a>", Title: "<a href='https://www.officialcharts.com/search/singles/wellerman/'>WELLERMAN</a>", Image: "https://d35iaml2i6ojwd.cloudfront.net/img/small?url=/images/artwork/5e05921d680fbd302e0a9a22fb335eea.jpg" },
+3: { Artist: "<a href='https://www.officialcharts.com/artist/59540/lil-tjay-and-6lack/'>lil tjay &amp; 6lack</a>", Title: "<a href='https://www.officialcharts.com/search/singles/calling-my-phone/'>CALLING MY PHONE</a>", Image: "https://d35iaml2i6ojwd.cloudfront.net/img/small?url=https://m.media-amazon.com/images/I/41UxdcuQWaL._SL75_.jpg" },
+4: { Artist: "<a href='https://www.officialcharts.com/artist/14412/tiesto/'>tiesto</a>", Title: "<a href='https://www.officialcharts.com/search/singles/the-business/'>THE BUSINESS</a>", Image: "https://d35iaml2i6ojwd.cloudfront.net/img/small?url=/images/artwork/893aaa8099c44c2ed2cbdb6abaff679c.jpg" },
+5: { Artist: "<a href='https://www.officialcharts.com/artist/59350/riton-nightcrawlers-mufasa/'>riton/nightcrawlers/mufasa</a>", Title: "<a href='https://www.officialcharts.com/search/singles/friday/'>FRIDAY</a>", Image: "https://d35iaml2i6ojwd.cloudfront.net/img/small?url=https://m.media-amazon.com/images/I/61eBeFUdkgL._SL75_.jpg" },
+
+	};
+
+	var box = makeBox(2, 2);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.append('a')
+		.attr('href', 'https://www.officialcharts.com/charts/singles-chart/')
+		.html('&#x1F3B5;UK Singles Chart')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div');
+	inside
+		.append('p')
+		.html(when + '<br/>&nbsp;');
+	var table = inside
+		.append('table');
+	var position = 0;
+	for (var item of Object.keys(singlesData)) {
+		var row = table
+			.append('tr');
+		row
+			.append('td')
+			.html(++position);
+		row
+			.append('td')
+			.append('img')
+			.attr('src', singlesData[item].Image);
+		row = row
+			.append('td')
+			.style('text-align', 'left')
+		row
+			.append('a')
+			.attr('href', 'https://google.com/search?q=' + singlesData[item].Title + ' - ' + singlesData[item].Artist)
+			.html(singlesData[item].Title)
+		row
+			.append('span')
+			.html('<br/>' + singlesData[item].Artist);
+	}
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function twitter() {
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Messi">Messi</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=Dembele">Dembele</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Barca">Barca</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23SarahEverard">#SarahEverard</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Thiago">Thiago</a></td></tr></table>';
+	var title = 'United Kingdom';
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.style('text-align', 'center')
+		.html(title);
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function twitter() {
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Messi">Messi</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=Dembele">Dembele</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23WarzoneReport">#WarzoneReport</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23mcyttwtvskpoptwt">#mcyttwtvskpoptwt</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Merrick+Garland%22">Merrick Garland</a></td></tr></table>';
+	var title = 'United States';
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.style('text-align', 'center')
+		.html(title);
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function sun() {
+	var sunData = {
+		Rise:     '06:31',
+		Set:      '18:02',
+		Location: '11609021'
+	};
+
+	var box = makeBox(1, 1);	
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#128262;<a href="https://www.timeanddate.com/sun/@' + sunData.Location + '">Sun</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div');	
+	var table = inside
+		.append('table')
+		.style('width', '150px');
+	var row = table
+		.append('tr')
+		.style('font-size', '300%');
+	row
+		.append('td')
+		.html('&#127748;')
+	row
+		.append('td')
+		.html('&#127751;')
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.html('Rise')
+	row
+		.append('td')
+		.html('Set')
+var row = table
+		.append('tr');
+	row
+		.append('td')
+		.html(sunData.Rise)
+	row
+		.append('td')
+		.html(sunData.Set)
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function word() {
+	var wordData = {
+		Word:       'felicitate',
+		Definition: '<p><strong>1</strong> <em>archaic</em>  to make happy</p><p><strong>2 a:</strong> to consider happy or fortunate</p><p><strong>b:</strong> to offer congratulations to</p>'
+	}
+
+	var box = makeBox(wordData.Definition.length > 250 ? 2 : 1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4DC;<a href="https://www.merriam-webster.com/word-of-the-day">Word of the Day</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');	
+	var inside = box
+		.append('div');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.append('a')
+		.attr('href', 'https://www.merriam-webster.com/dictionary/' + wordData.Word)
+		.text(wordData.Word);
+	inside
+		.append('div')
+		.style('padding', '5px')
+		.html(wordData.Definition);	
+});
+
+//////////////////////////////////////////////////
+
+
+
+			createPage();
+
 		</script>
 	</body>
 </html>

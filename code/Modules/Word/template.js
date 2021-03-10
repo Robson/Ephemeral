@@ -1,9 +1,9 @@
-var wordData = {
-	Word:       '{{WORD}}',
-	Definition: '{{DEFINITION}}'
-}
+modules.push(function word() {
+	var wordData = {
+		Word:       '{{WORD}}',
+		Definition: '{{DEFINITION}}'
+	}
 
-function word() {
 	var box = makeBox(wordData.Definition.length > 250 ? 2 : 1, 1);
 	box
 		.append('div')
@@ -24,6 +24,4 @@ function word() {
 		.append('div')
 		.style('padding', '5px')
 		.html(wordData.Definition);	
-}
-
-modules.push(word);
+});

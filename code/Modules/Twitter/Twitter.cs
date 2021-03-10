@@ -12,15 +12,14 @@
             return "twitter";
         }
 
-        public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
+        public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient)
         {
-            var dataUk = GetData(webClient, "united-kingdom");
-            var dataUs = GetData(webClient, "united-states");
+            var data = GetData(webClient, settings["where"]);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
-                .Replace("{{TRENDS_UK}}", dataUk.trends)
-                .Replace("{{TRENDS_US}}", dataUs.trends);
+                .Replace("{{TRENDS}}", data.trends)
+                .Replace("{{TITLE}}", settings["title"]);
 
-            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
+            return javascript;
         }
 
         private Data GetData(WebClient webClient, string where)
@@ -46,6 +45,11 @@
 
                 count++;
                 result += "<tr><td style=\"text-align: right\">" + count + "</td><td><a href=\"" + trend.Groups[1].Value + "\">" + label + "</a></td></tr>";
+
+                if (count == 5)
+                {
+                    break;
+                }
             }
 
             result += "</table>";

@@ -1,20 +1,21 @@
-var vanguardDates = {
-	"Latest":      "{{DATE_LATEST}}",
-	"vs Previous": "{{DATE_PREVIOUS}}",
-	"vs Week":     "{{DATE_WEEK}}",
-	"vs Month":    "{{DATE_MONTH}}",
-	"vs Year":     "{{DATE_YEAR}}"
-}
+modules.push(function vanguard() {
 
-var vanguardValues = {
-	"Latest": "{{VALUE_LATEST}}",
-	'vs Previous': "{{VALUE_PREVIOUS}}",
-	'vs Week': "{{VALUE_WEEK}}",
-	'vs Month': "{{VALUE_MONTH}}",
-	'vs Year': "{{VALUE_YEAR}}"
-};
+	var vanguardDates = {
+		"Latest":      "{{DATE_LATEST}}",
+		"vs Previous": "{{DATE_PREVIOUS}}",
+		"vs Week":     "{{DATE_WEEK}}",
+		"vs Month":    "{{DATE_MONTH}}",
+		"vs Year":     "{{DATE_YEAR}}"
+	}
 
-function vanguard() {
+	var vanguardValues = {
+		"Latest":      "{{VALUE_LATEST}}",
+		'vs Previous': "{{VALUE_PREVIOUS}}",
+		'vs Week':     "{{VALUE_WEEK}}",
+		'vs Month':    "{{VALUE_MONTH}}",
+		'vs Year':     "{{VALUE_YEAR}}"
+	};
+
 	var box = makeBox(1, 1);
 	box
 		.append('div')
@@ -51,6 +52,4 @@ function vanguard() {
 			.attr('class', 'code')
 			.html(vanguardValues[item]);
 	}
-}
-
-modules.push(vanguard);
+});

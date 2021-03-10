@@ -7,6 +7,6 @@
     {
         public string GetName();
 
-        public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient);
+        public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient);
     }
 }

@@ -12,21 +12,21 @@
             return "moon";
         }
 
-        public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
+        public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient)
         {
             var data = GetMoonData(settings, webClient);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
                 .Replace("{{PERCENT}}", data.percent)
                 .Replace("{{TYPE}}", data.type)
                 .Replace("{{URL}}", data.url)
-                .Replace("{{LOCATION}}", settings["moon_location"]);
+                .Replace("{{LOCATION}}", settings["location"]);
 
-            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
+            return javascript;
         }
 
         private Data GetMoonData(Dictionary<string, string> settings, WebClient webClient)
         {
-            var url = "https://www.timeanddate.com/moon/@" + settings["moon_location"];
+            var url = "https://www.timeanddate.com/moon/@" + settings["location"];
             var html = webClient.DownloadString(url);
 
             return new Data

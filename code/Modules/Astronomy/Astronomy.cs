@@ -12,7 +12,7 @@
             return "astronomy";
         }
 
-        public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
+        public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient)
         {
             var data = GetAstronomyData(webClient);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
@@ -21,7 +21,7 @@
                 .Replace("{{TITLE}}", data.title)
                 .Replace("{{SOURCE}}", data.source);
 
-            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
+            return javascript;
         }
 
         private Data GetAstronomyData(WebClient webClient)

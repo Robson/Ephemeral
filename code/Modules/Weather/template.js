@@ -1,8 +1,8 @@
-var weatherLocation = "{{LOCATION}}";
+modules.push(function weather() {
+    var weatherLocation = "{{LOCATION}}";
 
-{{DATA}}
+    {{DATA}}
 
-function weather() {
     var box = makeBox(2, 2);
     box
         .append('div')
@@ -51,6 +51,4 @@ function weather() {
             .style('text-align', 'left')
             .html(day.desc)
     }
-}
-
-modules.push(weather)
+});

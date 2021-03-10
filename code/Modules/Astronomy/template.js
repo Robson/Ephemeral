@@ -1,11 +1,11 @@
-var imageData = {	
-	Source:    '{{SOURCE}}',
-	Title:     '{{TITLE}}',
-	LinkImage: '{{LINK_IMAGE}}',
-	LinkPage:  '{{LINK_PAGE}}'
-}
+modules.push(function word() {
+	var imageData = {
+		Source:    '{{SOURCE}}',
+		Title:     '{{TITLE}}',
+		LinkImage: '{{LINK_IMAGE}}',
+		LinkPage:  '{{LINK_PAGE}}'
+	}
 
-function word() {
 	if (!imageData.Source.endsWith('/')) {
 		var box = makeBox(2, 2);
 		box
@@ -36,6 +36,4 @@ function word() {
 			.attr('href', imageData.LinkPage)
 			.html(imageData.Title);
 	}
-}
-
-modules.push(word);
+});

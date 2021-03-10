@@ -12,20 +12,20 @@
             return "sun";
         }
 
-        public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
+        public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient)
         {
             var data = GetSunData(settings, webClient);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
                 .Replace("{{RISE}}", data.rise)
                 .Replace("{{SET}}", data.set)
-                .Replace("{{LOCATION}}", settings["sun_location"]);
+                .Replace("{{LOCATION}}", settings["location"]);
 
-            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
+            return javascript;
         }
 
         private Data GetSunData(Dictionary<string, string> settings, WebClient webClient)
         {   
-            var html = webClient.DownloadString("https://www.timeanddate.com/sun/@" + settings["sun_location"]);
+            var html = webClient.DownloadString("https://www.timeanddate.com/sun/@" + settings["location"]);
 
             return new Data
             {

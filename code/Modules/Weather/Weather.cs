@@ -12,19 +12,19 @@
             return "weather";
         }
 
-        public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
+        public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient)
         {
             var data = GetWeatherData(settings, webClient);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
-                .Replace("{{LOCATION}}", settings["weather_location"])
+                .Replace("{{LOCATION}}", settings["location"])
                 .Replace("{{DATA}}", data.javascript);
 
-            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
+            return javascript;
         }
 
         private Data GetWeatherData(Dictionary<string, string> settings, WebClient webClient)
         {            
-            var html = webClient.DownloadString("https://www.timeanddate.com/weather/@" + settings["weather_location"] + "/ext");
+            var html = webClient.DownloadString("https://www.timeanddate.com/weather/@" + settings["location"] + "/ext");
 
             return new Data
             {

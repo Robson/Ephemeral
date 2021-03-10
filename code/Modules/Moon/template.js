@@ -1,16 +1,16 @@
-var moonData = {
-	Percent:  '{{PERCENT}}',
-	Type:     '{{TYPE}}',
-	Image:    '{{URL}}',
-	Location: '{{LOCATION}}'
-}
+modules.push(function moon() {
+	var moonData = {
+		Percent:  '{{PERCENT}}',
+		Type:     '{{TYPE}}',
+		Image:    '{{URL}}',
+		Location: '{{LOCATION}}'
+	}
 
-function moon() {
 	var box = makeBox(1, 1);
 	box
 		.append('div')
 		.attr('class', 'title')
-		.html('&#127769;<a href="https://www.timeanddate.com/moon/@' + sunData.Location + '">Moon</a>')
+		.html('&#127769;<a href="https://www.timeanddate.com/moon/@' + moonData.Location + '">Moon</a>')
 	box = box
 		.append('div')
 		.attr('class', 'inside');	
@@ -19,11 +19,9 @@ function moon() {
 	inside
 		.append('img')
 		.attr('src', moonData.Image)
-		.attr('width', '50%')
-		.attr('height', '50%');		
+		.attr('width', '75%')
+		.attr('height', '75%');		
 	inside
 		.append('p')
 		.html(moonData.Type + ' (' + moonData.Percent + '%)');	
-}
-
-modules.push(moon);
+});

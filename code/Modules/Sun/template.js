@@ -1,10 +1,10 @@
-var sunData = {
-	Rise:     '{{RISE}}',
-	Set:      '{{SET}}',
-	Location: '{{LOCATION}}'
-}
+modules.push(function sun() {
+	var sunData = {
+		Rise:     '{{RISE}}',
+		Set:      '{{SET}}',
+		Location: '{{LOCATION}}'
+	};
 
-function sun() {
 	var box = makeBox(1, 1);	
 	box
 		.append('div')
@@ -43,6 +43,4 @@ var row = table
 	row
 		.append('td')
 		.html(sunData.Set)
-}
-
-modules.push(sun);
+});

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Net;
 
     class Program
@@ -15,21 +16,20 @@
             new Astronomy(),
             new Bitcoin(),
             new Moon(),
-            new Twitter(),
+            new Nature(),
             new Singles(),
-            new Weather(),
             new Sun(),
-            new Vanguard(),            
-            new Word(),
-            new Nature()
+            new Twitter(),
+            new Vanguard(),
+            new Weather(),
+            new Word(),            
         };
 
-        private static Dictionary<string, string> settings = new Dictionary<string, string>();
+        private static Dictionary<string, string> globalSettings = new Dictionary<string, string>();
 
         static void Main()
         {
-            GetSettings();
-            MakeModulesDirectory();
+            GetSettings();         
             var scripts = ProcessModules();
             WriteHtml(scripts);
             WriteCss();
@@ -39,53 +39,69 @@
         {
             foreach (var line in File.ReadAllLines(ConfigFile))
             {
-                if (line.Contains('='))
+                if (line.Contains('=') && !line.StartsWith("module="))
                 {
                     var key = line.Split('=')[0];
                     var value = line.Split('=')[1];
-                    settings.Add(key, value);
+                    globalSettings.Add(key, value);
                 }
             }
         }
 
-        private static void MakeModulesDirectory()
+        private static string ProcessModules()
         {
-            Directory.CreateDirectory(settings["output"] + "modules");
-        }
-
-        private static List<string> ProcessModules()
-        {
-            var scripts = new List<string>();
-            foreach (var module in modules)
+            var scripts = string.Empty;
+            foreach (var line in File.ReadAllLines(ConfigFile))
             {
-                var sourceFolder = AppContext.BaseDirectory + @"\Modules\" + module.GetName() + @"\";
-                var lines = new List<string>();
-                try
+                if (line.StartsWith("module="))
                 {
-                    lines.AddRange(module.Run(settings, sourceFolder, settings["output"] + "modules", webClient));
-                }
-                catch (Exception e)
-                {
-                    lines.Add("<script>console.log('Error in " + module.GetName() + " module: " + e.Message + "');</script>");
-                }
+                    var parts = line.Split('=').Last().Split('/');
+                    var settings = globalSettings.ToDictionary(a => a.Key, b => b.Value);
+                    foreach (var part in parts.Skip(1))
+                    {
+                        settings.Add(part.Split(':').First(), part.Split(':').Last());
+                    }
 
-                scripts.AddRange(lines);
+                    foreach (var module in modules)
+                    {
+                        if (module.GetName() == parts.First())
+                        {
+                            var sourceFolder = AppContext.BaseDirectory + @"\Modules\" + module.GetName() + @"\";
+                            var lines = new List<string>();
+                            try
+                            {
+                                scripts += module.Run(settings, sourceFolder, webClient);
+                            }
+                            catch (Exception e)
+                            {
+                                scripts += "console.log('Error in " + module.GetName() + " module: " + e.Message + "');";
+                            }
+
+                            scripts +=
+                                Environment.NewLine +
+                                Environment.NewLine +
+                                new string('/', 50) +
+                                Environment.NewLine +
+                                Environment.NewLine;
+                        }
+                    }
+                }
             }
 
             return scripts;
         }
 
-        private static void WriteHtml(List<string> pageLines)
+        private static void WriteHtml(string pageLines)
         {
             var html = File.ReadAllText(@"Templates\template.html");
-            html = html.Replace("{{ADDITIONS}}", string.Join(Environment.NewLine, pageLines.ToArray()));
+            html = html.Replace("{{ADDITIONS}}", pageLines);
             html = html.Replace("{{GENERATED}}", DateTime.Now.ToString("d MMM HH:mm"));
-            File.WriteAllText(settings["output"] + @"\index.html", html);
+            File.WriteAllText(globalSettings["output"] + @"\index.html", html);
         }
 
         private static void WriteCss()
         {
-            File.Copy(@"Templates\template.css", settings["output"] + @"\style.css", overwrite:true);
+            File.Copy(@"Templates\template.css", globalSettings["output"] + @"\style.css", overwrite:true);
         }
     }
 }

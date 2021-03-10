@@ -1,10 +1,10 @@
-var natureData = {
-	Source:   '{{SOURCE}}',
-	Title:    '{{TITLE}}',
-	LinkPage: '{{LINK_PAGE}}'
-}
+modules.push(function nature() {
+	var natureData = {
+		Source:   '{{SOURCE}}',
+		Title:    '{{TITLE}}',
+		LinkPage: '{{LINK_PAGE}}'
+	}
 
-function nature() {
 	if (natureData.Source.length > 0) {
 		var box = makeBox(2, 2);
 		box
@@ -35,6 +35,4 @@ function nature() {
 			.attr('href', natureData.LinkPage)
 			.html(natureData.Title);
 	}
-}
-
-modules.push(nature);
+});

@@ -12,14 +12,14 @@
             return "singles";
         }
 
-        public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
+        public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient)
         {
             var data = GetSinglesData(webClient);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
                 .Replace("{{WHEN}}", data.when)
                 .Replace("{{DATA}}", data.javascript);
 
-            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
+            return javascript;
         }
 
         private Data GetSinglesData(WebClient webClient)

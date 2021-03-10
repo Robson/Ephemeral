@@ -1,10 +1,9 @@
-var when = "{{WHEN}}"
+modules.push(function singles() {
+	var when = "{{WHEN}}"
+	var singlesData = {
+		{{DATA}}
+	};
 
-var singlesData = {
-	{{DATA}}
-};
-
-function singles() {
 	var box = makeBox(2, 2);
 	box
 		.append('div')
@@ -44,6 +43,4 @@ function singles() {
 			.append('span')
 			.html('<br/>' + singlesData[item].Artist);
 	}
-}
-
-modules.push(singles)
+});

@@ -12,14 +12,14 @@
             return "word";
         }
 
-        public List<string> Run(Dictionary<string, string> settings, string sourceFolder, string outputFolder, WebClient webClient)
+        public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient)
         {
             var data = GetWordData(webClient);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
                 .Replace("{{WORD}}", data.word)
                 .Replace("{{DEFINITION}}", data.definition);
 
-            return MakeStandardOutput(outputFolder, this.GetName(), javascript);
+            return javascript;
         }
 
         private Data GetWordData(WebClient webClient)
