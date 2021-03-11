@@ -27,7 +27,6 @@
             var url = "https://trends24.in/" + where +"/";
             var html = webClient.DownloadString(url);
 
-            // <ol class=trend-card__list>
             var list = Regex.Match(html, "<ol class=trend-card__list>(.*?)</ol>").Groups[1].Value;
             list = Regex.Replace(list, "<span class=tweet-count>\\d+K</span>", "");
             list = list.Replace("<br>", "");

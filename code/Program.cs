@@ -22,7 +22,8 @@
             new Twitter(),
             new Vanguard(),
             new Weather(),
-            new Word(),            
+            new Word(),
+            new YouTube()
         };
 
         private static Dictionary<string, string> globalSettings = new Dictionary<string, string>();
