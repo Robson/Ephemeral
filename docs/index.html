@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Ephemeral - 11 Mar 22:39</title>		
+		<title>Ephemeral - 11 Mar 23:17</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -74,7 +74,7 @@
 				d3.selectAll('.box').remove();
 				var docWidth = document.body.clientWidth;		
 				columns = ~~((docWidth - 20) / length);
-				columns = Math.min(6, columns);
+				columns = Math.min(7, columns);
 				offsetX = ((docWidth - (columns * length)) / 2) + 5;				
 				offsetY = 100;
 				for (var a = 0; a < 50; a++) {
@@ -324,7 +324,7 @@ modules.push(function twitter() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Elneny">Elneny</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23notallmen">#notallmen</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%235SOSSpaces">#5SOSSpaces</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23OLYARS">#OLYARS</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Ceballos">Ceballos</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23notallmen">#notallmen</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23girlbossfightnight">#girlbossfightnight</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Elneny">Elneny</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%22Patrick+Ewing%22">Patrick Ewing</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Tucker+Carlson%22">Tucker Carlson</a></td></tr></table>';
 	var title = 'United States';
 	var box = makeBox(1, 1);
 	box
@@ -448,9 +448,9 @@ modules.push(function singles() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '2.5',
+		Percent:  '2.4',
 		Type:     '<a href="/astronomy/moon/waning-crescent.html" title="Waning Crescent on the night between 11 March and 12 March">Waning Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.025&p=2.325&r=5.730',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.024&p=2.479&r=5.889',
 		Location: '11609021'
 	}
 
@@ -551,6 +551,62 @@ modules.push(function word() {
 		.append('div')
 		.style('padding', '5px')
 		.html(wordData.Definition);	
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function youtube() {
+
+    
+
+    var box = makeBox(2, 2);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#127746;<a href="https://www.youtube.com/feed/trending">YouTube Trending</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div');
+    var table = inside
+        .append('table');
+
+    for (var day of data.detail.slice(0, 7)) {
+        var row = table
+            .append('tr');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .style('font-weight', 'bold')
+            .html(day.ds.split(',')[0] + ':&nbsp;');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html(day.templow + '&#xb0;');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html('to');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html(day.temp + '&#xb0;');
+        row
+            .append('td')
+            .style('text-align', 'center')
+            .append('img')
+            .attr('src', 'https://c.tadst.com/gfx/w/svg/wt-' + day.icon + '.svg')
+            .attr('width', '32px')
+            .attr('height', '32px');
+        row
+            .append('td')
+            .style('text-align', 'left')
+            .html(day.desc)
+    }
 });
 
 //////////////////////////////////////////////////
