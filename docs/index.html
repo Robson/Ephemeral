@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Ephemeral - 12 Mar 00:45</title>		
+		<title>Ephemeral - 12 Mar 01:30</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -296,7 +296,7 @@ modules.push(function vanguard() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23bbcqt">#bbcqt</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23TeamBimini">#TeamBimini</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23DragRaceUK">#DragRaceUK</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Elneny">Elneny</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23OLYARS">#OLYARS</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23TeamBimini">#TeamBimini</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23bbcqt">#bbcqt</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23DragRaceUK">#DragRaceUK</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Elneny">Elneny</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23CurfewForMen">#CurfewForMen</a></td></tr></table>';
 	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
@@ -448,9 +448,9 @@ modules.push(function singles() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '2.2',
+		Percent:  '2.1',
 		Type:     '<a href="/astronomy/moon/waning-crescent.html" title="Waning Crescent on the night between 11 March and 12 March">Waning Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.022&p=2.804&r=6.226',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.021&p=2.928&r=0.074',
 		Location: '11609021'
 	}
 
@@ -551,62 +551,6 @@ modules.push(function word() {
 		.append('div')
 		.style('padding', '5px')
 		.html(wordData.Definition);	
-});
-
-//////////////////////////////////////////////////
-
-modules.push(function youtube() {
-
-    
-
-    var box = makeBox(2, 2);
-    box
-        .append('div')
-        .attr('class', 'title')
-        .html('&#127746;<a href="https://www.youtube.com/feed/trending">YouTube Trending</a>')
-    box = box
-        .append('div')
-        .attr('class', 'inside');
-    var inside = box
-        .append('div');
-    var table = inside
-        .append('table');
-
-    for (var day of data.detail.slice(0, 7)) {
-        var row = table
-            .append('tr');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .style('font-weight', 'bold')
-            .html(day.ds.split(',')[0] + ':&nbsp;');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .attr('class', 'code')
-            .html(day.templow + '&#xb0;');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .attr('class', 'code')
-            .html('to');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .attr('class', 'code')
-            .html(day.temp + '&#xb0;');
-        row
-            .append('td')
-            .style('text-align', 'center')
-            .append('img')
-            .attr('src', 'https://c.tadst.com/gfx/w/svg/wt-' + day.icon + '.svg')
-            .attr('width', '32px')
-            .attr('height', '32px');
-        row
-            .append('td')
-            .style('text-align', 'left')
-            .html(day.desc)
-    }
 });
 
 //////////////////////////////////////////////////
