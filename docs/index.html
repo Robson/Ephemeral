@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Ephemeral - 12 Mar 12:09</title>		
+		<title>Ephemeral - 12 Mar 12:13</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -323,31 +323,7 @@ modules.push(function twitter() {
 
 //////////////////////////////////////////////////
 
-modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23BidenCalm">#BidenCalm</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23fridaymorning">#fridaymorning</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Kanon">Kanon</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23DAYWALKER">#DAYWALKER</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23GreysAnatomy">#GreysAnatomy</a></td></tr></table>';
-	var title = 'United States';
-	var box = makeBox(1, 1);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
-	box = box
-		.append('div')
-		.attr('class', 'inside');
-	var inside = box
-		.append('div')
-		.attr('class', 'condensed')
-		.style('text-align', 'left');
-	inside
-		.append('p')
-		.style('font-weight', 'bold')
-		.style('text-align', 'center')
-		.html(title);
-	inside
-		.append('div')
-		.style('text-align', 'left')
-		.html(html);
-});
+console.log('Error in twitter module: The remote server returned an error: (503) backend read error.');
 
 //////////////////////////////////////////////////
 
@@ -450,7 +426,7 @@ modules.push(function moon() {
 	var moonData = {
 		Percent:  '1.1',
 		Type:     '<a href="/astronomy/moon/new-moon.html" title="New Moon on the night between 12 March and 13 March">New Moon</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.011&p=2.239&r=5.809',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.011&p=2.228&r=5.799',
 		Location: '11609021'
 	}
 
