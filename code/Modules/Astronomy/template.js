@@ -1,4 +1,4 @@
-modules.push(function word() {
+modules.push(function astronomy() {
 	var imageData = {
 		Source:    '{{SOURCE}}',
 		Title:     '{{TITLE}}',

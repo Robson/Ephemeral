@@ -31,7 +31,7 @@
             
             return new Data
             {
-                word = Regex.Match(html, "<h1>([^<]+)</h1>").Groups[1].Value.Replace("'", "\\'"),
+                word = Regex.Match(html, "<h1>([^<]+)</h1>").Groups[1].Value,
                 definition = Regex.Match(html, "<h2>Definition</h2>(.*?)<span").Groups[1].Value.Replace("<strong>:</strong>", "").Trim().Split("<p><strong>3 :</strong>")[0]
             };
         }

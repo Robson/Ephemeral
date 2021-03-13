@@ -34,7 +34,7 @@
                 linkImage = "https://apod.nasa.gov/apod/" + Regex.Match(html, "<a href=\"(image/[^\"]+)\"").Groups[1].Value,
                 linkPage = "https://apod.nasa.gov/apod/ap" + Regex.Match(html, "(\\d+)\">Discuss</a>").Groups[1].Value + ".html",
                 source = "https://apod.nasa.gov/apod/" + Regex.Match(html, "<IMG SRC=\"([^\"]+)\"").Groups[1].Value,
-                title = Regex.Match(html, "<center>\\s+<b>([^<]+)</b>").Groups[1].Value.Trim()
+                title = Regex.Match(html, "<center>\\s+<b>([^<]+)</b>").Groups[1].Value.Trim().Replace("'", "\\'")
             };
         }
 
