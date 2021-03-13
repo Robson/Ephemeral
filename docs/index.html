@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Ephemeral - 13 Mar 11:22</title>		
+		<title>Ephemeral - 13 Mar 11:30</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -199,9 +199,9 @@ modules.push(function weather() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'MrfU4aTcUaM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Audio]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Audio] by KSI 20 hours ago 3 minutes, 2 seconds 1,250,253 views" },
-{ id: '2-O6tUkabk8', title: "Day 1 Highlights | 2021 Pre-Season Testing", label: "Day 1 Highlights | 2021 Pre-Season Testing by FORMULA 1 16 hours ago 4 minutes, 18 seconds 1,150,205 views" },
-{ id: 'kc7F34GWpWw', title: "Central Cee - 6 For 6 [Music Video]", label: "Central Cee - 6 For 6 [Music Video] by Central Cee 1 day ago 2 minutes, 38 seconds 843,332 views" },
+{ id: 'MrfU4aTcUaM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Audio]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Audio] by KSI 20 hours ago 3 minutes, 2 seconds 1,253,650 views" },
+{ id: '2-O6tUkabk8', title: "Day 1 Highlights | 2021 Pre-Season Testing", label: "Day 1 Highlights | 2021 Pre-Season Testing by FORMULA 1 16 hours ago 4 minutes, 18 seconds 1,157,590 views" },
+{ id: 'kc7F34GWpWw', title: "Central Cee - 6 For 6 [Music Video]", label: "Central Cee - 6 For 6 [Music Video] by Central Cee 1 day ago 2 minutes, 38 seconds 847,482 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -215,7 +215,9 @@ modules.push(function youtube() {
     var inside = box
         .append('div');
     var table = inside
-        .append('table');
+        .append('table')
+        .style('width', '80%')
+        .style('margin', '0 auto');
 
     var count = 0;
     for (var video of data) {
@@ -227,6 +229,7 @@ modules.push(function youtube() {
             .attr('src', 'https://i.ytimg.com/vi/' + video.id + '/hqdefault.jpg')
             .style('width', (480 / 4) + 'px')
             .style('height', (360 / 4) + 'px')
+            .style('text-align', 'right')
             .attr('title', video.label);
         row
             .append('td')
@@ -491,7 +494,7 @@ modules.push(function moon() {
 	var moonData = {
 		Percent:  '0.2',
 		Type:     '<a href="/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 13 March and 14 March">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.002&p=1.253&r=6.068',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.002&p=1.218&r=6.045',
 		Location: '11609021'
 	}
 
