@@ -20,6 +20,7 @@
             new Moon(),
             new Nature(),
             new Singles(),
+            new Stocks(),
             new Sun(),
             new Twitter(),
             new Vanguard(),
@@ -42,7 +43,9 @@
         {
             foreach (var line in File.ReadAllLines(ConfigFile))
             {
-                if (line.Contains('=') && !line.StartsWith("module="))
+                if (line.Contains('=') &&
+                    !line.StartsWith('#') &&
+                    !line.StartsWith("module="))
                 {
                     var key = line.Split('=')[0];
                     var value = line.Split('=')[1];

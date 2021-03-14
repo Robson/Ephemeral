@@ -15,7 +15,7 @@
 
         public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient)
         {
-            var data = GetBitcoinData(webClient);
+            var data = GetData(webClient);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
                 .Replace("{{DATE_LATEST}}", data.dateLatest)
                 .Replace("{{DATE_PREVIOUS}}", data.datePrevious)
@@ -36,7 +36,7 @@
             return percent.ToString("+0.00;-0.00;0.00") + "%";
         }
 
-        private Data GetBitcoinData(WebClient webClient)
+        private Data GetData(WebClient webClient)
         {            
             var url = "https://markets.ft.com/data/funds/tearsheet/historical?s=GB00BD3RZ582:GBP";
             var html = webClient.DownloadString(url);

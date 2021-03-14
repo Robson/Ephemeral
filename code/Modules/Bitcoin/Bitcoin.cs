@@ -15,7 +15,7 @@
 
         public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient)
         {
-            var data = GetBitcoinData(webClient);
+            var data = GetData(webClient);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
                 .Replace("{{TODAY}}", data.today)
                 .Replace("{{YESTERDAY}}", data.yesterday)
@@ -38,7 +38,7 @@
             return value;
         }
 
-        private Data GetBitcoinData(WebClient webClient)
+        private Data GetData(WebClient webClient)
         {            
             var url =
                 "https://query1.finance.yahoo.com/v7/finance/download/BTC-GBP?interval=1d&events=history&includeAdjustedClose=true&period1=1583000000&period2=" +
