@@ -1,4 +1,12 @@
 modules.push(function singles() {
+
+	function encode(text) {
+		text = text.toLowerCase();
+		text = text.replace(/&#39;/g, "'");
+		text = text.replace(/&amp;/g, "and");
+		return text;
+    }
+
 	var when = "{{WHEN}}"
 	var singlesData = {
 		{{DATA}}
@@ -23,8 +31,8 @@ modules.push(function singles() {
 		.append('table');
 	var position = 0;
 	for (var item of Object.keys(singlesData)) {
-		var title = singlesData[item].Title.match(/>([^<]+)</)[1].replace(/'/g, '');
-		var artist = singlesData[item].Artist.match(/>([^<]+)</)[1].replace(/'/g, '');
+		var title = encode(singlesData[item].Title.match(/>([^<]+)</)[1]);
+		var artist = encode(singlesData[item].Artist.match(/>([^<]+)</)[1]);
 		var row = table
 			.append('tr');
 		row
