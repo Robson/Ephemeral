@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Ephemeral - 13 Mar 22:20</title>		
+		<title>Ephemeral - 14 Mar 00:45</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -109,7 +109,7 @@ modules.push(function astronomy() {
 		box
 			.append('div')
 			.attr('class', 'title')
-			.html('&#x1F6F8;<a href="https://apod.nasa.gov/apod/astropix.html">Astronomy Picture of the Day</a>')
+			.html('&#x1F680;<a href="https://apod.nasa.gov/apod/astropix.html">Astronomy Picture of the Day</a>')
 		box = box
 			.append('div')
 			.attr('class', 'inside');
@@ -138,10 +138,32 @@ modules.push(function astronomy() {
 
 //////////////////////////////////////////////////
 
+modules.push(function bbcCombine() {
+	var html = '<p style="font-weight:bold;padding:10px 0 0 10px">UK</p><ul><li title="The police\'s actions at a gathering to mourn the 33-year-old are condemned by politicians from all parties."><a href="https://www.bbc.co.uk/news/uk-56389824">Sarah Everard: Met criticised over Clapham vigil policing</a></li><li title="Wayne Couzens is charged with the kidnap and murder of the 33-year-old who disappeared in south London."><a href="https://www.bbc.co.uk/news/uk-england-london-56385657">Sarah Everard: Wayne Couzens appears in court charged with murder</a></li><li title="An average of 48 outlets per day closed last year, but there may be worse to come."><a href="https://www.bbc.co.uk/news/business-56378667">Pandemic impact \'yet to be felt\' on high streets</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">World</p><ul><li title="Officers raided the opposition conference only minutes after it began at a hotel on Saturday."><a href="https://www.bbc.co.uk/news/world-europe-56385012">Russia opposition: Moscow police raid election forum</a></li><li title="Most shops, restaurants and schools will be closed on Monday as Coronavirus infections rise."><a href="https://www.bbc.co.uk/news/world-europe-56382608">Covid-19 pandemic: Italy to shut shops and schools amid infection spike</a></li><li title="The young black medic was shot dead when police raided her home in Louisville, Kentucky, a year ago."><a href="https://www.bbc.co.uk/news/world-us-canada-56387446">Breonna Taylor: Protest to mark anniversary of police killing</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">US & Canada</p><ul><li title="The young black medic was shot dead when police raided her home in Louisville, Kentucky, a year ago."><a href="https://www.bbc.co.uk/news/world-us-canada-56387446">Breonna Taylor: Protest to mark anniversary of police killing</a></li><li title="The leaders of the US, Australia, India and Japan agree to deliver the vaccines by the end of 2022."><a href="https://www.bbc.co.uk/news/world-56381104">Covid: US and allies promise one billion jabs for South East Asia</a></li><li title="Governor Andrew Cuomo has been accused of sexual misconduct by seven women, allegations he denies."><a href="https://www.bbc.co.uk/news/world-us-canada-56367991">Cuomo: Pressure mounts as senators tell New York governor to quit</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Formula 1</p><ul><li title="Legendary motor racing commentator, who became as famous as the drivers themselves, dies at 97"><a href="http://www.bbc.co.uk/sport/formula1/56355693">Murray Walker: A legend with effervescent enthusiasm</a></li><li title="Former Formula 1 commentator Murray Walker dies at the age of 97."><a href="http://www.bbc.co.uk/sport/formula1/56388596">Murray Walker: Formula 1 broadcasting legend dies at 97</a></li><li title="BBC Sport looks back at the career of legendary Formula One commentator Murray Walker, who has died aged 97."><a href="http://www.bbc.co.uk/sport/av/formula1/56389527">Murray Walker: Tribute to the legendary Formula One commentator</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Technology</p><ul><li title="Huge swings in the share price show amateur investors are still taking on Wall Street."><a href="https://www.bbc.co.uk/news/technology-56357526">Why the GameStop story is far from over</a></li><li title="The UK\'s National Cyber Security Centre warns that more than 3,000 servers have not been secured."><a href="https://www.bbc.co.uk/news/technology-56372188">Microsoft hack: 3,000 UK email servers remain unsecured</a></li><li title="Tips include ways to call the emergency services quickly and activate temporary location sharing."><a href="https://www.bbc.co.uk/news/technology-56373292">Women\'s safety: Smartphone tips shared online</a></li></ul>';
+	var box = makeBox(3, 2);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4F0;<a href="https://www.bbc.co.uk/news">BBC News</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
+
+//////////////////////////////////////////////////
+
 modules.push(function weather() {
     var weatherLocation = "11609021";
 
-    var data={"copyright":"Contents are strictly for use by timeanddate.com","units":{"temp":"°C","prec":"mm","wind":"mph","baro":"mbar"},"detail":[{"hl":true,"hls":"8 Mar - 14 Mar","date":161568E7,"ts":"Sun, 14","ds":"Sun, 14 Mar","icon":33,"desc":"Showers late. Increasing cloudiness.","temp":9,"templow":4,"cf":4,"wind":17,"wd":287,"hum":68,"pc":78,"rain":3.8 },{"hl":true,"hls":"15 Mar - 21 Mar","date":16157664E5,"ts":"Mon, 15","ds":"Mon, 15 Mar","icon":33,"desc":"Light showers. Broken clouds.","temp":10,"templow":3,"cf":6,"wind":13,"wd":317,"hum":68,"pc":49,"rain":0.5 },{"date":16158528E5,"ts":"Tue, 16","ds":"Tue, 16 Mar","icon":18,"desc":"Sprinkles. Overcast.","temp":7,"templow":2,"cf":5,"wind":6,"wd":289,"hum":90,"pc":67,"rain":0.8 },{"date":16159392E5,"ts":"Wed, 17","ds":"Wed, 17 Mar","icon":6,"desc":"Mostly cloudy.","temp":11,"templow":2,"cf":7,"wind":13,"wd":16,"hum":66,"pc":6},{"date":16160256E5,"ts":"Thu, 18","ds":"Thu, 18 Mar","icon":33,"desc":"Light showers. Cloudy.","temp":7,"templow":3,"cf":2,"wind":13,"wd":22,"hum":73,"pc":59,"rain":1.2 },{"date":1616112E6,"ts":"Fri, 19","ds":"Fri, 19 Mar","icon":4,"desc":"Morning clouds.","temp":10,"templow":2,"cf":7,"wind":10,"wd":50,"hum":58,"pc":6},{"date":16161984E5,"ts":"Sat, 20","ds":"Sat, 20 Mar","icon":33,"desc":"Light showers. Overcast.","temp":11,"templow":5,"cf":8,"wind":9,"wd":320,"hum":80,"pc":62,"rain":1},{"date":16162848E5,"ts":"Sun, 21","ds":"Sun, 21 Mar","icon":33,"desc":"Showers late. Mostly cloudy.","temp":11,"templow":5,"cf":8,"wind":10,"wd":0,"hum":59,"pc":50,"rain":0.3 },{"hl":true,"hls":"22 Mar - 28 Mar","date":16163712E5,"ts":"Mon, 22","ds":"Mon, 22 Mar","icon":33,"desc":"Light showers. Decreasing cloudiness.","temp":10,"templow":3,"cf":6,"wind":11,"wd":20,"hum":74,"pc":60,"rain":1.7 },{"date":16164576E5,"ts":"Tue, 23","ds":"Tue, 23 Mar","icon":2,"desc":"Scattered clouds.","temp":10,"templow":3,"cf":9,"wind":4,"wd":320,"hum":68,"pc":6},{"date":1616544E6,"ts":"Wed, 24","ds":"Wed, 24 Mar","icon":33,"desc":"Showers late. Afternoon clouds.","temp":13,"templow":5,"cf":10,"wind":5,"wd":290,"hum":70,"pc":62,"rain":0.7 },{"date":16166304E5,"ts":"Thu, 25","ds":"Thu, 25 Mar","icon":2,"desc":"Mostly sunny.","temp":13,"templow":5,"cf":10,"wind":5,"wd":260,"hum":59,"pc":6},{"date":16167168E5,"ts":"Fri, 26","ds":"Fri, 26 Mar","icon":1,"desc":"Sunny.","temp":13,"templow":5,"cf":10,"wind":9,"wd":160,"hum":65,"pc":4},{"date":16168032E5,"ts":"Sat, 27","ds":"Sat, 27 Mar","icon":2,"desc":"Clearing skies.","temp":13,"templow":5,"cf":11,"wind":6,"wd":220,"hum":62,"pc":5},{"date":16168896E5,"ts":"Sun, 28","ds":"Sun, 28 Mar","icon":2,"desc":"Clearing skies.","temp":13,"templow":5,"cf":11,"wind":6,"wd":220,"hum":62,"pc":5}],"grid":{"temp":{"low":2,"high":13,"range":11},"prec":{"high":3.8},"time":86400000,"sections":15},"conv":{"prec":{"offset":0,"scale":1},"temp":{"offset":0,"scale":1},"wind":{"offset":0,"scale":0.869},"baro":{"offset":0,"scale":1}}};
+    var data={"copyright":"Contents are strictly for use by timeanddate.com","units":{"temp":"°C","prec":"mm","wind":"mph","baro":"mbar"},"detail":[{"hl":true,"hls":"8 Mar - 14 Mar","date":161568E7,"ts":"Sun, 14","ds":"Sun, 14 Mar","icon":33,"desc":"Showers late. Increasing cloudiness.","temp":9,"templow":4,"cf":4,"wind":17,"wd":285,"hum":69,"pc":74,"rain":1.9 },{"hl":true,"hls":"15 Mar - 21 Mar","date":16157664E5,"ts":"Mon, 15","ds":"Mon, 15 Mar","icon":33,"desc":"Light showers. Breaks of sun late.","temp":11,"templow":5,"cf":7,"wind":14,"wd":323,"hum":66,"pc":52,"rain":0.6 },{"date":16158528E5,"ts":"Tue, 16","ds":"Tue, 16 Mar","icon":18,"desc":"Sprinkles. Increasing cloudiness.","temp":9,"templow":4,"cf":7,"wind":5,"wd":236,"hum":92,"pc":64,"rain":0.8 },{"date":16159392E5,"ts":"Wed, 17","ds":"Wed, 17 Mar","icon":2,"desc":"Scattered clouds.","temp":10,"templow":3,"cf":6,"wind":11,"wd":24,"hum":69,"pc":6},{"date":16160256E5,"ts":"Thu, 18","ds":"Thu, 18 Mar","icon":28,"desc":"Light mixture of precip. Increasing cloudiness.","temp":6,"templow":1,"cf":1,"wind":16,"wd":13,"hum":73,"pc":59,"rain":1.5 ,"snow":1},{"date":1616112E6,"ts":"Fri, 19","ds":"Fri, 19 Mar","icon":2,"desc":"Mostly sunny.","temp":7,"templow":1,"cf":3,"wind":13,"wd":50,"hum":59,"pc":10},{"date":16161984E5,"ts":"Sat, 20","ds":"Sat, 20 Mar","icon":1,"desc":"Sunny.","temp":9,"templow":1,"cf":9,"wind":3,"wd":320,"hum":42,"pc":3},{"date":16162848E5,"ts":"Sun, 21","ds":"Sun, 21 Mar","icon":33,"desc":"Showers late. Afternoon clouds.","temp":9,"templow":3,"cf":6,"wind":11,"wd":320,"hum":76,"pc":62,"rain":0.9 },{"hl":true,"hls":"22 Mar - 28 Mar","date":16163712E5,"ts":"Mon, 22","ds":"Mon, 22 Mar","icon":18,"desc":"Sprinkles late. Broken clouds.","temp":12,"templow":4,"cf":11,"wind":6,"wd":30,"hum":74,"pc":49,"rain":0.6 },{"date":16164576E5,"ts":"Tue, 23","ds":"Tue, 23 Mar","icon":18,"desc":"Sprinkles late. Increasing cloudiness.","temp":13,"templow":6,"cf":12,"wind":4,"wd":90,"hum":79,"pc":49,"rain":0.2 },{"date":1616544E6,"ts":"Wed, 24","ds":"Wed, 24 Mar","icon":4,"desc":"Breaks of sun late.","temp":12,"templow":6,"cf":12,"wind":2,"wd":0,"hum":63,"pc":6},{"date":16166304E5,"ts":"Thu, 25","ds":"Thu, 25 Mar","icon":4,"desc":"Increasing cloudiness.","temp":12,"templow":7,"cf":10,"wind":11,"wd":320,"hum":71,"pc":6},{"date":16167168E5,"ts":"Fri, 26","ds":"Fri, 26 Mar","icon":18,"desc":"Sprinkles. Increasing cloudiness.","temp":12,"templow":7,"cf":10,"wind":9,"wd":280,"hum":76,"pc":58,"rain":1.1 },{"date":16168032E5,"ts":"Sat, 27","ds":"Sat, 27 Mar","icon":18,"desc":"Light rain. Cloudy.","temp":8,"templow":2,"cf":3,"wind":20,"wd":350,"hum":64,"pc":67,"rain":2.3 },{"date":16168896E5,"ts":"Sun, 28","ds":"Sun, 28 Mar","icon":18,"desc":"Light rain. Cloudy.","temp":8,"templow":2,"cf":3,"wind":20,"wd":350,"hum":64,"pc":67,"rain":2.3 }],"grid":{"temp":{"low":1,"high":13,"range":12},"prec":{"high":2.5},"time":86400000,"sections":15},"conv":{"prec":{"offset":0,"scale":1},"temp":{"offset":0,"scale":1},"wind":{"offset":0,"scale":0.869},"baro":{"offset":0,"scale":1}}};
 
 
     var box = makeBox(2, 2);
@@ -199,9 +221,9 @@ modules.push(function weather() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'AKBF-jeOlD8', title: "Saying Goodbye...", label: "Saying Goodbye... by jeffreestar 22 hours ago 11 minutes, 24 seconds 2,085,728 views" },
-{ id: 'MrfU4aTcUaM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Audio]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Audio] by KSI 1 day ago 3 minutes, 2 seconds 1,689,182 views" },
-{ id: '-qjO88e2d3o', title: "this was hard to say...", label: "this was hard to say... by Dad V Girls 1 day ago 16 minutes 586,300 views" },
+{ id: 'AKBF-jeOlD8', title: "Saying Goodbye...", label: "Saying Goodbye... by jeffreestar 1 day ago 11 minutes, 24 seconds 2,368,778 views" },
+{ id: 'MrfU4aTcUaM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Audio]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Audio] by KSI 1 day ago 3 minutes, 2 seconds 1,795,539 views" },
+{ id: '-qjO88e2d3o', title: "this was hard to say...", label: "this was hard to say... by Dad V Girls 1 day ago 16 minutes 628,130 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -240,43 +262,58 @@ modules.push(function youtube() {
 
 //////////////////////////////////////////////////
 
-modules.push(function bitcoin() {
-	var bitcoinData = {
-		"Today's Open": "£40,693.30",
-		'vs Yesterday': "+1.0%",
-		'vs Week':      "+1.2%",
-		'vs Month':     "+1.2%",
-		'vs Year':      "+10.2%"
-	};
-
+modules.push(function twitter() {
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23ReclaimTheseStreets">#ReclaimTheseStreets</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23ClaphamCommon">#ClaphamCommon</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%22Marvin+Hagler%22">Marvin Hagler</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23SarahEverard">#SarahEverard</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Priti+Patel%22">Priti Patel</a></td></tr></table>';
+	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
 		.append('div')
 		.attr('class', 'title')
-		.html('&#x1F4B1;<a href="https://finance.yahoo.com/quote/BTC-GBP/history">Bitcoin</a>')
+		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
 	box = box
 		.append('div')
-		.attr('class', 'inside');		
+		.attr('class', 'inside');
 	var inside = box
-		.append('div');
-	var table = inside
-		.append('table');	
-	
-	for (var item of Object.keys(bitcoinData)) {
-		var row = table
-			.append('tr')
-			.style('font-weight', item.startsWith("Today") ? "bold" : "normal")
-			.style('border-bottom', '1px solid #000');
-		row
-			.append('td')
-			.style('text-align', 'left')
-			.html(item + ':&nbsp;');
-		row
-			.append('td')
-			.style('text-align', 'right')
-			.attr('class', 'code')
-			.html(bitcoinData[item]);
-	}
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.style('text-align', 'center')
+		.html(title);
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function twitter() {
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22Marvin+Hagler%22">Marvin Hagler</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23UFCVegas21">#UFCVegas21</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%2345TransitionToPrison">#45TransitionToPrison</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%22Jerry+Rice%22">Jerry Rice</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23MostRequestedLive">#MostRequestedLive</a></td></tr></table>';
+	var title = 'United States';
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.style('text-align', 'center')
+		.html(title);
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
 });
 
 //////////////////////////////////////////////////
@@ -335,62 +372,6 @@ modules.push(function vanguard() {
 			.attr('class', 'code')
 			.html(vanguardValues[item]);
 	}
-});
-
-//////////////////////////////////////////////////
-
-modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23ReclaimTheseStreets">#ReclaimTheseStreets</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22Murray+Walker%22">Murray Walker</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23SaturdayNightTakeaway">#SaturdayNightTakeaway</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%22Clapham+Common%22">Clapham Common</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22The+Met%22">The Met</a></td></tr></table>';
-	var title = 'United Kingdom';
-	var box = makeBox(1, 1);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
-	box = box
-		.append('div')
-		.attr('class', 'inside');
-	var inside = box
-		.append('div')
-		.attr('class', 'condensed')
-		.style('text-align', 'left');
-	inside
-		.append('p')
-		.style('font-weight', 'bold')
-		.style('text-align', 'center')
-		.html(title);
-	inside
-		.append('div')
-		.style('text-align', 'left')
-		.html(html);
-});
-
-//////////////////////////////////////////////////
-
-modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%2345TransitionToPrison">#45TransitionToPrison</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23AlphaBetas">#AlphaBetas</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23BreonnaTaylor">#BreonnaTaylor</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Bama">Bama</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Michigan">Michigan</a></td></tr></table>';
-	var title = 'United States';
-	var box = makeBox(1, 1);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
-	box = box
-		.append('div')
-		.attr('class', 'inside');
-	var inside = box
-		.append('div')
-		.attr('class', 'condensed')
-		.style('text-align', 'left');
-	inside
-		.append('p')
-		.style('font-weight', 'bold')
-		.style('text-align', 'center')
-		.html(title);
-	inside
-		.append('div')
-		.style('text-align', 'left')
-		.html(html);
 });
 
 //////////////////////////////////////////////////
@@ -466,6 +447,8 @@ modules.push(function singles() {
 		.append('table');
 	var position = 0;
 	for (var item of Object.keys(singlesData)) {
+		var title = singlesData[item].Title.match(/>([^<]+)</)[1].replace(/'/g, '');
+		var artist = singlesData[item].Artist.match(/>([^<]+)</)[1].replace(/'/g, '');
 		var row = table
 			.append('tr');
 		row
@@ -473,6 +456,8 @@ modules.push(function singles() {
 			.html(++position);
 		row
 			.append('td')
+			.append('a')
+			.attr('href', 'https://www.youtube.com/results?search_query=' + artist + ' - ' + title)
 			.append('img')
 			.attr('src', singlesData[item].Image);
 		row = row
@@ -490,11 +475,41 @@ modules.push(function singles() {
 
 //////////////////////////////////////////////////
 
+modules.push(function word() {
+	var wordData = {
+		Word:       'ungainly',
+		Definition: '<p><strong>1 a:</strong> lacking in smoothness or dexterity  <a href="https://www.merriam-webster.com/dictionary/clumsy">clumsy</a></p><p><strong>b:</strong> hard to handle  <a href="https://www.merriam-webster.com/dictionary/unwieldy">unwieldy</a></p><p><strong>2:</strong> having an awkward appearance</p>'
+	}
+
+	var box = makeBox(wordData.Definition.length > 250 ? 2 : 1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4DC;<a href="https://www.merriam-webster.com/word-of-the-day">Word of the Day</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');	
+	var inside = box
+		.append('div');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.append('a')
+		.attr('href', 'https://www.merriam-webster.com/dictionary/' + wordData.Word)
+		.text(wordData.Word);
+	inside
+		.append('div')
+		.style('padding', '5px')
+		.html(wordData.Definition);	
+});
+
+//////////////////////////////////////////////////
+
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '0.4',
+		Percent:  '0.5',
 		Type:     '<a href="/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 13 March and 14 March">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.004&p=6.125&r=5.432',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.005&p=0.186&r=5.868',
 		Location: '11609021'
 	}
 
@@ -522,8 +537,8 @@ modules.push(function moon() {
 
 modules.push(function sun() {
 	var sunData = {
-		Rise:     '06:24',
-		Set:      '18:07',
+		Rise:     '06:22',
+		Set:      '18:09',
 		Location: '11609021'
 	};
 
@@ -569,32 +584,43 @@ var row = table
 
 //////////////////////////////////////////////////
 
-modules.push(function word() {
-	var wordData = {
-		Word:       'ungainly',
-		Definition: '<p><strong>1 a:</strong> lacking in smoothness or dexterity  <a href="https://www.merriam-webster.com/dictionary/clumsy">clumsy</a></p><p><strong>b:</strong> hard to handle  <a href="https://www.merriam-webster.com/dictionary/unwieldy">unwieldy</a></p><p><strong>2:</strong> having an awkward appearance</p>'
-	}
+modules.push(function bitcoin() {
+	var bitcoinData = {
+		"Today's Open": "£44,186.84",
+		'vs Yesterday': "NA",
+		'vs Week':      "+1.2%",
+		'vs Month':     "+1.3%",
+		'vs Year':      "+9.7%"
+	};
 
-	var box = makeBox(wordData.Definition.length > 250 ? 2 : 1, 1);
+	var box = makeBox(1, 1);
 	box
 		.append('div')
 		.attr('class', 'title')
-		.html('&#x1F4DC;<a href="https://www.merriam-webster.com/word-of-the-day">Word of the Day</a>')
+		.html('&#x1F4B1;<a href="https://finance.yahoo.com/quote/BTC-GBP/history">Bitcoin</a>')
 	box = box
 		.append('div')
-		.attr('class', 'inside');	
+		.attr('class', 'inside');		
 	var inside = box
 		.append('div');
-	inside
-		.append('p')
-		.style('font-weight', 'bold')
-		.append('a')
-		.attr('href', 'https://www.merriam-webster.com/dictionary/' + wordData.Word)
-		.text(wordData.Word);
-	inside
-		.append('div')
-		.style('padding', '5px')
-		.html(wordData.Definition);	
+	var table = inside
+		.append('table');	
+	
+	for (var item of Object.keys(bitcoinData)) {
+		var row = table
+			.append('tr')
+			.style('font-weight', item.startsWith("Today") ? "bold" : "normal")
+			.style('border-bottom', '1px solid #000');
+		row
+			.append('td')
+			.style('text-align', 'left')
+			.html(item + ':&nbsp;');
+		row
+			.append('td')
+			.style('text-align', 'right')
+			.attr('class', 'code')
+			.html(bitcoinData[item]);
+	}
 });
 
 //////////////////////////////////////////////////

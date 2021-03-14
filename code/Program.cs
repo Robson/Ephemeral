@@ -14,6 +14,8 @@
 
         private static readonly List<IModule> modules = new List<IModule>() {
             new Astronomy(),
+            new BBC(),
+            new BBCCombine(),
             new Bitcoin(),
             new Moon(),
             new Nature(),
@@ -56,11 +58,11 @@
             {
                 if (line.StartsWith("module="))
                 {
-                    var parts = line.Split('=').Last().Split('/');
+                    var parts = line.Split('=').Last().Split('|');
                     var settings = globalSettings.ToDictionary(a => a.Key, b => b.Value);
                     foreach (var part in parts.Skip(1))
                     {
-                        settings.Add(part.Split(':').First(), part.Split(':').Last());
+                        settings.Add(part.Split('~').First(), part.Split('~').Last());
                     }
 
                     foreach (var module in modules)

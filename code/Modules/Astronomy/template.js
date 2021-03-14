@@ -11,7 +11,7 @@ modules.push(function astronomy() {
 		box
 			.append('div')
 			.attr('class', 'title')
-			.html('&#x1F6F8;<a href="https://apod.nasa.gov/apod/astropix.html">Astronomy Picture of the Day</a>')
+			.html('&#x1F680;<a href="https://apod.nasa.gov/apod/astropix.html">Astronomy Picture of the Day</a>')
 		box = box
 			.append('div')
 			.attr('class', 'inside');

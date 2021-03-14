@@ -23,6 +23,8 @@ modules.push(function singles() {
 		.append('table');
 	var position = 0;
 	for (var item of Object.keys(singlesData)) {
+		var title = singlesData[item].Title.match(/>([^<]+)</)[1].replace(/'/g, '');
+		var artist = singlesData[item].Artist.match(/>([^<]+)</)[1].replace(/'/g, '');
 		var row = table
 			.append('tr');
 		row
@@ -30,6 +32,8 @@ modules.push(function singles() {
 			.html(++position);
 		row
 			.append('td')
+			.append('a')
+			.attr('href', 'https://www.youtube.com/results?search_query=' + artist + ' - ' + title)
 			.append('img')
 			.attr('src', singlesData[item].Image);
 		row = row
