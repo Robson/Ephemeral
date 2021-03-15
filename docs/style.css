@@ -116,3 +116,14 @@ table {
 	padding: 0;
 	margin: 0;
 }
+
+/***** TOOLTIPS *****/
+
+.label {
+	display: none;
+	font-size: 12px;
+}
+
+.group:hover .label {
+	display: inline;
+}

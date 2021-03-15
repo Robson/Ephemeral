@@ -101,7 +101,7 @@
         {
             var html = File.ReadAllText(@"Templates\template.html");
             html = html.Replace("{{ADDITIONS}}", pageLines);
-            html = html.Replace("{{GENERATED}}", DateTime.Now.ToString("HH:mm d MMM"));
+            html = html.Replace("{{GENERATED}}", DateTime.Now.ToString("HH:mm d-MMM"));
             File.WriteAllText(globalSettings["output"] + @"\index.html", html);
         }
 
