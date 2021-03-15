@@ -14,8 +14,41 @@
 	<body>
 		<div id="container">
 		</div>
+		<div id="tt" style="display: none">
+			<p id="tooltip_text"></p>
+		</div>
 		<div id="cls">&nbsp;</div>
 		<script>
+
+            var tooltip = d3.select('#tt');
+            var tt = d3.select('#tt');
+
+            function setTooltip(value) {
+				d3.select('#tooltip_text').html(value);
+            }
+
+            function createTooltipTriggers() {
+                d3.selectAll('.ttt')
+                    .on("mouseover", function (d, i) {
+                        setTooltip(d3.selectAll('.ttt')[0][i].attributes['data-tt'].value);
+                    })
+                    .on("mouseout", function () {
+                        tt.style('display', 'none');
+                    })
+					.on("mousemove", function () {
+                        if (x <= 0 || y <= 0) {
+                            tt.style('display', 'none');
+                        } else {
+                            tt.style('display', null);
+                        }
+						console.log(tt.node().getBoundingClientRect());
+                        var x = d3.event.pageX - (tt.node().getBoundingClientRect().width / 2);
+                        var y = d3.event.pageY - (tt.node().getBoundingClientRect().height + 5);
+                        tt.style('left', ~~x + 'px');
+                        tt.style('top', ~~y + 'px');
+
+                    });
+            }
 					
 			var inside = 210;
 			var padding = 8;
@@ -90,6 +123,7 @@
 					.select('#cls')
 					.style('top', (low) + 'px')
 					.style('height', ((padding * 2) + offsetY) + 'px');
+				createTooltipTriggers();
 			}
 			
 			d3.select(window).on('resize', createPage);

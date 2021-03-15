@@ -119,11 +119,31 @@ table {
 
 /***** TOOLTIPS *****/
 
-.label {
-	display: none;
-	font-size: 12px;
+#tt {
+	background: rgba(0, 0, 0, 1);
+	text-align: center;
+	color: #fff;
+	height: auto;
+	width: auto;
+	top: 0;
+	left: 0;
+	position: absolute;
+	border: 2px solid #fff;
+	border-radius: 2px;
+	font-size: 15px;
 }
 
-.group:hover .label {
-	display: inline;
+#tt * {
+	margin: 4px;
+	padding: 0;
+	opacity: 1;
 }
+
+#tooltip_title {
+	font-style: italic;
+	margin: 5px;
+	padding: 0;
+	line-height: 1.1em;
+	height: 3.3em;
+	overflow: hidden;
+}  

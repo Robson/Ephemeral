@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>13:57 15-Mar - Ephemeral</title>		
+		<title>14:57 15-Mar - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,8 +14,41 @@
 	<body>
 		<div id="container">
 		</div>
+		<div id="tt" style="display: none">
+			<p id="tooltip_text"></p>
+		</div>
 		<div id="cls">&nbsp;</div>
 		<script>
+
+            var tooltip = d3.select('#tt');
+            var tt = d3.select('#tt');
+
+            function setTooltip(value) {
+				d3.select('#tooltip_text').html(value);
+            }
+
+            function createTooltipTriggers() {
+                d3.selectAll('.ttt')
+                    .on("mouseover", function (d, i) {
+                        setTooltip(d3.selectAll('.ttt')[0][i].attributes['data-tt'].value);
+                    })
+                    .on("mouseout", function () {
+                        tt.style('display', 'none');
+                    })
+					.on("mousemove", function () {
+                        if (x <= 0 || y <= 0) {
+                            tt.style('display', 'none');
+                        } else {
+                            tt.style('display', null);
+                        }
+						console.log(tt.node().getBoundingClientRect());
+                        var x = d3.event.pageX - (tt.node().getBoundingClientRect().width / 2);
+                        var y = d3.event.pageY - (tt.node().getBoundingClientRect().height + 5);
+                        tt.style('left', ~~x + 'px');
+                        tt.style('top', ~~y + 'px');
+
+                    });
+            }
 					
 			var inside = 210;
 			var padding = 8;
@@ -90,6 +123,7 @@
 					.select('#cls')
 					.style('top', (low) + 'px')
 					.style('height', ((padding * 2) + offsetY) + 'px');
+				createTooltipTriggers();
 			}
 			
 			d3.select(window).on('resize', createPage);
@@ -139,7 +173,7 @@ modules.push(function astronomy() {
 //////////////////////////////////////////////////
 
 modules.push(function bbcCombine() {
-	var html = '<p style="font-weight:bold;padding:10px 0 0 10px">UK</p><ul><li title="Police officers handcuffed women and removed them from the gathering on Clapham Common on Saturday."><a href="https://www.bbc.co.uk/news/uk-56396960">Sarah Everard vigil: Boris Johnson \'deeply concerned\' by footage</a></li><li title="Police investigating the death of the 33-year-old cordon off part of Sandwich, Kent."><a href="https://www.bbc.co.uk/news/uk-england-london-56399057">Sarah Everard killing: Police search Sandwich town centre</a></li><li title="The drugs regulator says people should still get their Covid vaccine, as some countries suspend using it."><a href="https://www.bbc.co.uk/news/uk-56397592">Covid-19: Evidence does not suggest AstraZeneca jab linked to clots, MHRA says</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">US & Canada</p><ul><li title="The US president is awaiting the outcome of a misconduct probe into NY Governor Andrew Cuomo."><a href="https://www.bbc.co.uk/news/world-us-canada-56397156">Andrew Cuomo: Biden declines to join calls for Cuomo to resign</a></li><li title="The US didn’t shut down until late March, but Americans were talking about the virus before that."><a href="https://www.bbc.co.uk/news/world-us-canada-56338916">We asked for your first Covid text messages. These are your stories</a></li><li title="The Talk is suspended after a row between Sharon Osbourne and one of her co-hosts about Piers Morgan."><a href="https://www.bbc.co.uk/news/entertainment-arts-56400070">The Talk: Sharon Osbourne\'s show off air after row over Piers Morgan</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">World</p><ul><li title="The military imposes martial law in more areas, a day after security forces shoot dead 50 protesters."><a href="https://www.bbc.co.uk/news/world-asia-56398001">Myanmar military extends martial law after bloodiest day since coup</a></li><li title="The wave of protests follow a backlash to the government\'s response to rape allegations."><a href="https://www.bbc.co.uk/news/world-australia-56397170">Australia March 4 Justice: Thousands march against sexual assault</a></li><li title="It is the latest country to act over reports of blood clotting, but the WHO says the vaccine is safe."><a href="https://www.bbc.co.uk/news/world-europe-56397157">Covid-19: Netherlands suspends use of AstraZeneca vaccine</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Formula 1</p><ul><li title="Lewis Hamilton says rivals Red Bull will be a &quot;different animal&quot; in this year\'s championship after pre-season testing."><a href="http://www.bbc.co.uk/sport/formula1/56394244">Lewis Hamilton says Red Bull a different animal after Formula 1 testing</a></li><li title="Legendary motor racing commentator, who became as famous as the drivers themselves, dies at 97"><a href="http://www.bbc.co.uk/sport/formula1/56355693">Murray Walker: A legend with effervescent enthusiasm</a></li><li title="Former Formula 1 commentator Murray Walker dies at the age of 97."><a href="http://www.bbc.co.uk/sport/formula1/56388596">Murray Walker: Formula 1 broadcasting legend dies at 97</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Technology</p><ul><li title="The mixed reality platform can be used on the Hololens 2, computers, VR headsets and smartphones."><a href="https://www.bbc.co.uk/news/technology-56347877">Microsoft Mesh: Will it change how we collaborate?</a></li><li title="The rise of scam calls seems relentless - but can anything be done about them?"><a href="https://www.bbc.co.uk/news/technology-56334466">Phone scammers: \'Give me £1,000 to stop calling you\'</a></li><li title="People who have had both jabs will be able to register their status on BA\'s smartphone app."><a href="https://www.bbc.co.uk/news/business-56392570">Covid-19: British Airways plans app-based travel pass</a></li></ul>';
+	var html = '<p style="font-weight:bold;padding:10px 0 0 10px">UK</p><ul><li title="It is &quot;fundamental&quot; women feel listened to when they report violence or assault, Boris Johnson says."><a href="https://www.bbc.co.uk/news/uk-56403282">Sarah Everard vigil: Women must feel \'properly heard\', says PM</a></li><li title="Police investigating the death of the 33-year-old cordon off part of Sandwich, Kent."><a href="https://www.bbc.co.uk/news/uk-england-london-56399057">Sarah Everard killing: Police search Sandwich town centre</a></li><li title="The world health body says it is vital that vaccination campaigns continue, so lives can be saved."><a href="https://www.bbc.co.uk/news/world-europe-56404542">Covid-19: \'No evidence\' of AstraZeneca jab problems, says WHO</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">US & Canada</p><ul><li title="The US president is awaiting the outcome of a misconduct probe into NY Governor Andrew Cuomo."><a href="https://www.bbc.co.uk/news/world-us-canada-56397156">Andrew Cuomo: Biden declines to join calls for Cuomo to resign</a></li><li title="The US didn’t shut down until late March, but Americans were talking about the virus before that."><a href="https://www.bbc.co.uk/news/world-us-canada-56338916">We asked for your first Covid text messages. These are your stories</a></li><li title="Yo-Yo Ma performs in a waiting room after receiving his second dose of Covid-19 vaccine."><a href="https://www.bbc.co.uk/news/entertainment-arts-56401138">Yo-Yo Ma: World-famous cellist\'s impromptu vaccine centre concert</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">World</p><ul><li title="The world health body says it is vital that vaccination campaigns continue, so lives can be saved."><a href="https://www.bbc.co.uk/news/world-europe-56404542">Covid-19: \'No evidence\' of AstraZeneca jab problems, says WHO</a></li><li title="The military imposes martial law in more areas, a day after security forces shoot dead 50 protesters."><a href="https://www.bbc.co.uk/news/world-asia-56398001">Myanmar military extends martial law after bloodiest day since coup</a></li><li title="The Pope had indicated support for same-sex unions, but the Vatican now says it cannot bless them."><a href="https://www.bbc.co.uk/news/world-56402096">Catholic Church \'cannot bless same-sex unions\'</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Formula 1</p><ul><li title="Lewis Hamilton says rivals Red Bull will be a &quot;different animal&quot; in this year\'s championship after pre-season testing."><a href="http://www.bbc.co.uk/sport/formula1/56394244">Lewis Hamilton says Red Bull a different animal after Formula 1 testing</a></li><li title="Legendary motor racing commentator, who became as famous as the drivers themselves, dies at 97"><a href="http://www.bbc.co.uk/sport/formula1/56355693">Murray Walker: A legend with effervescent enthusiasm</a></li><li title="Former Formula 1 commentator Murray Walker dies at the age of 97."><a href="http://www.bbc.co.uk/sport/formula1/56388596">Murray Walker: Formula 1 broadcasting legend dies at 97</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Technology</p><ul><li title="The firm\'s chief financial officer has been awarded the title &quot;Master of Coin&quot;."><a href="https://www.bbc.co.uk/news/technology-56404583">Elon Musk changes job title to \'Technoking of Tesla\'</a></li><li title="A US mother allegedly went to extreme lengths to help her daughter\'s cheerleading career."><a href="https://www.bbc.co.uk/news/technology-56404038">Mother \'used deepfake to frame cheerleading rivals\'</a></li><li title="The mixed reality platform can be used on the Hololens 2, computers, VR headsets and smartphones."><a href="https://www.bbc.co.uk/news/technology-56347877">Microsoft Mesh: Will it change how we collaborate?</a></li></ul>';
 	var box = makeBox(3, 2);
 	box
 		.append('div')
@@ -538,39 +572,17 @@ modules.push(function stocks() {
 			.append('circle')
 			.attr('cx', x1)
 			.attr('cy', y1)
-			.attr('r', 5)
-			.attr('opacity', '0.01')
-			.attr('z-index', 1000)
+			.attr('r', 1)
 			.attr('title', data[i - 1].open);
 		g
 			.append('circle')
+			.attr('class', 'ttt')
 			.attr('cx', x1)
 			.attr('cy', y1)
-			.attr('r', 2)
-			.attr('title', data[i - 1].open);
-		g
-			.append('text')
-			.attr('class', 'label')
-			.attr('x', x1 - 5)
-			.attr('y', y1 + 3)
-			.attr('height', 20)
-			.attr('width', 0)
-			.attr('text-anchor', i > data.length / 2 ? 'end' : 'start')
-			.attr('alignment-baseline', 'center')
-			.attr('fill', 'white')
-			.attr('stroke', 'white')
-			.attr('stroke-width', 8)
-			.text(data[i - 1].day + ': $' + data[i - 1].open.toFixed(2))
-		g
-			.append('text')
-			.attr('class', 'label')
-			.attr('x', x1 - 5)
-			.attr('y', y1 + 3)
-			.attr('height', 20)
-			.attr('width', 0)
-			.attr('text-anchor', i > data.length / 2 ? 'end' : 'start')
-			.attr('alignment-baseline', 'center')
-			.text(data[i - 1].day + ': $' + data[i - 1].open.toFixed(2))
+			.attr('r', 5)
+			.attr('opacity', '0.01')
+			.attr('z-index', 1000)
+			.attr('data-tt', data[i - 1].day + ': $' + data[i - 1].open.toFixed(2));
 	}
 
 	var info = "";
@@ -670,9 +682,9 @@ modules.push(function weather() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'UlIq5gvqOmA', title: "Harry Styles Wins Best Pop Solo Performance | 2021 GRAMMY Awards Show Acceptance Speech", label: "Harry Styles Wins Best Pop Solo Performance | 2021 GRAMMY Awards Show Acceptance Speech by Recording Academy / GRAMMYs 10 hours ago 2 minutes, 17 seconds 881,383 views" },
-{ id: 'zNjHov_yrd0', title: "Can I Save The Sidemen's Shots at My Car?", label: "Can I Save The Sidemen's Shots at My Car? by ChrisMD 18 hours ago 9 minutes, 10 seconds 796,878 views" },
-{ id: '9mBWZYKP2ro', title: "Taylor Swift Wins Album Of The Year | 2021 GRAMMY Awards Show Acceptance Speech", label: "Taylor Swift Wins Album Of The Year | 2021 GRAMMY Awards Show Acceptance Speech by Recording Academy / GRAMMYs 9 hours ago 3 minutes, 29 seconds 964,030 views" },
+{ id: 'UlIq5gvqOmA', title: "Harry Styles Wins Best Pop Solo Performance | 2021 GRAMMY Awards Show Acceptance Speech", label: "Harry Styles Wins Best Pop Solo Performance | 2021 GRAMMY Awards Show Acceptance Speech by Recording Academy / GRAMMYs 11 hours ago 2 minutes, 17 seconds 973,943 views" },
+{ id: '9mBWZYKP2ro', title: "Taylor Swift Wins Album Of The Year | 2021 GRAMMY Awards Show Acceptance Speech", label: "Taylor Swift Wins Album Of The Year | 2021 GRAMMY Awards Show Acceptance Speech by Recording Academy / GRAMMYs 10 hours ago 3 minutes, 29 seconds 1,084,043 views" },
+{ id: 'zNjHov_yrd0', title: "Can I Save The Sidemen's Shots at My Car?", label: "Can I Save The Sidemen's Shots at My Car? by ChrisMD 19 hours ago 9 minutes, 10 seconds 838,931 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -712,7 +724,7 @@ modules.push(function youtube() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23OscarNoms">#OscarNoms</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23MondayMotivation">#MondayMotivation</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23mondaythoughts">#mondaythoughts</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23thismorning">#thismorning</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23PolicingBill">#PolicingBill</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23OscarNoms">#OscarNoms</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23MondayMotivation">#MondayMotivation</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23cafc">#cafc</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Bowyer">Bowyer</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Churchill">Churchill</a></td></tr></table>';
 	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
@@ -740,7 +752,7 @@ modules.push(function twitter() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23OscarNoms">#OscarNoms</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23MondayMotivation">#MondayMotivation</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23mondaythoughts">#mondaythoughts</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Lakeith">Lakeith</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23IdesofMarch">#IdesofMarch</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23OscarNoms">#OscarNoms</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23MondayMotivation">#MondayMotivation</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Mank">Mank</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23mondaythoughts">#mondaythoughts</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23MondayMorning">#MondayMorning</a></td></tr></table>';
 	var title = 'United States';
 	var box = makeBox(1, 1);
 	box
@@ -827,9 +839,9 @@ modules.push(function vanguard() {
 
 modules.push(function nature() {
 	var natureData = {
-		Source:   'https://cdn2.outdoorphotographer.com/2021/03/New-Snow-By-Bill-Sisson.jpg',
-		Title:    'New Snow By Bill Sisson',
-		LinkPage: 'https://www.outdoorphotographer.com/blog/photo-of-the-day-by-bill-sisson-4/'
+		Source:   'https://cdn2.outdoorphotographer.com/2021/03/El-Dorado-National-Forest-Wildfire-Devastation-By-Beth-Young.jpg',
+		Title:    'El Dorado National Forest Wildfire Devastation By Beth Young',
+		LinkPage: 'https://www.outdoorphotographer.com/blog/photo-of-the-day-by-beth-young-13/'
 	}
 
 	if (natureData.Source.length > 0) {
@@ -964,9 +976,9 @@ modules.push(function word() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '4.6',
+		Percent:  '4.7',
 		Type:     '<a href="/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 15 March and 16 March">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.046&p=6.031&r=5.890',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.047&p=5.827&r=5.689',
 		Location: '11609021'
 	}
 
