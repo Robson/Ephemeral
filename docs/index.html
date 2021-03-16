@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>20:21 16-Mar - Ephemeral</title>		
+		<title>21:21 16-Mar - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,7 +58,7 @@
                 return (n - a) * (z - y) / (b - a) + y;
 			}
 
-			function createLineChart(width, height, element, data) {
+			function createLineChart(width, height, element, data, startAtZero=true) {
                 var svg = element
                     .append('svg')
                     .attr('width', width + 'px')
@@ -66,7 +66,7 @@
                     .style('border-bottom', '1px solid #ddd')
                     .style('background', '#fff');
 
-                var start = 0; //Math.min(...data.map(a => a.number));
+                var start = startAtZero ? 0 : Math.min(...data.map(a => a.number));
                 var end = Math.max(...data.map(a => a.number));
 
                 for (var i = 1; i <= data.length; i++) {
@@ -235,7 +235,7 @@ modules.push(function astronomy() {
 //////////////////////////////////////////////////
 
 modules.push(function bbcCombine() {
-	var html = '<p style="font-weight:bold;padding:10px 0 0 10px">UK</p><ul><li title="The UK will also shift focus towards Indo-Pacific countries, following a year-long foreign policy review."><a href="https://www.bbc.co.uk/news/uk-56413920">Integrated review: UK to lift cap on nuclear stockpile</a></li><li title="First Minister Nicola Sturgeon says garden centres can also reopen in the days after the stay at home lockdown order is lifted."><a href="https://www.bbc.co.uk/news/uk-scotland-56416538">Covid in Scotland: Hairdressers to reopen on 5 April as rules ease</a></li><li title="The 99-year-old Duke of Edinburgh returns to Windsor Castle following a successful heart procedure."><a href="https://www.bbc.co.uk/news/uk-56413762">Prince Philip: Duke of Edinburgh leaves hospital after a month</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">US & Canada</p><ul><li title="More than 4,200 migrant children are in US custody amid a surge of arrivals to the US-Mexico border."><a href="https://www.bbc.co.uk/news/world-us-canada-56405009">What is happening with migrant children at the southern US border?</a></li><li title="Infants as young as six months are taking part in the Covid-19 jab study."><a href="https://www.bbc.co.uk/news/world-us-canada-56422415">Moderna begins testing Covid-19 vaccine on babies and young children</a></li><li title="Nebraska\'s pro-meat day was planned in response to neighbouring Colorado\'s pro-vegetarian effort."><a href="https://www.bbc.co.uk/news/world-us-canada-56419396">Nebraska declares pro-meat day to rival Colorado\'s meatless day</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">World</p><ul><li title="While some countries seek further clarification on the vaccine\'s safety, others are pushing ahead."><a href="https://www.bbc.co.uk/news/world-europe-56412784">AstraZeneca vaccine: Europe divided over suspensions as investigation continues</a></li><li title="Aid agency report children as young as 11 are being beheaded in a region hit by an insurgency."><a href="https://www.bbc.co.uk/news/world-africa-56411157">Mozambique insurgency: Children beheaded, aid agency reports</a></li><li title="These cool cats enjoyed the record snowfall that hit Colorado over the weekend."><a href="https://www.bbc.co.uk/news/world-us-canada-56420398">Lions at Denver Zoo frolic in the snow after historic blizzard</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Formula 1</p><ul><li title="Lewis Hamilton says rivals Red Bull will be a &quot;different animal&quot; in this year\'s championship after pre-season testing."><a href="http://www.bbc.co.uk/sport/formula1/56394244">Lewis Hamilton says Red Bull a different animal after Formula 1 testing</a></li><li title="Legendary motor racing commentator, who became as famous as the drivers themselves, dies at 97"><a href="http://www.bbc.co.uk/sport/formula1/56355693">Murray Walker: A legend with effervescent enthusiasm</a></li><li title="Former Formula 1 commentator Murray Walker dies at the age of 97."><a href="http://www.bbc.co.uk/sport/formula1/56388596">Murray Walker: Formula 1 broadcasting legend dies at 97</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Technology</p><ul><li title="Firm re-engineers laptop chip designs to work with old transistor tech to get performance gains."><a href="https://www.bbc.co.uk/news/technology-56401847">Intel buys time with \'retrofit\' Rocket Lake desktop PC chips</a></li><li title="The new features have been criticised for collecting data when users are &quot;most vulnerable&quot;."><a href="https://www.bbc.co.uk/news/technology-56416578">Google Nest 2 home device tracks body activity in bed</a></li><li title="Older users will be able to privately message teenagers who follow them only."><a href="https://www.bbc.co.uk/news/technology-56414963">Instagram cracks down on adults messaging teens</a></li></ul>';
+	var html = '<p style="font-weight:bold;padding:10px 0 0 10px">UK</p><ul><li title="The UK will also shift focus towards Indo-Pacific countries, following a year-long foreign policy review."><a href="https://www.bbc.co.uk/news/uk-56413920">Integrated review: UK to lift cap on nuclear stockpile</a></li><li title="Taxi app\'s decision follows court ruling that drivers should be classed as workers, not self-employed."><a href="https://www.bbc.co.uk/news/business-56412397">Uber to pay drivers a minimum wage, holiday pay and pensions</a></li><li title="First Minister Nicola Sturgeon says garden centres can also reopen in the days after the stay at home lockdown order is lifted."><a href="https://www.bbc.co.uk/news/uk-scotland-56416538">Covid in Scotland: Hairdressers to reopen on 5 April as rules ease</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">US & Canada</p><ul><li title="More than 4,200 migrant children are in US custody amid a surge of arrivals to the US-Mexico border."><a href="https://www.bbc.co.uk/news/world-us-canada-56405009">What is happening with migrant children at the southern US border?</a></li><li title="Infants as young as six months are taking part in the Covid-19 jab study."><a href="https://www.bbc.co.uk/news/world-us-canada-56422415">Moderna begins testing Covid-19 vaccine on babies and young children</a></li><li title="Nebraska\'s pro-meat day was planned in response to neighbouring Colorado\'s pro-vegetarian effort."><a href="https://www.bbc.co.uk/news/world-us-canada-56419396">Nebraska declares pro-meat day to rival Colorado\'s meatless day</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">World</p><ul><li title="While some countries seek further clarification on the vaccine\'s safety, others are pushing ahead."><a href="https://www.bbc.co.uk/news/world-europe-56412784">AstraZeneca vaccine: Europe divided over suspensions as investigation continues</a></li><li title="Aid agency report children as young as 11 are being beheaded in a region hit by an insurgency."><a href="https://www.bbc.co.uk/news/world-africa-56411157">Mozambique insurgency: Children beheaded, aid agency reports</a></li><li title="These cats enjoyed the record snowfall that hit Colorado over the weekend."><a href="https://www.bbc.co.uk/news/world-us-canada-56420398">Lions at Denver Zoo frolic in the snow after historic blizzard</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Formula 1</p><ul><li title="Lewis Hamilton says rivals Red Bull will be a &quot;different animal&quot; in this year\'s championship after pre-season testing."><a href="http://www.bbc.co.uk/sport/formula1/56394244">Lewis Hamilton says Red Bull a different animal after Formula 1 testing</a></li><li title="Legendary motor racing commentator, who became as famous as the drivers themselves, dies at 97"><a href="http://www.bbc.co.uk/sport/formula1/56355693">Murray Walker: A legend with effervescent enthusiasm</a></li><li title="Former Formula 1 commentator Murray Walker dies at the age of 97."><a href="http://www.bbc.co.uk/sport/formula1/56388596">Murray Walker: Formula 1 broadcasting legend dies at 97</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Technology</p><ul><li title="Firm re-engineers laptop chip designs to work with old transistor tech to get performance gains."><a href="https://www.bbc.co.uk/news/technology-56401847">Intel buys time with \'retrofit\' Rocket Lake desktop PC chips</a></li><li title="The new features have been criticised for collecting data when users are &quot;most vulnerable&quot;."><a href="https://www.bbc.co.uk/news/technology-56416578">Google Nest 2 home device tracks body activity in bed</a></li><li title="Older users will be able to privately message teenagers who follow them only."><a href="https://www.bbc.co.uk/news/technology-56414963">Instagram cracks down on adults messaging teens</a></li></ul>';
 	var box = makeBox(3, 2);
 	box
 		.append('div')
@@ -261,11 +261,14 @@ modules.push(function stocks() {
 	var rawData = {
     "Meta Data": {
         "2. Symbol": "GME",
-        "3. Last Refreshed": "2021-03-15",
+        "3. Last Refreshed": "2021-03-16 16:00:01",
         "4. Output Size": "Compact",
         "5. Time Zone": "US/Eastern"
     },
     "Time Series (Daily)": {
+        "2021-03-16": {
+            "open": "203.1600",
+        },
         "2021-03-15": {
             "open": "277.5200",
         },
@@ -562,9 +565,6 @@ modules.push(function stocks() {
         },
         "2020-10-21": {
             "open": "13.9000",
-        },
-        "2020-10-20": {
-            "open": "14.0300",
         }
     }
 };
@@ -688,9 +688,9 @@ modules.push(function weather() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'xNWaHd8tj2E', title: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6", label: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6 by Fortnite 12 hours ago 3 minutes, 14 seconds 2,986,832 views" },
-{ id: 'p_4M4TKTydM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video] by KSI 1 day ago 3 minutes, 10 seconds 2,252,101 views" },
-{ id: 'vFWv44Z4Jhk', title: "Dua Lipa - Levitating ft. DaBaby / Don't Start Now (Live at the GRAMMYs 2021)", label: "Dua Lipa - Levitating ft. DaBaby / Don't Start Now (Live at the GRAMMYs 2021) by Dua Lipa 1 day ago 5 minutes, 5 seconds 11,286,093 views" },
+{ id: 'xNWaHd8tj2E', title: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6", label: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6 by Fortnite 13 hours ago 3 minutes, 14 seconds 3,267,872 views" },
+{ id: 'p_4M4TKTydM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video] by KSI 1 day ago 3 minutes, 10 seconds 2,338,416 views" },
+{ id: '8h3QNkTo07c', title: "Miniminter Embarrasses KSI", label: "Miniminter Embarrasses KSI by SidemenShorts 23 hours ago 1 minute, 7 seconds 166,425 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -730,7 +730,7 @@ modules.push(function youtube() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23GBBO">#GBBO</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22James+McAvoy%22">James McAvoy</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23EastEnders">#EastEnders</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23dcfc">#dcfc</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23pnefc">#pnefc</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23GBBO">#GBBO</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22James+McAvoy%22">James McAvoy</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23dcfc">#dcfc</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23interiordesignmasters">#interiordesignmasters</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22David+Davis%22">David Davis</a></td></tr></table>';
 	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
@@ -839,6 +839,47 @@ modules.push(function vanguard() {
 			.attr('class', 'code')
 			.html(vanguardValues[item]);
 	}
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function vanguardChart() {
+
+	var data = [{ number: 159.64, tooltip: "Mon, Mar 15, 2021: £159.64"},
+{ number: 158.64, tooltip: "Fri, Mar 12, 2021: £158.64"},
+{ number: 157.70, tooltip: "Thu, Mar 11, 2021: £157.70"},
+{ number: 156.45, tooltip: "Wed, Mar 10, 2021: £156.45"},
+{ number: 155.75, tooltip: "Tue, Mar 09, 2021: £155.75"},
+{ number: 154.64, tooltip: "Mon, Mar 08, 2021: £154.64"},
+{ number: 155.08, tooltip: "Fri, Mar 05, 2021: £155.08"},
+{ number: 152.20, tooltip: "Thu, Mar 04, 2021: £152.20"},
+{ number: 154.54, tooltip: "Wed, Mar 03, 2021: £154.54"},
+{ number: 155.81, tooltip: "Tue, Mar 02, 2021: £155.81"},
+{ number: 156.81, tooltip: "Mon, Mar 01, 2021: £156.81"},
+{ number: 153.10, tooltip: "Fri, Feb 26, 2021: £153.10"},
+{ number: 153.77, tooltip: "Thu, Feb 25, 2021: £153.77"},
+{ number: 155.98, tooltip: "Wed, Feb 24, 2021: £155.98"},
+{ number: 155.49, tooltip: "Tue, Feb 23, 2021: £155.49"},
+{ number: 156.16, tooltip: "Mon, Feb 22, 2021: £156.16"},
+{ number: 157.74, tooltip: "Fri, Feb 19, 2021: £157.74"},
+{ number: 158.11, tooltip: "Thu, Feb 18, 2021: £158.11"},
+{ number: 160.11, tooltip: "Wed, Feb 17, 2021: £160.11"},
+{ number: 159.97, tooltip: "Tue, Feb 16, 2021: £159.97"},
+{ number: 160.08, tooltip: "Mon, Feb 15, 2021: £160.08"},
+].reverse();
+
+	var box = makeBox(2, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#128200;<a href="https://www.vanguardinvestor.co.uk">Vanguard</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');		
+	var inside = box
+		.append('div');
+
+	createLineChart(400, 150, inside, data, false);
 });
 
 //////////////////////////////////////////////////
@@ -982,9 +1023,9 @@ modules.push(function word() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '10.8',
+		Percent:  '11.1',
 		Type:     '<a href="/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 16 March and 17 March">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.108&p=5.345&r=5.294',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.111&p=5.367&r=5.318',
 		Location: '11609021'
 	}
 

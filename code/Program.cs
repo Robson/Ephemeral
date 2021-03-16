@@ -24,6 +24,7 @@
             new Sun(),
             new Twitter(),
             new Vanguard(),
+            new VanguardChart(),
             new Weather(),
             new Word(),
             new YouTube()

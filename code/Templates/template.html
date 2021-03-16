@@ -58,7 +58,7 @@
                 return (n - a) * (z - y) / (b - a) + y;
 			}
 
-			function createLineChart(width, height, element, data) {
+			function createLineChart(width, height, element, data, startAtZero=true) {
                 var svg = element
                     .append('svg')
                     .attr('width', width + 'px')
@@ -66,7 +66,7 @@
                     .style('border-bottom', '1px solid #ddd')
                     .style('background', '#fff');
 
-                var start = 0; //Math.min(...data.map(a => a.number));
+                var start = startAtZero ? 0 : Math.min(...data.map(a => a.number));
                 var end = Math.max(...data.map(a => a.number));
 
                 for (var i = 1; i <= data.length; i++) {
