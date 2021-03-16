@@ -20,6 +20,8 @@
 		<div id="cls">&nbsp;</div>
 		<script>
 
+////////////////////////////////////////////////// tooltips
+
             var tooltip = d3.select('#tt');
             var tt = d3.select('#tt');
 
@@ -48,7 +50,67 @@
                         tt.style('top', ~~y + 'px');
 
                     });
+			}
+
+////////////////////////////////////////////////// charts
+
+            function map(n, a, b, y, z) {
+                return (n - a) * (z - y) / (b - a) + y;
+			}
+
+			function createLineChart(width, height, element, data) {
+                var svg = element
+                    .append('svg')
+                    .attr('width', width + 'px')
+                    .attr('height', height + 'px')
+                    .style('border-bottom', '1px solid #ddd')
+                    .style('background', '#fff');
+
+                var start = 0; //Math.min(...data.map(a => a.number));
+                var end = Math.max(...data.map(a => a.number));
+
+                for (var i = 1; i <= data.length; i++) {
+                    var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
+                    var y1 = map(data[i - 1].number, start, end, height, 6);
+                    if (i < data.length) {
+                        var x2 = map(i, 0, data.length - 1, 3, width - 3);
+                        var y2 = map(data[i].number, start, end, height, 6);
+                        svg
+                            .append('line')
+                            .attr('x1', x1)
+                            .attr('y1', y1)
+                            .attr('x2', x2)
+                            .attr('y2', y2)
+                            .style('stroke-width', 1)
+                            .style('stroke', '#333');
+                    }
+                }
+
+                for (var i = 1; i <= data.length; i++) {
+                    var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
+                    var y1 = map(data[i - 1].number, start, end, height, 6);
+                    var g = svg
+                        .append('g')
+                        .attr('class', 'group');
+                    g
+                        .append('circle')
+                        .attr('cx', x1)
+                        .attr('cy', y1)
+                        .attr('r', 2)
+                        .attr('title', data[i - 1].number);
+                    g
+                        .append('circle')
+                        .attr('class', 'ttt')
+                        .attr('cx', x1)
+                        .attr('cy', y1)
+                        .attr('r', 5)
+                        .attr('opacity', '0.01')
+                        .attr('z-index', 1000)
+                        .attr('data-tt', data[i - 1].tooltip);
+                }
             }
+
+////////////////////////////////////////////////// page
 					
 			var inside = 210;
 			var padding = 8;
@@ -128,7 +190,7 @@
 			
 			d3.select(window).on('resize', createPage);
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////// boxes
 			
 {{ADDITIONS}}
 

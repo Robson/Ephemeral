@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>19:21 16-Mar - Ephemeral</title>		
+		<title>20:21 16-Mar - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +19,8 @@
 		</div>
 		<div id="cls">&nbsp;</div>
 		<script>
+
+////////////////////////////////////////////////// tooltips
 
             var tooltip = d3.select('#tt');
             var tt = d3.select('#tt');
@@ -48,7 +50,67 @@
                         tt.style('top', ~~y + 'px');
 
                     });
+			}
+
+////////////////////////////////////////////////// charts
+
+            function map(n, a, b, y, z) {
+                return (n - a) * (z - y) / (b - a) + y;
+			}
+
+			function createLineChart(width, height, element, data) {
+                var svg = element
+                    .append('svg')
+                    .attr('width', width + 'px')
+                    .attr('height', height + 'px')
+                    .style('border-bottom', '1px solid #ddd')
+                    .style('background', '#fff');
+
+                var start = 0; //Math.min(...data.map(a => a.number));
+                var end = Math.max(...data.map(a => a.number));
+
+                for (var i = 1; i <= data.length; i++) {
+                    var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
+                    var y1 = map(data[i - 1].number, start, end, height, 6);
+                    if (i < data.length) {
+                        var x2 = map(i, 0, data.length - 1, 3, width - 3);
+                        var y2 = map(data[i].number, start, end, height, 6);
+                        svg
+                            .append('line')
+                            .attr('x1', x1)
+                            .attr('y1', y1)
+                            .attr('x2', x2)
+                            .attr('y2', y2)
+                            .style('stroke-width', 1)
+                            .style('stroke', '#333');
+                    }
+                }
+
+                for (var i = 1; i <= data.length; i++) {
+                    var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
+                    var y1 = map(data[i - 1].number, start, end, height, 6);
+                    var g = svg
+                        .append('g')
+                        .attr('class', 'group');
+                    g
+                        .append('circle')
+                        .attr('cx', x1)
+                        .attr('cy', y1)
+                        .attr('r', 2)
+                        .attr('title', data[i - 1].number);
+                    g
+                        .append('circle')
+                        .attr('class', 'ttt')
+                        .attr('cx', x1)
+                        .attr('cy', y1)
+                        .attr('r', 5)
+                        .attr('opacity', '0.01')
+                        .attr('z-index', 1000)
+                        .attr('data-tt', data[i - 1].tooltip);
+                }
             }
+
+////////////////////////////////////////////////// page
 					
 			var inside = 210;
 			var padding = 8;
@@ -128,7 +190,7 @@
 			
 			d3.select(window).on('resize', createPage);
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////// boxes
 			
 modules.push(function astronomy() {
 	var imageData = {
@@ -173,7 +235,7 @@ modules.push(function astronomy() {
 //////////////////////////////////////////////////
 
 modules.push(function bbcCombine() {
-	var html = '<p style="font-weight:bold;padding:10px 0 0 10px">UK</p><ul><li title="The UK will also shift focus towards Indo-Pacific countries, following a year-long foreign policy review."><a href="https://www.bbc.co.uk/news/uk-56413920">Integrated review: UK to lift cap on nuclear stockpile</a></li><li title="First Minister Nicola Sturgeon says garden centres can also reopen in the days after the stay at home lockdown order is lifted."><a href="https://www.bbc.co.uk/news/uk-scotland-56416538">Covid in Scotland: Hairdressers to reopen on 5 April as rules ease</a></li><li title="The 99-year-old Duke of Edinburgh returns to Windsor Castle following a successful heart procedure."><a href="https://www.bbc.co.uk/news/uk-56413762">Prince Philip: Duke of Edinburgh leaves hospital after a month</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">US & Canada</p><ul><li title="More than 4,200 migrant children are in US custody amid a surge of arrivals to the US-Mexico border."><a href="https://www.bbc.co.uk/news/world-us-canada-56405009">What is happening with migrant children at the southern US border?</a></li><li title="Nebraska\'s pro-meat day was planned in response to neighbouring Colorado\'s pro-vegetarian effort."><a href="https://www.bbc.co.uk/news/world-us-canada-56419396">Nebraska declares pro-meat day to rival Colorado\'s meatless day</a></li><li title="The director of Malcolm X and Da 5 Bloods was due to preside in 2020, but Covid cancelled the event."><a href="https://www.bbc.co.uk/news/entertainment-arts-56413896">Cannes Film Festival: Spike Lee asked again to be first black jury head</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">World</p><ul><li title="While some countries seek further clarification on the vaccine\'s safety, others are pushing ahead."><a href="https://www.bbc.co.uk/news/world-europe-56412784">AstraZeneca vaccine: Europe divided over suspensions as investigation continues</a></li><li title="Aid agency report children as young as 11 are being beheaded in a region hit by an insurgency."><a href="https://www.bbc.co.uk/news/world-africa-56411157">Mozambique insurgency: Children beheaded, aid agency reports</a></li><li title="Tens of thousands of people across Australia protested against abuse and harassment."><a href="https://www.bbc.co.uk/news/world-australia-56406043">Australia March 4 Justice: Thousands march against sexual assault</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Formula 1</p><ul><li title="Lewis Hamilton says rivals Red Bull will be a &quot;different animal&quot; in this year\'s championship after pre-season testing."><a href="http://www.bbc.co.uk/sport/formula1/56394244">Lewis Hamilton says Red Bull a different animal after Formula 1 testing</a></li><li title="Legendary motor racing commentator, who became as famous as the drivers themselves, dies at 97"><a href="http://www.bbc.co.uk/sport/formula1/56355693">Murray Walker: A legend with effervescent enthusiasm</a></li><li title="Former Formula 1 commentator Murray Walker dies at the age of 97."><a href="http://www.bbc.co.uk/sport/formula1/56388596">Murray Walker: Formula 1 broadcasting legend dies at 97</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Technology</p><ul><li title="Firm re-engineers laptop chip designs to work with old transistor tech to get performance gains."><a href="https://www.bbc.co.uk/news/technology-56401847">Intel buys time with \'retrofit\' Rocket Lake desktop PC chips</a></li><li title="The new features have been criticised for collecting data when users are &quot;most vulnerable&quot;."><a href="https://www.bbc.co.uk/news/technology-56416578">Google Nest 2 home device tracks body activity in bed</a></li><li title="Older users will be able to privately message teenagers who follow them only."><a href="https://www.bbc.co.uk/news/technology-56414963">Instagram cracks down on adults messaging teens</a></li></ul>';
+	var html = '<p style="font-weight:bold;padding:10px 0 0 10px">UK</p><ul><li title="The UK will also shift focus towards Indo-Pacific countries, following a year-long foreign policy review."><a href="https://www.bbc.co.uk/news/uk-56413920">Integrated review: UK to lift cap on nuclear stockpile</a></li><li title="First Minister Nicola Sturgeon says garden centres can also reopen in the days after the stay at home lockdown order is lifted."><a href="https://www.bbc.co.uk/news/uk-scotland-56416538">Covid in Scotland: Hairdressers to reopen on 5 April as rules ease</a></li><li title="The 99-year-old Duke of Edinburgh returns to Windsor Castle following a successful heart procedure."><a href="https://www.bbc.co.uk/news/uk-56413762">Prince Philip: Duke of Edinburgh leaves hospital after a month</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">US & Canada</p><ul><li title="More than 4,200 migrant children are in US custody amid a surge of arrivals to the US-Mexico border."><a href="https://www.bbc.co.uk/news/world-us-canada-56405009">What is happening with migrant children at the southern US border?</a></li><li title="Infants as young as six months are taking part in the Covid-19 jab study."><a href="https://www.bbc.co.uk/news/world-us-canada-56422415">Moderna begins testing Covid-19 vaccine on babies and young children</a></li><li title="Nebraska\'s pro-meat day was planned in response to neighbouring Colorado\'s pro-vegetarian effort."><a href="https://www.bbc.co.uk/news/world-us-canada-56419396">Nebraska declares pro-meat day to rival Colorado\'s meatless day</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">World</p><ul><li title="While some countries seek further clarification on the vaccine\'s safety, others are pushing ahead."><a href="https://www.bbc.co.uk/news/world-europe-56412784">AstraZeneca vaccine: Europe divided over suspensions as investigation continues</a></li><li title="Aid agency report children as young as 11 are being beheaded in a region hit by an insurgency."><a href="https://www.bbc.co.uk/news/world-africa-56411157">Mozambique insurgency: Children beheaded, aid agency reports</a></li><li title="These cool cats enjoyed the record snowfall that hit Colorado over the weekend."><a href="https://www.bbc.co.uk/news/world-us-canada-56420398">Lions at Denver Zoo frolic in the snow after historic blizzard</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Formula 1</p><ul><li title="Lewis Hamilton says rivals Red Bull will be a &quot;different animal&quot; in this year\'s championship after pre-season testing."><a href="http://www.bbc.co.uk/sport/formula1/56394244">Lewis Hamilton says Red Bull a different animal after Formula 1 testing</a></li><li title="Legendary motor racing commentator, who became as famous as the drivers themselves, dies at 97"><a href="http://www.bbc.co.uk/sport/formula1/56355693">Murray Walker: A legend with effervescent enthusiasm</a></li><li title="Former Formula 1 commentator Murray Walker dies at the age of 97."><a href="http://www.bbc.co.uk/sport/formula1/56388596">Murray Walker: Formula 1 broadcasting legend dies at 97</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Technology</p><ul><li title="Firm re-engineers laptop chip designs to work with old transistor tech to get performance gains."><a href="https://www.bbc.co.uk/news/technology-56401847">Intel buys time with \'retrofit\' Rocket Lake desktop PC chips</a></li><li title="The new features have been criticised for collecting data when users are &quot;most vulnerable&quot;."><a href="https://www.bbc.co.uk/news/technology-56416578">Google Nest 2 home device tracks body activity in bed</a></li><li title="Older users will be able to privately message teenagers who follow them only."><a href="https://www.bbc.co.uk/news/technology-56414963">Instagram cracks down on adults messaging teens</a></li></ul>';
 	var box = makeBox(3, 2);
 	box
 		.append('div')
@@ -195,10 +257,6 @@ modules.push(function bbcCombine() {
 //////////////////////////////////////////////////
 
 modules.push(function stocks() {
-
-	function showData(value) {
-		console.log(value);
-    }
 
 	var rawData = {
     "Meta Data": {
@@ -525,73 +583,25 @@ modules.push(function stocks() {
 		.style('text-align', 'center')
 		.style('margin-top', '6px');
 
-	function map(value, inMin, inMax, outMin, outMax) {
-		return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
-	}
-
 	var data = [];
 	for (var day of Object.keys(rawData["Time Series (Daily)"]).reverse()) {
-		data.push({ "day": day, "open": +rawData["Time Series (Daily)"][day]['open'] })
+		var value = +rawData["Time Series (Daily)"][day]['open'];
+		data.push({
+			"day": day,
+			"number": value,
+			"tooltip": day + ': $' + value.toFixed(2)
+		})
 	}
 
-	var width = 400, height = 150;
-	var svg = inside
-		.append('svg')
-		.attr('width', width + 'px')
-		.attr('height', height + 'px')
-		.style('border-bottom', '1px solid #ddd')
-		.style('background', '#fff');
-
-	var start = 0; //Math.min(...data.map(a => a.open));
-	var end = Math.max(...data.map(a => a.open));
-
-	for (var i = 1; i <= data.length; i++) {
-		var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
-		var y1 = map(data[i - 1].open, start, end, height, 6);
-		if (i < data.length) {
-			var x2 = map(i, 0, data.length - 1, 3, width - 3);
-			var y2 = map(data[i].open, start, end, height, 6);
-			svg
-				.append('line')
-				.attr('x1', x1)
-				.attr('y1', y1)
-				.attr('x2', x2)
-				.attr('y2', y2)
-				.style('stroke-width', 1)
-				.style('stroke', '#333');
-		}
-	}
-
-	for (var i = 1; i <= data.length; i++) {
-		var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
-		var y1 = map(data[i - 1].open, start, end, height, 6);
-		var g = svg
-			.append('g')
-			.attr('class', 'group');
-		g
-			.append('circle')
-			.attr('cx', x1)
-			.attr('cy', y1)
-			.attr('r', 1)
-			.attr('title', data[i - 1].open);
-		g
-			.append('circle')
-			.attr('class', 'ttt')
-			.attr('cx', x1)
-			.attr('cy', y1)
-			.attr('r', 5)
-			.attr('opacity', '0.01')
-			.attr('z-index', 1000)
-			.attr('data-tt', data[i - 1].day + ': $' + data[i - 1].open.toFixed(2));
-	}
+	createLineChart(400, 150, inside, data);
 
 	var info = "";
 	info += '<table>';
-	info += '<tr style="font-weight:bold"><td>' + data[data.length - 1].day + ':&nbsp;</td><td style="text-align:right">$' + data[data.length - 1].open.toFixed(2) + '</td></tr>';
+	info += '<tr style="font-weight:bold"><td>' + data[data.length - 1].day + ':&nbsp;</td><td style="text-align:right">$' + data[data.length - 1].number.toFixed(2) + '</td></tr>';
 
 	function diff(readable, days) {
-		var latest = data[data.length - 1].open;
-		var then = data[data.length - (days + 1)].open;
+		var latest = data[data.length - 1].number;
+		var then = data[data.length - (days + 1)].number;
 		var difference = latest / then;
 		difference = (difference >= 0 ? '+' : '-') + difference.toFixed(2) + '%';
 		return '<tr title="' + data[data.length - (days + 1)].day + '"><td>' + readable + ':&nbsp;</td><td style="text-align:right">' + difference + '</td></tr>';
@@ -604,17 +614,13 @@ modules.push(function stocks() {
 
 	inside
 		.append('div')
-		.style('margin', '38px 7px 0 7px')
 		.style('color', '#000')
-		.style('text-align', 'left')
 		.style('background', 'rgba(255, 255, 255, 0.75)')
 		.style('display', 'inline')
 		.style('position', 'absolute')
-		.style('top', '12px')
-		.style('left', '12px')
+		.style('top', '50px')
+		.style('left', '19px')
 		.style('padding', '3px')
-		.append('p')
-		.style('margin', '0px')
 		.html(info);
 
 });
@@ -682,9 +688,9 @@ modules.push(function weather() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'xNWaHd8tj2E', title: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6", label: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6 by Fortnite 11 hours ago 3 minutes, 14 seconds 2,617,344 views" },
-{ id: 'p_4M4TKTydM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video] by KSI 1 day ago 3 minutes, 10 seconds 2,158,941 views" },
-{ id: 'vFWv44Z4Jhk', title: "Dua Lipa - Levitating ft. DaBaby / Don't Start Now (Live at the GRAMMYs 2021)", label: "Dua Lipa - Levitating ft. DaBaby / Don't Start Now (Live at the GRAMMYs 2021) by Dua Lipa 1 day ago 5 minutes, 5 seconds 10,724,250 views" },
+{ id: 'xNWaHd8tj2E', title: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6", label: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6 by Fortnite 12 hours ago 3 minutes, 14 seconds 2,986,832 views" },
+{ id: 'p_4M4TKTydM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video] by KSI 1 day ago 3 minutes, 10 seconds 2,252,101 views" },
+{ id: 'vFWv44Z4Jhk', title: "Dua Lipa - Levitating ft. DaBaby / Don't Start Now (Live at the GRAMMYs 2021)", label: "Dua Lipa - Levitating ft. DaBaby / Don't Start Now (Live at the GRAMMYs 2021) by Dua Lipa 1 day ago 5 minutes, 5 seconds 11,286,093 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -724,7 +730,7 @@ modules.push(function youtube() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Galvin">Galvin</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23INDvENG">#INDvENG</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23CheltenhamFestival">#CheltenhamFestival</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Hartlepool">Hartlepool</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22jos+buttler%22">jos buttler</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23GBBO">#GBBO</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22James+McAvoy%22">James McAvoy</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23EastEnders">#EastEnders</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23dcfc">#dcfc</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23pnefc">#pnefc</a></td></tr></table>';
 	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
@@ -752,7 +758,7 @@ modules.push(function twitter() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=McConnell">McConnell</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22North+Korea%22">North Korea</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23316Day">#316Day</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=deGrom">deGrom</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Elliot">Elliot</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23UnbanNairo">#UnbanNairo</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22Red+Sox%22">Red Sox</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%22Rodney+Hudson%22">Rodney Hudson</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Gruden">Gruden</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=McConnell">McConnell</a></td></tr></table>';
 	var title = 'United States';
 	var box = makeBox(1, 1);
 	box
@@ -811,7 +817,7 @@ modules.push(function vanguard() {
 		.append('p')
 		.append('a')
 		.attr('href', 'https://www.vanguardinvestor.co.uk/investments/vanguard-ftse-global-all-cap-index-fund-gbp-acc')
-		.html('FTSE Global All Cap<br/>Index Fund - Accumulation');
+		.html('FTSE Global All Cap<br/>Index Fund - Acc');
 	inside
 		.append('p')
 		.html('&nbsp;');
@@ -976,9 +982,9 @@ modules.push(function word() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '10.6',
+		Percent:  '10.8',
 		Type:     '<a href="/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 16 March and 17 March">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.106&p=5.356&r=5.302',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.108&p=5.345&r=5.294',
 		Location: '11609021'
 	}
 

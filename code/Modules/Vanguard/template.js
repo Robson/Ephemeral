@@ -30,7 +30,7 @@ modules.push(function vanguard() {
 		.append('p')
 		.append('a')
 		.attr('href', 'https://www.vanguardinvestor.co.uk/investments/vanguard-ftse-global-all-cap-index-fund-gbp-acc')
-		.html('FTSE Global All Cap<br/>Index Fund - Accumulation');
+		.html('FTSE Global All Cap<br/>Index Fund - Acc');
 	inside
 		.append('p')
 		.html('&nbsp;');
