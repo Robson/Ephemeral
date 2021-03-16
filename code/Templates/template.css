@@ -146,4 +146,12 @@ table {
 	line-height: 1.1em;
 	height: 3.3em;
 	overflow: hidden;
-}  
+}
+
+/***** CHARTS *****/
+
+.group:hover .highlight {
+	fill: #E5007E;
+	stroke: #E5007E;
+	stroke-width: 3px;
+}

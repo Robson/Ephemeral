@@ -17,6 +17,7 @@
         {
             var data = GetData(webClient);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
+                .Replace("\"{{DATA}}\"", data.data)
                 .Replace("{{DATE_LATEST}}", data.dateLatest)
                 .Replace("{{DATE_PREVIOUS}}", data.datePrevious)
                 .Replace("{{DATE_WEEK}}", data.dateWeek)
@@ -41,6 +42,15 @@
             var url = "https://markets.ft.com/data/funds/tearsheet/historical?s=GB00BD3RZ582:GBP";
             var html = webClient.DownloadString(url);
             var rows = Regex.Matches(html, "<span class=\"mod-ui-hide-medium-above\">([\\w,\\d ]+)</span></td><td>([\\d\\.]+)</td>");
+
+            var javascript = "[";
+            foreach (Match row in rows)
+            {
+                javascript += "{ number: " + row.Groups[2].Value + ", tooltip: \"" + row.Groups[1].Value + ": £" + row.Groups[2].Value + "\"},\n";
+            }
+
+            javascript += "].reverse()";
+                        
             var latest = double.Parse(rows[0].Groups[2].Value);
             var previous = double.Parse(rows[1].Groups[2].Value);
             var week = double.Parse(rows[5].Groups[2].Value);
@@ -49,6 +59,7 @@
 
             return new Data
             {
+                data = javascript,
                 dateLatest = rows[0].Groups[1].Value,
                 valueLatest = string.Format("£{0:0.00}/share", latest),
                 datePrevious = rows[1].Groups[1].Value,
@@ -64,6 +75,7 @@
 
         private struct Data
         {
+            internal string data;
             internal string dateLatest;
             internal string datePrevious;
             internal string dateWeek;

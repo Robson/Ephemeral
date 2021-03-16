@@ -1,5 +1,7 @@
 modules.push(function vanguard() {
 
+	var data = "{{DATA}}";
+
 	var vanguardDates = {
 		"Latest":      "{{DATE_LATEST}}",
 		"vs Previous": "{{DATE_PREVIOUS}}",
@@ -16,7 +18,7 @@ modules.push(function vanguard() {
 		'vs Year':     "{{VALUE_YEAR}}"
 	};
 
-	var box = makeBox(1, 1);
+	var box = makeBox(3, 1);
 	box
 		.append('div')
 		.attr('class', 'title')
@@ -24,17 +26,21 @@ modules.push(function vanguard() {
 	box = box
 		.append('div')
 		.attr('class', 'inside');		
-	var inside = box
-		.append('div');
-	inside
+	var insideLeft = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('left', 0)
+		.style('width', '37%');
+	insideLeft
 		.append('p')
 		.append('a')
 		.attr('href', 'https://www.vanguardinvestor.co.uk/investments/vanguard-ftse-global-all-cap-index-fund-gbp-acc')
 		.html('FTSE Global All Cap<br/>Index Fund - Acc');
-	inside
+	insideLeft
 		.append('p')
 		.html('&nbsp;');
-	var table = inside
+	var table = insideLeft
 		.append('table');	
 	
 	for (var item of Object.keys(vanguardValues)) {
@@ -52,4 +58,12 @@ modules.push(function vanguard() {
 			.attr('class', 'code')
 			.html(vanguardValues[item]);
 	}
+
+	var insideRight = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('right', 0)
+		.style('width', '66%');
+	var chart = createLineChart(400, 150, insideRight, data, false);
 });
