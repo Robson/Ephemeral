@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>21:21 16-Mar - Ephemeral</title>		
+		<title>22:21 16-Mar - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,8 +81,8 @@
                             .attr('y1', y1)
                             .attr('x2', x2)
                             .attr('y2', y2)
-                            .style('stroke-width', 1)
-                            .style('stroke', '#333');
+                            .style('stroke-width', 2)
+                            .style('stroke', '#999');
                     }
                 }
 
@@ -96,7 +96,7 @@
                         .append('circle')
                         .attr('cx', x1)
                         .attr('cy', y1)
-                        .attr('r', 2)
+                        .attr('r', 1)
                         .attr('title', data[i - 1].number);
                     g
                         .append('circle')
@@ -235,7 +235,7 @@ modules.push(function astronomy() {
 //////////////////////////////////////////////////
 
 modules.push(function bbcCombine() {
-	var html = '<p style="font-weight:bold;padding:10px 0 0 10px">UK</p><ul><li title="The UK will also shift focus towards Indo-Pacific countries, following a year-long foreign policy review."><a href="https://www.bbc.co.uk/news/uk-56413920">Integrated review: UK to lift cap on nuclear stockpile</a></li><li title="Taxi app\'s decision follows court ruling that drivers should be classed as workers, not self-employed."><a href="https://www.bbc.co.uk/news/business-56412397">Uber to pay drivers a minimum wage, holiday pay and pensions</a></li><li title="First Minister Nicola Sturgeon says garden centres can also reopen in the days after the stay at home lockdown order is lifted."><a href="https://www.bbc.co.uk/news/uk-scotland-56416538">Covid in Scotland: Hairdressers to reopen on 5 April as rules ease</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">US & Canada</p><ul><li title="More than 4,200 migrant children are in US custody amid a surge of arrivals to the US-Mexico border."><a href="https://www.bbc.co.uk/news/world-us-canada-56405009">What is happening with migrant children at the southern US border?</a></li><li title="Infants as young as six months are taking part in the Covid-19 jab study."><a href="https://www.bbc.co.uk/news/world-us-canada-56422415">Moderna begins testing Covid-19 vaccine on babies and young children</a></li><li title="Nebraska\'s pro-meat day was planned in response to neighbouring Colorado\'s pro-vegetarian effort."><a href="https://www.bbc.co.uk/news/world-us-canada-56419396">Nebraska declares pro-meat day to rival Colorado\'s meatless day</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">World</p><ul><li title="While some countries seek further clarification on the vaccine\'s safety, others are pushing ahead."><a href="https://www.bbc.co.uk/news/world-europe-56412784">AstraZeneca vaccine: Europe divided over suspensions as investigation continues</a></li><li title="Aid agency report children as young as 11 are being beheaded in a region hit by an insurgency."><a href="https://www.bbc.co.uk/news/world-africa-56411157">Mozambique insurgency: Children beheaded, aid agency reports</a></li><li title="These cats enjoyed the record snowfall that hit Colorado over the weekend."><a href="https://www.bbc.co.uk/news/world-us-canada-56420398">Lions at Denver Zoo frolic in the snow after historic blizzard</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Formula 1</p><ul><li title="Lewis Hamilton says rivals Red Bull will be a &quot;different animal&quot; in this year\'s championship after pre-season testing."><a href="http://www.bbc.co.uk/sport/formula1/56394244">Lewis Hamilton says Red Bull a different animal after Formula 1 testing</a></li><li title="Legendary motor racing commentator, who became as famous as the drivers themselves, dies at 97"><a href="http://www.bbc.co.uk/sport/formula1/56355693">Murray Walker: A legend with effervescent enthusiasm</a></li><li title="Former Formula 1 commentator Murray Walker dies at the age of 97."><a href="http://www.bbc.co.uk/sport/formula1/56388596">Murray Walker: Formula 1 broadcasting legend dies at 97</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Technology</p><ul><li title="Firm re-engineers laptop chip designs to work with old transistor tech to get performance gains."><a href="https://www.bbc.co.uk/news/technology-56401847">Intel buys time with \'retrofit\' Rocket Lake desktop PC chips</a></li><li title="The new features have been criticised for collecting data when users are &quot;most vulnerable&quot;."><a href="https://www.bbc.co.uk/news/technology-56416578">Google Nest 2 home device tracks body activity in bed</a></li><li title="Older users will be able to privately message teenagers who follow them only."><a href="https://www.bbc.co.uk/news/technology-56414963">Instagram cracks down on adults messaging teens</a></li></ul>';
+	var html = '<p style="font-weight:bold;padding:10px 0 0 10px">UK</p><ul><li title="The UK will also shift focus towards Indo-Pacific countries, following a year-long foreign policy review."><a href="https://www.bbc.co.uk/news/uk-56413920">Integrated review: UK to lift cap on nuclear stockpile</a></li><li title="Taxi app\'s decision follows court ruling that drivers should be classed as workers, not self-employed."><a href="https://www.bbc.co.uk/news/business-56412397">Uber to pay drivers a minimum wage, holiday pay and pensions</a></li><li title="People should &quot;get the jab&quot;, the health secretary says, after some countries suspend its use."><a href="https://www.bbc.co.uk/news/uk-56420666">Oxford-AstraZeneca Covid jab safe, insists Hancock</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">US & Canada</p><ul><li title="Infants as young as six months are taking part in the Covid-19 jab study."><a href="https://www.bbc.co.uk/news/world-us-canada-56422415">Moderna begins testing Covid-19 vaccine on babies and young children</a></li><li title="More than 4,200 migrant children are in US custody amid a surge of arrivals to the US-Mexico border."><a href="https://www.bbc.co.uk/news/world-us-canada-56405009">What is happening with migrant children at the southern US border?</a></li><li title="An indigenous woman just took over at the agency that most closely oversees indigenous priorities."><a href="https://www.bbc.co.uk/news/world-us-canada-56421097">Deb Haaland: America’s first Native cabinet secretary</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">World</p><ul><li title="While some countries seek further clarification on the vaccine\'s safety, others are pushing ahead."><a href="https://www.bbc.co.uk/news/world-europe-56412784">AstraZeneca vaccine: Europe divided over suspensions as investigation continues</a></li><li title="Aid agency report children as young as 11 are being beheaded in a region hit by an insurgency."><a href="https://www.bbc.co.uk/news/world-africa-56411157">Mozambique insurgency: Children beheaded, aid agency reports</a></li><li title="These cats enjoyed the record snowfall that hit Colorado over the weekend."><a href="https://www.bbc.co.uk/news/world-us-canada-56420398">Lions at Denver Zoo frolic in the snow after historic blizzard</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Formula 1</p><ul><li title="Lewis Hamilton says rivals Red Bull will be a &quot;different animal&quot; in this year\'s championship after pre-season testing."><a href="http://www.bbc.co.uk/sport/formula1/56394244">Lewis Hamilton says Red Bull a different animal after Formula 1 testing</a></li><li title="Legendary motor racing commentator, who became as famous as the drivers themselves, dies at 97"><a href="http://www.bbc.co.uk/sport/formula1/56355693">Murray Walker: A legend with effervescent enthusiasm</a></li><li title="Former Formula 1 commentator Murray Walker dies at the age of 97."><a href="http://www.bbc.co.uk/sport/formula1/56388596">Murray Walker: Formula 1 broadcasting legend dies at 97</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Technology</p><ul><li title="Firm re-engineers laptop chip designs to work with old transistor tech to get performance gains."><a href="https://www.bbc.co.uk/news/technology-56401847">Intel buys time with \'retrofit\' Rocket Lake desktop PC chips</a></li><li title="The new features have been criticised for collecting data when users are &quot;most vulnerable&quot;."><a href="https://www.bbc.co.uk/news/technology-56416578">Google Nest 2 home device tracks body activity in bed</a></li><li title="Older users will be able to privately message teenagers who follow them only."><a href="https://www.bbc.co.uk/news/technology-56414963">Instagram cracks down on adults messaging teens</a></li></ul>';
 	var box = makeBox(3, 2);
 	box
 		.append('div')
@@ -596,7 +596,7 @@ modules.push(function stocks() {
 	createLineChart(400, 150, inside, data);
 
 	var info = "";
-	info += '<table>';
+	info += '<table style="text-align:left">';
 	info += '<tr style="font-weight:bold"><td>' + data[data.length - 1].day + ':&nbsp;</td><td style="text-align:right">$' + data[data.length - 1].number.toFixed(2) + '</td></tr>';
 
 	function diff(readable, days) {
@@ -688,9 +688,9 @@ modules.push(function weather() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'xNWaHd8tj2E', title: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6", label: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6 by Fortnite 13 hours ago 3 minutes, 14 seconds 3,267,872 views" },
-{ id: 'p_4M4TKTydM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video] by KSI 1 day ago 3 minutes, 10 seconds 2,338,416 views" },
-{ id: '8h3QNkTo07c', title: "Miniminter Embarrasses KSI", label: "Miniminter Embarrasses KSI by SidemenShorts 23 hours ago 1 minute, 7 seconds 166,425 views" },
+{ id: 'xNWaHd8tj2E', title: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6", label: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6 by Fortnite 14 hours ago 3 minutes, 14 seconds 3,427,656 views" },
+{ id: 'p_4M4TKTydM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video] by KSI 1 day ago 3 minutes, 10 seconds 2,399,849 views" },
+{ id: '8h3QNkTo07c', title: "Miniminter Embarrasses KSI", label: "Miniminter Embarrasses KSI by SidemenShorts 1 day ago 1 minute, 7 seconds 173,763 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -730,7 +730,7 @@ modules.push(function youtube() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23GBBO">#GBBO</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22James+McAvoy%22">James McAvoy</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23dcfc">#dcfc</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23interiordesignmasters">#interiordesignmasters</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22David+Davis%22">David Davis</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23OurSilentEmergency">#OurSilentEmergency</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23GBBO">#GBBO</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23TheCircle">#TheCircle</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%22James+McAvoy%22">James McAvoy</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22David+Davis%22">David Davis</a></td></tr></table>';
 	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
@@ -758,7 +758,7 @@ modules.push(function twitter() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23UnbanNairo">#UnbanNairo</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22Red+Sox%22">Red Sox</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%22Rodney+Hudson%22">Rodney Hudson</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Gruden">Gruden</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=McConnell">McConnell</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22Andy+Dalton%22">Andy Dalton</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22Ryan+Pace%22">Ryan Pace</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23UnbanNairo">#UnbanNairo</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Vinicius">Vinicius</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Red+Sox%22">Red Sox</a></td></tr></table>';
 	var title = 'United States';
 	var box = makeBox(1, 1);
 	box
@@ -872,7 +872,7 @@ modules.push(function vanguardChart() {
 	box
 		.append('div')
 		.attr('class', 'title')
-		.html('&#128200;<a href="https://www.vanguardinvestor.co.uk">Vanguard</a>')
+		.html('&#128200;<a href="https://www.vanguardinvestor.co.uk">Vanguard</a>: Past 30 Days')
 	box = box
 		.append('div')
 		.attr('class', 'inside');		
@@ -997,7 +997,9 @@ modules.push(function word() {
 		Definition: '<p><strong>1:</strong> fully or abundantly provided or filled</p><p><strong>2 a:</strong> abundantly fed</p><p><strong>b:</strong> <a href="https://www.merriam-webster.com/dictionary/fat">fat</a>, <a href="https://www.merriam-webster.com/dictionary/stout">stout</a></p><p><strong>3:</strong> <a href="https://www.merriam-webster.com/dictionary/complete">complete</a></p>'
 	}
 
-	var box = makeBox(wordData.Definition.length > 250 ? 2 : 1, 1);
+	var clean = wordData.Definition.replace(/<[^>]+>/g, '');
+
+	var box = makeBox(clean.length > 250 ? 2 : 1, 1);
 	box
 		.append('div')
 		.attr('class', 'title')
@@ -1023,9 +1025,9 @@ modules.push(function word() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '11.1',
+		Percent:  '11.3',
 		Type:     '<a href="/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 16 March and 17 March">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.111&p=5.367&r=5.318',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.113&p=5.420&r=5.372',
 		Location: '11609021'
 	}
 

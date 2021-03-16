@@ -4,7 +4,9 @@ modules.push(function word() {
 		Definition: '{{DEFINITION}}'
 	}
 
-	var box = makeBox(wordData.Definition.length > 250 ? 2 : 1, 1);
+	var clean = wordData.Definition.replace(/<[^>]+>/g, '');
+
+	var box = makeBox(clean.length > 250 ? 2 : 1, 1);
 	box
 		.append('div')
 		.attr('class', 'title')
