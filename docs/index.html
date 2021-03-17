@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>23:21 16-Mar - Ephemeral</title>		
+		<title>00:21 17-Mar - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,20 +58,33 @@
                 return (n - a) * (z - y) / (b - a) + y;
 			}
 
-			function createLineChart(width, height, element, data, startAtZero=true) {
+			function createLineChart(width, height, element, data, boundary=0) {
                 var svg = element
                     .append('svg')
                     .attr('width', width + 'px')
-                    .attr('height', height + 'px')
-                    .style('border-bottom', '1px solid #ddd')
-                    .style('background', '#fff');
+                    .attr('height', height + 'px');
 
-                var start = startAtZero ? 0 : Math.min(...data.map(a => a.number));
-                var end = Math.max(...data.map(a => a.number));
+                var start = Math.min(...data.map(a => a.number));
+				var end = Math.max(...data.map(a => a.number));
+
+				switch (boundary) {
+					case 1:
+						var distance = (end - start) * 0.1;
+						start -= distance;
+						start = Math.max(0, start);
+						end += distance;
+						break;
+					case 2:
+						start = 0;
+						break;
+                }
+
+				var polygon = "3," + height;
 
                 for (var i = 1; i <= data.length; i++) {
                     var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
-                    var y1 = map(data[i - 1].number, start, end, height, 6);
+					var y1 = map(data[i - 1].number, start, end, height, 6);
+					polygon += ' ' + x1 + ',' + y1;
                     if (i < data.length) {
                         var x2 = map(i, 0, data.length - 1, 3, width - 3);
                         var y2 = map(data[i].number, start, end, height, 6);
@@ -84,7 +97,12 @@
                             .style('stroke-width', 2)
                             .style('stroke', '#999');
                     }
-                }
+				}
+				polygon += ' ' + (width - 3) + ',' + height;
+				svg
+					.append('polygon')
+					.attr('points', polygon)
+					.attr('fill', '#eee');
 
                 for (var i = 1; i <= data.length; i++) {
                     var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
@@ -96,19 +114,28 @@
 						.append('circle')
 						.attr('class', 'highlight')
                         .attr('cx', x1)
-                        .attr('cy', y1)
+                        .attr('cy', y1 - 0.5)
                         .attr('r', 1)
                         .attr('title', data[i - 1].number);
                     g
                         .append('circle')
                         .attr('class', 'ttt')
                         .attr('cx', x1)
-                        .attr('cy', y1)
+                        .attr('cy', y1 - 0.5)
                         .attr('r', 5)
                         .attr('opacity', '0.01')
                         .attr('z-index', 1000)
                         .attr('data-tt', data[i - 1].tooltip);
-                }
+				}
+
+                svg
+                    .append('line')
+                    .attr('x1', 3)
+                    .attr('y1', height)
+                    .attr('x2', width - 3)
+                    .attr('y2', height)
+                    .style('stroke-width', 1)
+                    .style('stroke', '#999');
             }
 
 ////////////////////////////////////////////////// page
@@ -236,7 +263,7 @@ modules.push(function astronomy() {
 //////////////////////////////////////////////////
 
 modules.push(function bbcCombine() {
-	var html = '<p style="font-weight:bold;padding:10px 0 0 10px">UK</p><ul><li title="The UK will also shift focus towards Indo-Pacific countries, following a year-long foreign policy review."><a href="https://www.bbc.co.uk/news/uk-56413920">Integrated review: UK to lift cap on nuclear stockpile</a></li><li title="Taxi app\'s decision follows court ruling that drivers should be classed as workers, not self-employed."><a href="https://www.bbc.co.uk/news/business-56412397">Uber to pay drivers a minimum wage, holiday pay and pensions</a></li><li title="People should &quot;get the jab&quot;, the health secretary says, after some countries suspend its use."><a href="https://www.bbc.co.uk/news/uk-56420666">Oxford-AstraZeneca Covid jab safe, insists Hancock</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">US & Canada</p><ul><li title="A US intelligence report alleges Russia\'s president approved efforts to influence the 2020 election."><a href="https://www.bbc.co.uk/news/world-us-canada-56423536">Russia\'s Putin authorised pro-Trump \'influence\' campaign, US intelligence says</a></li><li title="Infants as young as six months are taking part in the Covid-19 jab study."><a href="https://www.bbc.co.uk/news/world-us-canada-56422415">Moderna begins testing Covid-19 vaccine on babies and young children</a></li><li title="More than 4,200 migrant children are in US custody amid a surge of arrivals to the US-Mexico border."><a href="https://www.bbc.co.uk/news/world-us-canada-56405009">What is happening with migrant children at the southern US border?</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">World</p><ul><li title="While some countries seek further clarification on the vaccine\'s safety, others are pushing ahead."><a href="https://www.bbc.co.uk/news/world-europe-56412784">AstraZeneca vaccine: Europe divided over suspensions as investigation continues</a></li><li title="A US intelligence report alleges Russia\'s president approved efforts to influence the 2020 election."><a href="https://www.bbc.co.uk/news/world-us-canada-56423536">Russia\'s Putin authorised pro-Trump \'influence\' campaign, US intelligence says</a></li><li title="Aid agency report children as young as 11 are being beheaded in a region hit by an insurgency."><a href="https://www.bbc.co.uk/news/world-africa-56411157">Mozambique insurgency: Children beheaded, aid agency reports</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Formula 1</p><ul><li title="Lewis Hamilton says rivals Red Bull will be a &quot;different animal&quot; in this year\'s championship after pre-season testing."><a href="http://www.bbc.co.uk/sport/formula1/56394244">Lewis Hamilton says Red Bull a different animal after Formula 1 testing</a></li><li title="Legendary motor racing commentator, who became as famous as the drivers themselves, dies at 97"><a href="http://www.bbc.co.uk/sport/formula1/56355693">Murray Walker: A legend with effervescent enthusiasm</a></li><li title="Former Formula 1 commentator Murray Walker dies at the age of 97."><a href="http://www.bbc.co.uk/sport/formula1/56388596">Murray Walker: Formula 1 broadcasting legend dies at 97</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Technology</p><ul><li title="Firm re-engineers laptop chip designs to work with old transistor tech to get performance gains."><a href="https://www.bbc.co.uk/news/technology-56401847">Intel buys time with \'retrofit\' Rocket Lake desktop PC chips</a></li><li title="Taxi app\'s decision follows court ruling that drivers should be classed as workers, not self-employed."><a href="https://www.bbc.co.uk/news/business-56412397">Uber to pay drivers a minimum wage, holiday pay and pensions</a></li><li title="The new features have been criticised for collecting data when users are &quot;most vulnerable&quot;."><a href="https://www.bbc.co.uk/news/technology-56416578">Google Nest 2 home device tracks body activity in bed</a></li></ul>';
+	var html = '<p style="font-weight:bold;padding:10px 0 0 10px">UK</p><ul><li title="The UK will also shift focus towards Indo-Pacific countries, following a year-long foreign policy review."><a href="https://www.bbc.co.uk/news/uk-56413920">Integrated review: UK to lift cap on nuclear stockpile</a></li><li title="Taxi app\'s decision follows court ruling that drivers should be classed as workers, not self-employed."><a href="https://www.bbc.co.uk/news/business-56412397">Uber to pay drivers a minimum wage, holiday pay and pensions</a></li><li title="People should &quot;get the jab&quot;, the health secretary says, after some countries suspend its use."><a href="https://www.bbc.co.uk/news/uk-56420666">Oxford-AstraZeneca Covid jab safe, insists Hancock</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">US & Canada</p><ul><li title="A US intelligence report alleges Russia\'s president approved efforts to influence the 2020 election."><a href="https://www.bbc.co.uk/news/world-us-canada-56423536">Russia\'s Putin authorised pro-Trump \'influence\' campaign, US intelligence says</a></li><li title="A man now facing murder charges had wanted some of his girlfriend\'s payout, according to court papers."><a href="https://www.bbc.co.uk/news/world-us-canada-56424266">Four shot dead following \'stimulus cheque row\'</a></li><li title="Infants as young as six months are taking part in the Covid-19 jab study."><a href="https://www.bbc.co.uk/news/world-us-canada-56422415">Moderna begins testing Covid-19 vaccine on babies and young children</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">World</p><ul><li title="While some countries seek further clarification on the vaccine\'s safety, others are pushing ahead."><a href="https://www.bbc.co.uk/news/world-europe-56412784">AstraZeneca vaccine: Europe divided over suspensions as investigation continues</a></li><li title="A US intelligence report alleges Russia\'s president approved efforts to influence the 2020 election."><a href="https://www.bbc.co.uk/news/world-us-canada-56423536">Russia\'s Putin authorised pro-Trump \'influence\' campaign, US intelligence says</a></li><li title="A man now facing murder charges had wanted some of his girlfriend\'s payout, according to court papers."><a href="https://www.bbc.co.uk/news/world-us-canada-56424266">Indianapolis deadly shootings \'started after stimulus cheque row\'</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Formula 1</p><ul><li title="Lewis Hamilton says rivals Red Bull will be a &quot;different animal&quot; in this year\'s championship after pre-season testing."><a href="http://www.bbc.co.uk/sport/formula1/56394244">Lewis Hamilton says Red Bull a different animal after Formula 1 testing</a></li><li title="Legendary motor racing commentator, who became as famous as the drivers themselves, dies at 97"><a href="http://www.bbc.co.uk/sport/formula1/56355693">Murray Walker: A legend with effervescent enthusiasm</a></li><li title="Former Formula 1 commentator Murray Walker dies at the age of 97."><a href="http://www.bbc.co.uk/sport/formula1/56388596">Murray Walker: Formula 1 broadcasting legend dies at 97</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Technology</p><ul><li title="The ad targeted individuals who were unlikely to know the risks involved, a watchdog\'s ruling said."><a href="https://www.bbc.co.uk/news/technology-56421901">Bitcoin ad banned for \'misleading pensioners\'</a></li><li title="Firm re-engineers laptop chip designs to work with old transistor tech to get performance gains."><a href="https://www.bbc.co.uk/news/technology-56401847">Intel buys time with \'retrofit\' Rocket Lake desktop PC chips</a></li><li title="Taxi app\'s decision follows court ruling that drivers should be classed as workers, not self-employed."><a href="https://www.bbc.co.uk/news/business-56412397">Uber to pay drivers a minimum wage, holiday pay and pensions</a></li></ul>';
 	var box = makeBox(3, 2);
 	box
 		.append('div')
@@ -594,7 +621,7 @@ modules.push(function stocks() {
 		})
 	}
 
-	createLineChart(400, 150, inside, data);
+	createLineChart(400, 150, inside, data, 1);
 
 	var info = "";
 	info += '<table style="text-align:left">';
@@ -689,9 +716,9 @@ modules.push(function weather() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'xNWaHd8tj2E', title: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6", label: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6 by Fortnite 15 hours ago 3 minutes, 14 seconds 3,550,173 views" },
-{ id: 'p_4M4TKTydM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video] by KSI 1 day ago 3 minutes, 10 seconds 2,453,390 views" },
-{ id: '8h3QNkTo07c', title: "Miniminter Embarrasses KSI", label: "Miniminter Embarrasses KSI by SidemenShorts 1 day ago 1 minute, 7 seconds 179,643 views" },
+{ id: 'xNWaHd8tj2E', title: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6", label: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6 by Fortnite 16 hours ago 3 minutes, 14 seconds 3,647,515 views" },
+{ id: 'p_4M4TKTydM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video] by KSI 1 day ago 3 minutes, 10 seconds 2,495,218 views" },
+{ id: '8h3QNkTo07c', title: "Miniminter Embarrasses KSI", label: "Miniminter Embarrasses KSI by SidemenShorts 1 day ago 1 minute, 7 seconds 185,162 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -731,7 +758,7 @@ modules.push(function youtube() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23OurSilentEmergency">#OurSilentEmergency</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23TheCircle">#TheCircle</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23GBBO">#GBBO</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%22David+Davis%22">David Davis</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23ToryDictatorship">#ToryDictatorship</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23OurSilentEmergency">#OurSilentEmergency</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23TheCircle">#TheCircle</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%22David+Davis%22">David Davis</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23ToryDictatorship">#ToryDictatorship</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23GBBO">#GBBO</a></td></tr></table>';
 	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
@@ -759,7 +786,7 @@ modules.push(function twitter() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22Andy+Dalton%22">Andy Dalton</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22Ryan+Pace%22">Ryan Pace</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Watson">Watson</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Mitch">Mitch</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23UnbanNairo">#UnbanNairo</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22Andy+Dalton%22">Andy Dalton</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=Bears">Bears</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%22Fashion+Nova%22">Fashion Nova</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Candace">Candace</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Ryan+Pace%22">Ryan Pace</a></td></tr></table>';
 	var title = 'United States';
 	var box = makeBox(1, 1);
 	box
@@ -874,7 +901,7 @@ modules.push(function vanguard() {
 		.style('position', 'absolute')
 		.style('right', 0)
 		.style('width', '66%');
-	var chart = createLineChart(400, 150, insideRight, data, false);
+	var chart = createLineChart(400, 150, insideRight, data, 1);
 });
 
 //////////////////////////////////////////////////
@@ -1020,9 +1047,9 @@ modules.push(function word() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '11.6',
+		Percent:  '11.8',
 		Type:     '<a href="/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 16 March and 17 March">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.116&p=5.503&r=5.457',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.118&p=5.618&r=5.574',
 		Location: '11609021'
 	}
 
@@ -1050,8 +1077,8 @@ modules.push(function moon() {
 
 modules.push(function sun() {
 	var sunData = {
-		Rise:     '06:17',
-		Set:      '18:12',
+		Rise:     '06:15',
+		Set:      '18:14',
 		Location: '11609021'
 	};
 
@@ -1099,11 +1126,11 @@ var row = table
 
 modules.push(function bitcoin() {
 	var bitcoinData = {
-		"Today's Open": "£40,049.70",
-		'vs Yesterday': "+0.9%",
-		'vs Week':      "+1.1%",
+		"Today's Open": "£40,864.13",
+		'vs Yesterday': "NA",
+		'vs Week':      "+1.0%",
 		'vs Month':     "+1.2%",
-		'vs Year':      "+9.2%"
+		'vs Year':      "+10.0%"
 	};
 
 	var box = makeBox(1, 1);

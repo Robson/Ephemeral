@@ -65,5 +65,5 @@ modules.push(function vanguard() {
 		.style('position', 'absolute')
 		.style('right', 0)
 		.style('width', '66%');
-	var chart = createLineChart(400, 150, insideRight, data, false);
+	var chart = createLineChart(400, 150, insideRight, data, 1);
 });

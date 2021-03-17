@@ -58,20 +58,33 @@
                 return (n - a) * (z - y) / (b - a) + y;
 			}
 
-			function createLineChart(width, height, element, data, startAtZero=true) {
+			function createLineChart(width, height, element, data, boundary=0) {
                 var svg = element
                     .append('svg')
                     .attr('width', width + 'px')
-                    .attr('height', height + 'px')
-                    .style('border-bottom', '1px solid #ddd')
-                    .style('background', '#fff');
+                    .attr('height', height + 'px');
 
-                var start = startAtZero ? 0 : Math.min(...data.map(a => a.number));
-                var end = Math.max(...data.map(a => a.number));
+                var start = Math.min(...data.map(a => a.number));
+				var end = Math.max(...data.map(a => a.number));
+
+				switch (boundary) {
+					case 1:
+						var distance = (end - start) * 0.1;
+						start -= distance;
+						start = Math.max(0, start);
+						end += distance;
+						break;
+					case 2:
+						start = 0;
+						break;
+                }
+
+				var polygon = "3," + height;
 
                 for (var i = 1; i <= data.length; i++) {
                     var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
-                    var y1 = map(data[i - 1].number, start, end, height, 6);
+					var y1 = map(data[i - 1].number, start, end, height, 6);
+					polygon += ' ' + x1 + ',' + y1;
                     if (i < data.length) {
                         var x2 = map(i, 0, data.length - 1, 3, width - 3);
                         var y2 = map(data[i].number, start, end, height, 6);
@@ -84,7 +97,12 @@
                             .style('stroke-width', 2)
                             .style('stroke', '#999');
                     }
-                }
+				}
+				polygon += ' ' + (width - 3) + ',' + height;
+				svg
+					.append('polygon')
+					.attr('points', polygon)
+					.attr('fill', '#eee');
 
                 for (var i = 1; i <= data.length; i++) {
                     var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
@@ -96,19 +114,28 @@
 						.append('circle')
 						.attr('class', 'highlight')
                         .attr('cx', x1)
-                        .attr('cy', y1)
+                        .attr('cy', y1 - 0.5)
                         .attr('r', 1)
                         .attr('title', data[i - 1].number);
                     g
                         .append('circle')
                         .attr('class', 'ttt')
                         .attr('cx', x1)
-                        .attr('cy', y1)
+                        .attr('cy', y1 - 0.5)
                         .attr('r', 5)
                         .attr('opacity', '0.01')
                         .attr('z-index', 1000)
                         .attr('data-tt', data[i - 1].tooltip);
-                }
+				}
+
+                svg
+                    .append('line')
+                    .attr('x1', 3)
+                    .attr('y1', height)
+                    .attr('x2', width - 3)
+                    .attr('y2', height)
+                    .style('stroke-width', 1)
+                    .style('stroke', '#999');
             }
 
 ////////////////////////////////////////////////// page
