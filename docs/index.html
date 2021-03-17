@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>00:45 17-Mar - Ephemeral</title>		
+		<title>01:13 17-Mar - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,7 +43,6 @@
                         } else {
                             tt.style('display', null);
                         }
-						console.log(tt.node().getBoundingClientRect());
                         var x = d3.event.pageX - (tt.node().getBoundingClientRect().width / 2);
                         var y = d3.event.pageY - (tt.node().getBoundingClientRect().height + 5);
                         tt.style('left', ~~x + 'px');
@@ -82,47 +81,37 @@
 				var xs = [];
 				var ys = [];
 
-				var polygon = "3," + height;
-
                 for (var i = 1; i <= data.length; i++) {
                     var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
 					var y1 = map(data[i - 1].number, start, end, height, 6);
-					polygon += ' ' + x1 + ',' + y1;
 					xs.push(x1);
 					ys.push(y1);
-                    if (i < data.length) {
-                        var x2 = map(i, 0, data.length - 1, 3, width - 3);
-                        var y2 = map(data[i].number, start, end, height, 6);
-                        /*svg
-                            .append('line')
-                            .attr('x1', x1)
-                            .attr('y1', y1)
-                            .attr('x2', x2)
-                            .attr('y2', y2)
-                            .style('stroke-width', 2)
-                            .style('stroke', '#999');*/
-                    }
 				}
-				//xs.push(width - 3);
-				//ys.push(height);
-				polygon += ' ' + (width - 3) + ',' + height;
-				svg
-					.append('polygon')
-					.attr('points', polygon)
-					.attr('fill', '#eee');
 
-				var line = d3.svg.line()
+				var area = d3.svg.area()
 					.interpolate('cardinal')
 					.x(function (d, i) { return xs[i] })
-					.y(function (d, i) { return ys[i] });
+					.y0(function (d, i) { return height })
+					.y1(function (d, i) { return ys[i] });
 
 				svg
 					.append('path')
                     .datum(d3.range(data.length).map(function(d, i) { return i }))
-					.attr("d", line)
+					.attr("d", area)
+					.attr('fill', '#eee');
+
+                var line = d3.svg.line()
+                    .interpolate('cardinal')
+                    .x(function (d, i) { return xs[i] })
+                    .y(function (d, i) { return ys[i] });
+
+                svg
+                    .append('path')
+                    .datum(d3.range(data.length).map(function (d, i) { return i }))
+                    .attr("d", line)
 					.attr('fill', 'transparent')
-					.attr('stroke-width', 2)
-					.attr('stroke', '#999');
+					.style('stroke-width', 2)
+					.style('stroke', '#bbb');
 
                 for (var i = 1; i <= data.length; i++) {
                     var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
@@ -154,8 +143,8 @@
                     .attr('y1', height)
                     .attr('x2', width - 3)
                     .attr('y2', height)
-                    .style('stroke-width', 1)
-                    .style('stroke', '#999');
+                    .style('stroke-width', 2)
+                    .style('stroke', '#bbb');
             }
 
 ////////////////////////////////////////////////// page
@@ -645,14 +634,14 @@ modules.push(function stocks() {
 
 	var info = "";
 	info += '<table style="text-align:left">';
-	info += '<tr style="font-weight:bold"><td>' + data[data.length - 1].day + ':&nbsp;</td><td style="text-align:right">$' + data[data.length - 1].number.toFixed(2) + '</td></tr>';
+	info += '<tr style="font-weight:bold"><td>Latest:&nbsp;</td><td style="text-align:right" class="code">$' + data[data.length - 1].number.toFixed(2) + '</td></tr>';
 
 	function diff(readable, days) {
 		var latest = data[data.length - 1].number;
 		var then = data[data.length - (days + 1)].number;
 		var difference = latest / then;
 		difference = (difference >= 0 ? '+' : '-') + difference.toFixed(2) + '%';
-		return '<tr title="' + data[data.length - (days + 1)].day + '"><td>' + readable + ':&nbsp;</td><td style="text-align:right">' + difference + '</td></tr>';
+		return '<tr title="' + data[data.length - (days + 1)].day + '"><td>' + readable + ':&nbsp;</td><td style="text-align:right" class="code">' + difference + '</td></tr>';
 	}
 
 	info += diff('vs Day', 1);
@@ -736,9 +725,9 @@ modules.push(function weather() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'xNWaHd8tj2E', title: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6", label: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6 by Fortnite 16 hours ago 3 minutes, 14 seconds 3,684,876 views" },
-{ id: 'p_4M4TKTydM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video] by KSI 1 day ago 3 minutes, 10 seconds 2,513,437 views" },
-{ id: '8h3QNkTo07c', title: "Miniminter Embarrasses KSI", label: "Miniminter Embarrasses KSI by SidemenShorts 1 day ago 1 minute, 7 seconds 187,626 views" },
+{ id: 'xNWaHd8tj2E', title: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6", label: "Zero Crisis Story Cinematic for Fortnite Chapter 2 Season 6 by Fortnite 17 hours ago 3 minutes, 14 seconds 3,732,215 views" },
+{ id: 'p_4M4TKTydM', title: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video]", label: "KSI – Patience (feat. YUNGBLUD \u0026 Polo G) [Official Video] by KSI 1 day ago 3 minutes, 10 seconds 2,534,555 views" },
+{ id: 'aVAKT9UxJMI', title: "Billie Eilish - everything i wanted (Live From The 63rd GRAMMYs®/2021)", label: "Billie Eilish - everything i wanted (Live From The 63rd GRAMMYs®/2021) by Billie Eilish 1 day ago 3 minutes, 40 seconds 3,756,045 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -806,7 +795,7 @@ modules.push(function twitter() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22Andy+Dalton%22">Andy Dalton</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=Bears">Bears</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%22Fashion+Nova%22">Fashion Nova</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Candace">Candace</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Ryan+Pace%22">Ryan Pace</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22Andy+Dalton%22">Andy Dalton</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23QueenSugar">#QueenSugar</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Candace">Candace</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Bears">Bears</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Fashion+Nova%22">Fashion Nova</a></td></tr></table>';
 	var title = 'United States';
 	var box = makeBox(1, 1);
 	box
@@ -860,7 +849,7 @@ modules.push(function vanguard() {
 
 	var vanguardDates = {
 		"Latest":      "Mon, Mar 15, 2021",
-		"vs Previous": "Fri, Mar 12, 2021",
+		"vs Day":      "Fri, Mar 12, 2021",
 		"vs Week":     "Mon, Mar 08, 2021",
 		"vs Month":    "Mon, Feb 15, 2021",
 		"vs Year":     ""
@@ -868,7 +857,7 @@ modules.push(function vanguard() {
 
 	var vanguardValues = {
 		"Latest":      "£159.64/share",
-		'vs Previous': "+0.63%",
+		'vs Day':      "+0.63%",
 		'vs Week':     "+3.23%",
 		'vs Month':    "-0.27%",
 		'vs Year':     "+51.29%"
@@ -1067,9 +1056,9 @@ modules.push(function word() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '11.9',
+		Percent:  '12.0',
 		Type:     '<a href="/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 16 March and 17 March">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.119&p=5.670&r=5.628',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.120&p=5.740&r=5.699',
 		Location: '11609021'
 	}
 
