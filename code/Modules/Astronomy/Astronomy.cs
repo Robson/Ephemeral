@@ -14,7 +14,7 @@
 
         public string Run(Dictionary<string, string> settings, string sourceFolder, WebClient webClient)
         {
-            var data = GetAstronomyData(webClient);
+            var data = GetData(webClient);
             var javascript = File.ReadAllText(sourceFolder + "template.js")
                 .Replace("{{LINK_IMAGE}}", data.linkImage)
                 .Replace("{{LINK_PAGE}}", data.linkPage)
@@ -24,7 +24,7 @@
             return javascript;
         }
 
-        private Data GetAstronomyData(WebClient webClient)
+        private Data GetData(WebClient webClient)
         {
             var url = "https://apod.nasa.gov/apod/astropix.html";
             var html = webClient.DownloadString(url);
