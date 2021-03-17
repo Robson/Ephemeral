@@ -46,7 +46,7 @@
             var javascript = "[";
             foreach (Match row in rows)
             {
-                javascript += "{ number: " + row.Groups[2].Value + ", tooltip: \"" + row.Groups[1].Value + ": £" + row.Groups[2].Value + "\"},\n";
+                javascript += "{ number: " + row.Groups[2].Value + ", tooltip: \"" + row.Groups[1].Value + "<br/>£" + row.Groups[2].Value + "\"},\n";
             }
 
             javascript += "].reverse()";

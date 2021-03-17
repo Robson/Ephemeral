@@ -120,21 +120,23 @@ table {
 /***** TOOLTIPS *****/
 
 #tt {
-	background: rgba(0, 0, 0, 1);
+	background: #fff;
 	text-align: center;
-	color: #fff;
+	color: #333;
 	height: auto;
 	width: auto;
+	max-width: 300px;
 	top: 0;
 	left: 0;
 	position: absolute;
-	border: 2px solid #fff;
-	border-radius: 2px;
+	border: 0 solid #fff;
 	font-size: 15px;
+	border-radius: 2px;
+	box-shadow: rgba(14, 31, 53, 0.5) 0px 2px 4px 0px;
 }
 
-#tt * {
-	margin: 4px;
+#tt p {
+	margin: 6px;
 	padding: 0;
 	opacity: 1;
 }

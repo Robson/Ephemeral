@@ -46,8 +46,12 @@ modules.push(function vanguard() {
 	for (var item of Object.keys(vanguardValues)) {
 		var row = table
 			.append('tr')
-			.attr('title', vanguardDates[item])
 			.style('font-weight', item.startsWith("Latest") ? "bold" : "normal");
+		if (vanguardDates[item].length > 0) {
+			row
+				.attr('class', 'ttt')
+				.attr('data-tt', vanguardDates[item])
+        }
 		row
 			.append('td')
 			.style('text-align', 'left')
