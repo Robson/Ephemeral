@@ -18,7 +18,7 @@ modules.push(function bitcoin() {
 		'vs Year':      "{{VALUE_YEAR}}"
 	};
 
-	var box = makeBox(2, 1);
+	var box = makeBox(3, 1);
 	box
 		.append('div')
 		.attr('class', 'title')
@@ -26,22 +26,15 @@ modules.push(function bitcoin() {
 	box = box
 		.append('div')
 		.attr('class', 'inside');		
-	var inside = box
+	var insideLeft = box
 		.append('div')
-		.style('text-align', 'center')
-		.style('margin-top', '6px');
-
-	createLineChart(400, 150, inside, data, 1);
-
-	var table = inside
-		.append('div')
-		.style('color', '#000')
-		.style('background', 'rgba(255, 255, 255, 0.75)')
 		.style('display', 'inline')
 		.style('position', 'absolute')
-		.style('top', '50px')
-		.style('left', '19px')
-		.style('padding', '3px')
+		.style('left', 0)
+		.style('width', '37%');
+
+	var table = insideLeft
+		.style('color', '#000')
 		.append('table');
 	
 	for (var item of Object.keys(bitcoinData)) {
@@ -61,4 +54,12 @@ modules.push(function bitcoin() {
 			.attr('class', 'code')
 			.html(bitcoinData[item]);
 	}
+
+	var insideRight = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('right', 0)
+		.style('width', '66%');
+	createLineChart(400, 150, insideRight, data, 1);
 });

@@ -3,7 +3,7 @@ modules.push(function stocks() {
 	var rawData = "{{DATA}}";
 	var symbol = "{{SYMBOL}}";
 
-	var box = makeBox(2, 1);
+	var box = makeBox(3, 1);
 	box
 		.append('div')
 		.attr('class', 'title')
@@ -11,10 +11,12 @@ modules.push(function stocks() {
 	box = box
 		.append('div')
 		.attr('class', 'inside');	
-	var inside = box
+	var insideLeft = box
 		.append('div')
-		.style('text-align', 'center')
-		.style('margin-top', '6px');
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('left', 0)
+		.style('width', '37%');
 
 	var data = [];
 	for (var day of Object.keys(rawData["Time Series (Daily)"]).reverse()) {
@@ -26,7 +28,13 @@ modules.push(function stocks() {
 		})
 	}
 
-	createLineChart(400, 150, inside, data, 1);
+	var insideRight = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('right', 0)
+		.style('width', '66%');
+	createLineChart(400, 150, insideRight, data, 1);
 
 	var info = "";
 	info += '<table style="text-align:left">';
@@ -45,15 +53,8 @@ modules.push(function stocks() {
 	info += diff('vs Month', 20);
 	info += diff('vs 3 Months', 60);
 
-	inside
+	insideLeft
 		.append('div')
 		.style('color', '#000')
-		.style('background', 'rgba(255, 255, 255, 0.75)')
-		.style('display', 'inline')
-		.style('position', 'absolute')
-		.style('top', '50px')
-		.style('left', '19px')
-		.style('padding', '3px')
 		.html(info);
-
 });
