@@ -48,6 +48,8 @@ modules.push(function stocks() {
 		return '<tr class="ttt" data-tt="' + data[data.length - (days + 1)].day + '"><td>' + readable + ':&nbsp;</td><td style="text-align:right" class="code">' + difference + '</td></tr>';
 	}
 
+	var ytd = data
+
 	info += diff('vs Day', 1);
 	info += diff('vs Week', 5);
 	info += diff('vs Month', 20);

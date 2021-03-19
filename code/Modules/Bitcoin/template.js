@@ -7,7 +7,8 @@ modules.push(function bitcoin() {
 		"vs Day":       "{{DATE_PREVIOUS}}",
 		"vs Week":      "{{DATE_WEEK}}",
 		"vs Month":     "{{DATE_MONTH}}",
-		"vs Year":      "{{DATE_YEAR}}"
+		"vs Year":      "{{DATE_YEAR}}",
+		"vs YTD":       "{{DATE_YTD}}",
 	}
 
 	var bitcoinData = {
@@ -15,7 +16,8 @@ modules.push(function bitcoin() {
 		'vs Day':       "{{VALUE_PREVIOUS}}",
 		'vs Week':      "{{VALUE_WEEK}}",
 		'vs Month':     "{{VALUE_MONTH}}",
-		'vs Year':      "{{VALUE_YEAR}}"
+		'vs Year':      "{{VALUE_YEAR}}",
+		'vs YTD':       "{{VALUE_YTD}}"
 	};
 
 	var box = makeBox(3, 1);

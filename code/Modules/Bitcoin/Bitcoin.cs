@@ -23,11 +23,13 @@
                 .Replace("{{DATE_WEEK}}", data.dateWeek)
                 .Replace("{{DATE_MONTH}}", data.dateMonth)
                 .Replace("{{DATE_YEAR}}", data.dateYear)
+                .Replace("{{DATE_YTD}}", data.dateYtd)
                 .Replace("{{VALUE_LATEST}}", data.valueLatest)
                 .Replace("{{VALUE_PREVIOUS}}", data.valuePrevious)
                 .Replace("{{VALUE_WEEK}}", data.valueWeek)
                 .Replace("{{VALUE_MONTH}}", data.valueMonth)
-                .Replace("{{VALUE_YEAR}}", data.valueYear);
+                .Replace("{{VALUE_YEAR}}", data.valueYear)
+                .Replace("{{VALUE_YTD}}", data.valueYtd);
 
             return javascript;
         }
@@ -70,6 +72,7 @@
             var valueWeek = GetValue(html, DateTime.Now.AddDays(-7));
             var valueMonth = GetValue(html, DateTime.Now.AddMonths(-1));
             var valueYear = GetValue(html, DateTime.Now.AddYears(-1));
+            var valueYtd = GetValue(html, new DateTime(DateTime.Now.Year, 1, 1));
 
             return new Data
             {
@@ -79,11 +82,13 @@
                 valueWeek = FormatPercent(valueLatest, valueWeek),
                 valueMonth = FormatPercent(valueLatest, valueMonth),
                 valueYear = FormatPercent(valueLatest, valueYear),
+                valueYtd = FormatPercent(valueLatest, valueYtd),
                 dateLatest = DateTime.Now.ToString("ddd, MMM d, yyyy"),
                 datePrevious = DateTime.Now.AddDays(-1).ToString("ddd, MMM d, yyyy"),
                 dateWeek = DateTime.Now.AddDays(-7).ToString("ddd, MMM d, yyyy"),
                 dateMonth = DateTime.Now.AddMonths(-1).ToString("ddd, MMM d, yyyy"),
                 dateYear = DateTime.Now.AddYears(-1).ToString("ddd, MMM d, yyyy"),
+                dateYtd = new DateTime(DateTime.Now.Year, 1, 1).ToString("ddd, MMM d, yyyy"),
             };
         }
 
@@ -95,11 +100,13 @@
             internal string dateWeek;
             internal string dateMonth;
             internal string dateYear;
+            internal string dateYtd;
             internal string valueLatest;
             internal string valuePrevious;
             internal string valueWeek;
             internal string valueMonth;
             internal string valueYear;
+            internal string valueYtd;
         }
     }
 }
