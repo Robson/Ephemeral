@@ -17,6 +17,7 @@
             new BBC(),
             new BBCCombine(),
             new Bitcoin(),
+            new F1(),
             new Moon(),
             new Nature(),
             new Singles(),
