@@ -34,7 +34,7 @@
 
         private string FormatPercent(double first, double second)
         {
-            return first > 0 && second > 0 ? (first / second).ToString("+0.0;-0.0;0.0") + "%" : "NA";
+            return first > 0 && second > 0 ? (((first / second) - 1) * 100).ToString("+0.0;-0.0;0.0") + "%" : "NA";
         }
 
         private double GetValue(string[] html, DateTime when)

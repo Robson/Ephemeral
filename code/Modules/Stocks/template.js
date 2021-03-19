@@ -43,8 +43,8 @@ modules.push(function stocks() {
 	function diff(readable, days) {
 		var latest = data[data.length - 1].number;
 		var then = data[data.length - (days + 1)].number;
-		var difference = latest / then;
-		difference = (difference >= 0 ? '+' : '-') + difference.toFixed(2) + '%';
+		var difference = ((latest / then) - 1) * 100;
+		difference = (difference >= 0 ? '+' : "") + difference.toFixed(2) + '%';
 		return '<tr class="ttt" data-tt="' + data[data.length - (days + 1)].day + '"><td>' + readable + ':&nbsp;</td><td style="text-align:right" class="code">' + difference + '</td></tr>';
 	}
 

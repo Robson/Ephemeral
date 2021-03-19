@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>19:18 19-Mar - Ephemeral</title>		
+		<title>19:40 19-Mar - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -407,10 +407,10 @@ modules.push(function bitcoin() {
 
 	var bitcoinData = {
 		"Today's Open": "£41,627.34",
-		'vs Day':       "+1.0%",
-		'vs Week':      "+1.0%",
-		'vs Month':     "+1.1%",
-		'vs Year':      "+9.2%"
+		'vs Day':       "-1.2%",
+		'vs Week':      "+0.7%",
+		'vs Month':     "+12.5%",
+		'vs Year':      "+822.4%"
 	};
 
 	var box = makeBox(3, 1);
@@ -522,9 +522,9 @@ modules.push(function weather() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'VrKW58MS12g', title: "Glitterbomb Trap Catches Phone Scammer (who gets arrested)", label: "Glitterbomb Trap Catches Phone Scammer (who gets arrested) by Mark Rober 1 day ago 23 minutes 7,335,783 views" },
-{ id: 'HoEd6VahZXs', title: "CRIMINAL FOSSIL FOOTBALL, A DISGRACE, OUT OF EUROPE IM LIVID!🤬🤬Dinamo (3) vs Spurs (0) EXPRESSIONS", label: "CRIMINAL FOSSIL FOOTBALL, A DISGRACE, OUT OF EUROPE IM LIVID!🤬🤬Dinamo (3) vs Spurs (0) EXPRESSIONS by Expressions Oozing 21 hours ago 8 minutes, 10 seconds 218,712 views" },
-{ id: 'y4M860h2jhA', title: "wewantwraiths - Know You (Official Video)", label: "wewantwraiths - Know You (Official Video) by wewantwraiths 23 hours ago 2 minutes, 59 seconds 323,340 views" },
+{ id: 'VrKW58MS12g', title: "Glitterbomb Trap Catches Phone Scammer (who gets arrested)", label: "Glitterbomb Trap Catches Phone Scammer (who gets arrested) by Mark Rober 1 day ago 23 minutes 7,470,419 views" },
+{ id: 'HoEd6VahZXs', title: "CRIMINAL FOSSIL FOOTBALL, A DISGRACE, OUT OF EUROPE IM LIVID!🤬🤬Dinamo (3) vs Spurs (0) EXPRESSIONS", label: "CRIMINAL FOSSIL FOOTBALL, A DISGRACE, OUT OF EUROPE IM LIVID!🤬🤬Dinamo (3) vs Spurs (0) EXPRESSIONS by Expressions Oozing 22 hours ago 8 minutes, 10 seconds 221,188 views" },
+{ id: 'y4M860h2jhA', title: "wewantwraiths - Know You (Official Video)", label: "wewantwraiths - Know You (Official Video) by wewantwraiths 23 hours ago 2 minutes, 59 seconds 328,334 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -1122,8 +1122,8 @@ modules.push(function stocks() {
 	function diff(readable, days) {
 		var latest = data[data.length - 1].number;
 		var then = data[data.length - (days + 1)].number;
-		var difference = latest / then;
-		difference = (difference >= 0 ? '+' : '-') + difference.toFixed(2) + '%';
+		var difference = ((latest / then) - 1) * 100;
+		difference = (difference >= 0 ? '+' : "") + difference.toFixed(2) + '%';
 		return '<tr class="ttt" data-tt="' + data[data.length - (days + 1)].day + '"><td>' + readable + ':&nbsp;</td><td style="text-align:right" class="code">' + difference + '</td></tr>';
 	}
 
@@ -1174,9 +1174,9 @@ modules.push(function word() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '33.2',
+		Percent:  '33.3',
 		Type:     '<a href="/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 19 March and 20 March">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.332&p=5.546&r=5.569',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.333&p=5.507&r=5.529',
 		Location: '11609021'
 	}
 
