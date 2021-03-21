@@ -157,3 +157,12 @@ table {
 	stroke: #E5007E;
 	stroke-width: 3px;
 }
+
+/***** FLAGS *****/
+
+.flag {
+	border: 1px solid black;
+	width: auto;
+	height: auto;
+	max-height: 12px;
+}
