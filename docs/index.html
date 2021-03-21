@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>13:04 21-Mar - Ephemeral</title>		
+		<title>13:05 21-Mar - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -704,7 +704,25 @@ modules.push(function nature() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in media module: 0x800A03EC');
+modules.push(function media() {
+	var html = '<p style="font-weight:bold;padding:10px 0 0 10px">Audiobooks</p><ul><li><a href="https://www.google.com/search?q=Audiobooks+-+Animal Farm">Animal Farm</a></li><li><a href="https://www.google.com/search?q=Audiobooks+-+Sherlock Holmes: A Study in Scarlet">Sherlock Holmes: A Study in Scarlet</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Books</p><ul><li><a href="https://www.google.com/search?q=Books+-+Fire Season">Fire Season</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Films</p><ul><li><a href="https://www.google.com/search?q=Films+-+The Perfect Host">The Perfect Host</a></li><li><a href="https://www.google.com/search?q=Films+-+The Peanut Butter Falcon">The Peanut Butter Falcon</a></li><li><a href="https://www.google.com/search?q=Films+-+Roof Culture Asia">Roof Culture Asia</a></li><li><a href="https://www.google.com/search?q=Films+-+Lady Bird">Lady Bird</a></li><li><a href="https://www.google.com/search?q=Films+-+Harry Potter and the Deathly Hallows: Part 2">Harry Potter and the Deathly Hallows: Part 2</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">Games</p><ul><li><a href="https://www.google.com/search?q=Games+-+God of Word">God of Word</a></li><li><a href="https://www.google.com/search?q=Games+-+Dishonored: Death of the Outsider">Dishonored: Death of the Outsider</a></li><li><a href="https://www.google.com/search?q=Games+-+Dishonored 2">Dishonored 2</a></li><li><a href="https://www.google.com/search?q=Games+-+Sniper Elite 4">Sniper Elite 4</a></li><li><a href="https://www.google.com/search?q=Games+-+The Turing Test">The Turing Test</a></li></ul><p style="font-weight:bold;padding:10px 0 0 10px">TV</p><ul><li><a href="https://www.google.com/search?q=TV+-+Drive to Survive: S3">Drive to Survive: S3</a></li></ul>';
+	var box = makeBox(2, 2);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F3AC;Recent Media')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
 
 //////////////////////////////////////////////////
 
@@ -1184,7 +1202,7 @@ modules.push(function moon() {
 	var moonData = {
 		Percent:  '49.5',
 		Type:     '<a href="/astronomy/moon/first-quarter.html" title="First Quarter on the night between 21 March and 22 March">First Quarter</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.495&p=0.738&r=0.768',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.495&p=0.738&r=0.769',
 		Location: '11609021'
 	}
 
