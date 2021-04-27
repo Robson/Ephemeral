@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>13:05 27-Apr - Ephemeral</title>		
+		<title>14:05 27-Apr - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -252,7 +252,25 @@ modules.push(function events() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in bbccombine module: The remote server returned an error: (500) Internal Server Error.');
+modules.push(function bbcCombine() {
+	var html = '<table style="margin:0 10px"><tr><td style="vertical-align:top"><b>UK</b><br/><ul><li class="ttt" data-tt="The PM has hosted a cabinet meeting after a series of claims about his comments and conduct." style="font-weight:bold"><a href="https://www.bbc.co.uk/news/uk-politics-56897213">Cabinet meets as pressure builds on Boris Johnson amid leaks</a></li><li class="ttt" data-tt="Those who are due to turn 42 by 1 July can also book their jabs on the NHS website."><a href="https://www.bbc.co.uk/news/uk-56899901">Covid-19: Vaccine offered to 42-year-olds in England</a></li><li class="ttt" data-tt="The large-scale operation was found by police, firefighters and a chemicals expert."><a href="https://www.bbc.co.uk/news/uk-england-coventry-warwickshire-56901616">Meth lab found in raid near Redditch</a></li></ul></td><td><a href="https://www.bbc.co.uk/news/uk-politics-56897213"><img src="https://ichef.bbci.co.uk/news/1024/branded_news/E8D2/production/_118220695_gettyimages-1232541197.jpg" class="ttt" data-tt="Boris Johnson in Wrexham, Wales, on Monday" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>US & Canada</b><br/><ul><li class="ttt" data-tt="The FBI investigates as a group says it has accessed Washington DC police computers, US media report." style="font-weight:bold"><a href="https://www.bbc.co.uk/news/world-us-canada-56898711">Cyber-attack hackers threaten to share US police informant data</a></li><li class="ttt" data-tt="West Virginia will offer a savings bond to 16-35 year olds to boost its vaccine drive."><a href="https://www.bbc.co.uk/news/world-us-canada-56900381">West Virginia to give young people $100 bond to get vaccine</a></li><li class="ttt" data-tt="The Colorado officers are seen reviewing a clip where the 73-year-old\'s shoulder goes &quot;pop&quot;."><a href="https://www.bbc.co.uk/news/world-us-canada-56897186">US police mock dementia sufferer during arrest</a></li></ul></td><td><a href="https://www.bbc.co.uk/news/world-us-canada-56898711"><img src="https://ichef.bbci.co.uk/news/1024/branded_news/16DCA/production/_118224639_gettyimages-456028116-1.jpg" class="ttt" data-tt="A Washington DC police officer models a body camera before a press conference at City Hall, 24 September 2014" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>World</b><br/><ul><li class="ttt" data-tt="India\'s capital struggles to find space to cremate its dead during the second wave of the pandemic." style="font-weight:bold"><a href="https://www.bbc.co.uk/news/world-asia-india-56897970">India Covid-19: Delhi adds makeshift crematoriums as deaths climb</a></li><li class="ttt" data-tt="French concern over fishing rights overshadows a key European Parliament vote on EU-UK trade."><a href="https://www.bbc.co.uk/news/world-europe-56899831">French warn UK ahead of vote on Brexit trade deal</a></li><li class="ttt" data-tt="Stargazers were treated to the fourth full Moon of 2021 on Monday night."><a href="https://www.bbc.co.uk/news/in-pictures-56900164">Pink Supermoon seen around the world</a></li></ul></td><td><a href="https://www.bbc.co.uk/news/world-asia-india-56897970"><img src="https://ichef.bbci.co.uk/news/1024/branded_news/4B0C/production/_118221291_gettyimages-1232547753.jpg" class="ttt" data-tt="Platforms being built outside the Sarai Kale Khan crematorium" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>Formula 1</b><br/><ul><li class="ttt" data-tt="Briton Callum Ilott joins Alfa Romeo as second reserve driver." style="font-weight:bold"><a href="http://www.bbc.co.uk/sport/formula1/56851780">Formula 1: Callum Ilott joins Alfa Romeo as second reserve driver</a></li><li class="ttt" data-tt="Formula 1 bosses agree that shorter \'sprint\' races will be introduced to F1 this year to set the grid positions at three grands prix."><a href="http://www.bbc.co.uk/sport/formula1/56893938">Formula 1: \'Sprint\' races to be introduced to set grid at three races in 2021</a></li><li class="ttt" data-tt="Formula 1 announces the Japanese Grand Prix will remain at Suzuka until the end of the 2024 season."><a href="http://www.bbc.co.uk/sport/formula1/56870464">Japanese Grand Prix to remain at Suzuka until 2024</a></li></ul></td><td><a href="http://www.bbc.co.uk/sport/formula1/56851780"><img src="https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/13986/production/_118226208_callumilott.jpg"  style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>Technology</b><br/><ul><li class="ttt" data-tt="New update includes new privacy features, emojis and a way of turning on an iPhone with a mask on." style="font-weight:bold"><a href="https://www.bbc.co.uk/news/technology-56896854">Five things to know about Apple\'s iOS update</a></li><li class="ttt" data-tt="The FBI investigates as a group says it has accessed Washington DC police computers, US media report."><a href="https://www.bbc.co.uk/news/world-us-canada-56898711">Cyber-attack hackers threaten to share US police informant data</a></li><li class="ttt" data-tt="Some governments are looking at coronavirus status systems but it is not without controversy."><a href="https://www.bbc.co.uk/news/technology-56818006">Could Covid-19 vaccine passports use biometric data?</a></li></ul></td><td><a href="https://www.bbc.co.uk/news/technology-56896854"><img src="https://ichef.bbci.co.uk/news/1024/branded_news/933B/production/_118219673_apple5.jpg" class="ttt" data-tt="Six new emojis including a face exhaling, woman with beard and heart on fire" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr></table>';
+	var box = makeBox(3, 2);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4F0;<a href="https://www.bbc.co.uk/news">BBC News</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
 
 //////////////////////////////////////////////////
 
@@ -413,9 +431,9 @@ modules.push(function tv() {
 modules.push(function youtube() {
 
     var data = [
-{ id: '1nHe3Weueog', title: "Line of Duty | Series 6 Finale Trailer - BBC Trailers", label: "Line of Duty | Series 6 Finale Trailer - BBC Trailers by BBC Trailers 23 hours ago 36 seconds 343,994 views" },
-{ id: 'iSvsf27wRns', title: "If You Build A Lamborghini I'll Pay For It!", label: "If You Build A Lamborghini I'll Pay For It! by MrBeast Gaming 17 hours ago 10 minutes, 24 seconds 9,589,887 views" },
-{ id: 'ChZaqqoNg-0', title: "Apex Legends – Legacy Gameplay Trailer", label: "Apex Legends – Legacy Gameplay Trailer by Apex Legends 21 hours ago 6 minutes, 7 seconds 4,718,135 views" },
+{ id: '1nHe3Weueog', title: "Line of Duty | Series 6 Finale Trailer - BBC Trailers", label: "Line of Duty | Series 6 Finale Trailer - BBC Trailers by BBC Trailers 1 day ago 36 seconds 354,254 views" },
+{ id: 'iSvsf27wRns', title: "If You Build A Lamborghini I'll Pay For It!", label: "If You Build A Lamborghini I'll Pay For It! by MrBeast Gaming 18 hours ago 10 minutes, 24 seconds 9,802,936 views" },
+{ id: 'ChZaqqoNg-0', title: "Apex Legends – Legacy Gameplay Trailer", label: "Apex Legends – Legacy Gameplay Trailer by Apex Legends 22 hours ago 6 minutes, 7 seconds 4,785,755 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -1259,9 +1277,9 @@ modules.push(function word() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '99.8',
+		Percent:  '99.7',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-gibbous.html" title="Waning Gibbous on the night between 27 April and 28 April">Waning Gibbous</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.998&p=2.902&r=0.192',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.997&p=3.192&r=0.431',
 		Location: '11609021'
 	}
 
@@ -1337,7 +1355,7 @@ var row = table
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22John+Lewis%22">John Lewis</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23IStandWithMaya">#IStandWithMaya</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23tuesdayvibe">#tuesdayvibe</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Bayern">Bayern</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23tuesdaymotivations">#tuesdaymotivations</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23boohootreats">#boohootreats</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22John+Lewis%22">John Lewis</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Wireless">Wireless</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23IStandWithMaya">#IStandWithMaya</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23PoliticsLive">#PoliticsLive</a></td></tr></table>';
 	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
@@ -1365,7 +1383,7 @@ modules.push(function twitter() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22Tucker+Carlson%22">Tucker Carlson</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23tuesdayvibe">#tuesdayvibe</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23tuesdaymotivations">#tuesdaymotivations</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23WhenTheMorningComes">#WhenTheMorningComes</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Super+Mario+Party%22">Super Mario Party</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22Tucker+Carlson%22">Tucker Carlson</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22Super+Mario+Party%22">Super Mario Party</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23TuesdayFeeling">#TuesdayFeeling</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23tuesdayvibe">#tuesdayvibe</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23WhenTheMorningComes">#WhenTheMorningComes</a></td></tr></table>';
 	var title = 'United States';
 	var box = makeBox(1, 1);
 	box
