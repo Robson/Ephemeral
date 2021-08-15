@@ -163,7 +163,7 @@ table {
 .group:hover .highlight {
 	fill: #E5007E;
 	stroke: #E5007E;
-	stroke-width: 3px;
+	stroke-width: 4px;
 }
 
 /***** FLAGS *****/
