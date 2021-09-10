@@ -846,7 +846,7 @@ modules.push(function crypto() {
 { day:'2021-09-06', number: 37357.550781, tooltip: '2021-09-06<br/>£37,357.55' },
 { day:'2021-09-07', number: 38052.144531, tooltip: '2021-09-07<br/>£38,052.14' },
 { day:'2021-09-08', number: 33984.125000, tooltip: '2021-09-08<br/>£33,984.13' },
-{ day:'2021-09-10', number: 33353.312500, tooltip: '2021-09-10<br/>£33,353.31' },
+{ day:'2021-09-10', number: 33584.656250, tooltip: '2021-09-10<br/>£33,584.66' },
 ];
 	var name = "Bitcoin";
 	var conversion = "BTC-GBP";
@@ -861,12 +861,12 @@ modules.push(function crypto() {
 	}
 
 	var cryptoData = {
-		"Today's Open": "£33,353.31",
+		"Today's Open": "£33,584.66",
 		'vs Day':       "NA",
-		'vs Week':      "-6.4%",
-		'vs Month':     "-0.2%",
-		'vs Year':      "+323.3%",
-		'vs YTD':       "+57.3%"
+		'vs Week':      "-5.7%",
+		'vs Month':     "+0.5%",
+		'vs Year':      "+326.2%",
+		'vs YTD':       "+58.4%"
 	};
 
 	var box = makeBox(3, 1);
@@ -1280,7 +1280,7 @@ modules.push(function crypto() {
 { day:'2021-09-06', number: 2851.496338, tooltip: '2021-09-06<br/>£2,851.50' },
 { day:'2021-09-07', number: 2837.285156, tooltip: '2021-09-07<br/>£2,837.29' },
 { day:'2021-09-08', number: 2488.062988, tooltip: '2021-09-08<br/>£2,488.06' },
-{ day:'2021-09-10', number: 2541.023926, tooltip: '2021-09-10<br/>£2,541.02' },
+{ day:'2021-09-10', number: 2483.909180, tooltip: '2021-09-10<br/>£2,483.91' },
 ];
 	var name = "Ether";
 	var conversion = "ETH-GBP";
@@ -1295,12 +1295,12 @@ modules.push(function crypto() {
 	}
 
 	var cryptoData = {
-		"Today's Open": "£2,541.02",
+		"Today's Open": "£2,483.91",
 		'vs Day':       "NA",
-		'vs Week':      "-7.2%",
-		'vs Month':     "+11.2%",
-		'vs Year':      "+839.9%",
-		'vs YTD':       "+370.9%"
+		'vs Week':      "-9.3%",
+		'vs Month':     "+8.7%",
+		'vs Year':      "+818.8%",
+		'vs YTD':       "+360.3%"
 	};
 
 	var box = makeBox(3, 1);
@@ -1714,7 +1714,7 @@ modules.push(function crypto() {
 { day:'2021-09-06', number: 0.226816, tooltip: '2021-09-06<br/>£0.23' },
 { day:'2021-09-07', number: 0.223246, tooltip: '2021-09-07<br/>£0.22' },
 { day:'2021-09-08', number: 0.184527, tooltip: '2021-09-08<br/>£0.18' },
-{ day:'2021-09-10', number: 0.187310, tooltip: '2021-09-10<br/>£0.19' },
+{ day:'2021-09-10', number: 0.183313, tooltip: '2021-09-10<br/>£0.18' },
 ];
 	var name = "Doge";
 	var conversion = "DOGE-GBP";
@@ -1729,12 +1729,12 @@ modules.push(function crypto() {
 	}
 
 	var cryptoData = {
-		"Today's Open": "£0.19",
+		"Today's Open": "£0.18",
 		'vs Day':       "NA",
-		'vs Week':      "-12.1%",
-		'vs Month':     "+1.2%",
-		'vs Year':      "+8620.2%",
-		'vs YTD':       "+5370.5%"
+		'vs Week':      "-13.9%",
+		'vs Month':     "-1.0%",
+		'vs Year':      "+8434.1%",
+		'vs YTD':       "+5253.8%"
 	};
 
 	var box = makeBox(3, 1);
@@ -2047,7 +2047,7 @@ modules.push(function moon() {
 	var moonData = {
 		Percent:  '11.2',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 9 September and 10 September">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.112&p=6.115&r=6.163',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.112&p=6.116&r=6.164',
 		Location: '11609021'
 	}
 
@@ -2214,7 +2214,58 @@ modules.push(function astronauts() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in backlog module: The server is not available. Contact your administrator if this condition persists.');
+modules.push(function backlog() {
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4CB;Backlog')
+	var table = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('table')
+		.style('text-align', 'right');
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Audiobooks:")
+	row
+		.append('td')
+		.text('19')
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Downloads:")
+	row
+		.append('td')
+		.text('8')
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Films:")
+	row
+		.append('td')
+		.text('12');
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Games:")
+	row
+		.append('td')
+		.text('9');
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Work Inbox:")
+	row
+		.append('td')
+		.text('24');
+});
 
 //////////////////////////////////////////////////
 
