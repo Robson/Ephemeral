@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>23:47 13-Sep - Ephemeral</title>		
+		<title>23:48 13-Sep - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -284,61 +284,7 @@ modules.push(function bbcCombine() {
 
 //////////////////////////////////////////////////
 
-modules.push(function weather() {
-    var weatherLocation = "11609021";
-
-    var data={"copyright":"Contents are strictly for use by timeanddate.com","units":{"temp":"°C","prec":"mm","wind":"mph","baro":"mbar"},"detail":[{"hl":true,"hls":"13 Sep - 19 Sep","date":16315776E5,"ts":"Tue, 14","ds":"Tue, 14 Sep","icon":20,"desc":"Heavy rain. Overcast.","temp":16,"templow":13,"cf":15,"wind":8,"wd":79,"hum":90,"pc":84,"rain":21.2 },{"date":1631664E6,"ts":"Wed, 15","ds":"Wed, 15 Sep","icon":7,"desc":"Overcast.","temp":19,"templow":10,"cf":18,"wind":6,"wd":313,"hum":73,"pc":5},{"date":16317504E5,"ts":"Thu, 16","ds":"Thu, 16 Sep","icon":6,"desc":"Broken clouds.","temp":20,"templow":12,"cf":19,"wind":7,"wd":238,"hum":67,"pc":0},{"date":16318368E5,"ts":"Fri, 17","ds":"Fri, 17 Sep","icon":33,"desc":"Showers late. Overcast.","temp":20,"templow":11,"cf":18,"wind":11,"wd":205,"hum":68,"pc":52,"rain":1.4 },{"date":16319232E5,"ts":"Sat, 18","ds":"Sat, 18 Sep","icon":4,"desc":"Increasing cloudiness.","temp":19,"templow":12,"cf":18,"wind":6,"wd":252,"hum":69,"pc":2},{"date":16320096E5,"ts":"Sun, 19","ds":"Sun, 19 Sep","icon":7,"desc":"Cloudy.","temp":19,"templow":12,"cf":18,"wind":7,"wd":260,"hum":50,"pc":3},{"hl":true,"hls":"20 Sep - 26 Sep","date":1632096E6,"ts":"Mon, 20","ds":"Mon, 20 Sep","icon":6,"desc":"Mostly cloudy.","temp":21,"templow":13,"cf":25,"wind":6,"wd":310,"hum":47,"pc":0},{"date":16321824E5,"ts":"Tue, 21","ds":"Tue, 21 Sep","icon":6,"desc":"Mostly cloudy.","temp":21,"templow":11,"cf":21,"wind":5,"wd":140,"hum":45,"pc":3},{"date":16322688E5,"ts":"Wed, 22","ds":"Wed, 22 Sep","icon":1,"desc":"Sunny.","temp":21,"templow":11,"cf":21,"wind":14,"wd":120,"hum":50,"pc":5},{"date":16323552E5,"ts":"Thu, 23","ds":"Thu, 23 Sep","icon":1,"desc":"Sunny.","temp":21,"templow":13,"cf":21,"wind":11,"wd":130,"hum":47,"pc":5},{"date":16324416E5,"ts":"Fri, 24","ds":"Fri, 24 Sep","icon":1,"desc":"Sunny.","temp":20,"templow":11,"cf":19,"wind":13,"wd":100,"hum":38,"pc":4},{"date":1632528E6,"ts":"Sat, 25","ds":"Sat, 25 Sep","icon":1,"desc":"Sunny.","temp":21,"templow":10,"cf":19,"wind":15,"wd":100,"hum":35,"pc":4},{"date":16326144E5,"ts":"Sun, 26","ds":"Sun, 26 Sep","icon":1,"desc":"Sunny.","temp":20,"templow":10,"cf":19,"wind":13,"wd":110,"hum":42,"pc":4},{"hl":true,"hls":"27 Sep - 3 Oct","date":16327008E5,"ts":"Mon, 27","ds":"Mon, 27 Sep","icon":1,"desc":"Sunny.","temp":19,"templow":10,"cf":19,"wind":14,"wd":100,"hum":38,"pc":4},{"date":16327872E5,"ts":"Tue, 28","ds":"Tue, 28 Sep","icon":2,"desc":"Mostly sunny.","temp":19,"templow":10,"cf":19,"wind":9,"wd":100,"hum":48,"pc":5}],"grid":{"temp":{"low":10,"high":21,"range":11},"prec":{"high":21.2},"time":86400000,"sections":15},"conv":{"prec":{"offset":0,"scale":1},"temp":{"offset":0,"scale":1},"wind":{"offset":0,"scale":0.869},"baro":{"offset":0,"scale":1}}};
-
-
-    var box = makeBox(2, 2);
-    box
-        .append('div')
-        .attr('class', 'title')
-        .html('&#127746;<a href="https://www.timeanddate.com/weather/@' + weatherLocation + '/ext">Weather</a>')
-    box = box
-        .append('div')
-        .attr('class', 'inside');
-    var inside = box
-        .append('div');
-    var table = inside
-        .append('table');
-
-    for (var day of data.detail.slice(0, 7)) {
-        var row = table
-            .append('tr');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .style('font-weight', 'bold')
-            .html(day.ds.split(',')[0] + ':&nbsp;');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .attr('class', 'code')
-            .html(day.templow + '&#xb0;');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .attr('class', 'code')
-            .html('to');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .attr('class', 'code')
-            .html(day.temp + '&#xb0;');
-        row
-            .append('td')
-            .style('text-align', 'center')
-            .append('img')
-            .attr('src', 'https://c.tadst.com/gfx/w/svg/wt-' + day.icon + '.svg')
-            .attr('width', '32px')
-            .attr('height', '32px');
-        row
-            .append('td')
-            .style('text-align', 'left')
-            .html(day.desc)
-    }
-});
+console.log('Error in weather module: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.');
 
 //////////////////////////////////////////////////
 
@@ -441,8 +387,8 @@ modules.push(function youtube() {
 
     var data = [
 { id: '5VYb3B1ETlk', title: "Marvel Studios’ Hawkeye | Official Trailer | Disney+", label: "Marvel Studios’ Hawkeye | Official Trailer | Disney+ by Marvel Entertainment 9 hours ago 1 minute, 53 seconds 7,598,470 views" },
-{ id: 'z5y2BMxrAqw', title: "Fortnite Chapter 2 Season 8 Battle Pass Trailer", label: "Fortnite Chapter 2 Season 8 Battle Pass Trailer by Fortnite 16 hours ago 1 minute, 2 seconds 2,546,083 views" },
-{ id: '2lBFoxLvYHs', title: "Fortnite Chapter 2 Season 8 Story Trailer", label: "Fortnite Chapter 2 Season 8 Story Trailer by Fortnite 16 hours ago 1 minute, 43 seconds 1,967,060 views" },
+{ id: 'z5y2BMxrAqw', title: "Fortnite Chapter 2 Season 8 Battle Pass Trailer", label: "Fortnite Chapter 2 Season 8 Battle Pass Trailer by Fortnite 16 hours ago 1 minute, 2 seconds 2,551,842 views" },
+{ id: '3Gc62cZgABA', title: "Conor McGregor REACTS to Machine Gun Kelly FIGHT at VMAs!", label: "Conor McGregor REACTS to Machine Gun Kelly FIGHT at VMAs! by Entertainment Tonight 17 hours ago 3 minutes, 12 seconds 1,335,118 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -2048,7 +1994,7 @@ modules.push(function moon() {
 	var moonData = {
 		Percent:  '51.1',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/first-quarter.html" title="First Quarter on the night between 13 September and 14 September">First Quarter</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.511&p=5.711&r=5.691',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.511&p=5.710&r=5.690',
 		Location: '11609021'
 	}
 
