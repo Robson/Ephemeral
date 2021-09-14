@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>16:21 14-Sep - Ephemeral</title>		
+		<title>16:25 14-Sep - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -284,61 +284,7 @@ modules.push(function bbcCombine() {
 
 //////////////////////////////////////////////////
 
-modules.push(function weather() {
-    var weatherLocation = "11609021";
-
-    var data={"copyright":"Contents are strictly for use by timeanddate.com","units":{"temp":"°C","prec":"mm","wind":"mph","baro":"mbar"},"detail":[{"hl":true,"hls":"13 Sep - 19 Sep","date":16315776E5,"ts":"Tue, 14","ds":"Tue, 14 Sep","icon":19,"desc":"Rain. Overcast.","temp":16,"templow":13,"cf":16,"wind":9,"wd":48,"hum":91,"pc":84,"rain":16.7 },{"date":1631664E6,"ts":"Wed, 15","ds":"Wed, 15 Sep","icon":6,"desc":"Broken clouds.","temp":19,"templow":12,"cf":18,"wind":5,"wd":333,"hum":70,"pc":5},{"date":16317504E5,"ts":"Thu, 16","ds":"Thu, 16 Sep","icon":6,"desc":"Broken clouds.","temp":20,"templow":14,"cf":19,"wind":6,"wd":263,"hum":66,"pc":1},{"date":16318368E5,"ts":"Fri, 17","ds":"Fri, 17 Sep","icon":2,"desc":"Clearing skies.","temp":20,"templow":11,"cf":19,"wind":11,"wd":186,"hum":66,"pc":2},{"date":16319232E5,"ts":"Sat, 18","ds":"Sat, 18 Sep","icon":6,"desc":"Broken clouds.","temp":18,"templow":13,"cf":18,"wind":6,"wd":176,"hum":72,"pc":4},{"date":16320096E5,"ts":"Sun, 19","ds":"Sun, 19 Sep","icon":4,"desc":"Increasing cloudiness.","temp":16,"templow":10,"cf":15,"wind":9,"wd":240,"hum":83,"pc":5},{"hl":true,"hls":"20 Sep - 26 Sep","date":1632096E6,"ts":"Mon, 20","ds":"Mon, 20 Sep","icon":4,"desc":"Morning clouds.","temp":18,"templow":10,"cf":18,"wind":15,"wd":270,"hum":65,"pc":0},{"date":16321824E5,"ts":"Tue, 21","ds":"Tue, 21 Sep","icon":4,"desc":"Increasing cloudiness.","temp":18,"templow":9,"cf":18,"wind":13,"wd":320,"hum":46,"pc":6},{"date":16322688E5,"ts":"Wed, 22","ds":"Wed, 22 Sep","icon":2,"desc":"Mostly sunny.","temp":19,"templow":9,"cf":19,"wind":4,"wd":130,"hum":43,"pc":6},{"date":16323552E5,"ts":"Thu, 23","ds":"Thu, 23 Sep","icon":7,"desc":"Overcast.","temp":17,"templow":10,"cf":17,"wind":10,"wd":180,"hum":52,"pc":6},{"date":16324416E5,"ts":"Fri, 24","ds":"Fri, 24 Sep","icon":7,"desc":"Overcast.","temp":17,"templow":10,"cf":17,"wind":13,"wd":200,"hum":54,"pc":5},{"date":1632528E6,"ts":"Sat, 25","ds":"Sat, 25 Sep","icon":2,"desc":"Scattered clouds.","temp":18,"templow":11,"cf":18,"wind":17,"wd":190,"hum":49,"pc":6},{"date":16326144E5,"ts":"Sun, 26","ds":"Sun, 26 Sep","icon":18,"desc":"Light rain. Mostly cloudy.","temp":16,"templow":11,"cf":16,"wind":13,"wd":300,"hum":47,"pc":57,"rain":3.8 },{"hl":true,"hls":"27 Sep - 3 Oct","date":16327008E5,"ts":"Mon, 27","ds":"Mon, 27 Sep","icon":33,"desc":"Showers late. Increasing cloudiness.","temp":16,"templow":8,"cf":14,"wind":13,"wd":210,"hum":77,"pc":52,"rain":0.9 },{"date":16327872E5,"ts":"Tue, 28","ds":"Tue, 28 Sep","icon":18,"desc":"Light rain early. Overcast.","temp":16,"templow":8,"cf":14,"wind":11,"wd":230,"hum":75,"pc":58,"rain":2.5 }],"grid":{"temp":{"low":8,"high":20,"range":12},"prec":{"high":16.7},"time":86400000,"sections":15},"conv":{"prec":{"offset":0,"scale":1},"temp":{"offset":0,"scale":1},"wind":{"offset":0,"scale":0.869},"baro":{"offset":0,"scale":1}}};
-
-
-    var box = makeBox(2, 2);
-    box
-        .append('div')
-        .attr('class', 'title')
-        .html('&#127746;<a href="https://www.timeanddate.com/weather/@' + weatherLocation + '/ext">Weather</a>')
-    box = box
-        .append('div')
-        .attr('class', 'inside');
-    var inside = box
-        .append('div');
-    var table = inside
-        .append('table');
-
-    for (var day of data.detail.slice(0, 7)) {
-        var row = table
-            .append('tr');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .style('font-weight', 'bold')
-            .html(day.ds.split(',')[0] + ':&nbsp;');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .attr('class', 'code')
-            .html(day.templow + '&#xb0;');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .attr('class', 'code')
-            .html('to');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .attr('class', 'code')
-            .html(day.temp + '&#xb0;');
-        row
-            .append('td')
-            .style('text-align', 'center')
-            .append('img')
-            .attr('src', 'https://c.tadst.com/gfx/w/svg/wt-' + day.icon + '.svg')
-            .attr('width', '32px')
-            .attr('height', '32px');
-        row
-            .append('td')
-            .style('text-align', 'left')
-            .html(day.desc)
-    }
-});
+console.log('Error in weather module: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.');
 
 //////////////////////////////////////////////////
 
@@ -442,7 +388,7 @@ modules.push(function youtube() {
     var data = [
 { id: '5VYb3B1ETlk', title: "Marvel Studios’ Hawkeye | Official Trailer | Disney+", label: "Marvel Studios’ Hawkeye | Official Trailer | Disney+ by Marvel Entertainment 1 day ago 1 minute, 53 seconds 10,943,932 views" },
 { id: 'TQU1jKslOME', title: "Zina is not faster than me! | FIFA22 Ratings! | KDB \u0026 FODEN", label: "Zina is not faster than me! | FIFA22 Ratings! | KDB \u0026 FODEN by Man City 22 hours ago 9 minutes, 28 seconds 762,232 views" },
-{ id: 'gSVEE0JIbRs', title: "Game of the Year? Baltimore Ravens vs. Las Vegas Raiders | Week 1 2021 NFL Game Highlights", label: "Game of the Year? Baltimore Ravens vs. Las Vegas Raiders | Week 1 2021 NFL Game Highlights by NFL 11 hours ago 14 minutes, 11 seconds 1,321,577 views" },
+{ id: 'gSVEE0JIbRs', title: "Game of the Year? Baltimore Ravens vs. Las Vegas Raiders | Week 1 2021 NFL Game Highlights", label: "Game of the Year? Baltimore Ravens vs. Las Vegas Raiders | Week 1 2021 NFL Game Highlights by NFL 11 hours ago 14 minutes, 11 seconds 1,336,174 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -2045,33 +1991,7 @@ modules.push(function word() {
 
 //////////////////////////////////////////////////
 
-modules.push(function moon() {
-	var moonData = {
-		Percent:  '58.9',
-		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waxing-gibbous.html" title="Waxing Gibbous on the night between 14 September and 15 September">Waxing Gibbous</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.589&p=0.463&r=0.445',
-		Location: '11609021'
-	}
-
-	var box = makeBox(1, 1);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#127769;<a href="https://www.timeanddate.com/moon/@' + moonData.Location + '">Moon</a>')
-	box = box
-		.append('div')
-		.attr('class', 'inside');	
-	var inside = box
-		.append('div');
-	inside
-		.append('img')
-		.attr('src', moonData.Image)
-		.attr('width', '75%')
-		.attr('height', '75%');		
-	inside
-		.append('p')
-		.html(moonData.Type + ' (' + moonData.Percent + '%)');	
-});
+console.log('Error in moon module: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.');
 
 //////////////////////////////////////////////////
 
@@ -2125,7 +2045,7 @@ var row = table
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23AppleEvent">#AppleEvent</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22Plan+B%22">Plan B</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%22Met+Gala%22">Met Gala</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23HumanBodyInSongOrFilm">#HumanBodyInSongOrFilm</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23tuesdaymotivations">#tuesdaymotivations</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23AppleEvent">#AppleEvent</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22Plan+B%22">Plan B</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23HumanBodyInSongOrFilm">#HumanBodyInSongOrFilm</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23downingstreetbriefing">#downingstreetbriefing</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Met+Gala%22">Met Gala</a></td></tr></table>';
 	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
@@ -2267,6 +2187,14 @@ modules.push(function backlog() {
 	row
 		.append('td')
 		.text('33');
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("YouTube:")
+	row
+		.append('td')
+		.text('203');
 });
 
 //////////////////////////////////////////////////
