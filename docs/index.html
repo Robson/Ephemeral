@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>00:45 20-Sep - Ephemeral</title>		
+		<title>00:57 20-Sep - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -440,9 +440,9 @@ modules.push(function tv() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'FnAbk_BuDk4', title: "A BRAND NEW GAME SHOW!", label: "A BRAND NEW GAME SHOW! by Miniminter 1 day ago 31 minutes 833,415 views" },
-{ id: '-ARdLKWyGfA', title: "I Survived 200 Days as a SHAPESHIFTER in Minecraft...", label: "I Survived 200 Days as a SHAPESHIFTER in Minecraft... by Silver 23 hours ago 42 minutes 1,363,310 views" },
-{ id: 'RkznQjwwmpQ', title: "Our new Strictly couples dance to Permission To Dance by BTS✨ BBC Strictly 2021", label: "Our new Strictly couples dance to Permission To Dance by BTS✨ BBC Strictly 2021 by BBC Strictly Come Dancing 12 hours ago 2 minutes, 55 seconds 83,357 views" },
+{ id: 'FnAbk_BuDk4', title: "A BRAND NEW GAME SHOW!", label: "A BRAND NEW GAME SHOW! by Miniminter 1 day ago 31 minutes 834,766 views" },
+{ id: '-ARdLKWyGfA', title: "I Survived 200 Days as a SHAPESHIFTER in Minecraft...", label: "I Survived 200 Days as a SHAPESHIFTER in Minecraft... by Silver 23 hours ago 42 minutes 1,370,614 views" },
+{ id: 'RkznQjwwmpQ', title: "Our new Strictly couples dance to Permission To Dance by BTS✨ BBC Strictly 2021", label: "Our new Strictly couples dance to Permission To Dance by BTS✨ BBC Strictly 2021 by BBC Strictly Come Dancing 13 hours ago 2 minutes, 55 seconds 84,262 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -2039,7 +2039,33 @@ modules.push(function word() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in moon module: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.');
+modules.push(function moon() {
+	var moonData = {
+		Percent:  '98.7',
+		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waxing-gibbous.html" title="Waxing Gibbous on the night between 19 September and 20 September">Waxing Gibbous</a>',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.987&p=5.395&r=5.785',
+		Location: '11609021'
+	}
+
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#127769;<a href="https://www.timeanddate.com/moon/@' + moonData.Location + '">Moon</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');	
+	var inside = box
+		.append('div');
+	inside
+		.append('img')
+		.attr('src', moonData.Image)
+		.attr('width', '75%')
+		.attr('height', '75%');		
+	inside
+		.append('p')
+		.html(moonData.Type + ' (' + moonData.Percent + '%)');	
+});
 
 //////////////////////////////////////////////////
 
