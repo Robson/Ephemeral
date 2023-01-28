@@ -1,0 +1,176 @@
+/***** PAGE *****/
+
+html {
+	color: #000;	
+	text-align: center;
+	padding: 75px 5px;
+	background: #ddd;
+	overflow-y: scroll;
+	margin-bottom: 100px;
+}
+
+body {
+	margin: 0;
+	font-family: rubik, sans-serif;
+}
+
+hr {
+	fill: #ddd;
+	height: 1px;
+	border: 0;
+	border-bottom: 1px solid #ddd;
+}
+
+/***** CONTAINERS *****/
+
+.box {
+	background: #fff;
+	margin: 8px;
+	position: absolute;
+	border: 0px solid #FAFAFA;
+	border-radius: 7px;	
+	box-shadow: rgba(14, 31, 53, 0.2) 0px 2px 4px 0px;
+}
+
+.box:hover {
+	border-color: #fff;
+}
+
+.inside {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: -22px;
+	height: 100%;
+}
+
+#cls {
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	font-size: 12px;
+	opacity: 0.75;
+}
+
+/***** LINKS *****/
+
+a {
+	color: #E5007E;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/***** TEXT *****/
+
+h1 {
+	font-size: 120%;	
+	font-family: 'roboto slab', georgia;
+	font-weight: normal;
+	margin-top: 0;
+	padding-top: 0;
+}
+
+h2 {
+	font-size: 100%;
+}
+
+p {
+	font-size: 80%;
+	margin: 0;
+}
+
+.code {
+	font-family: consolas, monospace;
+}
+
+/***** LISTS *****/
+
+ul, ol {
+	font-size: 12px;
+	margin: 0 0 0 0;
+	padding: 0 4px 0 8px;
+}
+
+li {
+	padding-left: 0;
+	margin-left: 10px;
+}
+
+/***** TITLES *****/
+
+.title {
+	text-align: center;
+	font-size: 120%;	
+	font-family: 'roboto slab', georgia;
+	font-weight: normal;
+	margin: 5px 5px 0 5px;
+	padding: 3px 0 5px 0;
+	border-bottom: 1px solid #e3e3e3;
+}
+
+/***** TABLES *****/
+
+table {
+	margin: 0 auto;
+	font-size: 12px;	
+}
+
+.condensed tr,
+.condensed td, 
+.condensed table {
+	padding: 0;
+	margin: 0;
+}
+
+/***** TOOLTIPS *****/
+
+#tt {
+	background: #fff;
+	text-align: center;
+	color: #333;
+	height: auto;
+	width: auto;
+	max-width: 300px;
+	top: 0;
+	left: 0;
+	position: absolute;
+	border: 0 solid #fff;
+	font-size: 15px;
+	border-radius: 2px;
+	box-shadow: rgba(14, 31, 53, 0.5) 0px 2px 4px 0px;
+}
+
+#tt p {
+	margin: 6px;
+	padding: 0;
+	opacity: 1;
+}
+
+#tooltip_title {
+	font-style: italic;
+	margin: 5px;
+	padding: 0;
+	line-height: 1.1em;
+	height: 3.3em;
+	overflow: hidden;
+}
+
+/***** CHARTS *****/
+
+.group:hover .highlight {
+	fill: #E5007E;
+	stroke: #E5007E;
+	stroke-width: 4px;
+}
+
+/***** FLAGS *****/
+
+.flag {
+	border: 1px solid black;
+	width: auto;
+	height: auto;
+	max-height: 13px;
+}

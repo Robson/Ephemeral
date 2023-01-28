@@ -1,0 +1,2714 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>17:51 28-Jan - Ephemeral</title>		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://d3js.org/d3.v3.min.js"></script>
+		<meta http-equiv="refresh" content="1800">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"> 		
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500&display=swap"> 	
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<div id="container">
+		</div>
+		<div id="tt" style="display: none">
+			<p id="tooltip_text"></p>
+		</div>
+		<div id="cls">&nbsp;</div>
+		<script>
+
+////////////////////////////////////////////////// tooltips
+
+            var tooltip = d3.select('#tt');
+            var tt = d3.select('#tt');
+
+            function setTooltip(value) {
+				d3.select('#tooltip_text').html(value);
+            }
+
+            function createTooltipTriggers() {
+                d3.selectAll('.ttt')
+                    .on("mouseover", function (d, i) {
+                        setTooltip(d3.selectAll('.ttt')[0][i].attributes['data-tt'].value);
+                    })
+                    .on("mouseout", function () {
+                        tt.style('display', 'none');
+                    })
+					.on("mousemove", function () {
+                        if (x <= 0 || y <= 0) {
+                            tt.style('display', 'none');
+                        } else {
+                            tt.style('display', null);
+                        }
+                        var x = d3.event.pageX - (tt.node().getBoundingClientRect().width / 2);
+                        var y = d3.event.pageY - (tt.node().getBoundingClientRect().height + 5);
+                        tt.style('left', ~~x + 'px');
+                        tt.style('top', ~~y + 'px');
+
+                    });
+			}
+
+////////////////////////////////////////////////// charts
+
+            function map(n, a, b, y, z) {
+                return (n - a) * (z - y) / (b - a) + y;
+			}
+
+			function createLineChart(width, height, element, data, boundary = 0) {
+                var svg = element
+                    .append('svg')
+                    .attr('width', width + 'px')
+                    .attr('height', height + 'px');
+
+                var start = Math.min(...data.map(a => a.number));
+				var end = Math.max(...data.map(a => a.number));
+
+				switch (boundary) {
+					case 1:
+						var distance = (end - start) * 0.1;
+						start -= distance;
+						start = Math.max(0, start);
+						end += distance;
+						break;
+					case 2:
+						start = 0;
+						break;
+				}
+
+				var xs = [];
+				var ys = [];
+
+                for (var i = 1; i <= data.length; i++) {
+                    var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
+					var y1 = map(data[i - 1].number, start, end, height, 6);
+					xs.push(x1);
+					ys.push(y1);
+				}
+
+				var area = d3.svg.area()
+					.interpolate('cardinal')
+					.x(function (d, i) { return xs[i] })
+					.y0(function (d, i) { return height })
+					.y1(function (d, i) { return ys[i] });
+
+				svg
+					.append('path')
+                    .datum(d3.range(data.length).map(function(d, i) { return i }))
+					.attr("d", area)
+					.attr('fill', '#eee');
+
+                var line = d3.svg.line()
+                    .interpolate('cardinal')
+                    .x(function (d, i) { return xs[i] })
+                    .y(function (d, i) { return ys[i] });
+
+                svg
+                    .append('path')
+                    .datum(d3.range(data.length).map(function (d, i) { return i }))
+                    .attr("d", line)
+					.attr('fill', 'transparent')
+					.style('stroke-width', 2)
+					.style('stroke', '#bbb');
+
+				for (var i = 1; i <= data.length; i++) {
+					var x1 = map(i - 1, 0, data.length - 1, 3, width - 3);
+                    var x2 = map(i, 0, data.length - 1, 3, width - 3);
+                    var y1 = map(data[i - 1].number, start, end, height, 6);
+                    var g = svg
+                        .append('g')
+                        .attr('class', 'group');
+                    g
+						.append('circle')
+						.attr('class', 'highlight')
+                        .attr('cx', x1)
+                        .attr('cy', y1 - 0.5)
+                        .attr('r', 1)
+						.attr('title', data[i - 1].number);
+					g
+						.append('rect')
+						.attr('class', 'ttt')
+						.attr('width', x2 - x1)
+						.attr('height', height)
+						.attr('x', (x1) - ((x2 - x1) / 2))
+						.attr('y', 0)
+						.attr('data-tt', data[i - 1].tooltip)
+						.attr('style', 'fill:transparent');
+                    /*g
+                        .append('circle')
+                        .attr('class', 'ttt')
+                        .attr('cx', x1)
+                        .attr('cy', y1 - 0.5)
+                        .attr('r', 4)
+                        .attr('opacity', '0.01')
+                        .attr('z-index', 1000)
+                        .attr('data-tt', data[i - 1].tooltip);*/
+				}
+
+                svg
+                    .append('line')
+                    .attr('x1', 3)
+                    .attr('y1', height)
+                    .attr('x2', width - 3)
+                    .attr('y2', height)
+                    .style('stroke-width', 2)
+                    .style('stroke', '#bbb');
+            }
+
+////////////////////////////////////////////////// page
+					
+			var inside = 210;
+			var padding = 8;
+			var length = padding + inside + padding;
+			var columns;
+			var offsetX;
+			var offsetY;
+			var filled = [,];
+			var low = 0;
+			var modules = [];
+								
+			function random(start, end) {
+				return start + Math.floor(Math.random() * (end - start));
+			}
+			
+			function makeBox(width, height) {			
+				var startX = 0, startY = 0;
+				var hasLocation = false;
+				for (var a = 0; a + height < filled.length && !hasLocation; a++) {
+					for (var b = 0; b + width <= columns && !hasLocation; b++) {					
+						var isValid = true;
+						for (var c = 0; c < height && isValid; c++) {
+							for (var d = 0; d < width && isValid; d++) {
+								if (filled[a + c][b + d] > 0) {
+									isValid = false;
+								}
+							}
+						}
+						if (isValid) {
+							hasLocation = true;							
+							startX = b;
+							startY = a;
+						}						
+					}
+				}				
+				if (hasLocation) {
+					for (var c = startY; c < startY + height && isValid; c++) {
+						for (var d = startX; d < startX + width && isValid; d++) {
+							filled[c][d] = 1;
+						}
+					}
+					low = Math.max(low, offsetY + (startY * length) + ((height * length) - (padding * 2)));				
+					return d3
+						.select('#container')
+						.append('div')
+						.attr('class', 'box')
+						.style('top', offsetY + startY * length + 'px')
+						.style('left', offsetX + startX * length + 'px')						
+						.style('width', ((width * length) - (padding * 2)) + 'px')
+						.style('height', ((height * length) - (padding * 2)) + 'px');
+				}
+			}
+			
+			function createPage() {
+				low = 0;
+				d3.selectAll('.box').remove();
+				var docWidth = document.body.clientWidth;		
+				columns = ~~((docWidth - 20) / length);
+				columns = Math.min(7, columns);
+				offsetX = ((docWidth - (columns * length)) / 2) + 5;				
+				offsetY = 100;
+				for (var a = 0; a < 50; a++) {
+					filled[a] = new Array(columns);
+					for (var b = 0; b < columns; b++) {
+						filled[a][b] = 0;
+					}
+				}
+				for (var func of modules) {
+					func();
+				}
+				d3
+					.select('#cls')
+					.style('top', (low) + 'px')
+					.style('height', ((padding * 2) + offsetY) + 'px');
+				createTooltipTriggers();
+			}
+			
+			d3.select(window).on('resize', createPage);
+
+////////////////////////////////////////////////// boxes
+			
+modules.push(function bbcCombine() {
+	var html = '<table style="margin:0 10px"><tr><td style="vertical-align:top"><b>UK</b><br/><ul><li class="ttt" data-tt="<b>Flybe administration: Scramble to change plans after airline ceases trading</b><br/>The airline said it was ceasing trading and cancelling all flights, affecting 75,000 passengers." style="font-weight:bold"><a href="https://www.bbc.co.uk/news/uk-64439107?at_medium=RSS&amp;at_campaign=KARANGA">Flybe administration: Scramble to change plans after airline ceases trading</a></li><li class="ttt" data-tt="<b>Hexham stabbing: Murder arrest after girl, 15, dies</b><br/>A 16-year-old boy is arrested on suspicion of murder following the stabbing in Northumberland."><a href="https://www.bbc.co.uk/news/uk-england-tyne-64438430?at_medium=RSS&amp;at_campaign=KARANGA">Hexham stabbing: Murder arrest after girl, 15, dies</a></li><li class="ttt" data-tt="<b>Rishi Sunak: Have his first 100 days been calm or \'cringe\'?</b><br/>As the prime minister reaches a key milestone, Laura Kuenssberg assesses his performance so far."><a href="https://www.bbc.co.uk/news/uk-politics-64439763?at_medium=RSS&amp;at_campaign=KARANGA">Rishi Sunak: Have his first 100 days been calm or \'cringe\'?</a></li></ul></td><td><a href="https://www.bbc.co.uk/news/uk-64439107?at_medium=RSS&amp;at_campaign=KARANGA"><img src="https://ichef.bbci.co.uk/news/1024/branded_news/A6A8/production/_128446624_sophie_flybe.jpg" class="ttt" data-tt="Sophie Levy standing by a river river, with boats and houses behind her" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>US & Canada</b><br/><ul><li class="ttt" data-tt="<b>Video shows police beating and kicking Tyre Nichols while he was restrained</b><br/>The 29-year-old cried out for his mother during the violent arrest in Memphis that led to his death, footage shows." style="font-weight:bold"><a href="https://www.bbc.co.uk/news/world-us-canada-64435109?at_medium=RSS&amp;at_campaign=KARANGA">Video shows police beating and kicking Tyre Nichols while he was restrained</a></li><li class="ttt" data-tt="<b>Community reckons with police killing by black officers</b><br/>All five officers involved in Tyre Nichols\' death were black. Experts say that\'s not unusual."><a href="https://www.bbc.co.uk/news/world-us-canada-64434333?at_medium=RSS&amp;at_campaign=KARANGA">Community reckons with police killing by black officers</a></li><li class="ttt" data-tt="<b>Toronto struggles with wave of public transport violence</b><br/>Seven incidents in seven days on the subway, streetcars and buses have sparked fears from commuters."><a href="https://www.bbc.co.uk/news/world-us-canada-64408450?at_medium=RSS&amp;at_campaign=KARANGA">Toronto struggles with wave of public transport violence</a></li></ul></td><td><a href="https://www.bbc.co.uk/news/world-us-canada-64435109?at_medium=RSS&amp;at_campaign=KARANGA"><img src="https://ichef.bbci.co.uk/news/1024/branded_news/3F92/production/_128447261_video_still.png" class="ttt" data-tt="Footage from a pole camera of Tyre Nichols arrest" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>World</b><br/><ul><li class="ttt" data-tt="<b>Video shows police beating and kicking Tyre Nichols while he was restrained</b><br/>The 29-year-old cried out for his mother during the violent arrest in Memphis that led to his death, footage shows." style="font-weight:bold"><a href="https://www.bbc.co.uk/news/world-us-canada-64435109?at_medium=RSS&amp;at_campaign=KARANGA">Video shows police beating and kicking Tyre Nichols while he was restrained</a></li><li class="ttt" data-tt="<b>Petr Pavel: Ex-general beats populist rival in Czech election</b><br/>Defeated former PM Andrej Babis conceded to retired Nato general Petr Pavel on Saturday afternoon."><a href="https://www.bbc.co.uk/news/world-europe-64438955?at_medium=RSS&amp;at_campaign=KARANGA">Petr Pavel: Ex-general beats populist rival in Czech election</a></li><li class="ttt" data-tt="<b>Jerusalem shooting: Thirteen-year-old held over second attack in days</b><br/>A Palestinian boy is arrested after opening fire in the city, a day after an attack killed seven people."><a href="https://www.bbc.co.uk/news/world-middle-east-64438905?at_medium=RSS&amp;at_campaign=KARANGA">Jerusalem shooting: Thirteen-year-old held over second attack in days</a></li></ul></td><td><a href="https://www.bbc.co.uk/news/world-us-canada-64435109?at_medium=RSS&amp;at_campaign=KARANGA"><img src="https://ichef.bbci.co.uk/news/1024/branded_news/3F92/production/_128447261_video_still.png" class="ttt" data-tt="Footage from a pole camera of Tyre Nichols arrest" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>Formula 1</b><br/><ul><li class="ttt" data-tt="<b>Formula 1: Sexist comments \'do not reflect\' FIA boss Mohammed Ben Sulayem\'s beliefs</b><br/>Motorsport\'s governing body the FIA says sexist remarks attributed to its president &quot;do not reflect his beliefs&quot;." style="font-weight:bold"><a href="https://www.bbc.co.uk/sport/formula1/64432277?at_medium=RSS&amp;at_campaign=KARANGA">Formula 1: Sexist comments \'do not reflect\' FIA boss Mohammed Ben Sulayem...</a></li><li class="ttt" data-tt="<b>Ferrari: Frederic Vasseur says team are aiming for title win this year</b><br/>New Ferrari team principal Frederic Vasseur says it is &quot;obvious&quot; that his target is to win the title this year."><a href="https://www.bbc.co.uk/sport/formula1/64421101?at_medium=RSS&amp;at_campaign=KARANGA">Ferrari: Frederic Vasseur says team are aiming for title win this year</a></li><li class="ttt" data-tt="<b>Alessandro Alunni Bravi: Alfa Romeo appoint Italian as team representative for 2023</b><br/>Italian Alessandro Alunni Bravi is given a senior leadership role with the Alfa Romeo/Sauber team, which will become Audi in 2026."><a href="https://www.bbc.co.uk/sport/formula1/64410407?at_medium=RSS&amp;at_campaign=KARANGA">Alessandro Alunni Bravi: Alfa Romeo appoint Italian as team representative...</a></li></ul></td><td><a href="https://www.bbc.co.uk/sport/formula1/64432277?at_medium=RSS&amp;at_campaign=KARANGA"><img src="https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/2FC0/production/_128442221_gettyimages-1418259580.jpg"  style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>Technology</b><br/><ul><li class="ttt" data-tt="<b>AmazonSmile closes: Charities say they will suffer</b><br/>Amazon will soon close its charity scheme that allows people to donate by shopping." style="font-weight:bold"><a href="https://www.bbc.co.uk/news/technology-64397651?at_medium=RSS&amp;at_campaign=KARANGA">AmazonSmile closes: Charities say they will suffer</a></li><li class="ttt" data-tt="<b>Lockdowns linked to tenfold rise in child sex imagery</b><br/>A charity says its data highlights how predators took advantage of the worldwide Covid-19 situation."><a href="https://www.bbc.co.uk/news/technology-64415015?at_medium=RSS&amp;at_campaign=KARANGA">Lockdowns linked to tenfold rise in child sex imagery</a></li><li class="ttt" data-tt="<b>Warning over risky electric blankets sold online</b><br/>The consumer rights group Which? found products being sold online that could cause electric shocks."><a href="https://www.bbc.co.uk/news/technology-64418949?at_medium=RSS&amp;at_campaign=KARANGA">Warning over risky electric blankets sold online</a></li></ul></td><td><a href="https://www.bbc.co.uk/news/technology-64397651?at_medium=RSS&amp;at_campaign=KARANGA"><img src="https://ichef.bbci.co.uk/news/1024/branded_news/14B1B/production/_128436748_gettyimages-1246435461.jpg" class="ttt" data-tt="Amazon logo on phone" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr></table>';
+	var box = makeBox(3, 2);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4F0;<a href="https://www.bbc.co.uk/news">BBC News</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function weather() {
+    var weatherLocation = "11609021";
+
+    var data={"copyright":"Contents are strictly for use by timeanddate.com","units":{"temp":"°C","prec":"mm","wind":"mph","baro":"mbar"},"detail":[{"hl":true,"hls":"23 Jan – 29 Jan","date":16749504E5,"ts":"Sun, 29","ds":"Sun, 29 Jan","icon":18,"desc":"Sprinkles late. Cloudy.","temp":8,"templow":3,"cf":4,"wind":13,"wd":251,"hum":79,"pc":44,"rain":1},{"hl":true,"hls":"30 Jan – 5 Feb","date":16750368E5,"ts":"Mon, 30","ds":"Mon, 30 Jan","icon":18,"desc":"Light rain. Breaks of sun late.","temp":8,"templow":3,"cf":4,"wind":11,"wd":296,"hum":72,"pc":42,"rain":0.4 },{"date":16751232E5,"ts":"Tue, 31","ds":"Tue, 31 Jan","icon":18,"desc":"Sprinkles early. Mostly cloudy.","temp":10,"templow":3,"cf":6,"wind":14,"wd":260,"hum":73,"pc":23,"rain":0.2 },{"date":16752096E5,"ts":"Wed, 1","ds":"Wed, 1 Feb","icon":18,"desc":"Sprinkles late. Broken clouds.","temp":7,"templow":5,"cf":2,"wind":17,"wd":295,"hum":70,"pc":18,"rain":0.2 },{"date":1675296E6,"ts":"Thu, 2","ds":"Thu, 2 Feb","icon":18,"desc":"Sprinkles early. Morning clouds.","temp":7,"templow":4,"cf":4,"wind":11,"wd":277,"hum":84,"pc":22,"rain":0.6 },{"date":16753824E5,"ts":"Fri, 3","ds":"Fri, 3 Feb","icon":1,"desc":"Sunny.","temp":11,"templow":5,"cf":8,"wind":11,"wd":320,"hum":73,"pc":0},{"date":16754688E5,"ts":"Sat, 4","ds":"Sat, 4 Feb","icon":4,"desc":"Increasing cloudiness.","temp":9,"templow":3,"cf":6,"wind":8,"wd":320,"hum":80,"pc":4},{"date":16755552E5,"ts":"Sun, 5","ds":"Sun, 5 Feb","icon":1,"desc":"Sunny.","temp":9,"templow":4,"cf":8,"wind":4,"wd":210,"hum":72,"pc":4},{"hl":true,"hls":"6 Feb – 12 Feb","date":16756416E5,"ts":"Mon, 6","ds":"Mon, 6 Feb","icon":1,"desc":"Sunny.","temp":8,"templow":3,"cf":6,"wind":8,"wd":160,"hum":75,"pc":2},{"date":1675728E6,"ts":"Tue, 7","ds":"Tue, 7 Feb","icon":1,"desc":"Sunny.","temp":8,"templow":3,"cf":6,"wind":7,"wd":180,"hum":72,"pc":3},{"date":16758144E5,"ts":"Wed, 8","ds":"Wed, 8 Feb","icon":18,"desc":"Sprinkles late. Cloudy.","temp":8,"templow":3,"cf":6,"wind":7,"wd":30,"hum":75,"pc":47,"rain":0.2 },{"date":16759008E5,"ts":"Thu, 9","ds":"Thu, 9 Feb","icon":4,"desc":"Morning clouds.","temp":9,"templow":3,"cf":5,"wind":15,"wd":50,"hum":65,"pc":44,"rain":0.2 },{"date":16759872E5,"ts":"Fri, 10","ds":"Fri, 10 Feb","icon":1,"desc":"Sunny.","temp":7,"templow":2,"cf":4,"wind":10,"wd":90,"hum":54,"pc":3},{"date":16760736E5,"ts":"Sat, 11","ds":"Sat, 11 Feb","icon":1,"desc":"Sunny.","temp":7,"templow":3,"cf":4,"wind":8,"wd":140,"hum":55,"pc":2},{"date":167616E7,"ts":"Sun, 12","ds":"Sun, 12 Feb","icon":1,"desc":"Sunny.","temp":7,"templow":1,"cf":5,"wind":7,"wd":180,"hum":60,"pc":1}],"grid":{"temp":{"low":1,"high":11,"range":10},"prec":{"high":1},"time":86400000,"sections":15},"conv":{"prec":{"offset":0,"scale":1},"temp":{"offset":0,"scale":1},"wind":{"offset":0,"scale":0.869},"baro":{"offset":0,"scale":1}}};
+
+
+    var box = makeBox(2, 2);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#127746;<a href="https://www.timeanddate.com/weather/@' + weatherLocation + '/ext">Weather</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div');
+    var table = inside
+        .append('table');
+
+    for (var day of data.detail.slice(0, 7)) {
+        var row = table
+            .append('tr');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .style('font-weight', 'bold')
+            .html(day.ds.split(',')[0] + ':&nbsp;');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html(day.templow + '&#xb0;');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html('to');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html(day.temp + '&#xb0;');
+        row
+            .append('td')
+            .style('text-align', 'center')
+            .append('img')
+            .attr('src', 'https://c.tadst.com/gfx/w/svg/wt-' + day.icon + '.svg')
+            .attr('width', '32px')
+            .attr('height', '32px');
+        row
+            .append('td')
+            .style('text-align', 'left')
+            .html(day.desc)
+    }
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function astronomy() {
+	var imageData = {
+		Source:    'https://apod.nasa.gov/apod/image/2301/C2022E3ZTFMountEtna1024.jpg',
+		Title:     'Comet ZTF over Mount Etna',
+		LinkImage: 'https://apod.nasa.gov/apod/image/2301/C2022E3ZTFMountEtna.jpg',
+		LinkPage:  'https://apod.nasa.gov/apod/ap230128.html'
+	}
+
+	if (!imageData.Source.endsWith('/')) {
+		var box = makeBox(2, 2);
+		box
+			.append('div')
+			.attr('class', 'title')
+			.html('&#x1F680;<a href="https://apod.nasa.gov/apod/astropix.html">Astronomy Picture of the Day</a>')
+		box = box
+			.append('div')
+			.attr('class', 'inside');
+		var inside = box
+			.append('div');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', imageData.LinkImage)
+			.append('img')
+			.style('width', 'auto')
+			.style('height', 'auto')
+			.style('max-width', '400px')
+			.style('max-height', '320px')
+			.attr('src', imageData.Source);
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', imageData.LinkPage)
+			.html(imageData.Title);
+	}
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function nature() {
+	var natureData = {
+		Source:   'https://cdn2.outdoorphotographer.com/2023/01/Howling-Coyote-By-eabowe.jpeg',
+		Title:    'Howling Coyote By eabowe',
+		LinkPage: 'https://www.outdoorphotographer.com/blog/photo-of-the-day-by-eabowe/'
+	}
+
+	if (natureData.Source.length > 0) {
+		var box = makeBox(2, 2);
+		box
+			.append('div')
+			.attr('class', 'title')
+			.html('&#x26FA;<a href="https://www.outdoorphotographer.com/blog/category/photo-of-the-day/">Outdoor Photo of the Day</a>')
+		box = box
+			.append('div')
+			.attr('class', 'inside');
+		var inside = box
+			.append('div');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', natureData.Source)
+			.append('img')
+			.style('width', 'auto')
+			.style('height', 'auto')
+			.style('max-width', '400px')
+			.style('max-height', '320px')
+			.attr('src', natureData.Source);
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', natureData.LinkPage)
+			.html(natureData.Title);
+	}
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function tv() {
+
+    var tvData = [{"channelid":505,"offset":0,"event":[{"name":"Breakfast","description":"The latest news, sport, business and weather from the BBC\u0027s Breakfast team. Also in HD. [S]","startTime":1674885600,"duration":14400,"svcId":505,"evtId":5471,"image":"\/ms\/img\/epg\/rb\/8df1-p09xvfpd.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1674900025,"availabilityEnd":1674986425,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001hqyv\u0026ui_id=4.0.0"}},{"name":"Saturday Kitchen Live","description":"Matt Tebbutt and chefs Nisha Katona and Serta\u00e7 Dirik are joined by special guest Robson Green. Also in HD. [S]","startTime":1674900000,"duration":5400,"svcId":505,"evtId":5472,"image":"\/ms\/img\/epg\/rb\/8df1-p08zkqzw.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1674905440,"availabilityEnd":1706441440,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001hqyx\u0026ui_id=4.0.0"}},{"name":"The Great Food Guys","description":"4\/8. Nick Nairn and Dougie Vipond cook hand-dived scallops and black pudding with guest Andrew Cotter and his dogs. Also in HD. [S,AD]","startTime":1674905400,"duration":1800,"svcId":505,"evtId":5473,"image":"\/ms\/img\/epg\/rb\/8df1-p09pxrjy.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1674907200,"availabilityEnd":1677499200,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m000yc08\u0026ui_id=4.0.0"},"seriesNo":5,"episodeNo":4},{"name":"BBC News","description":"The latest national and international news from the BBC. Also in HD. [S]","startTime":1674907200,"duration":600,"svcId":505,"evtId":5475,"image":"\/ms\/img\/epg\/rb\/8df1-p07hp9l7.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1674907920,"availabilityEnd":1674994320,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001hqz1\u0026ui_id=4.0.0"},"episodeNo":44},{"name":"Weather","description":"The latest weather forecast. Also in HD. [S]","startTime":1674907800,"duration":300,"svcId":505,"evtId":5476,"image":"\/ms\/img\/epg\/rb\/8df1-p0dc8npj.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1674908098,"availabilityEnd":1674994498,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001hqz3\u0026ui_id=4.0.0"},"episodeNo":44},{"name":"FA Cup MOTD Live: Accrington...","description":"...Stanley v Leeds United. Live coverage of the FA Cup fourth-round tie between Accrington Stanley and Leeds United. Also in HD. [S]","startTime":1674908100,"duration":8100,"svcId":505,"evtId":5494,"image":"\/ms\/img\/epg\/rb\/8df1-p0dz0zdx.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1674916215,"availabilityEnd":1677508215,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001hxvz\u0026ui_id=4.0.0"},"seriesNo":15},{"name":"Money for Nothing","description":"5\/15. In East Lothian, Sarah Moore repurposes some cider demijohns, and upcycler Sarah Peterson stamps her own unique style on an unwanted sideboard. Also in HD. [S]","startTime":1674916200,"duration":1800,"svcId":505,"evtId":5478,"image":"\/ms\/img\/epg\/rb\/8df1-p08xgkwm.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1674918005,"availabilityEnd":1677510005,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0011g4j\u0026ui_id=4.0.0"},"seriesNo":11,"episodeNo":5},{"name":"Escape to the Country","description":"49\/53. Alistair Appleton gets a lesson in feng shui from today\u0027s buyer, who is looking to move from Greater London to a country cottage in the picturesque Cotswolds. Also in HD. [S,AD]","startTime":1674918000,"duration":2700,"svcId":505,"evtId":5479,"image":"\/ms\/img\/epg\/rb\/8df1-p04qmb0x.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1674918923,"availabilityEnd":1677512699,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m000zh5f\u0026ui_id=4.0.0"},"seriesNo":41,"episodeNo":49},{"name":"Final Score","description":"Jason Mohammad brings you all the goals, action and incident as Fulham face Sunderland, Ipswich host Championship leaders Burnley, and Southampton take on Blackpool. Also in HD. [S]","startTime":1674920700,"duration":5700,"svcId":505,"evtId":5480,"image":"\/ms\/img\/epg\/rb\/8df1-p0dz8sq8.jpg","hasTstv":false},{"name":"BBC News","description":"The latest national and international news from the BBC. Also in HD. [S]","startTime":1674926400,"duration":600,"svcId":505,"evtId":5481,"image":"\/ms\/img\/epg\/rb\/8df1-p07hp9l7.jpg","hasTstv":false,"episodeNo":44},{"name":"BBC London News","description":"The latest news, sport and weather from London. [S]","startTime":1674927000,"duration":300,"svcId":505,"evtId":5482,"image":"\/ms\/img\/epg\/rb\/8df1-p0dkt7rv.jpg","hasTstv":false,"episodeNo":303},{"name":"Weather","description":"The latest weather forecast. Also in HD. [S]","startTime":1674927300,"duration":300,"svcId":505,"evtId":5483,"image":"\/ms\/img\/epg\/rb\/8df1-p0dc8npj.jpg","hasTstv":false,"episodeNo":44},{"name":"MOTD Live: Preston North End v...","description":"...Tottenham Hotspur. Live coverage of the fourth-round match between Preston and Tottenham. Also in HD. [S]","startTime":1674927600,"duration":8400,"svcId":505,"evtId":5484,"image":"\/ms\/img\/epg\/rb\/8df1-p0dyfjln.jpg","hasTstv":false,"seriesNo":15},{"name":"Michael McIntyre\u0027s Big Show","description":"3\/6. Nile Rodgers and Chic perform special renditions of their classic hits in Nile-oke. Also in HD. [S]","startTime":1674936000,"duration":3600,"svcId":505,"evtId":5485,"image":"\/ms\/img\/epg\/rb\/8df1-p0dyy529.jpg","hasTstv":false,"seriesNo":8,"episodeNo":3},{"name":"That\u0027s My Jam","description":"7\/8. Mo Gilligan hosts as Drag Race stars Courtney Act and The Vivienne take on TV legend Ricki Lake and top musical comedian Reggie Watts. Also in HD. [S]","startTime":1674939600,"duration":3600,"svcId":505,"evtId":5486,"image":"\/ms\/img\/epg\/rb\/8df1-p0dyy8k1.jpg","hasTstv":false,"seriesNo":1,"episodeNo":7},{"name":"Not Going Out","description":"4\/6. Recovering from knee surgery, Lee sits by the window day after day spying on his neighbours through a pair of binoculars. Contains adult humour. Also in HD. [S]","startTime":1674943200,"duration":1800,"svcId":505,"evtId":5487,"image":"\/ms\/img\/epg\/rb\/8df1-p0bzjzyy.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1650056400,"availabilityEnd":1682802000,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0016dk0\u0026ui_id=4.0.0"},"seriesNo":20,"episodeNo":4},{"name":"BBC News","description":"The latest national and international news from the BBC. Also in HD. [S]","startTime":1674945000,"duration":900,"svcId":505,"evtId":5488,"image":"\/ms\/img\/epg\/rb\/8df1-p07hp9l7.jpg","hasTstv":false,"episodeNo":44},{"name":"Weather","description":"The latest weather forecast. Also in HD. [S]","startTime":1674945900,"duration":300,"svcId":505,"evtId":5489,"image":"\/ms\/img\/epg\/rb\/8df1-p0dc8npj.jpg","hasTstv":false,"episodeNo":44},{"name":"MOTD: FA Cup Highlights","description":"All the goals and highlights from the FA Cup fourth-round ties that have taken place so far this weekend, including Manchester City\u0027s game against Arsenal on Friday. Also in HD. [S]","startTime":1674946200,"duration":4800,"svcId":505,"evtId":5490,"image":"\/ms\/img\/epg\/rb\/8df1-p09xgrj8.jpg","hasTstv":false,"seriesNo":15},{"name":"The Eiger Sanction","description":"Ex-hitman Jonathan Hemlock accepts one last government-sanctioned mission. Contains some strong language. Also in HD. [1975] [S]","startTime":1674951000,"duration":7500,"svcId":505,"evtId":5491,"image":"\/ms\/img\/epg\/rb\/8df1-p0b1tq0b.jpg","hasTstv":false},{"name":"Weather for the Week Ahead","description":"Detailed weather forecast. Also in HD. [S]","startTime":1674958500,"duration":300,"svcId":505,"evtId":5492,"image":"\/ms\/img\/epg\/rb\/8df1-p0dc8npj.jpg","hasTstv":false},{"name":"BBC News","description":"BBC One joins the BBC\u0027s rolling news channel for a night of news. Also in HD. [S]","startTime":1674958800,"duration":13200,"svcId":505,"evtId":5493,"image":"\/ms\/img\/epg\/rb\/8df1-p0bvs4dq.jpg","hasTstv":false,"episodeNo":304}]},{"channelid":1500,"offset":0,"event":[{"name":"Come Dine with Me","description":"Leeds area. Darren plans to put a fancy twist on an apparently basic menu. But Billy is concerned about how much mustard Darren is using. (Ep5\/5)  [AD,S]","startTime":1674879900,"duration":1500,"svcId":1500,"evtId":4159,"image":"\/ms\/img\/epg\/rb\/5d52-game.genre.l.png","hasTstv":false},{"name":"Jamie: Keep Cooking Family...","description":"...Favourites: Jamie Oliver puts his twist on the crowd-pleasing cauliflower cheese to create a pasta dish, and offers a healthy take on the classic chicken Kiev by using filo pastry. (Ep2)  [AD,S]","startTime":1674881400,"duration":1500,"svcId":1500,"evtId":4882,"image":"\/ms\/img\/epg\/rb\/5d52-7132348.l.png","hasTstv":false,"seriesNo":1,"episodeNo":2},{"name":"Sunday Brunch Best Bits","description":"Tim Lovejoy and Simon Rimmer host highlights from the food and chat show, featuring an interview with American music superstar John Legend.  [S]","startTime":1674882900,"duration":600,"svcId":1500,"evtId":4881,"image":"\/ms\/img\/epg\/rb\/5d52-7132362.l.png","hasTstv":false},{"name":"Building the Dream","description":"Charlie Luxton\u0027s in Hampshire with Ryan and Jenny, who plan to bring a derelict barn back from the brink. But keeping the rickety shell upright is easier said than done... (S10 Ep3)  [AD,S]","startTime":1674883500,"duration":3000,"svcId":1500,"evtId":4785,"image":"\/ms\/img\/epg\/rb\/5d52-407330612.l.png","hasTstv":false,"seriesNo":10,"episodeNo":3},{"name":"The King of Queens","description":"Crappy Birthday: When Carrie tells Doug to ignore her 30th birthday, he\u0027s more than happy to play along, because there\u0027s a huge ultimate fighting tournament on TV.  [AD,S]","startTime":1674886500,"duration":1500,"svcId":1500,"evtId":4935,"image":"\/ms\/img\/epg\/rb\/5d52-comedy.genre.l.png","hasTstv":false,"seriesNo":1,"episodeNo":15},{"name":"The King of Queens","description":"S\u0027ain\u0027t Valentine\u0027s: Arthur meets a stranger at a dance for singles.  [AD,S]","startTime":1674888000,"duration":1500,"svcId":1500,"evtId":4198,"image":"\/ms\/img\/epg\/rb\/5d52-comedy.genre.l.png","hasTstv":false,"seriesNo":1,"episodeNo":16},{"name":"The Simpsons","description":"Bart vs. Thanksgiving: After fighting with Lisa on Thanksgiving, Bart runs away from home and ends up at a homeless shelter - with a TV crew in attendance. (S2 Ep7\/22)  [AD,S]","startTime":1674889500,"duration":1500,"svcId":1500,"evtId":4199,"image":"\/ms\/img\/epg\/rb\/5d52-52046.l.png","hasTstv":false,"seriesNo":2,"episodeNo":7},{"name":"The Simpsons","description":"Bart the Daredevil: After the Simpsons\u0027 car is attacked by the Truck-o-Saurus at the Springfield Speedway, Bart is enthralled and inspired by daredevil Captain Murdock\u0027s stunts. (S2 Ep8\/22)  [AD,S]","startTime":1674891000,"duration":1500,"svcId":1500,"evtId":4200,"image":"\/ms\/img\/epg\/rb\/5d52-245764.l.png","hasTstv":false,"seriesNo":2,"episodeNo":8},{"name":"The Simpsons","description":"Itchy \u0026 Scratchy \u0026 Marge: Marge campaigns against The Itchy \u0026 Scratchy Show after it inspires Maggie to hit Homer over the head with a hammer. (S2 Ep9\/22)  [AD,S]","startTime":1674892500,"duration":1500,"svcId":1500,"evtId":4201,"image":"\/ms\/img\/epg\/rb\/5d52-116727.l.png","hasTstv":false,"seriesNo":2,"episodeNo":9},{"name":"The Simpsons","description":"Bart Gets Hit by a Car: Disreputable lawyer Lionel Hutz encourages Homer to sue Mr Burns after he hits Bart with his car. (S2 Ep10\/22)  [AD,S]","startTime":1674894000,"duration":1800,"svcId":1500,"evtId":4202,"image":"\/ms\/img\/epg\/rb\/5d52-35170.l.png","hasTstv":false,"seriesNo":2,"episodeNo":10},{"name":"The Simpsons","description":"One Fish, Two Fish, Blowfish, Blue Fish: Homer is told that he has 24 hours to live after eating incorrectly prepared blowfish at the Happy Sumo restaurant. (S2 Ep11\/22)  [AD,S]","startTime":1674895800,"duration":1800,"svcId":1500,"evtId":4203,"image":"\/ms\/img\/epg\/rb\/5d52-322591.l.png","hasTstv":false,"seriesNo":2,"episodeNo":11},{"name":"The Simpsons","description":"The Way We Was: The Simpsons\u0027 TV breaks down, so Marge regales the kids with the tale of how she and Homer met and fell in love, despite Homer\u0027s clumsy courtship techniques. (S2 Ep12\/22)  [AD,S]","startTime":1674897600,"duration":1800,"svcId":1500,"evtId":4204,"image":"\/ms\/img\/epg\/rb\/5d52-120112.l.png","hasTstv":false,"seriesNo":2,"episodeNo":12},{"name":"The Simpsons","description":"Lisa\u0027s First Word: The family try to get Maggie to say her first word. But Homer is glad that she hasn\u0027t spoken yet, because all Lisa and Bart do is talk back to him. (S4 Ep10\/22)  [AD,S]","startTime":1674899400,"duration":1800,"svcId":1500,"evtId":4205,"image":"\/ms\/img\/epg\/rb\/5d52-142172.l.png","hasTstv":false,"seriesNo":4,"episodeNo":10},{"name":"Formula E Diriyah ePrix Highlights","description":"Formula E highlights from the first of two night races surrounded by historic deserts in Diriyah, Saudi Arabia. Can Brit Jake Dennis build on his dominant performance in Mexico City?  [S]","startTime":1674901200,"duration":3300,"svcId":1500,"evtId":4936,"image":"\/ms\/img\/epg\/rb\/5d52-7160312.l.png","hasTstv":false},{"name":"Alvin and the Chipmunks: The...","description":"...Road Chip: (2015) Family comedy. When Alvin, Simon and Theodore discover that Dave (Jason Lee) has an engagement ring, they set out to sabotage his proposal.  [S]","startTime":1674904500,"duration":6300,"svcId":1500,"evtId":4209,"image":"\/ms\/img\/epg\/rb\/5d52-201761202.l.png","hasTstv":false},{"name":"Four in a Bed","description":"The competition begins at B\u0026B at No.3 in Market Bosworth. Hosts Mac and Jo take pride in their Tudor architecture, but they\u0027ve got a breakfast bombshell for their guests.  [S]","startTime":1674910800,"duration":1800,"svcId":1500,"evtId":4210,"image":"\/ms\/img\/epg\/rb\/5d52-reality.genre.l.png","hasTstv":false},{"name":"Four in a Bed","description":"On day two, a topsy-turvy breakfast at The Bull Hotel in Buckinghamshire leaves some of the guests happier than others...  [S]","startTime":1674912600,"duration":1800,"svcId":1500,"evtId":4211,"image":"\/ms\/img\/epg\/rb\/5d52-reality.genre.l.png","hasTstv":false},{"name":"Four in a Bed","description":"At The Chequers Inn in Battle, Shaun and Kelly aim to please with their historic surroundings and home-made ingredients. But one guest delivers a shock in their feedback.  [S]","startTime":1674914400,"duration":1800,"svcId":1500,"evtId":4212,"image":"\/ms\/img\/epg\/rb\/5d52-reality.genre.l.png","hasTstv":false},{"name":"Four in a Bed","description":"The last visit is to Hastings House in East Sussex, where Ian and Bev aim to provide an upmarket experience. But according to two guests, that doesn\u0027t extend to their towels...  [S]","startTime":1674916200,"duration":2100,"svcId":1500,"evtId":4213,"image":"\/ms\/img\/epg\/rb\/5d52-reality.genre.l.png","hasTstv":false},{"name":"Four in a Bed","description":"The B\u0026Bers sharpen their knives on payment day as they debate bad breakfasts, miserable mini bars and terrible towels, before the winning B\u0026B is crowned.  [S]","startTime":1674918300,"duration":1800,"svcId":1500,"evtId":4214,"image":"\/ms\/img\/epg\/rb\/5d52-reality.genre.l.png","hasTstv":false},{"name":"Location, Location, Location","description":"Kirstie and Phil help more house-hunters make life-changing moves. In Northumberland, Lauren and Noel are set on character, while solo buyer Charlotte keeps getting outbid. (S37 Ep1)  [S]","startTime":1674920100,"duration":3600,"svcId":1500,"evtId":4937,"image":"\/ms\/img\/epg\/rb\/5d52-5942916.l.png","hasTstv":false,"seriesNo":37,"episodeNo":1},{"name":"A Lake District Farm Shop","description":"The service station hatches an ingenious plan to weave leftover fleece into bespoke tweed goods. The caf\u00e9 trials a new ketchup. And a luxury Michelin butter\u0027s on its way. Or is it? (S2 Ep3)  [AD,S]","startTime":1674923700,"duration":3600,"svcId":1500,"evtId":4215,"image":"\/ms\/img\/epg\/rb\/5d52-415435550.l.png","hasTstv":false,"seriesNo":2,"episodeNo":3},{"name":"Channel 4 News","description":"Channel 4\u0027s flagship news programme. Including the weather.  [S]","startTime":1674927300,"duration":1800,"svcId":1500,"evtId":4216,"image":"\/ms\/img\/epg\/rb\/5d52-2023390.l.png","hasTstv":false},{"name":"New: The Welsh Valley That Won...","description":"...the Lottery: What would you spend your share of \u00a33.7m on? We find out what the residents of Rhymney Valley did with their life-changing windfall and the impact it\u0027s had on their lives.  [AD,S]","startTime":1674929100,"duration":3300,"svcId":1500,"evtId":4939,"image":"\/ms\/img\/epg\/rb\/5d52-documen.genre.l.png","hasTstv":false},{"name":"Knight and Day","description":"(2010) Action-comedy starring Tom Cruise and Cameron Diaz. A CIA assassin kidnaps a woman and takes her on an impromptu round-the-world trip in order to save both their lives. Violence.  [AD,S]","startTime":1674932400,"duration":7200,"svcId":1500,"evtId":4938,"image":"\/ms\/img\/epg\/rb\/5d52-30930698.l.png","hasTstv":false},{"name":"Hustlers","description":"(2019) Network premiere. Fact-based caper with Jennifer Lopez. Some high-end strippers enjoy lucrative success by drugging rich men into spending their money. Strong language\/nudity\/drugs. [AD,S]","startTime":1674939600,"duration":7800,"svcId":1500,"evtId":4218,"image":"\/ms\/img\/epg\/rb\/5d52-389447076.l.png","hasTstv":false},{"name":"Get Out","description":"(2017) Oscar-winning horror starring Daniel Kaluuya. A Black photographer\u0027s first visit to his White girlfriend\u0027s parents goes badly. Violence\/strong language, some that may offend.  [AD,S]","startTime":1674947400,"duration":6900,"svcId":1500,"evtId":4219,"image":"\/ms\/img\/epg\/rb\/5d52-252913631.l.png","hasTstv":false},{"name":"Ramsay\u0027s Kitchen Nightmares USA","description":"Gordon Ramsay travels to Oakhurst, New Jersey, to help the overwhelmed owner of Mike and Nellie\u0027s restaurant, who lost his way when his father and business partner died. (S5 Ep8)  [S,SL]","startTime":1674954300,"duration":3000,"svcId":1500,"evtId":4941,"image":"\/ms\/img\/epg\/rb\/5d52-380147693.l.png","hasTstv":false,"seriesNo":4,"episodeNo":3},{"name":"Couples Come Dine with Me","description":"In west London, Queen and Shawn take inspiration from their Thai and West Indian heritage. Paul and Suzy plan a fancy French feast. And Charlotte and Kevin serve up Japanese cuisine.  [S]","startTime":1674957300,"duration":3000,"svcId":1500,"evtId":4942,"image":"\/ms\/img\/epg\/rb\/5d52-4238804.l.png","hasTstv":false,"seriesNo":3,"episodeNo":45},{"name":"Hollyoaks Omnibus","description":"Mercedes goes AWOL during the week of Bobby\u0027s sentencing as her son finally faces the music for his crimes. Imran grows close to a friend at the clinic. Maxine plans a women\u0027s rally.  [AD,S,SL]","startTime":1674960300,"duration":6900,"svcId":1500,"evtId":4940,"image":"\/ms\/img\/epg\/rb\/5d52-7160836.l.png","hasTstv":false}]}];
+
+    var box = makeBox(2, 3);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#x1F4FA;<a href="https://www.freesat.co.uk/tv-guide">TV</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div')
+        .style('text-align', 'left');
+
+    var channels = { 505: "BBC 1", 700: "BBC 2", 1500: "Channel 4" };
+
+    var today = new Date();
+    var primeTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 18, 0, 0);
+    var unixStart = (+primeTime) / 1000;
+    var unixEnd = unixStart + 60 * 60 * 6;
+    var first = true;
+
+    for (var channel of tvData) {
+        if (!first) {
+            first = false;
+        } else {
+            inside
+                .append('br');
+        }
+
+        inside
+            .append('p')
+            .append('b')
+            .text(channels[channel.channelid]);
+        var list = inside
+            .append('ul');
+        for (var event of channel.event) {
+            console.log(event);
+            if (+event.startTime >= unixStart && +event.startTime < unixEnd) {
+                list
+                    .append('li')
+                    .attr('class', 'ttt')
+                    .attr('data-tt', '<img src=\"https://fdp-sv15-image-v1-0.gcprod1.freetime-platform.net/270x180-0' + event.image + '\" /><br/><b>' + event.name + '</b><br/>' + (+event.duration / 60) + ' minutes<br/>' + event.description)
+                    .html('<span class="code">' + new Date(+event.startTime * 1000).toLocaleTimeString('en-GB').substr(0, 5) + "</span> - " + event.name);
+            }
+        }
+    }
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function vanguard() {
+
+	var data = [{ number: 175.19, tooltip: "Fri, Jan 27, 2023<br/>£175.19"},
+{ number: 174.75, tooltip: "Thu, Jan 26, 2023<br/>£174.75"},
+{ number: 173.38, tooltip: "Wed, Jan 25, 2023<br/>£173.38"},
+{ number: 173.92, tooltip: "Tue, Jan 24, 2023<br/>£173.92"},
+{ number: 173.08, tooltip: "Mon, Jan 23, 2023<br/>£173.08"},
+{ number: 171.43, tooltip: "Fri, Jan 20, 2023<br/>£171.43"},
+{ number: 169.21, tooltip: "Thu, Jan 19, 2023<br/>£169.21"},
+{ number: 170.40, tooltip: "Wed, Jan 18, 2023<br/>£170.40"},
+{ number: 173.12, tooltip: "Tue, Jan 17, 2023<br/>£173.12"},
+{ number: 174.19, tooltip: "Mon, Jan 16, 2023<br/>£174.19"},
+{ number: 174.02, tooltip: "Fri, Jan 13, 2023<br/>£174.02"},
+{ number: 173.76, tooltip: "Thu, Jan 12, 2023<br/>£173.76"},
+{ number: 172.94, tooltip: "Wed, Jan 11, 2023<br/>£172.94"},
+{ number: 170.92, tooltip: "Tue, Jan 10, 2023<br/>£170.92"},
+{ number: 169.81, tooltip: "Mon, Jan 09, 2023<br/>£169.81"},
+{ number: 170.51, tooltip: "Fri, Jan 06, 2023<br/>£170.51"},
+{ number: 169.63, tooltip: "Thu, Jan 05, 2023<br/>£169.63"},
+{ number: 168.85, tooltip: "Wed, Jan 04, 2023<br/>£168.85"},
+{ number: 167.92, tooltip: "Tue, Jan 03, 2023<br/>£167.92"},
+{ number: 167.47, tooltip: "Fri, Dec 30, 2022<br/>£167.47"},
+{ number: 167.65, tooltip: "Thu, Dec 29, 2022<br/>£167.65"},
+].reverse();
+
+	var vanguardDates = {
+		"Latest":      "Fri, Jan 27, 2023",
+		"vs Day":      "Thu, Jan 26, 2023",
+		"vs Week":     "Fri, Jan 20, 2023",
+		"vs Month":    "Thu, Dec 29, 2022",
+		"vs Year":     ""
+	}
+
+	var vanguardValues = {
+		"Latest":      "£175.19/share",
+		'vs Day':      "+0.25%",
+		'vs Week':     "+2.19%",
+		'vs Month':    "+4.50%",
+		'vs Year':     "+2.20%"
+	};
+
+	var box = makeBox(3, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#128200;<a href="https://www.vanguardinvestor.co.uk">Vanguard</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');		
+	var insideLeft = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('left', 0)
+		.style('width', '37%');
+	insideLeft
+		.append('p')
+		.append('a')
+		.attr('href', 'https://www.vanguardinvestor.co.uk/investments/vanguard-ftse-global-all-cap-index-fund-gbp-acc')
+		.html('FTSE Global All Cap<br/>Index Fund - Acc');
+	insideLeft
+		.append('p')
+		.html('&nbsp;');
+	var table = insideLeft
+		.append('table');	
+	
+	for (var item of Object.keys(vanguardValues)) {
+		var row = table
+			.append('tr')
+			.style('font-weight', item.startsWith("Latest") ? "bold" : "normal");
+		if (vanguardDates[item].length > 0) {
+			row
+				.attr('class', 'ttt')
+				.attr('data-tt', vanguardDates[item])
+        }
+		row
+			.append('td')
+			.style('text-align', 'left')
+			.html(item + ':&nbsp;');
+		row
+			.append('td')
+			.style('text-align', 'right')
+			.attr('class', 'code')
+			.html(vanguardValues[item]);
+	}
+
+	var insideRight = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('right', 0)
+		.style('width', '66%');
+	var chart = createLineChart(400, 150, insideRight, data, 2);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function crypto() {
+
+	var data = [
+{ day:'2022-01-29', number: 28184.035156, tooltip: '2022-01-29<br/>£28,184.04' },
+{ day:'2022-01-30', number: 28460.949219, tooltip: '2022-01-30<br/>£28,460.95' },
+{ day:'2022-01-31', number: 28292.927734, tooltip: '2022-01-31<br/>£28,292.93' },
+{ day:'2022-02-01', number: 28621.966797, tooltip: '2022-02-01<br/>£28,621.97' },
+{ day:'2022-02-02', number: 28646.753906, tooltip: '2022-02-02<br/>£28,646.75' },
+{ day:'2022-02-03', number: 27237.853516, tooltip: '2022-02-03<br/>£27,237.85' },
+{ day:'2022-02-04', number: 27319.642578, tooltip: '2022-02-04<br/>£27,319.64' },
+{ day:'2022-02-05', number: 30655.982422, tooltip: '2022-02-05<br/>£30,655.98' },
+{ day:'2022-02-06', number: 30611.396484, tooltip: '2022-02-06<br/>£30,611.40' },
+{ day:'2022-02-07', number: 31335.896484, tooltip: '2022-02-07<br/>£31,335.90' },
+{ day:'2022-02-08', number: 32395.783203, tooltip: '2022-02-08<br/>£32,395.78' },
+{ day:'2022-02-09', number: 32550.556641, tooltip: '2022-02-09<br/>£32,550.56' },
+{ day:'2022-02-10', number: 32771.207031, tooltip: '2022-02-10<br/>£32,771.21' },
+{ day:'2022-02-11', number: 32157.671875, tooltip: '2022-02-11<br/>£32,157.67' },
+{ day:'2022-02-12', number: 31253.751953, tooltip: '2022-02-12<br/>£31,253.75' },
+{ day:'2022-02-13', number: 31142.160156, tooltip: '2022-02-13<br/>£31,142.16' },
+{ day:'2022-02-14', number: 31069.033203, tooltip: '2022-02-14<br/>£31,069.03' },
+{ day:'2022-02-15', number: 31470.503906, tooltip: '2022-02-15<br/>£31,470.50' },
+{ day:'2022-02-16', number: 32923.019531, tooltip: '2022-02-16<br/>£32,923.02' },
+{ day:'2022-02-17', number: 32351.041016, tooltip: '2022-02-17<br/>£32,351.04' },
+{ day:'2022-02-18', number: 29785.460938, tooltip: '2022-02-18<br/>£29,785.46' },
+{ day:'2022-02-19', number: 29443.462891, tooltip: '2022-02-19<br/>£29,443.46' },
+{ day:'2022-02-20', number: 29511.195313, tooltip: '2022-02-20<br/>£29,511.20' },
+{ day:'2022-02-21', number: 28270.222656, tooltip: '2022-02-21<br/>£28,270.22' },
+{ day:'2022-02-22', number: 27266.230469, tooltip: '2022-02-22<br/>£27,266.23' },
+{ day:'2022-02-23', number: 28174.828125, tooltip: '2022-02-23<br/>£28,174.83' },
+{ day:'2022-02-24', number: 27521.945313, tooltip: '2022-02-24<br/>£27,521.95' },
+{ day:'2022-02-25', number: 28668.007813, tooltip: '2022-02-25<br/>£28,668.01' },
+{ day:'2022-02-26', number: 29247.117188, tooltip: '2022-02-26<br/>£29,247.12' },
+{ day:'2022-02-27', number: 29161.802734, tooltip: '2022-02-27<br/>£29,161.80' },
+{ day:'2022-02-28', number: 28197.453125, tooltip: '2022-02-28<br/>£28,197.45' },
+{ day:'2022-03-01', number: 32181.675781, tooltip: '2022-03-01<br/>£32,181.68' },
+{ day:'2022-03-02', number: 33262.445313, tooltip: '2022-03-02<br/>£33,262.45' },
+{ day:'2022-03-03', number: 32788.269531, tooltip: '2022-03-03<br/>£32,788.27' },
+{ day:'2022-03-04', number: 31802.548828, tooltip: '2022-03-04<br/>£31,802.55' },
+{ day:'2022-03-05', number: 29596.267578, tooltip: '2022-03-05<br/>£29,596.27' },
+{ day:'2022-03-06', number: 29789.613281, tooltip: '2022-03-06<br/>£29,789.61' },
+{ day:'2022-03-07', number: 29087.216797, tooltip: '2022-03-07<br/>£29,087.22' },
+{ day:'2022-03-08', number: 29023.037109, tooltip: '2022-03-08<br/>£29,023.04' },
+{ day:'2022-03-09', number: 29577.777344, tooltip: '2022-03-09<br/>£29,577.78' },
+{ day:'2022-03-10', number: 31834.939453, tooltip: '2022-03-10<br/>£31,834.94' },
+{ day:'2022-03-11', number: 30100.939453, tooltip: '2022-03-11<br/>£30,100.94' },
+{ day:'2022-03-12', number: 29774.906250, tooltip: '2022-03-12<br/>£29,774.91' },
+{ day:'2022-03-13', number: 29822.990234, tooltip: '2022-03-13<br/>£29,822.99' },
+{ day:'2022-03-14', number: 29001.896484, tooltip: '2022-03-14<br/>£29,001.90' },
+{ day:'2022-03-15', number: 30488.083984, tooltip: '2022-03-15<br/>£30,488.08' },
+{ day:'2022-03-16', number: 30155.472656, tooltip: '2022-03-16<br/>£30,155.47' },
+{ day:'2022-03-17', number: 31307.976563, tooltip: '2022-03-17<br/>£31,307.98' },
+{ day:'2022-03-18', number: 31116.523438, tooltip: '2022-03-18<br/>£31,116.52' },
+{ day:'2022-03-19', number: 31708.261719, tooltip: '2022-03-19<br/>£31,708.26' },
+{ day:'2022-03-20', number: 32009.269531, tooltip: '2022-03-20<br/>£32,009.27' },
+{ day:'2022-03-21', number: 31343.019531, tooltip: '2022-03-21<br/>£31,343.02' },
+{ day:'2022-03-22', number: 31189.457031, tooltip: '2022-03-22<br/>£31,189.46' },
+{ day:'2022-03-23', number: 31934.226563, tooltip: '2022-03-23<br/>£31,934.23' },
+{ day:'2022-03-24', number: 32476.046875, tooltip: '2022-03-24<br/>£32,476.05' },
+{ day:'2022-03-25', number: 33320.949219, tooltip: '2022-03-25<br/>£33,320.95' },
+{ day:'2022-03-26', number: 33623.843750, tooltip: '2022-03-26<br/>£33,623.84' },
+{ day:'2022-03-27', number: 33740.445313, tooltip: '2022-03-27<br/>£33,740.45' },
+{ day:'2022-03-28', number: 35543.449219, tooltip: '2022-03-28<br/>£35,543.45' },
+{ day:'2022-03-29', number: 35956.144531, tooltip: '2022-03-29<br/>£35,956.14' },
+{ day:'2022-03-30', number: 36246.105469, tooltip: '2022-03-30<br/>£36,246.11' },
+{ day:'2022-03-31', number: 35822.531250, tooltip: '2022-03-31<br/>£35,822.53' },
+{ day:'2022-04-01', number: 34651.730469, tooltip: '2022-04-01<br/>£34,651.73' },
+{ day:'2022-04-02', number: 35295.007813, tooltip: '2022-04-02<br/>£35,295.01' },
+{ day:'2022-04-03', number: 34968.273438, tooltip: '2022-04-03<br/>£34,968.27' },
+{ day:'2022-04-04', number: 35441.828125, tooltip: '2022-04-04<br/>£35,441.83' },
+{ day:'2022-04-05', number: 35556.687500, tooltip: '2022-04-05<br/>£35,556.69' },
+{ day:'2022-04-06', number: 34828.179688, tooltip: '2022-04-06<br/>£34,828.18' },
+{ day:'2022-04-07', number: 33060.261719, tooltip: '2022-04-07<br/>£33,060.26' },
+{ day:'2022-04-08', number: 33288.609375, tooltip: '2022-04-08<br/>£33,288.61' },
+{ day:'2022-04-09', number: 32436.359375, tooltip: '2022-04-09<br/>£32,436.36' },
+{ day:'2022-04-10', number: 32819.171875, tooltip: '2022-04-10<br/>£32,819.17' },
+{ day:'2022-04-11', number: 32387.609375, tooltip: '2022-04-11<br/>£32,387.61' },
+{ day:'2022-04-12', number: 30357.187500, tooltip: '2022-04-12<br/>£30,357.19' },
+{ day:'2022-04-13', number: 30858.998047, tooltip: '2022-04-13<br/>£30,859.00' },
+{ day:'2022-04-14', number: 31375.035156, tooltip: '2022-04-14<br/>£31,375.04' },
+{ day:'2022-04-15', number: 30565.345703, tooltip: '2022-04-15<br/>£30,565.35' },
+{ day:'2022-04-16', number: 31050.787109, tooltip: '2022-04-16<br/>£31,050.79' },
+{ day:'2022-04-17', number: 30947.769531, tooltip: '2022-04-17<br/>£30,947.77' },
+{ day:'2022-04-18', number: 30423.462891, tooltip: '2022-04-18<br/>£30,423.46' },
+{ day:'2022-04-19', number: 31384.085938, tooltip: '2022-04-19<br/>£31,384.09' },
+{ day:'2022-04-20', number: 31892.513672, tooltip: '2022-04-20<br/>£31,892.51' },
+{ day:'2022-04-21', number: 31661.082031, tooltip: '2022-04-21<br/>£31,661.08' },
+{ day:'2022-04-22', number: 31115.068359, tooltip: '2022-04-22<br/>£31,115.07' },
+{ day:'2022-04-23', number: 30950.384766, tooltip: '2022-04-23<br/>£30,950.38' },
+{ day:'2022-04-24', number: 30747.613281, tooltip: '2022-04-24<br/>£30,747.61' },
+{ day:'2022-04-25', number: 30769.845703, tooltip: '2022-04-25<br/>£30,769.85' },
+{ day:'2022-04-26', number: 31754.277344, tooltip: '2022-04-26<br/>£31,754.28' },
+{ day:'2022-04-27', number: 30298.359375, tooltip: '2022-04-27<br/>£30,298.36' },
+{ day:'2022-04-28', number: 31293.429688, tooltip: '2022-04-28<br/>£31,293.43' },
+{ day:'2022-04-29', number: 31904.371094, tooltip: '2022-04-29<br/>£31,904.37' },
+{ day:'2022-04-30', number: 30721.615234, tooltip: '2022-04-30<br/>£30,721.62' },
+{ day:'2022-05-01', number: 29994.265625, tooltip: '2022-05-01<br/>£29,994.27' },
+{ day:'2022-05-02', number: 30608.779297, tooltip: '2022-05-02<br/>£30,608.78' },
+{ day:'2022-05-03', number: 30823.296875, tooltip: '2022-05-03<br/>£30,823.30' },
+{ day:'2022-05-04', number: 30201.806641, tooltip: '2022-05-04<br/>£30,201.81' },
+{ day:'2022-05-05', number: 31462.492188, tooltip: '2022-05-05<br/>£31,462.49' },
+{ day:'2022-05-06', number: 29584.083984, tooltip: '2022-05-06<br/>£29,584.08' },
+{ day:'2022-05-07', number: 29209.060547, tooltip: '2022-05-07<br/>£29,209.06' },
+{ day:'2022-05-08', number: 28771.794922, tooltip: '2022-05-08<br/>£28,771.79' },
+{ day:'2022-05-09', number: 27633.435547, tooltip: '2022-05-09<br/>£27,633.44' },
+{ day:'2022-05-10', number: 24540.398438, tooltip: '2022-05-10<br/>£24,540.40' },
+{ day:'2022-05-11', number: 25201.671875, tooltip: '2022-05-11<br/>£25,201.67' },
+{ day:'2022-05-12', number: 23653.406250, tooltip: '2022-05-12<br/>£23,653.41' },
+{ day:'2022-05-13', number: 23788.015625, tooltip: '2022-05-13<br/>£23,788.02' },
+{ day:'2022-05-14', number: 23883.730469, tooltip: '2022-05-14<br/>£23,883.73' },
+{ day:'2022-05-15', number: 24540.220703, tooltip: '2022-05-15<br/>£24,540.22' },
+{ day:'2022-05-16', number: 25538.953125, tooltip: '2022-05-16<br/>£25,538.95' },
+{ day:'2022-05-17', number: 24228.656250, tooltip: '2022-05-17<br/>£24,228.66' },
+{ day:'2022-05-18', number: 24364.470703, tooltip: '2022-05-18<br/>£24,364.47' },
+{ day:'2022-05-19', number: 23265.931641, tooltip: '2022-05-19<br/>£23,265.93' },
+{ day:'2022-05-20', number: 24320.550781, tooltip: '2022-05-20<br/>£24,320.55' },
+{ day:'2022-05-21', number: 23374.312500, tooltip: '2022-05-21<br/>£23,374.31' },
+{ day:'2022-05-22', number: 23567.669922, tooltip: '2022-05-22<br/>£23,567.67' },
+{ day:'2022-05-23', number: 24241.333984, tooltip: '2022-05-23<br/>£24,241.33' },
+{ day:'2022-05-24', number: 23156.871094, tooltip: '2022-05-24<br/>£23,156.87' },
+{ day:'2022-05-25', number: 23643.689453, tooltip: '2022-05-25<br/>£23,643.69' },
+{ day:'2022-05-26', number: 23489.984375, tooltip: '2022-05-26<br/>£23,489.98' },
+{ day:'2022-05-27', number: 23183.226563, tooltip: '2022-05-27<br/>£23,183.23' },
+{ day:'2022-05-28', number: 22664.023438, tooltip: '2022-05-28<br/>£22,664.02' },
+{ day:'2022-05-29', number: 22978.570313, tooltip: '2022-05-29<br/>£22,978.57' },
+{ day:'2022-05-30', number: 23322.267578, tooltip: '2022-05-30<br/>£23,322.27' },
+{ day:'2022-05-31', number: 25086.566406, tooltip: '2022-05-31<br/>£25,086.57' },
+{ day:'2022-06-01', number: 25213.021484, tooltip: '2022-06-01<br/>£25,213.02' },
+{ day:'2022-06-02', number: 23870.265625, tooltip: '2022-06-02<br/>£23,870.27' },
+{ day:'2022-06-03', number: 24222.423828, tooltip: '2022-06-03<br/>£24,222.42' },
+{ day:'2022-06-04', number: 23786.804688, tooltip: '2022-06-04<br/>£23,786.80' },
+{ day:'2022-06-05', number: 23890.082031, tooltip: '2022-06-05<br/>£23,890.08' },
+{ day:'2022-06-06', number: 23945.455078, tooltip: '2022-06-06<br/>£23,945.46' },
+{ day:'2022-06-07', number: 25050.146484, tooltip: '2022-06-07<br/>£25,050.15' },
+{ day:'2022-06-08', number: 24747.826172, tooltip: '2022-06-08<br/>£24,747.83' },
+{ day:'2022-06-09', number: 24094.177734, tooltip: '2022-06-09<br/>£24,094.18' },
+{ day:'2022-06-10', number: 24102.535156, tooltip: '2022-06-10<br/>£24,102.54' },
+{ day:'2022-06-11', number: 23617.273438, tooltip: '2022-06-11<br/>£23,617.27' },
+{ day:'2022-06-12', number: 23036.996094, tooltip: '2022-06-12<br/>£23,037.00' },
+{ day:'2022-06-13', number: 21780.376953, tooltip: '2022-06-13<br/>£21,780.38' },
+{ day:'2022-06-14', number: 18520.273438, tooltip: '2022-06-14<br/>£18,520.27' },
+{ day:'2022-06-15', number: 18479.642578, tooltip: '2022-06-15<br/>£18,479.64' },
+{ day:'2022-06-16', number: 18545.103516, tooltip: '2022-06-16<br/>£18,545.10' },
+{ day:'2022-06-17', number: 16505.623047, tooltip: '2022-06-17<br/>£16,505.62' },
+{ day:'2022-06-18', number: 16754.039063, tooltip: '2022-06-18<br/>£16,754.04' },
+{ day:'2022-06-19', number: 15550.195313, tooltip: '2022-06-19<br/>£15,550.20' },
+{ day:'2022-06-20', number: 16808.402344, tooltip: '2022-06-20<br/>£16,808.40' },
+{ day:'2022-06-21', number: 16810.298828, tooltip: '2022-06-21<br/>£16,810.30' },
+{ day:'2022-06-22', number: 16894.195313, tooltip: '2022-06-22<br/>£16,894.20' },
+{ day:'2022-06-23', number: 16313.728516, tooltip: '2022-06-23<br/>£16,313.73' },
+{ day:'2022-06-24', number: 17197.839844, tooltip: '2022-06-24<br/>£17,197.84' },
+{ day:'2022-06-25', number: 17313.056641, tooltip: '2022-06-25<br/>£17,313.06' },
+{ day:'2022-06-26', number: 17527.404297, tooltip: '2022-06-26<br/>£17,527.40' },
+{ day:'2022-06-27', number: 17120.224609, tooltip: '2022-06-27<br/>£17,120.22' },
+{ day:'2022-06-28', number: 16901.080078, tooltip: '2022-06-28<br/>£16,901.08' },
+{ day:'2022-06-29', number: 16640.537109, tooltip: '2022-06-29<br/>£16,640.54' },
+{ day:'2022-06-30', number: 16578.679688, tooltip: '2022-06-30<br/>£16,578.68' },
+{ day:'2022-07-01', number: 16299.343750, tooltip: '2022-07-01<br/>£16,299.34' },
+{ day:'2022-07-02', number: 15923.039063, tooltip: '2022-07-02<br/>£15,923.04' },
+{ day:'2022-07-03', number: 15895.990234, tooltip: '2022-07-03<br/>£15,895.99' },
+{ day:'2022-07-04', number: 15946.162109, tooltip: '2022-07-04<br/>£15,946.16' },
+{ day:'2022-07-05', number: 16696.373047, tooltip: '2022-07-05<br/>£16,696.37' },
+{ day:'2022-07-06', number: 16897.806641, tooltip: '2022-07-06<br/>£16,897.81' },
+{ day:'2022-07-07', number: 17234.787109, tooltip: '2022-07-07<br/>£17,234.79' },
+{ day:'2022-07-08', number: 17986.923828, tooltip: '2022-07-08<br/>£17,986.92' },
+{ day:'2022-07-09', number: 18044.730469, tooltip: '2022-07-09<br/>£18,044.73' },
+{ day:'2022-07-10', number: 17948.449219, tooltip: '2022-07-10<br/>£17,948.45' },
+{ day:'2022-07-11', number: 17355.697266, tooltip: '2022-07-11<br/>£17,355.70' },
+{ day:'2022-07-12', number: 16782.828125, tooltip: '2022-07-12<br/>£16,782.83' },
+{ day:'2022-07-13', number: 16270.729492, tooltip: '2022-07-13<br/>£16,270.73' },
+{ day:'2022-07-14', number: 17035.759766, tooltip: '2022-07-14<br/>£17,035.76' },
+{ day:'2022-07-15', number: 17374.523438, tooltip: '2022-07-15<br/>£17,374.52' },
+{ day:'2022-07-16', number: 17574.109375, tooltip: '2022-07-16<br/>£17,574.11' },
+{ day:'2022-07-17', number: 17879.332031, tooltip: '2022-07-17<br/>£17,879.33' },
+{ day:'2022-07-18', number: 17478.210938, tooltip: '2022-07-18<br/>£17,478.21' },
+{ day:'2022-07-19', number: 18803.050781, tooltip: '2022-07-19<br/>£18,803.05' },
+{ day:'2022-07-20', number: 19487.699219, tooltip: '2022-07-20<br/>£19,487.70' },
+{ day:'2022-07-21', number: 19413.058594, tooltip: '2022-07-21<br/>£19,413.06' },
+{ day:'2022-07-22', number: 19310.484375, tooltip: '2022-07-22<br/>£19,310.48' },
+{ day:'2022-07-23', number: 18915.394531, tooltip: '2022-07-23<br/>£18,915.39' },
+{ day:'2022-07-24', number: 18714.240234, tooltip: '2022-07-24<br/>£18,714.24' },
+{ day:'2022-07-25', number: 18862.144531, tooltip: '2022-07-25<br/>£18,862.14' },
+{ day:'2022-07-26', number: 17721.271484, tooltip: '2022-07-26<br/>£17,721.27' },
+{ day:'2022-07-27', number: 17651.376953, tooltip: '2022-07-27<br/>£17,651.38' },
+{ day:'2022-07-28', number: 18856.566406, tooltip: '2022-07-28<br/>£18,856.57' },
+{ day:'2022-07-29', number: 19588.699219, tooltip: '2022-07-29<br/>£19,588.70' },
+{ day:'2022-07-30', number: 19545.636719, tooltip: '2022-07-30<br/>£19,545.64' },
+{ day:'2022-07-31', number: 19426.746094, tooltip: '2022-07-31<br/>£19,426.75' },
+{ day:'2022-08-01', number: 19178.488281, tooltip: '2022-08-01<br/>£19,178.49' },
+{ day:'2022-08-02', number: 19019.519531, tooltip: '2022-08-02<br/>£19,019.52' },
+{ day:'2022-08-03', number: 18925.287109, tooltip: '2022-08-03<br/>£18,925.29' },
+{ day:'2022-08-04', number: 18823.570313, tooltip: '2022-08-04<br/>£18,823.57' },
+{ day:'2022-08-05', number: 18610.072266, tooltip: '2022-08-05<br/>£18,610.07' },
+{ day:'2022-08-06', number: 19292.962891, tooltip: '2022-08-06<br/>£19,292.96' },
+{ day:'2022-08-07', number: 19021.337891, tooltip: '2022-08-07<br/>£19,021.34' },
+{ day:'2022-08-08', number: 19218.447266, tooltip: '2022-08-08<br/>£19,218.45' },
+{ day:'2022-08-09', number: 19702.763672, tooltip: '2022-08-09<br/>£19,702.76' },
+{ day:'2022-08-10', number: 19188.005859, tooltip: '2022-08-10<br/>£19,188.01' },
+{ day:'2022-08-11', number: 19612.498047, tooltip: '2022-08-11<br/>£19,612.50' },
+{ day:'2022-08-12', number: 19645.337891, tooltip: '2022-08-12<br/>£19,645.34' },
+{ day:'2022-08-13', number: 20097.763672, tooltip: '2022-08-13<br/>£20,097.76' },
+{ day:'2022-08-14', number: 20119.894531, tooltip: '2022-08-14<br/>£20,119.89' },
+{ day:'2022-08-15', number: 20052.396484, tooltip: '2022-08-15<br/>£20,052.40' },
+{ day:'2022-08-16', number: 20011.158203, tooltip: '2022-08-16<br/>£20,011.16' },
+{ day:'2022-08-17', number: 19744.785156, tooltip: '2022-08-17<br/>£19,744.79' },
+{ day:'2022-08-18', number: 19377.146484, tooltip: '2022-08-18<br/>£19,377.15' },
+{ day:'2022-08-19', number: 19456.794922, tooltip: '2022-08-19<br/>£19,456.79' },
+{ day:'2022-08-20', number: 17646.005859, tooltip: '2022-08-20<br/>£17,646.01' },
+{ day:'2022-08-21', number: 17887.810547, tooltip: '2022-08-21<br/>£17,887.81' },
+{ day:'2022-08-22', number: 18201.472656, tooltip: '2022-08-22<br/>£18,201.47' },
+{ day:'2022-08-23', number: 18189.669922, tooltip: '2022-08-23<br/>£18,189.67' },
+{ day:'2022-08-24', number: 18196.419922, tooltip: '2022-08-24<br/>£18,196.42' },
+{ day:'2022-08-25', number: 18146.580078, tooltip: '2022-08-25<br/>£18,146.58' },
+{ day:'2022-08-26', number: 18266.142578, tooltip: '2022-08-26<br/>£18,266.14' },
+{ day:'2022-08-27', number: 17271.130859, tooltip: '2022-08-27<br/>£17,271.13' },
+{ day:'2022-08-28', number: 17056.923828, tooltip: '2022-08-28<br/>£17,056.92' },
+{ day:'2022-08-29', number: 16779.429688, tooltip: '2022-08-29<br/>£16,779.43' },
+{ day:'2022-08-30', number: 17317.273438, tooltip: '2022-08-30<br/>£17,317.27' },
+{ day:'2022-08-31', number: 16983.388672, tooltip: '2022-08-31<br/>£16,983.39' },
+{ day:'2022-09-01', number: 17289.343750, tooltip: '2022-09-01<br/>£17,289.34' },
+{ day:'2022-09-02', number: 17429.662109, tooltip: '2022-09-02<br/>£17,429.66' },
+{ day:'2022-09-03', number: 17343.101563, tooltip: '2022-09-03<br/>£17,343.10' },
+{ day:'2022-09-04', number: 17223.906250, tooltip: '2022-09-04<br/>£17,223.91' },
+{ day:'2022-09-05', number: 17422.748047, tooltip: '2022-09-05<br/>£17,422.75' },
+{ day:'2022-09-06', number: 17135.335938, tooltip: '2022-09-06<br/>£17,135.34' },
+{ day:'2022-09-07', number: 16365.708008, tooltip: '2022-09-07<br/>£16,365.71' },
+{ day:'2022-09-08', number: 16745.345703, tooltip: '2022-09-08<br/>£16,745.35' },
+{ day:'2022-09-09', number: 16777.617188, tooltip: '2022-09-09<br/>£16,777.62' },
+{ day:'2022-09-10', number: 18433.140625, tooltip: '2022-09-10<br/>£18,433.14' },
+{ day:'2022-09-11', number: 18697.634766, tooltip: '2022-09-11<br/>£18,697.63' },
+{ day:'2022-09-12', number: 18734.976563, tooltip: '2022-09-12<br/>£18,734.98' },
+{ day:'2022-09-13', number: 19138.175781, tooltip: '2022-09-13<br/>£19,138.18' },
+{ day:'2022-09-14', number: 17547.765625, tooltip: '2022-09-14<br/>£17,547.77' },
+{ day:'2022-09-15', number: 17534.236328, tooltip: '2022-09-15<br/>£17,534.24' },
+{ day:'2022-09-16', number: 17205.951172, tooltip: '2022-09-16<br/>£17,205.95' },
+{ day:'2022-09-17', number: 17326.244141, tooltip: '2022-09-17<br/>£17,326.24' },
+{ day:'2022-09-18', number: 17633.066406, tooltip: '2022-09-18<br/>£17,633.07' },
+{ day:'2022-09-19', number: 16982.724609, tooltip: '2022-09-19<br/>£16,982.72' },
+{ day:'2022-09-20', number: 17078.019531, tooltip: '2022-09-20<br/>£17,078.02' },
+{ day:'2022-09-21', number: 16599.335938, tooltip: '2022-09-21<br/>£16,599.34' },
+{ day:'2022-09-22', number: 16464.441406, tooltip: '2022-09-22<br/>£16,464.44' },
+{ day:'2022-09-23', number: 17235.880859, tooltip: '2022-09-23<br/>£17,235.88' },
+{ day:'2022-09-24', number: 17793.447266, tooltip: '2022-09-24<br/>£17,793.45' },
+{ day:'2022-09-25', number: 17439.167969, tooltip: '2022-09-25<br/>£17,439.17' },
+{ day:'2022-09-26', number: 17422.490234, tooltip: '2022-09-26<br/>£17,422.49' },
+{ day:'2022-09-27', number: 17853.302734, tooltip: '2022-09-27<br/>£17,853.30' },
+{ day:'2022-09-28', number: 17810.587891, tooltip: '2022-09-28<br/>£17,810.59' },
+{ day:'2022-09-29', number: 17936.621094, tooltip: '2022-09-29<br/>£17,936.62' },
+{ day:'2022-09-30', number: 17519.884766, tooltip: '2022-09-30<br/>£17,519.88' },
+{ day:'2022-10-01', number: 17391.908203, tooltip: '2022-10-01<br/>£17,391.91' },
+{ day:'2022-10-02', number: 17320.042969, tooltip: '2022-10-02<br/>£17,320.04' },
+{ day:'2022-10-03', number: 17101.953125, tooltip: '2022-10-03<br/>£17,101.95' },
+{ day:'2022-10-04', number: 17307.197266, tooltip: '2022-10-04<br/>£17,307.20' },
+{ day:'2022-10-05', number: 17758.933594, tooltip: '2022-10-05<br/>£17,758.93' },
+{ day:'2022-10-06', number: 17752.419922, tooltip: '2022-10-06<br/>£17,752.42' },
+{ day:'2022-10-07', number: 17880.835938, tooltip: '2022-10-07<br/>£17,880.84' },
+{ day:'2022-10-08', number: 17618.357422, tooltip: '2022-10-08<br/>£17,618.36' },
+{ day:'2022-10-09', number: 17514.527344, tooltip: '2022-10-09<br/>£17,514.53' },
+{ day:'2022-10-10', number: 17561.513672, tooltip: '2022-10-10<br/>£17,561.51' },
+{ day:'2022-10-11', number: 17274.191406, tooltip: '2022-10-11<br/>£17,274.19' },
+{ day:'2022-10-12', number: 17377.460938, tooltip: '2022-10-12<br/>£17,377.46' },
+{ day:'2022-10-13', number: 17257.515625, tooltip: '2022-10-13<br/>£17,257.52' },
+{ day:'2022-10-14', number: 17150.248047, tooltip: '2022-10-14<br/>£17,150.25' },
+{ day:'2022-10-15', number: 17173.556641, tooltip: '2022-10-15<br/>£17,173.56' },
+{ day:'2022-10-16', number: 17069.251953, tooltip: '2022-10-16<br/>£17,069.25' },
+{ day:'2022-10-17', number: 17140.291016, tooltip: '2022-10-17<br/>£17,140.29' },
+{ day:'2022-10-18', number: 17221.966797, tooltip: '2022-10-18<br/>£17,221.97' },
+{ day:'2022-10-19', number: 17046.222656, tooltip: '2022-10-19<br/>£17,046.22' },
+{ day:'2022-10-20', number: 17076.990234, tooltip: '2022-10-20<br/>£17,076.99' },
+{ day:'2022-10-21', number: 16978.214844, tooltip: '2022-10-21<br/>£16,978.21' },
+{ day:'2022-10-22', number: 16959.964844, tooltip: '2022-10-22<br/>£16,959.96' },
+{ day:'2022-10-23', number: 16991.238281, tooltip: '2022-10-23<br/>£16,991.24' },
+{ day:'2022-10-24', number: 17261.492188, tooltip: '2022-10-24<br/>£17,261.49' },
+{ day:'2022-10-25', number: 17110.273438, tooltip: '2022-10-25<br/>£17,110.27' },
+{ day:'2022-10-26', number: 17531.220703, tooltip: '2022-10-26<br/>£17,531.22' },
+{ day:'2022-10-27', number: 17847.078125, tooltip: '2022-10-27<br/>£17,847.08' },
+{ day:'2022-10-28', number: 17542.244141, tooltip: '2022-10-28<br/>£17,542.24' },
+{ day:'2022-10-29', number: 17733.763672, tooltip: '2022-10-29<br/>£17,733.76' },
+{ day:'2022-10-30', number: 17925.677734, tooltip: '2022-10-30<br/>£17,925.68' },
+{ day:'2022-10-31', number: 17795.345703, tooltip: '2022-10-31<br/>£17,795.35' },
+{ day:'2022-11-01', number: 17872.021484, tooltip: '2022-11-01<br/>£17,872.02' },
+{ day:'2022-11-02', number: 17827.691406, tooltip: '2022-11-02<br/>£17,827.69' },
+{ day:'2022-11-03', number: 17711.974609, tooltip: '2022-11-03<br/>£17,711.97' },
+{ day:'2022-11-04', number: 18091.132813, tooltip: '2022-11-04<br/>£18,091.13' },
+{ day:'2022-11-05', number: 18580.703125, tooltip: '2022-11-05<br/>£18,580.70' },
+{ day:'2022-11-06', number: 18708.033203, tooltip: '2022-11-06<br/>£18,708.03' },
+{ day:'2022-11-07', number: 18466.792969, tooltip: '2022-11-07<br/>£18,466.79' },
+{ day:'2022-11-08', number: 17893.064453, tooltip: '2022-11-08<br/>£17,893.06' },
+{ day:'2022-11-09', number: 16052.351563, tooltip: '2022-11-09<br/>£16,052.35' },
+{ day:'2022-11-10', number: 13971.460938, tooltip: '2022-11-10<br/>£13,971.46' },
+{ day:'2022-11-11', number: 15035.544922, tooltip: '2022-11-11<br/>£15,035.54' },
+{ day:'2022-11-12', number: 14405.564453, tooltip: '2022-11-12<br/>£14,405.56' },
+{ day:'2022-11-13', number: 14191.952148, tooltip: '2022-11-13<br/>£14,191.95' },
+{ day:'2022-11-14', number: 13861.533203, tooltip: '2022-11-14<br/>£13,861.53' },
+{ day:'2022-11-15', number: 14139.817383, tooltip: '2022-11-15<br/>£14,139.82' },
+{ day:'2022-11-16', number: 14212.867188, tooltip: '2022-11-16<br/>£14,212.87' },
+{ day:'2022-11-17', number: 13991.939453, tooltip: '2022-11-17<br/>£13,991.94' },
+{ day:'2022-11-18', number: 14071.964844, tooltip: '2022-11-18<br/>£14,071.96' },
+{ day:'2022-11-19', number: 14041.053711, tooltip: '2022-11-19<br/>£14,041.05' },
+{ day:'2022-11-20', number: 14058.056641, tooltip: '2022-11-20<br/>£14,058.06' },
+{ day:'2022-11-21', number: 13707.256836, tooltip: '2022-11-21<br/>£13,707.26' },
+{ day:'2022-11-22', number: 13344.867188, tooltip: '2022-11-22<br/>£13,344.87' },
+{ day:'2022-11-23', number: 13616.911133, tooltip: '2022-11-23<br/>£13,616.91' },
+{ day:'2022-11-24', number: 13755.100586, tooltip: '2022-11-24<br/>£13,755.10' },
+{ day:'2022-11-25', number: 13706.867188, tooltip: '2022-11-25<br/>£13,706.87' },
+{ day:'2022-11-26', number: 13662.105469, tooltip: '2022-11-26<br/>£13,662.11' },
+{ day:'2022-11-27', number: 13616.652344, tooltip: '2022-11-27<br/>£13,616.65' },
+{ day:'2022-11-28', number: 13638.643555, tooltip: '2022-11-28<br/>£13,638.64' },
+{ day:'2022-11-29', number: 13559.958008, tooltip: '2022-11-29<br/>£13,559.96' },
+{ day:'2022-11-30', number: 13765.884766, tooltip: '2022-11-30<br/>£13,765.88' },
+{ day:'2022-12-01', number: 14217.543945, tooltip: '2022-12-01<br/>£14,217.54' },
+{ day:'2022-12-02', number: 13842.237305, tooltip: '2022-12-02<br/>£13,842.24' },
+{ day:'2022-12-03', number: 13900.898438, tooltip: '2022-12-03<br/>£13,900.90' },
+{ day:'2022-12-04', number: 13746.477539, tooltip: '2022-12-04<br/>£13,746.48' },
+{ day:'2022-12-05', number: 13930.261719, tooltip: '2022-12-05<br/>£13,930.26' },
+{ day:'2022-12-06', number: 13922.412109, tooltip: '2022-12-06<br/>£13,922.41' },
+{ day:'2022-12-07', number: 14085.837891, tooltip: '2022-12-07<br/>£14,085.84' },
+{ day:'2022-12-08', number: 13798.114258, tooltip: '2022-12-08<br/>£13,798.11' },
+{ day:'2022-12-09', number: 14086.091797, tooltip: '2022-12-09<br/>£14,086.09' },
+{ day:'2022-12-10', number: 13970.301758, tooltip: '2022-12-10<br/>£13,970.30' },
+{ day:'2022-12-11', number: 13974.880859, tooltip: '2022-12-11<br/>£13,974.88' },
+{ day:'2022-12-12', number: 13977.600586, tooltip: '2022-12-12<br/>£13,977.60' },
+{ day:'2022-12-13', number: 14024.091797, tooltip: '2022-12-13<br/>£14,024.09' },
+{ day:'2022-12-14', number: 14392.840820, tooltip: '2022-12-14<br/>£14,392.84' },
+{ day:'2022-12-15', number: 14344.152344, tooltip: '2022-12-15<br/>£14,344.15' },
+{ day:'2022-12-16', number: 14244.015625, tooltip: '2022-12-16<br/>£14,244.02' },
+{ day:'2022-12-17', number: 13703.479492, tooltip: '2022-12-17<br/>£13,703.48' },
+{ day:'2022-12-18', number: 13830.377930, tooltip: '2022-12-18<br/>£13,830.38' },
+{ day:'2022-12-19', number: 13782.769531, tooltip: '2022-12-19<br/>£13,782.77' },
+{ day:'2022-12-20', number: 13526.773438, tooltip: '2022-12-20<br/>£13,526.77' },
+{ day:'2022-12-21', number: 13869.404297, tooltip: '2022-12-21<br/>£13,869.40' },
+{ day:'2022-12-22', number: 13926.644531, tooltip: '2022-12-22<br/>£13,926.64' },
+{ day:'2022-12-23', number: 13980.789063, tooltip: '2022-12-23<br/>£13,980.79' },
+{ day:'2022-12-24', number: 13935.930664, tooltip: '2022-12-24<br/>£13,935.93' },
+{ day:'2022-12-25', number: 13977.852539, tooltip: '2022-12-25<br/>£13,977.85' },
+{ day:'2022-12-26', number: 13971.167969, tooltip: '2022-12-26<br/>£13,971.17' },
+{ day:'2022-12-27', number: 14002.829102, tooltip: '2022-12-27<br/>£14,002.83' },
+{ day:'2022-12-28', number: 13899.653320, tooltip: '2022-12-28<br/>£13,899.65' },
+{ day:'2022-12-29', number: 13761.435547, tooltip: '2022-12-29<br/>£13,761.44' },
+{ day:'2022-12-30', number: 13804.382813, tooltip: '2022-12-30<br/>£13,804.38' },
+{ day:'2022-12-31', number: 13718.636719, tooltip: '2022-12-31<br/>£13,718.64' },
+{ day:'2023-01-01', number: 13678.224609, tooltip: '2023-01-01<br/>£13,678.22' },
+{ day:'2023-01-02', number: 13743.495117, tooltip: '2023-01-02<br/>£13,743.50' },
+{ day:'2023-01-03', number: 13834.787109, tooltip: '2023-01-03<br/>£13,834.79' },
+{ day:'2023-01-04', number: 13938.929688, tooltip: '2023-01-04<br/>£13,938.93' },
+{ day:'2023-01-05', number: 13987.221680, tooltip: '2023-01-05<br/>£13,987.22' },
+{ day:'2023-01-06', number: 14137.789063, tooltip: '2023-01-06<br/>£14,137.79' },
+{ day:'2023-01-07', number: 14018.128906, tooltip: '2023-01-07<br/>£14,018.13' },
+{ day:'2023-01-08', number: 14019.806641, tooltip: '2023-01-08<br/>£14,019.81' },
+{ day:'2023-01-09', number: 14103.928711, tooltip: '2023-01-09<br/>£14,103.93' },
+{ day:'2023-01-10', number: 14111.320313, tooltip: '2023-01-10<br/>£14,111.32' },
+{ day:'2023-01-11', number: 14354.708008, tooltip: '2023-01-11<br/>£14,354.71' },
+{ day:'2023-01-12', number: 14900.833984, tooltip: '2023-01-12<br/>£14,900.83' },
+{ day:'2023-01-13', number: 15444.747070, tooltip: '2023-01-13<br/>£15,444.75' },
+{ day:'2023-01-14', number: 16278.754883, tooltip: '2023-01-14<br/>£16,278.75' },
+{ day:'2023-01-15', number: 17151.085938, tooltip: '2023-01-15<br/>£17,151.09' },
+{ day:'2023-01-16', number: 17083.810547, tooltip: '2023-01-16<br/>£17,083.81' },
+{ day:'2023-01-17', number: 17345.443359, tooltip: '2023-01-17<br/>£17,345.44' },
+{ day:'2023-01-18', number: 17227.042969, tooltip: '2023-01-18<br/>£17,227.04' },
+{ day:'2023-01-19', number: 16754.546875, tooltip: '2023-01-19<br/>£16,754.55' },
+{ day:'2023-01-20', number: 17014.714844, tooltip: '2023-01-20<br/>£17,014.71' },
+{ day:'2023-01-21', number: 18300.048828, tooltip: '2023-01-21<br/>£18,300.05' },
+{ day:'2023-01-22', number: 18385.662109, tooltip: '2023-01-22<br/>£18,385.66' },
+{ day:'2023-01-23', number: 18314.173828, tooltip: '2023-01-23<br/>£18,314.17' },
+{ day:'2023-01-24', number: 18522.644531, tooltip: '2023-01-24<br/>£18,522.64' },
+{ day:'2023-01-25', number: 18358.703125, tooltip: '2023-01-25<br/>£18,358.70' },
+{ day:'2023-01-26', number: 18620.525391, tooltip: '2023-01-26<br/>£18,620.53' },
+{ day:'2023-01-27', number: 18551.011719, tooltip: '2023-01-27<br/>£18,551.01' },
+{ day:'2023-01-28', number: 18646.671875, tooltip: '2023-01-28<br/>£18,646.67' },
+];
+	var name = "Bitcoin";
+	var conversion = "BTC-GBP";
+
+	var cryptoDates = {
+		"Today's Open": "Sat, Jan 28, 2023",
+		"vs Day":       "Fri, Jan 27, 2023",
+		"vs Week":      "Sat, Jan 21, 2023",
+		"vs Month":     "Wed, Dec 28, 2022",
+		"vs Year":      "Fri, Jan 28, 2022",
+		"vs YTD":       "Sun, Jan 1, 2023",
+	}
+
+	var cryptoData = {
+		"Today's Open": "£18,646.67",
+		'vs Day':       "+0.5%",
+		'vs Week':      "+1.9%",
+		'vs Month':     "+34.2%",
+		'vs Year':      "-32.8%",
+		'vs YTD':       "+36.3%"
+	};
+
+	var box = makeBox(3, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4B1;<a href="https://finance.yahoo.com/quote/' + conversion + '/history">' + name + '</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');		
+	var insideLeft = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('left', 0)
+		.style('width', '37%');
+
+	var table = insideLeft
+		.style('color', '#000')
+		.append('table');
+	
+	for (var item of Object.keys(cryptoData)) {
+		var row = table
+			.append('tr')
+			.attr('class', 'ttt')
+			.attr('data-tt', cryptoDates[item])
+			.style('font-weight', item.startsWith("Today") ? "bold" : "normal")
+			.style('border-bottom', '1px solid #000');
+		row
+			.append('td')
+			.style('text-align', 'left')
+			.html(item + ':&nbsp;');
+		row
+			.append('td')
+			.style('text-align', 'right')
+			.attr('class', 'code')
+			.html(cryptoData[item]);
+	}
+
+	var insideRight = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('right', 0)
+		.style('width', '66%');
+	createLineChart(400, 150, insideRight, data, 2);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function crypto() {
+
+	var data = [
+{ day:'2022-01-29', number: 1899.731079, tooltip: '2022-01-29<br/>£1,899.73' },
+{ day:'2022-01-30', number: 1938.503540, tooltip: '2022-01-30<br/>£1,938.50' },
+{ day:'2022-01-31', number: 1942.336426, tooltip: '2022-01-31<br/>£1,942.34' },
+{ day:'2022-02-01', number: 1999.205444, tooltip: '2022-02-01<br/>£1,999.21' },
+{ day:'2022-02-02', number: 2064.349365, tooltip: '2022-02-02<br/>£2,064.35' },
+{ day:'2022-02-03', number: 1977.492554, tooltip: '2022-02-03<br/>£1,977.49' },
+{ day:'2022-02-04', number: 1971.655151, tooltip: '2022-02-04<br/>£1,971.66' },
+{ day:'2022-02-05', number: 2204.526611, tooltip: '2022-02-05<br/>£2,204.53' },
+{ day:'2022-02-06', number: 2227.066406, tooltip: '2022-02-06<br/>£2,227.07' },
+{ day:'2022-02-07', number: 2259.239258, tooltip: '2022-02-07<br/>£2,259.24' },
+{ day:'2022-02-08', number: 2321.765381, tooltip: '2022-02-08<br/>£2,321.77' },
+{ day:'2022-02-09', number: 2303.941406, tooltip: '2022-02-09<br/>£2,303.94' },
+{ day:'2022-02-10', number: 2394.310791, tooltip: '2022-02-10<br/>£2,394.31' },
+{ day:'2022-02-11', number: 2271.284668, tooltip: '2022-02-11<br/>£2,271.28' },
+{ day:'2022-02-12', number: 2157.199707, tooltip: '2022-02-12<br/>£2,157.20' },
+{ day:'2022-02-13', number: 2150.627686, tooltip: '2022-02-13<br/>£2,150.63' },
+{ day:'2022-02-14', number: 2122.632080, tooltip: '2022-02-14<br/>£2,122.63' },
+{ day:'2022-02-15', number: 2167.964111, tooltip: '2022-02-15<br/>£2,167.96' },
+{ day:'2022-02-16', number: 2348.899902, tooltip: '2022-02-16<br/>£2,348.90' },
+{ day:'2022-02-17', number: 2302.318359, tooltip: '2022-02-17<br/>£2,302.32' },
+{ day:'2022-02-18', number: 2118.542480, tooltip: '2022-02-18<br/>£2,118.54' },
+{ day:'2022-02-19', number: 2048.574707, tooltip: '2022-02-19<br/>£2,048.57' },
+{ day:'2022-02-20', number: 2033.041504, tooltip: '2022-02-20<br/>£2,033.04' },
+{ day:'2022-02-21', number: 1933.328491, tooltip: '2022-02-21<br/>£1,933.33' },
+{ day:'2022-02-22', number: 1892.516113, tooltip: '2022-02-22<br/>£1,892.52' },
+{ day:'2022-02-23', number: 1942.416626, tooltip: '2022-02-23<br/>£1,942.42' },
+{ day:'2022-02-24', number: 1910.786133, tooltip: '2022-02-24<br/>£1,910.79' },
+{ day:'2022-02-25', number: 1943.248413, tooltip: '2022-02-25<br/>£1,943.25' },
+{ day:'2022-02-26', number: 2062.270264, tooltip: '2022-02-26<br/>£2,062.27' },
+{ day:'2022-02-27', number: 2073.842041, tooltip: '2022-02-27<br/>£2,073.84' },
+{ day:'2022-02-28', number: 1960.175415, tooltip: '2022-02-28<br/>£1,960.18' },
+{ day:'2022-03-01', number: 2175.352783, tooltip: '2022-03-01<br/>£2,175.35' },
+{ day:'2022-03-02', number: 2228.967529, tooltip: '2022-03-02<br/>£2,228.97' },
+{ day:'2022-03-03', number: 2202.165039, tooltip: '2022-03-03<br/>£2,202.17' },
+{ day:'2022-03-04', number: 2123.499023, tooltip: '2022-03-04<br/>£2,123.50' },
+{ day:'2022-03-05', number: 1979.568604, tooltip: '2022-03-05<br/>£1,979.57' },
+{ day:'2022-03-06', number: 2014.700073, tooltip: '2022-03-06<br/>£2,014.70' },
+{ day:'2022-03-07', number: 1934.109863, tooltip: '2022-03-07<br/>£1,934.11' },
+{ day:'2022-03-08', number: 1904.667480, tooltip: '2022-03-08<br/>£1,904.67' },
+{ day:'2022-03-09', number: 1967.508545, tooltip: '2022-03-09<br/>£1,967.51' },
+{ day:'2022-03-10', number: 2069.879395, tooltip: '2022-03-10<br/>£2,069.88' },
+{ day:'2022-03-11', number: 1990.656006, tooltip: '2022-03-11<br/>£1,990.66' },
+{ day:'2022-03-12', number: 1964.549805, tooltip: '2022-03-12<br/>£1,964.55' },
+{ day:'2022-03-13', number: 1973.759766, tooltip: '2022-03-13<br/>£1,973.76' },
+{ day:'2022-03-14', number: 1929.933716, tooltip: '2022-03-14<br/>£1,929.93' },
+{ day:'2022-03-15', number: 1991.328003, tooltip: '2022-03-15<br/>£1,991.33' },
+{ day:'2022-03-16', number: 2008.568848, tooltip: '2022-03-16<br/>£2,008.57' },
+{ day:'2022-03-17', number: 2109.450684, tooltip: '2022-03-17<br/>£2,109.45' },
+{ day:'2022-03-18', number: 2138.863281, tooltip: '2022-03-18<br/>£2,138.86' },
+{ day:'2022-03-19', number: 2234.066162, tooltip: '2022-03-19<br/>£2,234.07' },
+{ day:'2022-03-20', number: 2235.451416, tooltip: '2022-03-20<br/>£2,235.45' },
+{ day:'2022-03-21', number: 2173.398193, tooltip: '2022-03-21<br/>£2,173.40' },
+{ day:'2022-03-22', number: 2200.413086, tooltip: '2022-03-22<br/>£2,200.41' },
+{ day:'2022-03-23', number: 2241.153809, tooltip: '2022-03-23<br/>£2,241.15' },
+{ day:'2022-03-24', number: 2295.279785, tooltip: '2022-03-24<br/>£2,295.28' },
+{ day:'2022-03-25', number: 2355.909180, tooltip: '2022-03-25<br/>£2,355.91' },
+{ day:'2022-03-26', number: 2355.121338, tooltip: '2022-03-26<br/>£2,355.12' },
+{ day:'2022-03-27', number: 2383.377441, tooltip: '2022-03-27<br/>£2,383.38' },
+{ day:'2022-03-28', number: 2499.270996, tooltip: '2022-03-28<br/>£2,499.27' },
+{ day:'2022-03-29', number: 2545.931885, tooltip: '2022-03-29<br/>£2,545.93' },
+{ day:'2022-03-30', number: 2597.980225, tooltip: '2022-03-30<br/>£2,597.98' },
+{ day:'2022-03-31', number: 2576.797607, tooltip: '2022-03-31<br/>£2,576.80' },
+{ day:'2022-04-01', number: 2496.960449, tooltip: '2022-04-01<br/>£2,496.96' },
+{ day:'2022-04-02', number: 2630.636230, tooltip: '2022-04-02<br/>£2,630.64' },
+{ day:'2022-04-03', number: 2626.719727, tooltip: '2022-04-03<br/>£2,626.72' },
+{ day:'2022-04-04', number: 2687.874512, tooltip: '2022-04-04<br/>£2,687.87' },
+{ day:'2022-04-05', number: 2685.360840, tooltip: '2022-04-05<br/>£2,685.36' },
+{ day:'2022-04-06', number: 2608.936279, tooltip: '2022-04-06<br/>£2,608.94' },
+{ day:'2022-04-07', number: 2427.209961, tooltip: '2022-04-07<br/>£2,427.21' },
+{ day:'2022-04-08', number: 2473.986816, tooltip: '2022-04-08<br/>£2,473.99' },
+{ day:'2022-04-09', number: 2448.698975, tooltip: '2022-04-09<br/>£2,448.70' },
+{ day:'2022-04-10', number: 2501.873535, tooltip: '2022-04-10<br/>£2,501.87' },
+{ day:'2022-04-11', number: 2463.221924, tooltip: '2022-04-11<br/>£2,463.22' },
+{ day:'2022-04-12', number: 2289.376221, tooltip: '2022-04-12<br/>£2,289.38' },
+{ day:'2022-04-13', number: 2330.276123, tooltip: '2022-04-13<br/>£2,330.28' },
+{ day:'2022-04-14', number: 2376.609619, tooltip: '2022-04-14<br/>£2,376.61' },
+{ day:'2022-04-15', number: 2311.287842, tooltip: '2022-04-15<br/>£2,311.29' },
+{ day:'2022-04-16', number: 2328.578857, tooltip: '2022-04-16<br/>£2,328.58' },
+{ day:'2022-04-17', number: 2344.473877, tooltip: '2022-04-17<br/>£2,344.47' },
+{ day:'2022-04-18', number: 2292.784180, tooltip: '2022-04-18<br/>£2,292.78' },
+{ day:'2022-04-19', number: 2350.314453, tooltip: '2022-04-19<br/>£2,350.31' },
+{ day:'2022-04-20', number: 2385.256104, tooltip: '2022-04-20<br/>£2,385.26' },
+{ day:'2022-04-21', number: 2355.422852, tooltip: '2022-04-21<br/>£2,355.42' },
+{ day:'2022-04-22', number: 2293.320801, tooltip: '2022-04-22<br/>£2,293.32' },
+{ day:'2022-04-23', number: 2309.127441, tooltip: '2022-04-23<br/>£2,309.13' },
+{ day:'2022-04-24', number: 2287.744141, tooltip: '2022-04-24<br/>£2,287.74' },
+{ day:'2022-04-25', number: 2278.541016, tooltip: '2022-04-25<br/>£2,278.54' },
+{ day:'2022-04-26', number: 2362.191406, tooltip: '2022-04-26<br/>£2,362.19' },
+{ day:'2022-04-27', number: 2232.337158, tooltip: '2022-04-27<br/>£2,232.34' },
+{ day:'2022-04-28', number: 2303.739258, tooltip: '2022-04-28<br/>£2,303.74' },
+{ day:'2022-04-29', number: 2356.029053, tooltip: '2022-04-29<br/>£2,356.03' },
+{ day:'2022-04-30', number: 2240.533936, tooltip: '2022-04-30<br/>£2,240.53' },
+{ day:'2022-05-01', number: 2171.229980, tooltip: '2022-05-01<br/>£2,171.23' },
+{ day:'2022-05-02', number: 2249.672363, tooltip: '2022-05-02<br/>£2,249.67' },
+{ day:'2022-05-03', number: 2285.781738, tooltip: '2022-05-03<br/>£2,285.78' },
+{ day:'2022-05-04', number: 2226.755371, tooltip: '2022-05-04<br/>£2,226.76' },
+{ day:'2022-05-05', number: 2330.397217, tooltip: '2022-05-05<br/>£2,330.40' },
+{ day:'2022-05-06', number: 2223.613525, tooltip: '2022-05-06<br/>£2,223.61' },
+{ day:'2022-05-07', number: 2184.037598, tooltip: '2022-05-07<br/>£2,184.04' },
+{ day:'2022-05-08', number: 2136.328857, tooltip: '2022-05-08<br/>£2,136.33' },
+{ day:'2022-05-09', number: 2043.306152, tooltip: '2022-05-09<br/>£2,043.31' },
+{ day:'2022-05-10', number: 1817.934937, tooltip: '2022-05-10<br/>£1,817.93' },
+{ day:'2022-05-11', number: 1903.565186, tooltip: '2022-05-11<br/>£1,903.57' },
+{ day:'2022-05-12', number: 1694.102539, tooltip: '2022-05-12<br/>£1,694.10' },
+{ day:'2022-05-13', number: 1606.130249, tooltip: '2022-05-13<br/>£1,606.13' },
+{ day:'2022-05-14', number: 1642.734497, tooltip: '2022-05-14<br/>£1,642.73' },
+{ day:'2022-05-15', number: 1676.463745, tooltip: '2022-05-15<br/>£1,676.46' },
+{ day:'2022-05-16', number: 1750.631592, tooltip: '2022-05-16<br/>£1,750.63' },
+{ day:'2022-05-17', number: 1641.251465, tooltip: '2022-05-17<br/>£1,641.25' },
+{ day:'2022-05-18', number: 1674.077881, tooltip: '2022-05-18<br/>£1,674.08' },
+{ day:'2022-05-19', number: 1552.244019, tooltip: '2022-05-19<br/>£1,552.24' },
+{ day:'2022-05-20', number: 1619.170654, tooltip: '2022-05-20<br/>£1,619.17' },
+{ day:'2022-05-21', number: 1569.783081, tooltip: '2022-05-21<br/>£1,569.78' },
+{ day:'2022-05-22', number: 1581.191772, tooltip: '2022-05-22<br/>£1,581.19' },
+{ day:'2022-05-23', number: 1633.459229, tooltip: '2022-05-23<br/>£1,633.46' },
+{ day:'2022-05-24', number: 1569.506348, tooltip: '2022-05-24<br/>£1,569.51' },
+{ day:'2022-05-25', number: 1577.682251, tooltip: '2022-05-25<br/>£1,577.68' },
+{ day:'2022-05-26', number: 1545.379517, tooltip: '2022-05-26<br/>£1,545.38' },
+{ day:'2022-05-27', number: 1428.620605, tooltip: '2022-05-27<br/>£1,428.62' },
+{ day:'2022-05-28', number: 1365.604736, tooltip: '2022-05-28<br/>£1,365.60' },
+{ day:'2022-05-29', number: 1419.091064, tooltip: '2022-05-29<br/>£1,419.09' },
+{ day:'2022-05-30', number: 1435.205811, tooltip: '2022-05-30<br/>£1,435.21' },
+{ day:'2022-05-31', number: 1578.717529, tooltip: '2022-05-31<br/>£1,578.72' },
+{ day:'2022-06-01', number: 1540.139404, tooltip: '2022-06-01<br/>£1,540.14' },
+{ day:'2022-06-02', number: 1460.030884, tooltip: '2022-06-02<br/>£1,460.03' },
+{ day:'2022-06-03', number: 1458.168579, tooltip: '2022-06-03<br/>£1,458.17' },
+{ day:'2022-06-04', number: 1421.484985, tooltip: '2022-06-04<br/>£1,421.48' },
+{ day:'2022-06-05', number: 1442.783203, tooltip: '2022-06-05<br/>£1,442.78' },
+{ day:'2022-06-06', number: 1445.548828, tooltip: '2022-06-06<br/>£1,445.55' },
+{ day:'2022-06-07', number: 1484.666870, tooltip: '2022-06-07<br/>£1,484.67' },
+{ day:'2022-06-08', number: 1441.185059, tooltip: '2022-06-08<br/>£1,441.19' },
+{ day:'2022-06-09', number: 1430.177612, tooltip: '2022-06-09<br/>£1,430.18' },
+{ day:'2022-06-10', number: 1432.600220, tooltip: '2022-06-10<br/>£1,432.60' },
+{ day:'2022-06-11', number: 1352.186890, tooltip: '2022-06-11<br/>£1,352.19' },
+{ day:'2022-06-12', number: 1242.390137, tooltip: '2022-06-12<br/>£1,242.39' },
+{ day:'2022-06-13', number: 1176.145508, tooltip: '2022-06-13<br/>£1,176.15' },
+{ day:'2022-06-14', number: 992.027222, tooltip: '2022-06-14<br/>£992.03' },
+{ day:'2022-06-15', number: 1008.509399, tooltip: '2022-06-15<br/>£1,008.51' },
+{ day:'2022-06-16', number: 1013.332458, tooltip: '2022-06-16<br/>£1,013.33' },
+{ day:'2022-06-17', number: 864.713318, tooltip: '2022-06-17<br/>£864.71' },
+{ day:'2022-06-18', number: 889.016785, tooltip: '2022-06-18<br/>£889.02' },
+{ day:'2022-06-19', number: 812.563965, tooltip: '2022-06-19<br/>£812.56' },
+{ day:'2022-06-20', number: 922.189392, tooltip: '2022-06-20<br/>£922.19' },
+{ day:'2022-06-21', number: 920.342834, tooltip: '2022-06-21<br/>£920.34' },
+{ day:'2022-06-22', number: 917.606567, tooltip: '2022-06-22<br/>£917.61' },
+{ day:'2022-06-23', number: 858.129639, tooltip: '2022-06-23<br/>£858.13' },
+{ day:'2022-06-24', number: 932.462891, tooltip: '2022-06-24<br/>£932.46' },
+{ day:'2022-06-25', number: 1000.223450, tooltip: '2022-06-25<br/>£1,000.22' },
+{ day:'2022-06-26', number: 1013.483582, tooltip: '2022-06-26<br/>£1,013.48' },
+{ day:'2022-06-27', number: 976.751221, tooltip: '2022-06-27<br/>£976.75' },
+{ day:'2022-06-28', number: 972.782410, tooltip: '2022-06-28<br/>£972.78' },
+{ day:'2022-06-29', number: 939.073059, tooltip: '2022-06-29<br/>£939.07' },
+{ day:'2022-06-30', number: 906.382568, tooltip: '2022-06-30<br/>£906.38' },
+{ day:'2022-07-01', number: 878.529297, tooltip: '2022-07-01<br/>£878.53' },
+{ day:'2022-07-02', number: 875.771423, tooltip: '2022-07-02<br/>£875.77' },
+{ day:'2022-07-03', number: 881.014099, tooltip: '2022-07-03<br/>£881.01' },
+{ day:'2022-07-04', number: 887.320251, tooltip: '2022-07-04<br/>£887.32' },
+{ day:'2022-07-05', number: 949.765442, tooltip: '2022-07-05<br/>£949.77' },
+{ day:'2022-07-06', number: 949.560303, tooltip: '2022-07-06<br/>£949.56' },
+{ day:'2022-07-07', number: 995.581238, tooltip: '2022-07-07<br/>£995.58' },
+{ day:'2022-07-08', number: 1028.798096, tooltip: '2022-07-08<br/>£1,028.80' },
+{ day:'2022-07-09', number: 1015.626953, tooltip: '2022-07-09<br/>£1,015.63' },
+{ day:'2022-07-10', number: 1011.600403, tooltip: '2022-07-10<br/>£1,011.60' },
+{ day:'2022-07-11', number: 972.071594, tooltip: '2022-07-11<br/>£972.07' },
+{ day:'2022-07-12', number: 922.116882, tooltip: '2022-07-12<br/>£922.12' },
+{ day:'2022-07-13', number: 874.059692, tooltip: '2022-07-13<br/>£874.06' },
+{ day:'2022-07-14', number: 938.555725, tooltip: '2022-07-14<br/>£938.56' },
+{ day:'2022-07-15', number: 1006.397949, tooltip: '2022-07-15<br/>£1,006.40' },
+{ day:'2022-07-16', number: 1039.891846, tooltip: '2022-07-16<br/>£1,039.89' },
+{ day:'2022-07-17', number: 1141.512329, tooltip: '2022-07-17<br/>£1,141.51' },
+{ day:'2022-07-18', number: 1125.976074, tooltip: '2022-07-18<br/>£1,125.98' },
+{ day:'2022-07-19', number: 1320.928955, tooltip: '2022-07-19<br/>£1,320.93' },
+{ day:'2022-07-20', number: 1285.358154, tooltip: '2022-07-20<br/>£1,285.36' },
+{ day:'2022-07-21', number: 1270.385376, tooltip: '2022-07-21<br/>£1,270.39' },
+{ day:'2022-07-22', number: 1314.455322, tooltip: '2022-07-22<br/>£1,314.46' },
+{ day:'2022-07-23', number: 1279.901245, tooltip: '2022-07-23<br/>£1,279.90' },
+{ day:'2022-07-24', number: 1290.534912, tooltip: '2022-07-24<br/>£1,290.53' },
+{ day:'2022-07-25', number: 1334.247314, tooltip: '2022-07-25<br/>£1,334.25' },
+{ day:'2022-07-26', number: 1198.903076, tooltip: '2022-07-26<br/>£1,198.90' },
+{ day:'2022-07-27', number: 1199.565186, tooltip: '2022-07-27<br/>£1,199.57' },
+{ day:'2022-07-28', number: 1345.347534, tooltip: '2022-07-28<br/>£1,345.35' },
+{ day:'2022-07-29', number: 1417.589722, tooltip: '2022-07-29<br/>£1,417.59' },
+{ day:'2022-07-30', number: 1418.531006, tooltip: '2022-07-30<br/>£1,418.53' },
+{ day:'2022-07-31', number: 1392.923462, tooltip: '2022-07-31<br/>£1,392.92' },
+{ day:'2022-08-01', number: 1381.838867, tooltip: '2022-08-01<br/>£1,381.84' },
+{ day:'2022-08-02', number: 1333.859619, tooltip: '2022-08-02<br/>£1,333.86' },
+{ day:'2022-08-03', number: 1344.830811, tooltip: '2022-08-03<br/>£1,344.83' },
+{ day:'2022-08-04', number: 1333.724731, tooltip: '2022-08-04<br/>£1,333.72' },
+{ day:'2022-08-05', number: 1322.153076, tooltip: '2022-08-05<br/>£1,322.15' },
+{ day:'2022-08-06', number: 1435.213379, tooltip: '2022-08-06<br/>£1,435.21' },
+{ day:'2022-08-07', number: 1401.348755, tooltip: '2022-08-07<br/>£1,401.35' },
+{ day:'2022-08-08', number: 1409.237915, tooltip: '2022-08-08<br/>£1,409.24' },
+{ day:'2022-08-09', number: 1469.606689, tooltip: '2022-08-09<br/>£1,469.61' },
+{ day:'2022-08-10', number: 1410.677490, tooltip: '2022-08-10<br/>£1,410.68' },
+{ day:'2022-08-11', number: 1516.554810, tooltip: '2022-08-11<br/>£1,516.55' },
+{ day:'2022-08-12', number: 1542.371216, tooltip: '2022-08-12<br/>£1,542.37' },
+{ day:'2022-08-13', number: 1612.070068, tooltip: '2022-08-13<br/>£1,612.07' },
+{ day:'2022-08-14', number: 1632.205933, tooltip: '2022-08-14<br/>£1,632.21' },
+{ day:'2022-08-15', number: 1597.013916, tooltip: '2022-08-15<br/>£1,597.01' },
+{ day:'2022-08-16', number: 1578.284058, tooltip: '2022-08-16<br/>£1,578.28' },
+{ day:'2022-08-17', number: 1552.653564, tooltip: '2022-08-17<br/>£1,552.65' },
+{ day:'2022-08-18', number: 1522.304810, tooltip: '2022-08-18<br/>£1,522.30' },
+{ day:'2022-08-19', number: 1548.187256, tooltip: '2022-08-19<br/>£1,548.19' },
+{ day:'2022-08-20', number: 1363.342896, tooltip: '2022-08-20<br/>£1,363.34' },
+{ day:'2022-08-21', number: 1332.721680, tooltip: '2022-08-21<br/>£1,332.72' },
+{ day:'2022-08-22', number: 1368.751343, tooltip: '2022-08-22<br/>£1,368.75' },
+{ day:'2022-08-23', number: 1379.405884, tooltip: '2022-08-23<br/>£1,379.41' },
+{ day:'2022-08-24', number: 1405.484741, tooltip: '2022-08-24<br/>£1,405.48' },
+{ day:'2022-08-25', number: 1405.671631, tooltip: '2022-08-25<br/>£1,405.67' },
+{ day:'2022-08-26', number: 1434.764893, tooltip: '2022-08-26<br/>£1,434.76' },
+{ day:'2022-08-27', number: 1285.507813, tooltip: '2022-08-27<br/>£1,285.51' },
+{ day:'2022-08-28', number: 1269.166138, tooltip: '2022-08-28<br/>£1,269.17' },
+{ day:'2022-08-29', number: 1223.643677, tooltip: '2022-08-29<br/>£1,223.64' },
+{ day:'2022-08-30', number: 1325.065796, tooltip: '2022-08-30<br/>£1,325.07' },
+{ day:'2022-08-31', number: 1307.479614, tooltip: '2022-08-31<br/>£1,307.48' },
+{ day:'2022-09-01', number: 1339.788574, tooltip: '2022-09-01<br/>£1,339.79' },
+{ day:'2022-09-02', number: 1373.529541, tooltip: '2022-09-02<br/>£1,373.53' },
+{ day:'2022-09-03', number: 1369.762817, tooltip: '2022-09-03<br/>£1,369.76' },
+{ day:'2022-09-04', number: 1352.117432, tooltip: '2022-09-04<br/>£1,352.12' },
+{ day:'2022-09-05', number: 1375.324707, tooltip: '2022-09-05<br/>£1,375.32' },
+{ day:'2022-09-06', number: 1398.341919, tooltip: '2022-09-06<br/>£1,398.34' },
+{ day:'2022-09-07', number: 1356.076782, tooltip: '2022-09-07<br/>£1,356.08' },
+{ day:'2022-09-08', number: 1414.812622, tooltip: '2022-09-08<br/>£1,414.81' },
+{ day:'2022-09-09', number: 1419.410034, tooltip: '2022-09-09<br/>£1,419.41' },
+{ day:'2022-09-10', number: 1482.246582, tooltip: '2022-09-10<br/>£1,482.25' },
+{ day:'2022-09-11', number: 1531.770508, tooltip: '2022-09-11<br/>£1,531.77' },
+{ day:'2022-09-12', number: 1516.416748, tooltip: '2022-09-12<br/>£1,516.42' },
+{ day:'2022-09-13', number: 1466.246948, tooltip: '2022-09-13<br/>£1,466.25' },
+{ day:'2022-09-14', number: 1369.128174, tooltip: '2022-09-14<br/>£1,369.13' },
+{ day:'2022-09-15', number: 1416.338379, tooltip: '2022-09-15<br/>£1,416.34' },
+{ day:'2022-09-16', number: 1285.318726, tooltip: '2022-09-16<br/>£1,285.32' },
+{ day:'2022-09-17', number: 1255.312988, tooltip: '2022-09-17<br/>£1,255.31' },
+{ day:'2022-09-18', number: 1287.579590, tooltip: '2022-09-18<br/>£1,287.58' },
+{ day:'2022-09-19', number: 1167.775757, tooltip: '2022-09-19<br/>£1,167.78' },
+{ day:'2022-09-20', number: 1203.698730, tooltip: '2022-09-20<br/>£1,203.70' },
+{ day:'2022-09-21', number: 1163.557739, tooltip: '2022-09-21<br/>£1,163.56' },
+{ day:'2022-09-22', number: 1111.774780, tooltip: '2022-09-22<br/>£1,111.77' },
+{ day:'2022-09-23', number: 1178.643921, tooltip: '2022-09-23<br/>£1,178.64' },
+{ day:'2022-09-24', number: 1224.753174, tooltip: '2022-09-24<br/>£1,224.75' },
+{ day:'2022-09-25', number: 1213.739624, tooltip: '2022-09-25<br/>£1,213.74' },
+{ day:'2022-09-26', number: 1199.295410, tooltip: '2022-09-26<br/>£1,199.30' },
+{ day:'2022-09-27', number: 1240.265015, tooltip: '2022-09-27<br/>£1,240.27' },
+{ day:'2022-09-28', number: 1239.486206, tooltip: '2022-09-28<br/>£1,239.49' },
+{ day:'2022-09-29', number: 1234.891846, tooltip: '2022-09-29<br/>£1,234.89' },
+{ day:'2022-09-30', number: 1195.517090, tooltip: '2022-09-30<br/>£1,195.52' },
+{ day:'2022-10-01', number: 1188.806396, tooltip: '2022-10-01<br/>£1,188.81' },
+{ day:'2022-10-02', number: 1176.460449, tooltip: '2022-10-02<br/>£1,176.46' },
+{ day:'2022-10-03', number: 1146.020264, tooltip: '2022-10-03<br/>£1,146.02' },
+{ day:'2022-10-04', number: 1167.077148, tooltip: '2022-10-04<br/>£1,167.08' },
+{ day:'2022-10-05', number: 1189.383667, tooltip: '2022-10-05<br/>£1,189.38' },
+{ day:'2022-10-06', number: 1191.188232, tooltip: '2022-10-06<br/>£1,191.19' },
+{ day:'2022-10-07', number: 1211.168457, tooltip: '2022-10-07<br/>£1,211.17' },
+{ day:'2022-10-08', number: 1200.951538, tooltip: '2022-10-08<br/>£1,200.95' },
+{ day:'2022-10-09', number: 1186.542480, tooltip: '2022-10-09<br/>£1,186.54' },
+{ day:'2022-10-10', number: 1194.419922, tooltip: '2022-10-10<br/>£1,194.42' },
+{ day:'2022-10-11', number: 1165.310425, tooltip: '2022-10-11<br/>£1,165.31' },
+{ day:'2022-10-12', number: 1167.213135, tooltip: '2022-10-12<br/>£1,167.21' },
+{ day:'2022-10-13', number: 1166.523682, tooltip: '2022-10-13<br/>£1,166.52' },
+{ day:'2022-10-14', number: 1139.704102, tooltip: '2022-10-14<br/>£1,139.70' },
+{ day:'2022-10-15', number: 1161.263916, tooltip: '2022-10-15<br/>£1,161.26' },
+{ day:'2022-10-16', number: 1141.302124, tooltip: '2022-10-16<br/>£1,141.30' },
+{ day:'2022-10-17', number: 1162.023804, tooltip: '2022-10-17<br/>£1,162.02' },
+{ day:'2022-10-18', number: 1173.065430, tooltip: '2022-10-18<br/>£1,173.07' },
+{ day:'2022-10-19', number: 1155.423950, tooltip: '2022-10-19<br/>£1,155.42' },
+{ day:'2022-10-20', number: 1147.199829, tooltip: '2022-10-20<br/>£1,147.20' },
+{ day:'2022-10-21', number: 1143.442505, tooltip: '2022-10-21<br/>£1,143.44' },
+{ day:'2022-10-22', number: 1149.898804, tooltip: '2022-10-22<br/>£1,149.90' },
+{ day:'2022-10-23', number: 1162.590332, tooltip: '2022-10-23<br/>£1,162.59' },
+{ day:'2022-10-24', number: 1202.789307, tooltip: '2022-10-24<br/>£1,202.79' },
+{ day:'2022-10-25', number: 1189.372925, tooltip: '2022-10-25<br/>£1,189.37' },
+{ day:'2022-10-26', number: 1274.892822, tooltip: '2022-10-26<br/>£1,274.89' },
+{ day:'2022-10-27', number: 1346.161133, tooltip: '2022-10-27<br/>£1,346.16' },
+{ day:'2022-10-28', number: 1309.379150, tooltip: '2022-10-28<br/>£1,309.38' },
+{ day:'2022-10-29', number: 1339.195679, tooltip: '2022-10-29<br/>£1,339.20' },
+{ day:'2022-10-30', number: 1394.668457, tooltip: '2022-10-30<br/>£1,394.67' },
+{ day:'2022-10-31', number: 1371.696289, tooltip: '2022-10-31<br/>£1,371.70' },
+{ day:'2022-11-01', number: 1371.382935, tooltip: '2022-11-01<br/>£1,371.38' },
+{ day:'2022-11-02', number: 1374.742798, tooltip: '2022-11-02<br/>£1,374.74' },
+{ day:'2022-11-03', number: 1335.006836, tooltip: '2022-11-03<br/>£1,335.01' },
+{ day:'2022-11-04', number: 1370.925415, tooltip: '2022-11-04<br/>£1,370.93' },
+{ day:'2022-11-05', number: 1445.656616, tooltip: '2022-11-05<br/>£1,445.66' },
+{ day:'2022-11-06', number: 1430.807861, tooltip: '2022-11-06<br/>£1,430.81' },
+{ day:'2022-11-07', number: 1387.366333, tooltip: '2022-11-07<br/>£1,387.37' },
+{ day:'2022-11-08', number: 1362.199341, tooltip: '2022-11-08<br/>£1,362.20' },
+{ day:'2022-11-09', number: 1154.013428, tooltip: '2022-11-09<br/>£1,154.01' },
+{ day:'2022-11-10', number: 967.698303, tooltip: '2022-11-10<br/>£967.70' },
+{ day:'2022-11-11', number: 1110.682129, tooltip: '2022-11-11<br/>£1,110.68' },
+{ day:'2022-11-12', number: 1088.596069, tooltip: '2022-11-12<br/>£1,088.60' },
+{ day:'2022-11-13', number: 1060.562866, tooltip: '2022-11-13<br/>£1,060.56' },
+{ day:'2022-11-14', number: 1035.794678, tooltip: '2022-11-14<br/>£1,035.79' },
+{ day:'2022-11-15', number: 1056.543579, tooltip: '2022-11-15<br/>£1,056.54' },
+{ day:'2022-11-16', number: 1053.745117, tooltip: '2022-11-16<br/>£1,053.75' },
+{ day:'2022-11-17', number: 1020.494629, tooltip: '2022-11-17<br/>£1,020.49' },
+{ day:'2022-11-18', number: 1012.568054, tooltip: '2022-11-18<br/>£1,012.57' },
+{ day:'2022-11-19', number: 1019.439331, tooltip: '2022-11-19<br/>£1,019.44' },
+{ day:'2022-11-20', number: 1024.886475, tooltip: '2022-11-20<br/>£1,024.89' },
+{ day:'2022-11-21', number: 961.199219, tooltip: '2022-11-21<br/>£961.20' },
+{ day:'2022-11-22', number: 936.791443, tooltip: '2022-11-22<br/>£936.79' },
+{ day:'2022-11-23', number: 954.638550, tooltip: '2022-11-23<br/>£954.64' },
+{ day:'2022-11-24', number: 979.857117, tooltip: '2022-11-24<br/>£979.86' },
+{ day:'2022-11-25', number: 993.859192, tooltip: '2022-11-25<br/>£993.86' },
+{ day:'2022-11-26', number: 991.309814, tooltip: '2022-11-26<br/>£991.31' },
+{ day:'2022-11-27', number: 997.358459, tooltip: '2022-11-27<br/>£997.36' },
+{ day:'2022-11-28', number: 991.327148, tooltip: '2022-11-28<br/>£991.33' },
+{ day:'2022-11-29', number: 978.160095, tooltip: '2022-11-29<br/>£978.16' },
+{ day:'2022-11-30', number: 1018.644775, tooltip: '2022-11-30<br/>£1,018.64' },
+{ day:'2022-12-01', number: 1073.081177, tooltip: '2022-12-01<br/>£1,073.08' },
+{ day:'2022-12-02', number: 1041.167603, tooltip: '2022-12-02<br/>£1,041.17' },
+{ day:'2022-12-03', number: 1052.896729, tooltip: '2022-12-03<br/>£1,052.90' },
+{ day:'2022-12-04', number: 1010.747131, tooltip: '2022-12-04<br/>£1,010.75' },
+{ day:'2022-12-05', number: 1040.973145, tooltip: '2022-12-05<br/>£1,040.97' },
+{ day:'2022-12-06', number: 1033.282104, tooltip: '2022-12-06<br/>£1,033.28' },
+{ day:'2022-12-07', number: 1048.063721, tooltip: '2022-12-07<br/>£1,048.06' },
+{ day:'2022-12-08', number: 1009.387939, tooltip: '2022-12-08<br/>£1,009.39' },
+{ day:'2022-12-09', number: 1047.192261, tooltip: '2022-12-09<br/>£1,047.19' },
+{ day:'2022-12-10', number: 1030.902222, tooltip: '2022-12-10<br/>£1,030.90' },
+{ day:'2022-12-11', number: 1033.177856, tooltip: '2022-12-11<br/>£1,033.18' },
+{ day:'2022-12-12', number: 1032.698364, tooltip: '2022-12-12<br/>£1,032.70' },
+{ day:'2022-12-13', number: 1038.912354, tooltip: '2022-12-13<br/>£1,038.91' },
+{ day:'2022-12-14', number: 1068.968018, tooltip: '2022-12-14<br/>£1,068.97' },
+{ day:'2022-12-15', number: 1054.204956, tooltip: '2022-12-15<br/>£1,054.20' },
+{ day:'2022-12-16', number: 1038.868774, tooltip: '2022-12-16<br/>£1,038.87' },
+{ day:'2022-12-17', number: 961.530396, tooltip: '2022-12-17<br/>£961.53' },
+{ day:'2022-12-18', number: 978.366821, tooltip: '2022-12-18<br/>£978.37' },
+{ day:'2022-12-19', number: 974.354736, tooltip: '2022-12-19<br/>£974.35' },
+{ day:'2022-12-20', number: 960.825317, tooltip: '2022-12-20<br/>£960.83' },
+{ day:'2022-12-21', number: 998.974854, tooltip: '2022-12-21<br/>£998.97' },
+{ day:'2022-12-22', number: 1004.994995, tooltip: '2022-12-22<br/>£1,004.99' },
+{ day:'2022-12-23', number: 1011.887695, tooltip: '2022-12-23<br/>£1,011.89' },
+{ day:'2022-12-24', number: 1012.293945, tooltip: '2022-12-24<br/>£1,012.29' },
+{ day:'2022-12-25', number: 1013.168152, tooltip: '2022-12-25<br/>£1,013.17' },
+{ day:'2022-12-26', number: 1011.132080, tooltip: '2022-12-26<br/>£1,011.13' },
+{ day:'2022-12-27', number: 1015.485229, tooltip: '2022-12-27<br/>£1,015.49' },
+{ day:'2022-12-28', number: 1008.388062, tooltip: '2022-12-28<br/>£1,008.39' },
+{ day:'2022-12-29', number: 989.362549, tooltip: '2022-12-29<br/>£989.36' },
+{ day:'2022-12-30', number: 996.730835, tooltip: '2022-12-30<br/>£996.73' },
+{ day:'2022-12-31', number: 990.960510, tooltip: '2022-12-31<br/>£990.96' },
+{ day:'2023-01-01', number: 989.183167, tooltip: '2023-01-01<br/>£989.18' },
+{ day:'2023-01-02', number: 992.893250, tooltip: '2023-01-02<br/>£992.89' },
+{ day:'2023-01-03', number: 1007.003357, tooltip: '2023-01-03<br/>£1,007.00' },
+{ day:'2023-01-04', number: 1015.088074, tooltip: '2023-01-04<br/>£1,015.09' },
+{ day:'2023-01-05', number: 1042.177368, tooltip: '2023-01-05<br/>£1,042.18' },
+{ day:'2023-01-06', number: 1050.025391, tooltip: '2023-01-06<br/>£1,050.03' },
+{ day:'2023-01-07', number: 1049.714966, tooltip: '2023-01-07<br/>£1,049.71' },
+{ day:'2023-01-08', number: 1045.383667, tooltip: '2023-01-08<br/>£1,045.38' },
+{ day:'2023-01-09', number: 1062.251221, tooltip: '2023-01-09<br/>£1,062.25' },
+{ day:'2023-01-10', number: 1084.551147, tooltip: '2023-01-10<br/>£1,084.55' },
+{ day:'2023-01-11', number: 1099.649292, tooltip: '2023-01-11<br/>£1,099.65' },
+{ day:'2023-01-12', number: 1155.832764, tooltip: '2023-01-12<br/>£1,155.83' },
+{ day:'2023-01-13', number: 1160.630127, tooltip: '2023-01-13<br/>£1,160.63' },
+{ day:'2023-01-14', number: 1186.680664, tooltip: '2023-01-14<br/>£1,186.68' },
+{ day:'2023-01-15', number: 1267.870361, tooltip: '2023-01-15<br/>£1,267.87' },
+{ day:'2023-01-16', number: 1270.120605, tooltip: '2023-01-16<br/>£1,270.12' },
+{ day:'2023-01-17', number: 1291.832397, tooltip: '2023-01-17<br/>£1,291.83' },
+{ day:'2023-01-18', number: 1276.251221, tooltip: '2023-01-18<br/>£1,276.25' },
+{ day:'2023-01-19', number: 1227.226440, tooltip: '2023-01-19<br/>£1,227.23' },
+{ day:'2023-01-20', number: 1252.678711, tooltip: '2023-01-20<br/>£1,252.68' },
+{ day:'2023-01-21', number: 1339.336304, tooltip: '2023-01-21<br/>£1,339.34' },
+{ day:'2023-01-22', number: 1313.557739, tooltip: '2023-01-22<br/>£1,313.56' },
+{ day:'2023-01-23', number: 1312.682007, tooltip: '2023-01-23<br/>£1,312.68' },
+{ day:'2023-01-24', number: 1314.982300, tooltip: '2023-01-24<br/>£1,314.98' },
+{ day:'2023-01-25', number: 1262.450928, tooltip: '2023-01-25<br/>£1,262.45' },
+{ day:'2023-01-26', number: 1298.162354, tooltip: '2023-01-26<br/>£1,298.16' },
+{ day:'2023-01-27', number: 1291.265015, tooltip: '2023-01-27<br/>£1,291.27' },
+{ day:'2023-01-28', number: 1291.555420, tooltip: '2023-01-28<br/>£1,291.56' },
+];
+	var name = "Ether";
+	var conversion = "ETH-GBP";
+
+	var cryptoDates = {
+		"Today's Open": "Sat, Jan 28, 2023",
+		"vs Day":       "Fri, Jan 27, 2023",
+		"vs Week":      "Sat, Jan 21, 2023",
+		"vs Month":     "Wed, Dec 28, 2022",
+		"vs Year":      "Fri, Jan 28, 2022",
+		"vs YTD":       "Sun, Jan 1, 2023",
+	}
+
+	var cryptoData = {
+		"Today's Open": "£1,291.56",
+		'vs Day':       "0.0%",
+		'vs Week':      "-3.6%",
+		'vs Month':     "+28.1%",
+		'vs Year':      "-28.6%",
+		'vs YTD':       "+30.6%"
+	};
+
+	var box = makeBox(3, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4B1;<a href="https://finance.yahoo.com/quote/' + conversion + '/history">' + name + '</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');		
+	var insideLeft = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('left', 0)
+		.style('width', '37%');
+
+	var table = insideLeft
+		.style('color', '#000')
+		.append('table');
+	
+	for (var item of Object.keys(cryptoData)) {
+		var row = table
+			.append('tr')
+			.attr('class', 'ttt')
+			.attr('data-tt', cryptoDates[item])
+			.style('font-weight', item.startsWith("Today") ? "bold" : "normal")
+			.style('border-bottom', '1px solid #000');
+		row
+			.append('td')
+			.style('text-align', 'left')
+			.html(item + ':&nbsp;');
+		row
+			.append('td')
+			.style('text-align', 'right')
+			.attr('class', 'code')
+			.html(cryptoData[item]);
+	}
+
+	var insideRight = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('right', 0)
+		.style('width', '66%');
+	createLineChart(400, 150, insideRight, data, 2);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function crypto() {
+
+	var data = [
+{ day:'2022-01-29', number: 0.314218, tooltip: '2022-01-29<br/>£0.31' },
+{ day:'2022-01-30', number: 0.322304, tooltip: '2022-01-30<br/>£0.32' },
+{ day:'2022-01-31', number: 0.316438, tooltip: '2022-01-31<br/>£0.32' },
+{ day:'2022-02-01', number: 0.319036, tooltip: '2022-02-01<br/>£0.32' },
+{ day:'2022-02-02', number: 0.323184, tooltip: '2022-02-02<br/>£0.32' },
+{ day:'2022-02-03', number: 0.297025, tooltip: '2022-02-03<br/>£0.30' },
+{ day:'2022-02-04', number: 0.295587, tooltip: '2022-02-04<br/>£0.30' },
+{ day:'2022-02-05', number: 0.322202, tooltip: '2022-02-05<br/>£0.32' },
+{ day:'2022-02-06', number: 0.331215, tooltip: '2022-02-06<br/>£0.33' },
+{ day:'2022-02-07', number: 0.341127, tooltip: '2022-02-07<br/>£0.34' },
+{ day:'2022-02-08', number: 0.365709, tooltip: '2022-02-08<br/>£0.37' },
+{ day:'2022-02-09', number: 0.359750, tooltip: '2022-02-09<br/>£0.36' },
+{ day:'2022-02-10', number: 0.380236, tooltip: '2022-02-10<br/>£0.38' },
+{ day:'2022-02-11', number: 0.375584, tooltip: '2022-02-11<br/>£0.38' },
+{ day:'2022-02-12', number: 0.353515, tooltip: '2022-02-12<br/>£0.35' },
+{ day:'2022-02-13', number: 0.358343, tooltip: '2022-02-13<br/>£0.36' },
+{ day:'2022-02-14', number: 0.371566, tooltip: '2022-02-14<br/>£0.37' },
+{ day:'2022-02-15', number: 0.347702, tooltip: '2022-02-15<br/>£0.35' },
+{ day:'2022-02-16', number: 0.366031, tooltip: '2022-02-16<br/>£0.37' },
+{ day:'2022-02-17', number: 0.353130, tooltip: '2022-02-17<br/>£0.35' },
+{ day:'2022-02-18', number: 0.315710, tooltip: '2022-02-18<br/>£0.32' },
+{ day:'2022-02-19', number: 0.320156, tooltip: '2022-02-19<br/>£0.32' },
+{ day:'2022-02-20', number: 0.321311, tooltip: '2022-02-20<br/>£0.32' },
+{ day:'2022-02-21', number: 0.297606, tooltip: '2022-02-21<br/>£0.30' },
+{ day:'2022-02-22', number: 0.283862, tooltip: '2022-02-22<br/>£0.28' },
+{ day:'2022-02-23', number: 0.297306, tooltip: '2022-02-23<br/>£0.30' },
+{ day:'2022-02-24', number: 0.294575, tooltip: '2022-02-24<br/>£0.29' },
+{ day:'2022-02-25', number: 0.295040, tooltip: '2022-02-25<br/>£0.30' },
+{ day:'2022-02-26', number: 0.311670, tooltip: '2022-02-26<br/>£0.31' },
+{ day:'2022-02-27', number: 0.308589, tooltip: '2022-02-27<br/>£0.31' },
+{ day:'2022-02-28', number: 0.295046, tooltip: '2022-02-28<br/>£0.30' },
+{ day:'2022-03-01', number: 0.326868, tooltip: '2022-03-01<br/>£0.33' },
+{ day:'2022-03-02', number: 0.329220, tooltip: '2022-03-02<br/>£0.33' },
+{ day:'2022-03-03', number: 0.333081, tooltip: '2022-03-03<br/>£0.33' },
+{ day:'2022-03-04', number: 0.322280, tooltip: '2022-03-04<br/>£0.32' },
+{ day:'2022-03-05', number: 0.299501, tooltip: '2022-03-05<br/>£0.30' },
+{ day:'2022-03-06', number: 0.309593, tooltip: '2022-03-06<br/>£0.31' },
+{ day:'2022-03-07', number: 0.296386, tooltip: '2022-03-07<br/>£0.30' },
+{ day:'2022-03-08', number: 0.289078, tooltip: '2022-03-08<br/>£0.29' },
+{ day:'2022-03-09', number: 0.295552, tooltip: '2022-03-09<br/>£0.30' },
+{ day:'2022-03-10', number: 0.309997, tooltip: '2022-03-10<br/>£0.31' },
+{ day:'2022-03-11', number: 0.297176, tooltip: '2022-03-11<br/>£0.30' },
+{ day:'2022-03-12', number: 0.293760, tooltip: '2022-03-12<br/>£0.29' },
+{ day:'2022-03-13', number: 0.297804, tooltip: '2022-03-13<br/>£0.30' },
+{ day:'2022-03-14', number: 0.288861, tooltip: '2022-03-14<br/>£0.29' },
+{ day:'2022-03-15', number: 0.291512, tooltip: '2022-03-15<br/>£0.29' },
+{ day:'2022-03-16', number: 0.294925, tooltip: '2022-03-16<br/>£0.29' },
+{ day:'2022-03-17', number: 0.308874, tooltip: '2022-03-17<br/>£0.31' },
+{ day:'2022-03-18', number: 0.304954, tooltip: '2022-03-18<br/>£0.30' },
+{ day:'2022-03-19', number: 0.308125, tooltip: '2022-03-19<br/>£0.31' },
+{ day:'2022-03-20', number: 0.317034, tooltip: '2022-03-20<br/>£0.32' },
+{ day:'2022-03-21', number: 0.308161, tooltip: '2022-03-21<br/>£0.31' },
+{ day:'2022-03-22', number: 0.307806, tooltip: '2022-03-22<br/>£0.31' },
+{ day:'2022-03-23', number: 0.314699, tooltip: '2022-03-23<br/>£0.31' },
+{ day:'2022-03-24', number: 0.329025, tooltip: '2022-03-24<br/>£0.33' },
+{ day:'2022-03-25', number: 0.340872, tooltip: '2022-03-25<br/>£0.34' },
+{ day:'2022-03-26', number: 0.345528, tooltip: '2022-03-26<br/>£0.35' },
+{ day:'2022-03-27', number: 0.346959, tooltip: '2022-03-27<br/>£0.35' },
+{ day:'2022-03-28', number: 0.368418, tooltip: '2022-03-28<br/>£0.37' },
+{ day:'2022-03-29', number: 0.367233, tooltip: '2022-03-29<br/>£0.37' },
+{ day:'2022-03-30', number: 0.367165, tooltip: '2022-03-30<br/>£0.37' },
+{ day:'2022-03-31', number: 0.360750, tooltip: '2022-03-31<br/>£0.36' },
+{ day:'2022-04-01', number: 0.350289, tooltip: '2022-04-01<br/>£0.35' },
+{ day:'2022-04-02', number: 0.366674, tooltip: '2022-04-02<br/>£0.37' },
+{ day:'2022-04-03', number: 0.365255, tooltip: '2022-04-03<br/>£0.37' },
+{ day:'2022-04-04', number: 0.366331, tooltip: '2022-04-04<br/>£0.37' },
+{ day:'2022-04-05', number: 0.368759, tooltip: '2022-04-05<br/>£0.37' },
+{ day:'2022-04-06', number: 0.360212, tooltip: '2022-04-06<br/>£0.36' },
+{ day:'2022-04-07', number: 0.336628, tooltip: '2022-04-07<br/>£0.34' },
+{ day:'2022-04-08', number: 0.343246, tooltip: '2022-04-08<br/>£0.34' },
+{ day:'2022-04-09', number: 0.334274, tooltip: '2022-04-09<br/>£0.33' },
+{ day:'2022-04-10', number: 0.341613, tooltip: '2022-04-10<br/>£0.34' },
+{ day:'2022-04-11', number: 0.338276, tooltip: '2022-04-11<br/>£0.34' },
+{ day:'2022-04-12', number: 0.309332, tooltip: '2022-04-12<br/>£0.31' },
+{ day:'2022-04-13', number: 0.320502, tooltip: '2022-04-13<br/>£0.32' },
+{ day:'2022-04-14', number: 0.322153, tooltip: '2022-04-14<br/>£0.32' },
+{ day:'2022-04-15', number: 0.314332, tooltip: '2022-04-15<br/>£0.31' },
+{ day:'2022-04-16', number: 0.311806, tooltip: '2022-04-16<br/>£0.31' },
+{ day:'2022-04-17', number: 0.312717, tooltip: '2022-04-17<br/>£0.31' },
+{ day:'2022-04-18', number: 0.310231, tooltip: '2022-04-18<br/>£0.31' },
+{ day:'2022-04-19', number: 0.316238, tooltip: '2022-04-19<br/>£0.32' },
+{ day:'2022-04-20', number: 0.320444, tooltip: '2022-04-20<br/>£0.32' },
+{ day:'2022-04-21', number: 0.319188, tooltip: '2022-04-21<br/>£0.32' },
+{ day:'2022-04-22', number: 0.312963, tooltip: '2022-04-22<br/>£0.31' },
+{ day:'2022-04-23', number: 0.315240, tooltip: '2022-04-23<br/>£0.32' },
+{ day:'2022-04-24', number: 0.315869, tooltip: '2022-04-24<br/>£0.32' },
+{ day:'2022-04-25', number: 0.310148, tooltip: '2022-04-25<br/>£0.31' },
+{ day:'2022-04-26', number: 0.316298, tooltip: '2022-04-26<br/>£0.32' },
+{ day:'2022-04-27', number: 0.301432, tooltip: '2022-04-27<br/>£0.30' },
+{ day:'2022-04-28', number: 0.310703, tooltip: '2022-04-28<br/>£0.31' },
+{ day:'2022-04-29', number: 0.312363, tooltip: '2022-04-29<br/>£0.31' },
+{ day:'2022-04-30', number: 0.294456, tooltip: '2022-04-30<br/>£0.29' },
+{ day:'2022-05-01', number: 0.278699, tooltip: '2022-05-01<br/>£0.28' },
+{ day:'2022-05-02', number: 0.249334, tooltip: '2022-05-02<br/>£0.25' },
+{ day:'2022-05-03', number: 0.220930, tooltip: '2022-05-03<br/>£0.22' },
+{ day:'2022-05-04', number: 0.232761, tooltip: '2022-05-04<br/>£0.23' },
+{ day:'2022-05-05', number: 0.247205, tooltip: '2022-05-05<br/>£0.25' },
+{ day:'2022-05-06', number: 0.230020, tooltip: '2022-05-06<br/>£0.23' },
+{ day:'2022-05-07', number: 0.227171, tooltip: '2022-05-07<br/>£0.23' },
+{ day:'2022-05-08', number: 0.220240, tooltip: '2022-05-08<br/>£0.22' },
+{ day:'2022-05-09', number: 0.208000, tooltip: '2022-05-09<br/>£0.21' },
+{ day:'2022-05-10', number: 0.169831, tooltip: '2022-05-10<br/>£0.17' },
+{ day:'2022-05-11', number: 0.187178, tooltip: '2022-05-11<br/>£0.19' },
+{ day:'2022-05-12', number: 0.158838, tooltip: '2022-05-12<br/>£0.16' },
+{ day:'2022-05-13', number: 0.145245, tooltip: '2022-05-13<br/>£0.15' },
+{ day:'2022-05-14', number: 0.148459, tooltip: '2022-05-14<br/>£0.15' },
+{ day:'2022-05-15', number: 0.154039, tooltip: '2022-05-15<br/>£0.15' },
+{ day:'2022-05-16', number: 0.166025, tooltip: '2022-05-16<br/>£0.17' },
+{ day:'2022-05-17', number: 0.157174, tooltip: '2022-05-17<br/>£0.16' },
+{ day:'2022-05-18', number: 0.162024, tooltip: '2022-05-18<br/>£0.16' },
+{ day:'2022-05-19', number: 0.150041, tooltip: '2022-05-19<br/>£0.15' },
+{ day:'2022-05-20', number: 0.157608, tooltip: '2022-05-20<br/>£0.16' },
+{ day:'2022-05-21', number: 0.150042, tooltip: '2022-05-21<br/>£0.15' },
+{ day:'2022-05-22', number: 0.151613, tooltip: '2022-05-22<br/>£0.15' },
+{ day:'2022-05-23', number: 0.156470, tooltip: '2022-05-23<br/>£0.16' },
+{ day:'2022-05-24', number: 0.147404, tooltip: '2022-05-24<br/>£0.15' },
+{ day:'2022-05-25', number: 0.151136, tooltip: '2022-05-25<br/>£0.15' },
+{ day:'2022-05-26', number: 0.146197, tooltip: '2022-05-26<br/>£0.15' },
+{ day:'2022-05-27', number: 0.134876, tooltip: '2022-05-27<br/>£0.13' },
+{ day:'2022-05-28', number: 0.133155, tooltip: '2022-05-28<br/>£0.13' },
+{ day:'2022-05-29', number: 0.135043, tooltip: '2022-05-29<br/>£0.14' },
+{ day:'2022-05-30', number: 0.138171, tooltip: '2022-05-30<br/>£0.14' },
+{ day:'2022-05-31', number: 0.150056, tooltip: '2022-05-31<br/>£0.15' },
+{ day:'2022-06-01', number: 0.150065, tooltip: '2022-06-01<br/>£0.15' },
+{ day:'2022-06-02', number: 0.143236, tooltip: '2022-06-02<br/>£0.14' },
+{ day:'2022-06-03', number: 0.146810, tooltip: '2022-06-03<br/>£0.15' },
+{ day:'2022-06-04', number: 0.142823, tooltip: '2022-06-04<br/>£0.14' },
+{ day:'2022-06-05', number: 0.143710, tooltip: '2022-06-05<br/>£0.14' },
+{ day:'2022-06-06', number: 0.143238, tooltip: '2022-06-06<br/>£0.14' },
+{ day:'2022-06-07', number: 0.145120, tooltip: '2022-06-07<br/>£0.15' },
+{ day:'2022-06-08', number: 0.141579, tooltip: '2022-06-08<br/>£0.14' },
+{ day:'2022-06-09', number: 0.140615, tooltip: '2022-06-09<br/>£0.14' },
+{ day:'2022-06-10', number: 0.139515, tooltip: '2022-06-10<br/>£0.14' },
+{ day:'2022-06-11', number: 0.134551, tooltip: '2022-06-11<br/>£0.13' },
+{ day:'2022-06-12', number: 0.124366, tooltip: '2022-06-12<br/>£0.12' },
+{ day:'2022-06-13', number: 0.115218, tooltip: '2022-06-13<br/>£0.12' },
+{ day:'2022-06-14', number: 0.095963, tooltip: '2022-06-14<br/>£0.10' },
+{ day:'2022-06-15', number: 0.098730, tooltip: '2022-06-15<br/>£0.10' },
+{ day:'2022-06-16', number: 0.100004, tooltip: '2022-06-16<br/>£0.10' },
+{ day:'2022-06-17', number: 0.088487, tooltip: '2022-06-17<br/>£0.09' },
+{ day:'2022-06-18', number: 0.093969, tooltip: '2022-06-18<br/>£0.09' },
+{ day:'2022-06-19', number: 0.087166, tooltip: '2022-06-19<br/>£0.09' },
+{ day:'2022-06-20', number: 0.093760, tooltip: '2022-06-20<br/>£0.09' },
+{ day:'2022-06-21', number: 0.093685, tooltip: '2022-06-21<br/>£0.09' },
+{ day:'2022-06-22', number: 0.094894, tooltip: '2022-06-22<br/>£0.09' },
+{ day:'2022-06-23', number: 0.093321, tooltip: '2022-06-23<br/>£0.09' },
+{ day:'2022-06-24', number: 0.098762, tooltip: '2022-06-24<br/>£0.10' },
+{ day:'2022-06-25', number: 0.103670, tooltip: '2022-06-25<br/>£0.10' },
+{ day:'2022-06-26', number: 0.105185, tooltip: '2022-06-26<br/>£0.11' },
+{ day:'2022-06-27', number: 0.101269, tooltip: '2022-06-27<br/>£0.10' },
+{ day:'2022-06-28', number: 0.101382, tooltip: '2022-06-28<br/>£0.10' },
+{ day:'2022-06-29', number: 0.098476, tooltip: '2022-06-29<br/>£0.10' },
+{ day:'2022-06-30', number: 0.096476, tooltip: '2022-06-30<br/>£0.10' },
+{ day:'2022-07-01', number: 0.094541, tooltip: '2022-07-01<br/>£0.09' },
+{ day:'2022-07-02', number: 0.093041, tooltip: '2022-07-02<br/>£0.09' },
+{ day:'2022-07-03', number: 0.093297, tooltip: '2022-07-03<br/>£0.09' },
+{ day:'2022-07-04', number: 0.093562, tooltip: '2022-07-04<br/>£0.09' },
+{ day:'2022-07-05', number: 0.097775, tooltip: '2022-07-05<br/>£0.10' },
+{ day:'2022-07-06', number: 0.097180, tooltip: '2022-07-06<br/>£0.10' },
+{ day:'2022-07-07', number: 0.100299, tooltip: '2022-07-07<br/>£0.10' },
+{ day:'2022-07-08', number: 0.102650, tooltip: '2022-07-08<br/>£0.10' },
+{ day:'2022-07-09', number: 0.102092, tooltip: '2022-07-09<br/>£0.10' },
+{ day:'2022-07-10', number: 0.103654, tooltip: '2022-07-10<br/>£0.10' },
+{ day:'2022-07-11', number: 0.099294, tooltip: '2022-07-11<br/>£0.10' },
+{ day:'2022-07-12', number: 0.095251, tooltip: '2022-07-12<br/>£0.10' },
+{ day:'2022-07-13', number: 0.092730, tooltip: '2022-07-13<br/>£0.09' },
+{ day:'2022-07-14', number: 0.097829, tooltip: '2022-07-14<br/>£0.10' },
+{ day:'2022-07-15', number: 0.100036, tooltip: '2022-07-15<br/>£0.10' },
+{ day:'2022-07-16', number: 0.101102, tooltip: '2022-07-16<br/>£0.10' },
+{ day:'2022-07-17', number: 0.103532, tooltip: '2022-07-17<br/>£0.10' },
+{ day:'2022-07-18', number: 0.101471, tooltip: '2022-07-18<br/>£0.10' },
+{ day:'2022-07-19', number: 0.110678, tooltip: '2022-07-19<br/>£0.11' },
+{ day:'2022-07-20', number: 0.112834, tooltip: '2022-07-20<br/>£0.11' },
+{ day:'2022-07-21', number: 0.110242, tooltip: '2022-07-21<br/>£0.11' },
+{ day:'2022-07-22', number: 0.112077, tooltip: '2022-07-22<br/>£0.11' },
+{ day:'2022-07-23', number: 0.109183, tooltip: '2022-07-23<br/>£0.11' },
+{ day:'2022-07-24', number: 0.105446, tooltip: '2022-07-24<br/>£0.11' },
+{ day:'2022-07-25', number: 0.107466, tooltip: '2022-07-25<br/>£0.11' },
+{ day:'2022-07-26', number: 0.100071, tooltip: '2022-07-26<br/>£0.10' },
+{ day:'2022-07-27', number: 0.100076, tooltip: '2022-07-27<br/>£0.10' },
+{ day:'2022-07-28', number: 0.107722, tooltip: '2022-07-28<br/>£0.11' },
+{ day:'2022-07-29', number: 0.111075, tooltip: '2022-07-29<br/>£0.11' },
+{ day:'2022-07-30', number: 0.113100, tooltip: '2022-07-30<br/>£0.11' },
+{ day:'2022-07-31', number: 0.113118, tooltip: '2022-07-31<br/>£0.11' },
+{ day:'2022-08-01', number: 0.112787, tooltip: '2022-08-01<br/>£0.11' },
+{ day:'2022-08-02', number: 0.113167, tooltip: '2022-08-02<br/>£0.11' },
+{ day:'2022-08-03', number: 0.125228, tooltip: '2022-08-03<br/>£0.13' },
+{ day:'2022-08-04', number: 0.118991, tooltip: '2022-08-04<br/>£0.12' },
+{ day:'2022-08-05', number: 0.117144, tooltip: '2022-08-05<br/>£0.12' },
+{ day:'2022-08-06', number: 0.121809, tooltip: '2022-08-06<br/>£0.12' },
+{ day:'2022-08-07', number: 0.119828, tooltip: '2022-08-07<br/>£0.12' },
+{ day:'2022-08-08', number: 0.121569, tooltip: '2022-08-08<br/>£0.12' },
+{ day:'2022-08-09', number: 0.124455, tooltip: '2022-08-09<br/>£0.12' },
+{ day:'2022-08-10', number: 0.120306, tooltip: '2022-08-10<br/>£0.12' },
+{ day:'2022-08-11', number: 0.123865, tooltip: '2022-08-11<br/>£0.12' },
+{ day:'2022-08-12', number: 0.123960, tooltip: '2022-08-12<br/>£0.12' },
+{ day:'2022-08-13', number: 0.127921, tooltip: '2022-08-13<br/>£0.13' },
+{ day:'2022-08-14', number: 0.127027, tooltip: '2022-08-14<br/>£0.13' },
+{ day:'2022-08-15', number: 0.125463, tooltip: '2022-08-15<br/>£0.13' },
+{ day:'2022-08-16', number: 0.125421, tooltip: '2022-08-16<br/>£0.13' },
+{ day:'2022-08-17', number: 0.124490, tooltip: '2022-08-17<br/>£0.12' },
+{ day:'2022-08-18', number: 0.119018, tooltip: '2022-08-18<br/>£0.12' },
+{ day:'2022-08-19', number: 0.118074, tooltip: '2022-08-19<br/>£0.12' },
+{ day:'2022-08-20', number: 0.103479, tooltip: '2022-08-20<br/>£0.10' },
+{ day:'2022-08-21', number: 0.105541, tooltip: '2022-08-21<br/>£0.11' },
+{ day:'2022-08-22', number: 0.108097, tooltip: '2022-08-22<br/>£0.11' },
+{ day:'2022-08-23', number: 0.108871, tooltip: '2022-08-23<br/>£0.11' },
+{ day:'2022-08-24', number: 0.108867, tooltip: '2022-08-24<br/>£0.11' },
+{ day:'2022-08-25', number: 0.109365, tooltip: '2022-08-25<br/>£0.11' },
+{ day:'2022-08-26', number: 0.111356, tooltip: '2022-08-26<br/>£0.11' },
+{ day:'2022-08-27', number: 0.102557, tooltip: '2022-08-27<br/>£0.10' },
+{ day:'2022-08-28', number: 0.102354, tooltip: '2022-08-28<br/>£0.10' },
+{ day:'2022-08-29', number: 0.100930, tooltip: '2022-08-29<br/>£0.10' },
+{ day:'2022-08-30', number: 0.104990, tooltip: '2022-08-30<br/>£0.10' },
+{ day:'2022-08-31', number: 0.103805, tooltip: '2022-08-31<br/>£0.10' },
+{ day:'2022-09-01', number: 0.105235, tooltip: '2022-09-01<br/>£0.11' },
+{ day:'2022-09-02', number: 0.105719, tooltip: '2022-09-02<br/>£0.11' },
+{ day:'2022-09-03', number: 0.103991, tooltip: '2022-09-03<br/>£0.10' },
+{ day:'2022-09-04', number: 0.103788, tooltip: '2022-09-04<br/>£0.10' },
+{ day:'2022-09-05', number: 0.104733, tooltip: '2022-09-05<br/>£0.10' },
+{ day:'2022-09-06', number: 0.103954, tooltip: '2022-09-06<br/>£0.10' },
+{ day:'2022-09-07', number: 0.097633, tooltip: '2022-09-07<br/>£0.10' },
+{ day:'2022-09-08', number: 0.098498, tooltip: '2022-09-08<br/>£0.10' },
+{ day:'2022-09-09', number: 0.100429, tooltip: '2022-09-09<br/>£0.10' },
+{ day:'2022-09-10', number: 0.103755, tooltip: '2022-09-10<br/>£0.10' },
+{ day:'2022-09-11', number: 0.107177, tooltip: '2022-09-11<br/>£0.11' },
+{ day:'2022-09-12', number: 0.106066, tooltip: '2022-09-12<br/>£0.11' },
+{ day:'2022-09-13', number: 0.104125, tooltip: '2022-09-13<br/>£0.10' },
+{ day:'2022-09-14', number: 0.095941, tooltip: '2022-09-14<br/>£0.10' },
+{ day:'2022-09-15', number: 0.096821, tooltip: '2022-09-15<br/>£0.10' },
+{ day:'2022-09-16', number: 0.092478, tooltip: '2022-09-16<br/>£0.09' },
+{ day:'2022-09-17', number: 0.092727, tooltip: '2022-09-17<br/>£0.09' },
+{ day:'2022-09-18', number: 0.097140, tooltip: '2022-09-18<br/>£0.10' },
+{ day:'2022-09-19', number: 0.089229, tooltip: '2022-09-19<br/>£0.09' },
+{ day:'2022-09-20', number: 0.091150, tooltip: '2022-09-20<br/>£0.09' },
+{ day:'2022-09-21', number: 0.091306, tooltip: '2022-09-21<br/>£0.09' },
+{ day:'2022-09-22', number: 0.090709, tooltip: '2022-09-22<br/>£0.09' },
+{ day:'2022-09-23', number: 0.096330, tooltip: '2022-09-23<br/>£0.10' },
+{ day:'2022-09-24', number: 0.112716, tooltip: '2022-09-24<br/>£0.11' },
+{ day:'2022-09-25', number: 0.108968, tooltip: '2022-09-25<br/>£0.11' },
+{ day:'2022-09-26', number: 0.106772, tooltip: '2022-09-26<br/>£0.11' },
+{ day:'2022-09-27', number: 0.107027, tooltip: '2022-09-27<br/>£0.11' },
+{ day:'2022-09-28', number: 0.103782, tooltip: '2022-09-28<br/>£0.10' },
+{ day:'2022-09-29', number: 0.103479, tooltip: '2022-09-29<br/>£0.10' },
+{ day:'2022-09-30', number: 0.100034, tooltip: '2022-09-30<br/>£0.10' },
+{ day:'2022-10-01', number: 0.098244, tooltip: '2022-10-01<br/>£0.10' },
+{ day:'2022-10-02', number: 0.099562, tooltip: '2022-10-02<br/>£0.10' },
+{ day:'2022-10-03', number: 0.098352, tooltip: '2022-10-03<br/>£0.10' },
+{ day:'2022-10-04', number: 0.096696, tooltip: '2022-10-04<br/>£0.10' },
+{ day:'2022-10-05', number: 0.097456, tooltip: '2022-10-05<br/>£0.10' },
+{ day:'2022-10-06', number: 0.097146, tooltip: '2022-10-06<br/>£0.10' },
+{ day:'2022-10-07', number: 0.097805, tooltip: '2022-10-07<br/>£0.10' },
+{ day:'2022-10-08', number: 0.097220, tooltip: '2022-10-08<br/>£0.10' },
+{ day:'2022-10-09', number: 0.096547, tooltip: '2022-10-09<br/>£0.10' },
+{ day:'2022-10-10', number: 0.096589, tooltip: '2022-10-10<br/>£0.10' },
+{ day:'2022-10-11', number: 0.093631, tooltip: '2022-10-11<br/>£0.09' },
+{ day:'2022-10-12', number: 0.092919, tooltip: '2022-10-12<br/>£0.09' },
+{ day:'2022-10-13', number: 0.091979, tooltip: '2022-10-13<br/>£0.09' },
+{ day:'2022-10-14', number: 0.091528, tooltip: '2022-10-14<br/>£0.09' },
+{ day:'2022-10-15', number: 0.092669, tooltip: '2022-10-15<br/>£0.09' },
+{ day:'2022-10-16', number: 0.093083, tooltip: '2022-10-16<br/>£0.09' },
+{ day:'2022-10-17', number: 0.093213, tooltip: '2022-10-17<br/>£0.09' },
+{ day:'2022-10-18', number: 0.096636, tooltip: '2022-10-18<br/>£0.10' },
+{ day:'2022-10-19', number: 0.095525, tooltip: '2022-10-19<br/>£0.10' },
+{ day:'2022-10-20', number: 0.094151, tooltip: '2022-10-20<br/>£0.09' },
+{ day:'2022-10-21', number: 0.092377, tooltip: '2022-10-21<br/>£0.09' },
+{ day:'2022-10-22', number: 0.093721, tooltip: '2022-10-22<br/>£0.09' },
+{ day:'2022-10-23', number: 0.093284, tooltip: '2022-10-23<br/>£0.09' },
+{ day:'2022-10-24', number: 0.094750, tooltip: '2022-10-24<br/>£0.09' },
+{ day:'2022-10-25', number: 0.093373, tooltip: '2022-10-25<br/>£0.09' },
+{ day:'2022-10-26', number: 0.094583, tooltip: '2022-10-26<br/>£0.09' },
+{ day:'2022-10-27', number: 0.096564, tooltip: '2022-10-27<br/>£0.10' },
+{ day:'2022-10-28', number: 0.095116, tooltip: '2022-10-28<br/>£0.10' },
+{ day:'2022-10-29', number: 0.096746, tooltip: '2022-10-29<br/>£0.10' },
+{ day:'2022-10-30', number: 0.095353, tooltip: '2022-10-30<br/>£0.10' },
+{ day:'2022-10-31', number: 0.098485, tooltip: '2022-10-31<br/>£0.10' },
+{ day:'2022-11-01', number: 0.100140, tooltip: '2022-11-01<br/>£0.10' },
+{ day:'2022-11-02', number: 0.097493, tooltip: '2022-11-02<br/>£0.10' },
+{ day:'2022-11-03', number: 0.096125, tooltip: '2022-11-03<br/>£0.10' },
+{ day:'2022-11-04', number: 0.099060, tooltip: '2022-11-04<br/>£0.10' },
+{ day:'2022-11-05', number: 0.102937, tooltip: '2022-11-05<br/>£0.10' },
+{ day:'2022-11-06', number: 0.106737, tooltip: '2022-11-06<br/>£0.11' },
+{ day:'2022-11-07', number: 0.104394, tooltip: '2022-11-07<br/>£0.10' },
+{ day:'2022-11-08', number: 0.108132, tooltip: '2022-11-08<br/>£0.11' },
+{ day:'2022-11-09', number: 0.088671, tooltip: '2022-11-09<br/>£0.09' },
+{ day:'2022-11-10', number: 0.071247, tooltip: '2022-11-10<br/>£0.07' },
+{ day:'2022-11-11', number: 0.081720, tooltip: '2022-11-11<br/>£0.08' },
+{ day:'2022-11-12', number: 0.073172, tooltip: '2022-11-12<br/>£0.07' },
+{ day:'2022-11-13', number: 0.067603, tooltip: '2022-11-13<br/>£0.07' },
+{ day:'2022-11-14', number: 0.055337, tooltip: '2022-11-14<br/>£0.06' },
+{ day:'2022-11-15', number: 0.058995, tooltip: '2022-11-15<br/>£0.06' },
+{ day:'2022-11-16', number: 0.062029, tooltip: '2022-11-16<br/>£0.06' },
+{ day:'2022-11-17', number: 0.059263, tooltip: '2022-11-17<br/>£0.06' },
+{ day:'2022-11-18', number: 0.059090, tooltip: '2022-11-18<br/>£0.06' },
+{ day:'2022-11-19', number: 0.061031, tooltip: '2022-11-19<br/>£0.06' },
+{ day:'2022-11-20', number: 0.059549, tooltip: '2022-11-20<br/>£0.06' },
+{ day:'2022-11-21', number: 0.053791, tooltip: '2022-11-21<br/>£0.05' },
+{ day:'2022-11-22', number: 0.054070, tooltip: '2022-11-22<br/>£0.05' },
+{ day:'2022-11-23', number: 0.054221, tooltip: '2022-11-23<br/>£0.05' },
+{ day:'2022-11-24', number: 0.055936, tooltip: '2022-11-24<br/>£0.06' },
+{ day:'2022-11-25', number: 0.054055, tooltip: '2022-11-25<br/>£0.05' },
+{ day:'2022-11-26', number: 0.053925, tooltip: '2022-11-26<br/>£0.05' },
+{ day:'2022-11-27', number: 0.053299, tooltip: '2022-11-27<br/>£0.05' },
+{ day:'2022-11-28', number: 0.053336, tooltip: '2022-11-28<br/>£0.05' },
+{ day:'2022-11-29', number: 0.052910, tooltip: '2022-11-29<br/>£0.05' },
+{ day:'2022-11-30', number: 0.053062, tooltip: '2022-11-30<br/>£0.05' },
+{ day:'2022-12-01', number: 0.054338, tooltip: '2022-12-01<br/>£0.05' },
+{ day:'2022-12-02', number: 0.053216, tooltip: '2022-12-02<br/>£0.05' },
+{ day:'2022-12-03', number: 0.052846, tooltip: '2022-12-03<br/>£0.05' },
+{ day:'2022-12-04', number: 0.051763, tooltip: '2022-12-04<br/>£0.05' },
+{ day:'2022-12-05', number: 0.052682, tooltip: '2022-12-05<br/>£0.05' },
+{ day:'2022-12-06', number: 0.056258, tooltip: '2022-12-06<br/>£0.06' },
+{ day:'2022-12-07', number: 0.054847, tooltip: '2022-12-07<br/>£0.05' },
+{ day:'2022-12-08', number: 0.052354, tooltip: '2022-12-08<br/>£0.05' },
+{ day:'2022-12-09', number: 0.052874, tooltip: '2022-12-09<br/>£0.05' },
+{ day:'2022-12-10', number: 0.052079, tooltip: '2022-12-10<br/>£0.05' },
+{ day:'2022-12-11', number: 0.052290, tooltip: '2022-12-11<br/>£0.05' },
+{ day:'2022-12-12', number: 0.051974, tooltip: '2022-12-12<br/>£0.05' },
+{ day:'2022-12-13', number: 0.050742, tooltip: '2022-12-13<br/>£0.05' },
+{ day:'2022-12-14', number: 0.050391, tooltip: '2022-12-14<br/>£0.05' },
+{ day:'2022-12-15', number: 0.049875, tooltip: '2022-12-15<br/>£0.05' },
+{ day:'2022-12-16', number: 0.049892, tooltip: '2022-12-16<br/>£0.05' },
+{ day:'2022-12-17', number: 0.046050, tooltip: '2022-12-17<br/>£0.05' },
+{ day:'2022-12-18', number: 0.046200, tooltip: '2022-12-18<br/>£0.05' },
+{ day:'2022-12-19', number: 0.046908, tooltip: '2022-12-19<br/>£0.05' },
+{ day:'2022-12-20', number: 0.045445, tooltip: '2022-12-20<br/>£0.05' },
+{ day:'2022-12-21', number: 0.046926, tooltip: '2022-12-21<br/>£0.05' },
+{ day:'2022-12-22', number: 0.047256, tooltip: '2022-12-22<br/>£0.05' },
+{ day:'2022-12-23', number: 0.047982, tooltip: '2022-12-23<br/>£0.05' },
+{ day:'2022-12-24', number: 0.048705, tooltip: '2022-12-24<br/>£0.05' },
+{ day:'2022-12-25', number: 0.050059, tooltip: '2022-12-25<br/>£0.05' },
+{ day:'2022-12-26', number: 0.049606, tooltip: '2022-12-26<br/>£0.05' },
+{ day:'2022-12-27', number: 0.049049, tooltip: '2022-12-27<br/>£0.05' },
+{ day:'2022-12-28', number: 0.048381, tooltip: '2022-12-28<br/>£0.05' },
+{ day:'2022-12-29', number: 0.047893, tooltip: '2022-12-29<br/>£0.05' },
+{ day:'2022-12-30', number: 0.047982, tooltip: '2022-12-30<br/>£0.05' },
+{ day:'2022-12-31', number: 0.046259, tooltip: '2022-12-31<br/>£0.05' },
+{ day:'2023-01-01', number: 0.046109, tooltip: '2023-01-01<br/>£0.05' },
+{ day:'2023-01-02', number: 0.046979, tooltip: '2023-01-02<br/>£0.05' },
+{ day:'2023-01-03', number: 0.047513, tooltip: '2023-01-03<br/>£0.05' },
+{ day:'2023-01-04', number: 0.047685, tooltip: '2023-01-04<br/>£0.05' },
+{ day:'2023-01-05', number: 0.049214, tooltip: '2023-01-05<br/>£0.05' },
+{ day:'2023-01-06', number: 0.049327, tooltip: '2023-01-06<br/>£0.05' },
+{ day:'2023-01-07', number: 0.050154, tooltip: '2023-01-07<br/>£0.05' },
+{ day:'2023-01-08', number: 0.051295, tooltip: '2023-01-08<br/>£0.05' },
+{ day:'2023-01-09', number: 0.051265, tooltip: '2023-01-09<br/>£0.05' },
+{ day:'2023-01-10', number: 0.051851, tooltip: '2023-01-10<br/>£0.05' },
+{ day:'2023-01-11', number: 0.052720, tooltip: '2023-01-11<br/>£0.05' },
+{ day:'2023-01-12', number: 0.054085, tooltip: '2023-01-12<br/>£0.05' },
+{ day:'2023-01-13', number: 0.054442, tooltip: '2023-01-13<br/>£0.05' },
+{ day:'2023-01-14', number: 0.058468, tooltip: '2023-01-14<br/>£0.06' },
+{ day:'2023-01-15', number: 0.062136, tooltip: '2023-01-15<br/>£0.06' },
+{ day:'2023-01-16', number: 0.060681, tooltip: '2023-01-16<br/>£0.06' },
+{ day:'2023-01-17', number: 0.066263, tooltip: '2023-01-17<br/>£0.07' },
+{ day:'2023-01-18', number: 0.064257, tooltip: '2023-01-18<br/>£0.06' },
+{ day:'2023-01-19', number: 0.057405, tooltip: '2023-01-19<br/>£0.06' },
+{ day:'2023-01-20', number: 0.059582, tooltip: '2023-01-20<br/>£0.06' },
+{ day:'2023-01-21', number: 0.063393, tooltip: '2023-01-21<br/>£0.06' },
+{ day:'2023-01-22', number: 0.061998, tooltip: '2023-01-22<br/>£0.06' },
+{ day:'2023-01-23', number: 0.062790, tooltip: '2023-01-23<br/>£0.06' },
+{ day:'2023-01-24', number: 0.064758, tooltip: '2023-01-24<br/>£0.06' },
+{ day:'2023-01-25', number: 0.063447, tooltip: '2023-01-25<br/>£0.06' },
+{ day:'2023-01-26', number: 0.065533, tooltip: '2023-01-26<br/>£0.07' },
+{ day:'2023-01-27', number: 0.065051, tooltip: '2023-01-27<br/>£0.07' },
+{ day:'2023-01-28', number: 0.065972, tooltip: '2023-01-28<br/>£0.07' },
+];
+	var name = "Crypto.com Coin";
+	var conversion = "CRO-GBP";
+
+	var cryptoDates = {
+		"Today's Open": "Sat, Jan 28, 2023",
+		"vs Day":       "Fri, Jan 27, 2023",
+		"vs Week":      "Sat, Jan 21, 2023",
+		"vs Month":     "Wed, Dec 28, 2022",
+		"vs Year":      "Fri, Jan 28, 2022",
+		"vs YTD":       "Sun, Jan 1, 2023",
+	}
+
+	var cryptoData = {
+		"Today's Open": "£0.07",
+		'vs Day':       "+1.4%",
+		'vs Week':      "+4.1%",
+		'vs Month':     "+36.4%",
+		'vs Year':      "-77.9%",
+		'vs YTD':       "+43.1%"
+	};
+
+	var box = makeBox(3, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4B1;<a href="https://finance.yahoo.com/quote/' + conversion + '/history">' + name + '</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');		
+	var insideLeft = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('left', 0)
+		.style('width', '37%');
+
+	var table = insideLeft
+		.style('color', '#000')
+		.append('table');
+	
+	for (var item of Object.keys(cryptoData)) {
+		var row = table
+			.append('tr')
+			.attr('class', 'ttt')
+			.attr('data-tt', cryptoDates[item])
+			.style('font-weight', item.startsWith("Today") ? "bold" : "normal")
+			.style('border-bottom', '1px solid #000');
+		row
+			.append('td')
+			.style('text-align', 'left')
+			.html(item + ':&nbsp;');
+		row
+			.append('td')
+			.style('text-align', 'right')
+			.attr('class', 'code')
+			.html(cryptoData[item]);
+	}
+
+	var insideRight = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('right', 0)
+		.style('width', '66%');
+	createLineChart(400, 150, insideRight, data, 2);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function crypto() {
+
+	var data = [
+{ day:'2022-01-29', number: 0.105669, tooltip: '2022-01-29<br/>£0.11' },
+{ day:'2022-01-30', number: 0.106719, tooltip: '2022-01-30<br/>£0.11' },
+{ day:'2022-01-31', number: 0.104060, tooltip: '2022-01-31<br/>£0.10' },
+{ day:'2022-02-01', number: 0.105472, tooltip: '2022-02-01<br/>£0.11' },
+{ day:'2022-02-02', number: 0.105456, tooltip: '2022-02-02<br/>£0.11' },
+{ day:'2022-02-03', number: 0.101161, tooltip: '2022-02-03<br/>£0.10' },
+{ day:'2022-02-04', number: 0.101135, tooltip: '2022-02-04<br/>£0.10' },
+{ day:'2022-02-05', number: 0.108978, tooltip: '2022-02-05<br/>£0.11' },
+{ day:'2022-02-06', number: 0.108688, tooltip: '2022-02-06<br/>£0.11' },
+{ day:'2022-02-07', number: 0.113651, tooltip: '2022-02-07<br/>£0.11' },
+{ day:'2022-02-08', number: 0.122334, tooltip: '2022-02-08<br/>£0.12' },
+{ day:'2022-02-09', number: 0.116893, tooltip: '2022-02-09<br/>£0.12' },
+{ day:'2022-02-10', number: 0.117602, tooltip: '2022-02-10<br/>£0.12' },
+{ day:'2022-02-11', number: 0.112106, tooltip: '2022-02-11<br/>£0.11' },
+{ day:'2022-02-12', number: 0.106745, tooltip: '2022-02-12<br/>£0.11' },
+{ day:'2022-02-13', number: 0.106454, tooltip: '2022-02-13<br/>£0.11' },
+{ day:'2022-02-14', number: 0.109713, tooltip: '2022-02-14<br/>£0.11' },
+{ day:'2022-02-15', number: 0.107888, tooltip: '2022-02-15<br/>£0.11' },
+{ day:'2022-02-16', number: 0.112096, tooltip: '2022-02-16<br/>£0.11' },
+{ day:'2022-02-17', number: 0.109746, tooltip: '2022-02-17<br/>£0.11' },
+{ day:'2022-02-18', number: 0.101797, tooltip: '2022-02-18<br/>£0.10' },
+{ day:'2022-02-19', number: 0.102076, tooltip: '2022-02-19<br/>£0.10' },
+{ day:'2022-02-20', number: 0.103865, tooltip: '2022-02-20<br/>£0.10' },
+{ day:'2022-02-21', number: 0.100680, tooltip: '2022-02-21<br/>£0.10' },
+{ day:'2022-02-22', number: 0.094511, tooltip: '2022-02-22<br/>£0.09' },
+{ day:'2022-02-23', number: 0.096818, tooltip: '2022-02-23<br/>£0.10' },
+{ day:'2022-02-24', number: 0.094368, tooltip: '2022-02-24<br/>£0.09' },
+{ day:'2022-02-25', number: 0.092616, tooltip: '2022-02-25<br/>£0.09' },
+{ day:'2022-02-26', number: 0.095147, tooltip: '2022-02-26<br/>£0.10' },
+{ day:'2022-02-27', number: 0.095199, tooltip: '2022-02-27<br/>£0.10' },
+{ day:'2022-02-28', number: 0.092070, tooltip: '2022-02-28<br/>£0.09' },
+{ day:'2022-03-01', number: 0.099220, tooltip: '2022-03-01<br/>£0.10' },
+{ day:'2022-03-02', number: 0.100456, tooltip: '2022-03-02<br/>£0.10' },
+{ day:'2022-03-03', number: 0.099277, tooltip: '2022-03-03<br/>£0.10' },
+{ day:'2022-03-04', number: 0.097098, tooltip: '2022-03-04<br/>£0.10' },
+{ day:'2022-03-05', number: 0.092696, tooltip: '2022-03-05<br/>£0.09' },
+{ day:'2022-03-06', number: 0.094519, tooltip: '2022-03-06<br/>£0.09' },
+{ day:'2022-03-07', number: 0.091410, tooltip: '2022-03-07<br/>£0.09' },
+{ day:'2022-03-08', number: 0.089301, tooltip: '2022-03-08<br/>£0.09' },
+{ day:'2022-03-09', number: 0.089358, tooltip: '2022-03-09<br/>£0.09' },
+{ day:'2022-03-10', number: 0.092205, tooltip: '2022-03-10<br/>£0.09' },
+{ day:'2022-03-11', number: 0.089214, tooltip: '2022-03-11<br/>£0.09' },
+{ day:'2022-03-12', number: 0.088729, tooltip: '2022-03-12<br/>£0.09' },
+{ day:'2022-03-13', number: 0.088262, tooltip: '2022-03-13<br/>£0.09' },
+{ day:'2022-03-14', number: 0.085525, tooltip: '2022-03-14<br/>£0.09' },
+{ day:'2022-03-15', number: 0.087660, tooltip: '2022-03-15<br/>£0.09' },
+{ day:'2022-03-16', number: 0.086459, tooltip: '2022-03-16<br/>£0.09' },
+{ day:'2022-03-17', number: 0.088965, tooltip: '2022-03-17<br/>£0.09' },
+{ day:'2022-03-18', number: 0.088528, tooltip: '2022-03-18<br/>£0.09' },
+{ day:'2022-03-19', number: 0.090492, tooltip: '2022-03-19<br/>£0.09' },
+{ day:'2022-03-20', number: 0.093755, tooltip: '2022-03-20<br/>£0.09' },
+{ day:'2022-03-21', number: 0.090539, tooltip: '2022-03-21<br/>£0.09' },
+{ day:'2022-03-22', number: 0.090615, tooltip: '2022-03-22<br/>£0.09' },
+{ day:'2022-03-23', number: 0.092330, tooltip: '2022-03-23<br/>£0.09' },
+{ day:'2022-03-24', number: 0.098232, tooltip: '2022-03-24<br/>£0.10' },
+{ day:'2022-03-25', number: 0.103532, tooltip: '2022-03-25<br/>£0.10' },
+{ day:'2022-03-26', number: 0.099326, tooltip: '2022-03-26<br/>£0.10' },
+{ day:'2022-03-27', number: 0.103029, tooltip: '2022-03-27<br/>£0.10' },
+{ day:'2022-03-28', number: 0.109864, tooltip: '2022-03-28<br/>£0.11' },
+{ day:'2022-03-29', number: 0.108827, tooltip: '2022-03-29<br/>£0.11' },
+{ day:'2022-03-30', number: 0.110331, tooltip: '2022-03-30<br/>£0.11' },
+{ day:'2022-03-31', number: 0.108988, tooltip: '2022-03-31<br/>£0.11' },
+{ day:'2022-04-01', number: 0.104913, tooltip: '2022-04-01<br/>£0.10' },
+{ day:'2022-04-02', number: 0.107756, tooltip: '2022-04-02<br/>£0.11' },
+{ day:'2022-04-03', number: 0.105916, tooltip: '2022-04-03<br/>£0.11' },
+{ day:'2022-04-04', number: 0.111726, tooltip: '2022-04-04<br/>£0.11' },
+{ day:'2022-04-05', number: 0.113336, tooltip: '2022-04-05<br/>£0.11' },
+{ day:'2022-04-06', number: 0.131901, tooltip: '2022-04-06<br/>£0.13' },
+{ day:'2022-04-07', number: 0.109748, tooltip: '2022-04-07<br/>£0.11' },
+{ day:'2022-04-08', number: 0.111795, tooltip: '2022-04-08<br/>£0.11' },
+{ day:'2022-04-09', number: 0.109351, tooltip: '2022-04-09<br/>£0.11' },
+{ day:'2022-04-10', number: 0.110702, tooltip: '2022-04-10<br/>£0.11' },
+{ day:'2022-04-11', number: 0.114639, tooltip: '2022-04-11<br/>£0.11' },
+{ day:'2022-04-12', number: 0.103397, tooltip: '2022-04-12<br/>£0.10' },
+{ day:'2022-04-13', number: 0.106189, tooltip: '2022-04-13<br/>£0.11' },
+{ day:'2022-04-14', number: 0.106758, tooltip: '2022-04-14<br/>£0.11' },
+{ day:'2022-04-15', number: 0.110139, tooltip: '2022-04-15<br/>£0.11' },
+{ day:'2022-04-16', number: 0.111804, tooltip: '2022-04-16<br/>£0.11' },
+{ day:'2022-04-17', number: 0.110026, tooltip: '2022-04-17<br/>£0.11' },
+{ day:'2022-04-18', number: 0.106824, tooltip: '2022-04-18<br/>£0.11' },
+{ day:'2022-04-19', number: 0.107844, tooltip: '2022-04-19<br/>£0.11' },
+{ day:'2022-04-20', number: 0.109642, tooltip: '2022-04-20<br/>£0.11' },
+{ day:'2022-04-21', number: 0.107804, tooltip: '2022-04-21<br/>£0.11' },
+{ day:'2022-04-22', number: 0.104693, tooltip: '2022-04-22<br/>£0.10' },
+{ day:'2022-04-23', number: 0.106224, tooltip: '2022-04-23<br/>£0.11' },
+{ day:'2022-04-24', number: 0.104523, tooltip: '2022-04-24<br/>£0.10' },
+{ day:'2022-04-25', number: 0.102847, tooltip: '2022-04-25<br/>£0.10' },
+{ day:'2022-04-26', number: 0.123864, tooltip: '2022-04-26<br/>£0.12' },
+{ day:'2022-04-27', number: 0.109562, tooltip: '2022-04-27<br/>£0.11' },
+{ day:'2022-04-28', number: 0.111398, tooltip: '2022-04-28<br/>£0.11' },
+{ day:'2022-04-29', number: 0.110210, tooltip: '2022-04-29<br/>£0.11' },
+{ day:'2022-04-30', number: 0.107456, tooltip: '2022-04-30<br/>£0.11' },
+{ day:'2022-05-01', number: 0.101474, tooltip: '2022-05-01<br/>£0.10' },
+{ day:'2022-05-02', number: 0.105652, tooltip: '2022-05-02<br/>£0.11' },
+{ day:'2022-05-03', number: 0.104751, tooltip: '2022-05-03<br/>£0.10' },
+{ day:'2022-05-04', number: 0.103623, tooltip: '2022-05-04<br/>£0.10' },
+{ day:'2022-05-05', number: 0.107644, tooltip: '2022-05-05<br/>£0.11' },
+{ day:'2022-05-06', number: 0.103866, tooltip: '2022-05-06<br/>£0.10' },
+{ day:'2022-05-07', number: 0.103643, tooltip: '2022-05-07<br/>£0.10' },
+{ day:'2022-05-08', number: 0.103348, tooltip: '2022-05-08<br/>£0.10' },
+{ day:'2022-05-09', number: 0.100766, tooltip: '2022-05-09<br/>£0.10' },
+{ day:'2022-05-10', number: 0.084879, tooltip: '2022-05-10<br/>£0.08' },
+{ day:'2022-05-11', number: 0.088118, tooltip: '2022-05-11<br/>£0.09' },
+{ day:'2022-05-12', number: 0.069183, tooltip: '2022-05-12<br/>£0.07' },
+{ day:'2022-05-13', number: 0.067714, tooltip: '2022-05-13<br/>£0.07' },
+{ day:'2022-05-14', number: 0.072046, tooltip: '2022-05-14<br/>£0.07' },
+{ day:'2022-05-15', number: 0.073204, tooltip: '2022-05-15<br/>£0.07' },
+{ day:'2022-05-16', number: 0.075763, tooltip: '2022-05-16<br/>£0.08' },
+{ day:'2022-05-17', number: 0.071265, tooltip: '2022-05-17<br/>£0.07' },
+{ day:'2022-05-18', number: 0.072251, tooltip: '2022-05-18<br/>£0.07' },
+{ day:'2022-05-19', number: 0.067751, tooltip: '2022-05-19<br/>£0.07' },
+{ day:'2022-05-20', number: 0.069580, tooltip: '2022-05-20<br/>£0.07' },
+{ day:'2022-05-21', number: 0.067219, tooltip: '2022-05-21<br/>£0.07' },
+{ day:'2022-05-22', number: 0.067621, tooltip: '2022-05-22<br/>£0.07' },
+{ day:'2022-05-23', number: 0.068849, tooltip: '2022-05-23<br/>£0.07' },
+{ day:'2022-05-24', number: 0.066258, tooltip: '2022-05-24<br/>£0.07' },
+{ day:'2022-05-25', number: 0.066680, tooltip: '2022-05-25<br/>£0.07' },
+{ day:'2022-05-26', number: 0.065941, tooltip: '2022-05-26<br/>£0.07' },
+{ day:'2022-05-27', number: 0.061986, tooltip: '2022-05-27<br/>£0.06' },
+{ day:'2022-05-28', number: 0.064396, tooltip: '2022-05-28<br/>£0.06' },
+{ day:'2022-05-29', number: 0.064801, tooltip: '2022-05-29<br/>£0.06' },
+{ day:'2022-05-30', number: 0.065495, tooltip: '2022-05-30<br/>£0.07' },
+{ day:'2022-05-31', number: 0.069482, tooltip: '2022-05-31<br/>£0.07' },
+{ day:'2022-06-01', number: 0.068087, tooltip: '2022-06-01<br/>£0.07' },
+{ day:'2022-06-02', number: 0.064935, tooltip: '2022-06-02<br/>£0.06' },
+{ day:'2022-06-03', number: 0.065809, tooltip: '2022-06-03<br/>£0.07' },
+{ day:'2022-06-04', number: 0.064422, tooltip: '2022-06-04<br/>£0.06' },
+{ day:'2022-06-05', number: 0.065481, tooltip: '2022-06-05<br/>£0.07' },
+{ day:'2022-06-06', number: 0.065027, tooltip: '2022-06-06<br/>£0.07' },
+{ day:'2022-06-07', number: 0.065900, tooltip: '2022-06-07<br/>£0.07' },
+{ day:'2022-06-08', number: 0.063946, tooltip: '2022-06-08<br/>£0.06' },
+{ day:'2022-06-09', number: 0.063344, tooltip: '2022-06-09<br/>£0.06' },
+{ day:'2022-06-10', number: 0.063506, tooltip: '2022-06-10<br/>£0.06' },
+{ day:'2022-06-11', number: 0.061285, tooltip: '2022-06-11<br/>£0.06' },
+{ day:'2022-06-12', number: 0.056769, tooltip: '2022-06-12<br/>£0.06' },
+{ day:'2022-06-13', number: 0.052358, tooltip: '2022-06-13<br/>£0.05' },
+{ day:'2022-06-14', number: 0.044424, tooltip: '2022-06-14<br/>£0.04' },
+{ day:'2022-06-15', number: 0.046270, tooltip: '2022-06-15<br/>£0.05' },
+{ day:'2022-06-16', number: 0.051732, tooltip: '2022-06-16<br/>£0.05' },
+{ day:'2022-06-17', number: 0.044570, tooltip: '2022-06-17<br/>£0.04' },
+{ day:'2022-06-18', number: 0.046627, tooltip: '2022-06-18<br/>£0.05' },
+{ day:'2022-06-19', number: 0.043358, tooltip: '2022-06-19<br/>£0.04' },
+{ day:'2022-06-20', number: 0.049393, tooltip: '2022-06-20<br/>£0.05' },
+{ day:'2022-06-21', number: 0.049118, tooltip: '2022-06-21<br/>£0.05' },
+{ day:'2022-06-22', number: 0.053494, tooltip: '2022-06-22<br/>£0.05' },
+{ day:'2022-06-23', number: 0.050364, tooltip: '2022-06-23<br/>£0.05' },
+{ day:'2022-06-24', number: 0.052217, tooltip: '2022-06-24<br/>£0.05' },
+{ day:'2022-06-25', number: 0.054719, tooltip: '2022-06-25<br/>£0.05' },
+{ day:'2022-06-26', number: 0.055842, tooltip: '2022-06-26<br/>£0.06' },
+{ day:'2022-06-27', number: 0.059559, tooltip: '2022-06-27<br/>£0.06' },
+{ day:'2022-06-28', number: 0.058877, tooltip: '2022-06-28<br/>£0.06' },
+{ day:'2022-06-29', number: 0.054149, tooltip: '2022-06-29<br/>£0.05' },
+{ day:'2022-06-30', number: 0.057285, tooltip: '2022-06-30<br/>£0.06' },
+{ day:'2022-07-01', number: 0.054446, tooltip: '2022-07-01<br/>£0.05' },
+{ day:'2022-07-02', number: 0.054692, tooltip: '2022-07-02<br/>£0.05' },
+{ day:'2022-07-03', number: 0.055100, tooltip: '2022-07-03<br/>£0.06' },
+{ day:'2022-07-04', number: 0.055509, tooltip: '2022-07-04<br/>£0.06' },
+{ day:'2022-07-05', number: 0.057317, tooltip: '2022-07-05<br/>£0.06' },
+{ day:'2022-07-06', number: 0.056206, tooltip: '2022-07-06<br/>£0.06' },
+{ day:'2022-07-07', number: 0.057522, tooltip: '2022-07-07<br/>£0.06' },
+{ day:'2022-07-08', number: 0.058705, tooltip: '2022-07-08<br/>£0.06' },
+{ day:'2022-07-09', number: 0.057519, tooltip: '2022-07-09<br/>£0.06' },
+{ day:'2022-07-10', number: 0.057782, tooltip: '2022-07-10<br/>£0.06' },
+{ day:'2022-07-11', number: 0.055978, tooltip: '2022-07-11<br/>£0.06' },
+{ day:'2022-07-12', number: 0.051978, tooltip: '2022-07-12<br/>£0.05' },
+{ day:'2022-07-13', number: 0.050586, tooltip: '2022-07-13<br/>£0.05' },
+{ day:'2022-07-14', number: 0.052201, tooltip: '2022-07-14<br/>£0.05' },
+{ day:'2022-07-15', number: 0.052699, tooltip: '2022-07-15<br/>£0.05' },
+{ day:'2022-07-16', number: 0.053173, tooltip: '2022-07-16<br/>£0.05' },
+{ day:'2022-07-17', number: 0.054231, tooltip: '2022-07-17<br/>£0.05' },
+{ day:'2022-07-18', number: 0.053081, tooltip: '2022-07-18<br/>£0.05' },
+{ day:'2022-07-19', number: 0.056649, tooltip: '2022-07-19<br/>£0.06' },
+{ day:'2022-07-20', number: 0.057493, tooltip: '2022-07-20<br/>£0.06' },
+{ day:'2022-07-21', number: 0.058594, tooltip: '2022-07-21<br/>£0.06' },
+{ day:'2022-07-22', number: 0.058331, tooltip: '2022-07-22<br/>£0.06' },
+{ day:'2022-07-23', number: 0.056255, tooltip: '2022-07-23<br/>£0.06' },
+{ day:'2022-07-24', number: 0.056742, tooltip: '2022-07-24<br/>£0.06' },
+{ day:'2022-07-25', number: 0.056498, tooltip: '2022-07-25<br/>£0.06' },
+{ day:'2022-07-26', number: 0.051700, tooltip: '2022-07-26<br/>£0.05' },
+{ day:'2022-07-27', number: 0.051942, tooltip: '2022-07-27<br/>£0.05' },
+{ day:'2022-07-28', number: 0.055115, tooltip: '2022-07-28<br/>£0.06' },
+{ day:'2022-07-29', number: 0.056768, tooltip: '2022-07-29<br/>£0.06' },
+{ day:'2022-07-30', number: 0.056596, tooltip: '2022-07-30<br/>£0.06' },
+{ day:'2022-07-31', number: 0.057201, tooltip: '2022-07-31<br/>£0.06' },
+{ day:'2022-08-01', number: 0.056102, tooltip: '2022-08-01<br/>£0.06' },
+{ day:'2022-08-02', number: 0.056065, tooltip: '2022-08-02<br/>£0.06' },
+{ day:'2022-08-03', number: 0.054922, tooltip: '2022-08-03<br/>£0.05' },
+{ day:'2022-08-04', number: 0.054537, tooltip: '2022-08-04<br/>£0.05' },
+{ day:'2022-08-05', number: 0.055380, tooltip: '2022-08-05<br/>£0.06' },
+{ day:'2022-08-06', number: 0.057789, tooltip: '2022-08-06<br/>£0.06' },
+{ day:'2022-08-07', number: 0.056881, tooltip: '2022-08-07<br/>£0.06' },
+{ day:'2022-08-08', number: 0.057164, tooltip: '2022-08-08<br/>£0.06' },
+{ day:'2022-08-09', number: 0.057972, tooltip: '2022-08-09<br/>£0.06' },
+{ day:'2022-08-10', number: 0.057258, tooltip: '2022-08-10<br/>£0.06' },
+{ day:'2022-08-11', number: 0.058314, tooltip: '2022-08-11<br/>£0.06' },
+{ day:'2022-08-12', number: 0.058164, tooltip: '2022-08-12<br/>£0.06' },
+{ day:'2022-08-13', number: 0.059583, tooltip: '2022-08-13<br/>£0.06' },
+{ day:'2022-08-14', number: 0.060005, tooltip: '2022-08-14<br/>£0.06' },
+{ day:'2022-08-15', number: 0.067366, tooltip: '2022-08-15<br/>£0.07' },
+{ day:'2022-08-16', number: 0.063614, tooltip: '2022-08-16<br/>£0.06' },
+{ day:'2022-08-17', number: 0.071875, tooltip: '2022-08-17<br/>£0.07' },
+{ day:'2022-08-18', number: 0.066558, tooltip: '2022-08-18<br/>£0.07' },
+{ day:'2022-08-19', number: 0.062900, tooltip: '2022-08-19<br/>£0.06' },
+{ day:'2022-08-20', number: 0.057401, tooltip: '2022-08-20<br/>£0.06' },
+{ day:'2022-08-21', number: 0.058776, tooltip: '2022-08-21<br/>£0.06' },
+{ day:'2022-08-22', number: 0.058702, tooltip: '2022-08-22<br/>£0.06' },
+{ day:'2022-08-23', number: 0.058131, tooltip: '2022-08-23<br/>£0.06' },
+{ day:'2022-08-24', number: 0.058133, tooltip: '2022-08-24<br/>£0.06' },
+{ day:'2022-08-25', number: 0.057667, tooltip: '2022-08-25<br/>£0.06' },
+{ day:'2022-08-26', number: 0.058430, tooltip: '2022-08-26<br/>£0.06' },
+{ day:'2022-08-27', number: 0.054186, tooltip: '2022-08-27<br/>£0.05' },
+{ day:'2022-08-28', number: 0.054094, tooltip: '2022-08-28<br/>£0.05' },
+{ day:'2022-08-29', number: 0.052826, tooltip: '2022-08-29<br/>£0.05' },
+{ day:'2022-08-30', number: 0.054514, tooltip: '2022-08-30<br/>£0.05' },
+{ day:'2022-08-31', number: 0.052782, tooltip: '2022-08-31<br/>£0.05' },
+{ day:'2022-09-01', number: 0.052889, tooltip: '2022-09-01<br/>£0.05' },
+{ day:'2022-09-02', number: 0.054016, tooltip: '2022-09-02<br/>£0.05' },
+{ day:'2022-09-03', number: 0.053523, tooltip: '2022-09-03<br/>£0.05' },
+{ day:'2022-09-04', number: 0.054450, tooltip: '2022-09-04<br/>£0.05' },
+{ day:'2022-09-05', number: 0.055113, tooltip: '2022-09-05<br/>£0.06' },
+{ day:'2022-09-06', number: 0.054257, tooltip: '2022-09-06<br/>£0.05' },
+{ day:'2022-09-07', number: 0.051227, tooltip: '2022-09-07<br/>£0.05' },
+{ day:'2022-09-08', number: 0.053030, tooltip: '2022-09-08<br/>£0.05' },
+{ day:'2022-09-09', number: 0.052928, tooltip: '2022-09-09<br/>£0.05' },
+{ day:'2022-09-10', number: 0.055195, tooltip: '2022-09-10<br/>£0.06' },
+{ day:'2022-09-11', number: 0.055865, tooltip: '2022-09-11<br/>£0.06' },
+{ day:'2022-09-12', number: 0.054832, tooltip: '2022-09-12<br/>£0.05' },
+{ day:'2022-09-13', number: 0.054667, tooltip: '2022-09-13<br/>£0.05' },
+{ day:'2022-09-14', number: 0.051916, tooltip: '2022-09-14<br/>£0.05' },
+{ day:'2022-09-15', number: 0.052985, tooltip: '2022-09-15<br/>£0.05' },
+{ day:'2022-09-16', number: 0.051338, tooltip: '2022-09-16<br/>£0.05' },
+{ day:'2022-09-17', number: 0.052942, tooltip: '2022-09-17<br/>£0.05' },
+{ day:'2022-09-18', number: 0.054501, tooltip: '2022-09-18<br/>£0.05' },
+{ day:'2022-09-19', number: 0.050304, tooltip: '2022-09-19<br/>£0.05' },
+{ day:'2022-09-20', number: 0.051212, tooltip: '2022-09-20<br/>£0.05' },
+{ day:'2022-09-21', number: 0.051335, tooltip: '2022-09-21<br/>£0.05' },
+{ day:'2022-09-22', number: 0.050976, tooltip: '2022-09-22<br/>£0.05' },
+{ day:'2022-09-23', number: 0.052912, tooltip: '2022-09-23<br/>£0.05' },
+{ day:'2022-09-24', number: 0.058398, tooltip: '2022-09-24<br/>£0.06' },
+{ day:'2022-09-25', number: 0.058225, tooltip: '2022-09-25<br/>£0.06' },
+{ day:'2022-09-26', number: 0.056674, tooltip: '2022-09-26<br/>£0.06' },
+{ day:'2022-09-27', number: 0.056735, tooltip: '2022-09-27<br/>£0.06' },
+{ day:'2022-09-28', number: 0.056492, tooltip: '2022-09-28<br/>£0.06' },
+{ day:'2022-09-29', number: 0.055971, tooltip: '2022-09-29<br/>£0.06' },
+{ day:'2022-09-30', number: 0.054366, tooltip: '2022-09-30<br/>£0.05' },
+{ day:'2022-10-01', number: 0.055180, tooltip: '2022-10-01<br/>£0.06' },
+{ day:'2022-10-02', number: 0.054375, tooltip: '2022-10-02<br/>£0.05' },
+{ day:'2022-10-03', number: 0.053241, tooltip: '2022-10-03<br/>£0.05' },
+{ day:'2022-10-04', number: 0.053254, tooltip: '2022-10-04<br/>£0.05' },
+{ day:'2022-10-05', number: 0.057583, tooltip: '2022-10-05<br/>£0.06' },
+{ day:'2022-10-06', number: 0.057005, tooltip: '2022-10-06<br/>£0.06' },
+{ day:'2022-10-07', number: 0.056847, tooltip: '2022-10-07<br/>£0.06' },
+{ day:'2022-10-08', number: 0.056257, tooltip: '2022-10-08<br/>£0.06' },
+{ day:'2022-10-09', number: 0.055628, tooltip: '2022-10-09<br/>£0.06' },
+{ day:'2022-10-10', number: 0.056127, tooltip: '2022-10-10<br/>£0.06' },
+{ day:'2022-10-11', number: 0.053710, tooltip: '2022-10-11<br/>£0.05' },
+{ day:'2022-10-12', number: 0.054961, tooltip: '2022-10-12<br/>£0.05' },
+{ day:'2022-10-13', number: 0.053935, tooltip: '2022-10-13<br/>£0.05' },
+{ day:'2022-10-14', number: 0.052794, tooltip: '2022-10-14<br/>£0.05' },
+{ day:'2022-10-15', number: 0.052489, tooltip: '2022-10-15<br/>£0.05' },
+{ day:'2022-10-16', number: 0.052440, tooltip: '2022-10-16<br/>£0.05' },
+{ day:'2022-10-17', number: 0.052406, tooltip: '2022-10-17<br/>£0.05' },
+{ day:'2022-10-18', number: 0.052797, tooltip: '2022-10-18<br/>£0.05' },
+{ day:'2022-10-19', number: 0.052702, tooltip: '2022-10-19<br/>£0.05' },
+{ day:'2022-10-20', number: 0.052388, tooltip: '2022-10-20<br/>£0.05' },
+{ day:'2022-10-21', number: 0.053044, tooltip: '2022-10-21<br/>£0.05' },
+{ day:'2022-10-22', number: 0.052490, tooltip: '2022-10-22<br/>£0.05' },
+{ day:'2022-10-23', number: 0.052796, tooltip: '2022-10-23<br/>£0.05' },
+{ day:'2022-10-24', number: 0.053230, tooltip: '2022-10-24<br/>£0.05' },
+{ day:'2022-10-25', number: 0.052628, tooltip: '2022-10-25<br/>£0.05' },
+{ day:'2022-10-26', number: 0.054844, tooltip: '2022-10-26<br/>£0.05' },
+{ day:'2022-10-27', number: 0.062546, tooltip: '2022-10-27<br/>£0.06' },
+{ day:'2022-10-28', number: 0.066603, tooltip: '2022-10-28<br/>£0.07' },
+{ day:'2022-10-29', number: 0.072272, tooltip: '2022-10-29<br/>£0.07' },
+{ day:'2022-10-30', number: 0.104743, tooltip: '2022-10-30<br/>£0.10' },
+{ day:'2022-10-31', number: 0.101554, tooltip: '2022-10-31<br/>£0.10' },
+{ day:'2022-11-01', number: 0.110733, tooltip: '2022-11-01<br/>£0.11' },
+{ day:'2022-11-02', number: 0.124048, tooltip: '2022-11-02<br/>£0.12' },
+{ day:'2022-11-03', number: 0.112267, tooltip: '2022-11-03<br/>£0.11' },
+{ day:'2022-11-04', number: 0.109713, tooltip: '2022-11-04<br/>£0.11' },
+{ day:'2022-11-05', number: 0.110966, tooltip: '2022-11-05<br/>£0.11' },
+{ day:'2022-11-06', number: 0.109323, tooltip: '2022-11-06<br/>£0.11' },
+{ day:'2022-11-07', number: 0.101162, tooltip: '2022-11-07<br/>£0.10' },
+{ day:'2022-11-08', number: 0.096652, tooltip: '2022-11-08<br/>£0.10' },
+{ day:'2022-11-09', number: 0.076528, tooltip: '2022-11-09<br/>£0.08' },
+{ day:'2022-11-10', number: 0.065354, tooltip: '2022-11-10<br/>£0.07' },
+{ day:'2022-11-11', number: 0.076771, tooltip: '2022-11-11<br/>£0.08' },
+{ day:'2022-11-12', number: 0.071795, tooltip: '2022-11-12<br/>£0.07' },
+{ day:'2022-11-13', number: 0.074384, tooltip: '2022-11-13<br/>£0.07' },
+{ day:'2022-11-14', number: 0.071992, tooltip: '2022-11-14<br/>£0.07' },
+{ day:'2022-11-15', number: 0.073074, tooltip: '2022-11-15<br/>£0.07' },
+{ day:'2022-11-16', number: 0.073204, tooltip: '2022-11-16<br/>£0.07' },
+{ day:'2022-11-17', number: 0.071842, tooltip: '2022-11-17<br/>£0.07' },
+{ day:'2022-11-18', number: 0.071477, tooltip: '2022-11-18<br/>£0.07' },
+{ day:'2022-11-19', number: 0.071207, tooltip: '2022-11-19<br/>£0.07' },
+{ day:'2022-11-20', number: 0.071146, tooltip: '2022-11-20<br/>£0.07' },
+{ day:'2022-11-21', number: 0.064934, tooltip: '2022-11-21<br/>£0.06' },
+{ day:'2022-11-22', number: 0.063170, tooltip: '2022-11-22<br/>£0.06' },
+{ day:'2022-11-23', number: 0.066001, tooltip: '2022-11-23<br/>£0.07' },
+{ day:'2022-11-24', number: 0.067727, tooltip: '2022-11-24<br/>£0.07' },
+{ day:'2022-11-25', number: 0.067261, tooltip: '2022-11-25<br/>£0.07' },
+{ day:'2022-11-26', number: 0.073981, tooltip: '2022-11-26<br/>£0.07' },
+{ day:'2022-11-27', number: 0.073591, tooltip: '2022-11-27<br/>£0.07' },
+{ day:'2022-11-28', number: 0.081861, tooltip: '2022-11-28<br/>£0.08' },
+{ day:'2022-11-29', number: 0.079541, tooltip: '2022-11-29<br/>£0.08' },
+{ day:'2022-11-30', number: 0.085236, tooltip: '2022-11-30<br/>£0.09' },
+{ day:'2022-12-01', number: 0.088493, tooltip: '2022-12-01<br/>£0.09' },
+{ day:'2022-12-02', number: 0.082875, tooltip: '2022-12-02<br/>£0.08' },
+{ day:'2022-12-03', number: 0.083088, tooltip: '2022-12-03<br/>£0.08' },
+{ day:'2022-12-04', number: 0.081147, tooltip: '2022-12-04<br/>£0.08' },
+{ day:'2022-12-05', number: 0.084784, tooltip: '2022-12-05<br/>£0.08' },
+{ day:'2022-12-06', number: 0.083230, tooltip: '2022-12-06<br/>£0.08' },
+{ day:'2022-12-07', number: 0.082656, tooltip: '2022-12-07<br/>£0.08' },
+{ day:'2022-12-08', number: 0.078448, tooltip: '2022-12-08<br/>£0.08' },
+{ day:'2022-12-09', number: 0.080548, tooltip: '2022-12-09<br/>£0.08' },
+{ day:'2022-12-10', number: 0.078814, tooltip: '2022-12-10<br/>£0.08' },
+{ day:'2022-12-11', number: 0.078698, tooltip: '2022-12-11<br/>£0.08' },
+{ day:'2022-12-12', number: 0.075903, tooltip: '2022-12-12<br/>£0.08' },
+{ day:'2022-12-13', number: 0.073562, tooltip: '2022-12-13<br/>£0.07' },
+{ day:'2022-12-14', number: 0.073622, tooltip: '2022-12-14<br/>£0.07' },
+{ day:'2022-12-15', number: 0.071270, tooltip: '2022-12-15<br/>£0.07' },
+{ day:'2022-12-16', number: 0.069497, tooltip: '2022-12-16<br/>£0.07' },
+{ day:'2022-12-17', number: 0.062516, tooltip: '2022-12-17<br/>£0.06' },
+{ day:'2022-12-18', number: 0.065268, tooltip: '2022-12-18<br/>£0.07' },
+{ day:'2022-12-19', number: 0.064681, tooltip: '2022-12-19<br/>£0.06' },
+{ day:'2022-12-20', number: 0.058775, tooltip: '2022-12-20<br/>£0.06' },
+{ day:'2022-12-21', number: 0.061478, tooltip: '2022-12-21<br/>£0.06' },
+{ day:'2022-12-22', number: 0.061010, tooltip: '2022-12-22<br/>£0.06' },
+{ day:'2022-12-23', number: 0.063933, tooltip: '2022-12-23<br/>£0.06' },
+{ day:'2022-12-24', number: 0.063991, tooltip: '2022-12-24<br/>£0.06' },
+{ day:'2022-12-25', number: 0.064409, tooltip: '2022-12-25<br/>£0.06' },
+{ day:'2022-12-26', number: 0.063015, tooltip: '2022-12-26<br/>£0.06' },
+{ day:'2022-12-27', number: 0.062703, tooltip: '2022-12-27<br/>£0.06' },
+{ day:'2022-12-28', number: 0.061304, tooltip: '2022-12-28<br/>£0.06' },
+{ day:'2022-12-29', number: 0.058513, tooltip: '2022-12-29<br/>£0.06' },
+{ day:'2022-12-30', number: 0.058922, tooltip: '2022-12-30<br/>£0.06' },
+{ day:'2022-12-31', number: 0.056510, tooltip: '2022-12-31<br/>£0.06' },
+{ day:'2023-01-01', number: 0.058098, tooltip: '2023-01-01<br/>£0.06' },
+{ day:'2023-01-02', number: 0.058051, tooltip: '2023-01-02<br/>£0.06' },
+{ day:'2023-01-03', number: 0.059236, tooltip: '2023-01-03<br/>£0.06' },
+{ day:'2023-01-04', number: 0.058887, tooltip: '2023-01-04<br/>£0.06' },
+{ day:'2023-01-05', number: 0.060742, tooltip: '2023-01-05<br/>£0.06' },
+{ day:'2023-01-06', number: 0.060085, tooltip: '2023-01-06<br/>£0.06' },
+{ day:'2023-01-07', number: 0.059927, tooltip: '2023-01-07<br/>£0.06' },
+{ day:'2023-01-08', number: 0.059712, tooltip: '2023-01-08<br/>£0.06' },
+{ day:'2023-01-09', number: 0.060719, tooltip: '2023-01-09<br/>£0.06' },
+{ day:'2023-01-10', number: 0.062189, tooltip: '2023-01-10<br/>£0.06' },
+{ day:'2023-01-11', number: 0.063959, tooltip: '2023-01-11<br/>£0.06' },
+{ day:'2023-01-12', number: 0.065149, tooltip: '2023-01-12<br/>£0.07' },
+{ day:'2023-01-13', number: 0.065715, tooltip: '2023-01-13<br/>£0.07' },
+{ day:'2023-01-14', number: 0.069037, tooltip: '2023-01-14<br/>£0.07' },
+{ day:'2023-01-15', number: 0.071404, tooltip: '2023-01-15<br/>£0.07' },
+{ day:'2023-01-16', number: 0.070461, tooltip: '2023-01-16<br/>£0.07' },
+{ day:'2023-01-17', number: 0.068521, tooltip: '2023-01-17<br/>£0.07' },
+{ day:'2023-01-18', number: 0.067552, tooltip: '2023-01-18<br/>£0.07' },
+{ day:'2023-01-19', number: 0.064932, tooltip: '2023-01-19<br/>£0.06' },
+{ day:'2023-01-20', number: 0.065886, tooltip: '2023-01-20<br/>£0.07' },
+{ day:'2023-01-21', number: 0.069729, tooltip: '2023-01-21<br/>£0.07' },
+{ day:'2023-01-22', number: 0.068425, tooltip: '2023-01-22<br/>£0.07' },
+{ day:'2023-01-23', number: 0.071182, tooltip: '2023-01-23<br/>£0.07' },
+{ day:'2023-01-24', number: 0.071553, tooltip: '2023-01-24<br/>£0.07' },
+{ day:'2023-01-25', number: 0.068090, tooltip: '2023-01-25<br/>£0.07' },
+{ day:'2023-01-26', number: 0.069755, tooltip: '2023-01-26<br/>£0.07' },
+{ day:'2023-01-27', number: 0.069566, tooltip: '2023-01-27<br/>£0.07' },
+{ day:'2023-01-28', number: 0.070523, tooltip: '2023-01-28<br/>£0.07' },
+];
+	var name = "Doge";
+	var conversion = "DOGE-GBP";
+
+	var cryptoDates = {
+		"Today's Open": "Sat, Jan 28, 2023",
+		"vs Day":       "Fri, Jan 27, 2023",
+		"vs Week":      "Sat, Jan 21, 2023",
+		"vs Month":     "Wed, Dec 28, 2022",
+		"vs Year":      "Fri, Jan 28, 2022",
+		"vs YTD":       "Sun, Jan 1, 2023",
+	}
+
+	var cryptoData = {
+		"Today's Open": "£0.07",
+		'vs Day':       "+1.4%",
+		'vs Week':      "+1.1%",
+		'vs Month':     "+15.0%",
+		'vs Year':      "-33.2%",
+		'vs YTD':       "+21.4%"
+	};
+
+	var box = makeBox(3, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4B1;<a href="https://finance.yahoo.com/quote/' + conversion + '/history">' + name + '</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');		
+	var insideLeft = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('left', 0)
+		.style('width', '37%');
+
+	var table = insideLeft
+		.style('color', '#000')
+		.append('table');
+	
+	for (var item of Object.keys(cryptoData)) {
+		var row = table
+			.append('tr')
+			.attr('class', 'ttt')
+			.attr('data-tt', cryptoDates[item])
+			.style('font-weight', item.startsWith("Today") ? "bold" : "normal")
+			.style('border-bottom', '1px solid #000');
+		row
+			.append('td')
+			.style('text-align', 'left')
+			.html(item + ':&nbsp;');
+		row
+			.append('td')
+			.style('text-align', 'right')
+			.attr('class', 'code')
+			.html(cryptoData[item]);
+	}
+
+	var insideRight = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('right', 0)
+		.style('width', '66%');
+	createLineChart(400, 150, insideRight, data, 2);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function youtube() {
+
+    var data = [
+{ id: 'h8DLofLM7No', title: "Taylor Swift - Lavender Haze", label: "Taylor Swift - Lavender Haze by Taylor Swift 1 day ago 3 minutes, 31 seconds 7,088,434 views" },
+{ id: 'P9tKTxbgdkk', title: "TXT (투모로우바이투게더) 'Sugar Rush Ride' Official MV", label: "TXT (투모로우바이투게더) 'Sugar Rush Ride' Official MV by HYBE LABELS 1 day ago 3 minutes, 33 seconds 21,542,972 views" },
+{ id: 'TwY5AhL66KM', title: "Sam Smith - I'm Not Here To Make Friends", label: "Sam Smith - I'm Not Here To Make Friends by SAM SMITH 23 hours ago 4 minutes, 3 seconds 627,684 views" },
+];
+
+    var box = makeBox(2, 2);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#x1F4FC;<a href="https://www.youtube.com/feed/trending">YouTube Trending</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div');
+    var table = inside
+        .append('table')
+        .style('width', '80%')
+        .style('margin', '0 auto');
+
+    var count = 0;
+    for (var video of data) {
+        var row = table
+            .append('tr');
+        row
+            .append('td')
+            .append('a')
+            .attr('href', "https://www.youtube.com/watch?v=" + video.id)
+            .append('img')
+            .attr('src', 'https://i.ytimg.com/vi/' + video.id + '/hqdefault.jpg')
+            .style('width', (480 / 4) + 'px')
+            .style('height', (360 / 4) + 'px')
+            .style('text-align', 'right')
+            .attr('title', video.label);
+        row
+            .append('td')
+            .style('text-align', 'left')
+            .html(++count + '<br/><a href="https://www.youtube.com/watch?v=' + video.id + '">' + video.title + '</a>');
+    }
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function media() {
+	var html = '<p style="font-weight:bold;padding:10px 0 0 0">Audiobooks</p><ul><li><a href="https://www.google.com/search?q=Audiobooks+-+Around the World in 80 Days">Around the World in 80 Days</a></li><li><a href="https://www.google.com/search?q=Audiobooks+-+Animal Farm">Animal Farm</a></li><li><a href="https://www.google.com/search?q=Audiobooks+-+Sherlock Holmes: A Study in Scarlet">Sherlock Holmes: A Study in Scarlet</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">Books</p><ul><li><a href="https://www.google.com/search?q=Books+-+Fire Season">Fire Season</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">Films</p><ul><li><a href="https://www.google.com/search?q=Films+-+Sleepy Hollow (1999)">Sleepy Hollow (1999)</a></li><li><a href="https://www.google.com/search?q=Films+-+The Shawshank Redemption (1994)">The Shawshank Redemption (1994)</a></li><li><a href="https://www.google.com/search?q=Films+-+Glass Onion (2022)">Glass Onion (2022)</a></li><li><a href="https://www.google.com/search?q=Films+-+Mean Creek (2004)">Mean Creek (2004)</a></li><li><a href="https://www.google.com/search?q=Films+-+Triangle of Sadness (2022)">Triangle of Sadness (2022)</a></li><li><a href="https://www.google.com/search?q=Films+-+Knives Out (2019)">Knives Out (2019)</a></li><li><a href="https://www.google.com/search?q=Films+-+Downton Abbey: A New Era (2022)">Downton Abbey: A New Era (2022)</a></li><li><a href="https://www.google.com/search?q=Films+-+Downton Abbey (2019)">Downton Abbey (2019)</a></li><li><a href="https://www.google.com/search?q=Films+-+The Ice Storm (1997)">The Ice Storm (1997)</a></li><li><a href="https://www.google.com/search?q=Films+-+Lock, Stock and Two Smoking Barrels (1998)">Lock, Stock and Two Smoking Barrels (1998)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">Games</p><ul><li><a href="https://www.google.com/search?q=Games+-+Command & Conquer: Red Alert">Command & Conquer: Red Alert</a></li><li><a href="https://www.google.com/search?q=Games+-+100 Hidden Frogs">100 Hidden Frogs</a></li><li><a href="https://www.google.com/search?q=Games+-+Return to Monkey Island">Return to Monkey Island</a></li><li><a href="https://www.google.com/search?q=Games+-+Hitman 3">Hitman 3</a></li><li><a href="https://www.google.com/search?q=Games+-+Firewatch">Firewatch</a></li><li><a href="https://www.google.com/search?q=Games+-+Sniper Elite 4">Sniper Elite 4</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">TV</p><ul><li><a href="https://www.google.com/search?q=TV+-+How this Blind Girl… (S1)">How this Blind Girl… (S1)</a></li><li><a href="https://www.google.com/search?q=TV+-+Downton Abbey (S6)">Downton Abbey (S6)</a></li><li><a href="https://www.google.com/search?q=TV+-+Downton Abbey (S5)">Downton Abbey (S5)</a></li><li><a href="https://www.google.com/search?q=TV+-+Downton Abbey (S4)">Downton Abbey (S4)</a></li><li><a href="https://www.google.com/search?q=TV+-+Downton Abbey (S3)">Downton Abbey (S3)</a></li><li><a href="https://www.google.com/search?q=TV+-+Downton Abbey (S2)">Downton Abbey (S2)</a></li><li><a href="https://www.google.com/search?q=TV+-+Downton Abbey (S1)">Downton Abbey (S1)</a></li><li><a href="https://www.google.com/search?q=TV+-+The Traitors (S1)">The Traitors (S1)</a></li><li><a href="https://www.google.com/search?q=TV+-+Buffy the Vampire Slayer (S1)">Buffy the Vampire Slayer (S1)</a></li><li><a href="https://www.google.com/search?q=TV+-+Wednesday (S1)">Wednesday (S1)</a></li></ul>';
+	var box = makeBox(2, 3);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F3AC;Recently Completed Media')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function singles() {
+
+	function encode(text) {
+		text = text.toLowerCase();
+		text = text.replace(/&#39;/g, "'");
+		text = text.replace(/&amp;/g, "and");
+		return text;
+    }
+
+	var when = "27 January 2023 -  02 February 2023"
+	var singlesData = {
+		1: { Artist: "<a href='https://www.officialcharts.com/artist/5138/miley-cyrus/'>miley cyrus</a>", Title: "<a href='https://www.officialcharts.com/search/singles/flowers/'>FLOWERS</a>", Image: "https://d35iaml2i6ojwd.cloudfront.net/img/small?url=https://m.media-amazon.com/images/I/31iDAcJi6VL._SL75_.jpg" },
+2: { Artist: "<a href='https://www.officialcharts.com/artist/63748/raye-ft-070-shake/'>raye ft 070 shake</a>", Title: "<a href='https://www.officialcharts.com/search/singles/escapism/'>ESCAPISM</a>", Image: "https://d35iaml2i6ojwd.cloudfront.net/img/small?url=https://m.media-amazon.com/images/I/41igUB7t1uL._SL75_.jpg" },
+3: { Artist: "<a href='https://www.officialcharts.com/artist/32371/sza/'>sza</a>", Title: "<a href='https://www.officialcharts.com/search/singles/kill-bill/'>KILL BILL</a>", Image: "https://d35iaml2i6ojwd.cloudfront.net/img/small?url=https://m.media-amazon.com/images/I/61jcJk0rZKL._SL75_.jpg" },
+4: { Artist: "<a href='https://www.officialcharts.com/artist/5387/taylor-swift/'>taylor swift</a>", Title: "<a href='https://www.officialcharts.com/search/singles/anti-hero/'>ANTI-HERO</a>", Image: "https://d35iaml2i6ojwd.cloudfront.net/img/small?url=https://m.media-amazon.com/images/I/419jTRCD5SL._SL75_.jpg" },
+5: { Artist: "<a href='https://www.officialcharts.com/artist/63406/venbee-and-goddard/'>venbee &amp; goddard</a>", Title: "<a href='https://www.officialcharts.com/search/singles/messy-in-heaven/'>MESSY IN HEAVEN</a>", Image: "https://d35iaml2i6ojwd.cloudfront.net/img/small?url=https://m.media-amazon.com/images/I/51nAJkbfRZL._SL75_.jpg" },
+
+	};
+
+	var box = makeBox(2, 2);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.append('a')
+		.attr('href', 'https://www.officialcharts.com/charts/singles-chart/')
+		.html('&#x1F3B5;UK Singles Chart')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div');
+	inside
+		.append('p')
+		.html(when + '<br/>&nbsp;');
+	var table = inside
+		.append('table');
+	var position = 0;
+	for (var item of Object.keys(singlesData)) {
+		var title = encode(singlesData[item].Title.match(/>([^<]+)</)[1]);
+		var artist = encode(singlesData[item].Artist.match(/>([^<]+)</)[1]);
+		var row = table
+			.append('tr');
+		row
+			.append('td')
+			.html(++position);
+		row
+			.append('td')
+			.append('a')
+			.attr('href', 'https://www.youtube.com/results?search_query=' + artist + ' - ' + title)
+			.append('img')
+			.attr('src', singlesData[item].Image);
+		row = row
+			.append('td')
+			.style('text-align', 'left')
+		row
+			.append('a')
+			.attr('href', 'https://google.com/search?q=' + singlesData[item].Title + ' - ' + singlesData[item].Artist)
+			.html(singlesData[item].Title)
+		row
+			.append('span')
+			.html('<br/>' + singlesData[item].Artist);
+	}
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function word() {
+	var wordData = {
+		Word:       'doctrinaire',
+		Definition: '<p><em>Doctrinaire</em> is a formal word that means “stubbornly or excessively devoted to a <a href="https://www.merriam-webster.com/dictionary/doctrine">doctrine</a> or theory without regard to practical considerations.” It is often used disapprovingly to describe a person who has very strong beliefs about what should be done and who will not change those beliefs or accept other people\'s opinions.</p>'
+	}
+
+	var clean = wordData.Definition.replace(/<[^>]+>/g, '');
+
+	var box = makeBox(clean.length > 250 ? 2 : 1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4DC;<a href="https://www.merriam-webster.com/word-of-the-day">Word of the Day</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');	
+	var inside = box
+		.append('div');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.append('a')
+		.attr('href', 'https://www.merriam-webster.com/dictionary/' + wordData.Word)
+		.text(wordData.Word);
+	inside
+		.append('div')
+		.style('padding', '5px')
+		.html(wordData.Definition);	
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function moon() {
+	var moonData = {
+		Percent:  '51.2',
+		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/first-quarter.html" title="First Quarter on the night between 28 January and 29 January">First Quarter</a>',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.512&p=6.020&r=6.047',
+		Location: '11609021'
+	}
+
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#127769;<a href="https://www.timeanddate.com/moon/@' + moonData.Location + '">Moon</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');	
+	var inside = box
+		.append('div');
+	inside
+		.append('img')
+		.attr('src', moonData.Image)
+		.attr('width', '75%')
+		.attr('height', '75%');		
+	inside
+		.append('p')
+		.html(moonData.Type + ' (' + moonData.Percent + '%)');	
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function sun() {
+	var sunData = {
+		Rise:     '07:53',
+		Set:      '16:45',
+		Location: '11609021'
+	};
+
+	var box = makeBox(1, 1);	
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#128262;<a href="https://www.timeanddate.com/sun/@' + sunData.Location + '">Sun</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div');	
+	var table = inside
+		.append('table')
+		.style('width', '150px');
+	var row = table
+		.append('tr')
+		.style('font-size', '300%');
+	row
+		.append('td')
+		.html('&#127748;')
+	row
+		.append('td')
+		.html('&#127751;')
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.html('Rise')
+	row
+		.append('td')
+		.html('Set')
+var row = table
+		.append('tr');
+	row
+		.append('td')
+		.html(sunData.Rise)
+	row
+		.append('td')
+		.html(sunData.Set)
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function twitter() {
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22HALF+TIME%22">HALF TIME</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=Goodwin">Goodwin</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%22FULL+TIME%22">FULL TIME</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23lufc">#lufc</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Mark+Drakeford%22">Mark Drakeford</a></td></tr></table>';
+	var title = 'United Kingdom';
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.style('text-align', 'center')
+		.html(title);
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function twitter() {
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23Caturday">#Caturday</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23RoyalRumble">#RoyalRumble</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Gunna">Gunna</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23SaturdayVibes">#SaturdayVibes</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23SaturdayMorning">#SaturdayMorning</a></td></tr></table>';
+	var title = 'United States';
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.style('text-align', 'center')
+		.html(title);
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function f1() {
+	var html =  "<a href='https://www.formula1.com/en/racing/2023/Bahrain.html'><img src='https://www.formula1.com/content/dam/fom-website/races/2023/Bahrain_Grand_Prix.png' style='height:auto;width:auto;max-height:180px;max-width:180px;' /></a><br/><span style='font-size:85%'>5 March</span>";
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F3C1;<a href="https://www.formula1.com/en/racing/2021.html">Next F1 Race</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('div')
+		.html(html);
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function astronauts() {
+	var astronautsData = {
+		Amount:      '10',
+		CountryHtml: '<table><tr><td><img class="flag ttt" data-tt="usa" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-usa.jpg" /></td><td><img class="flag ttt" data-tt="russia" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-russia.jpg" /></td><td><img class="flag ttt" data-tt="china" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-china.jpg" /></td><td><img class="flag ttt" data-tt="germany" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-germany.jpg" /></td></tr><tr style="vertical-align:top"><td>3</td><td>3</td><td>3</td><td>1</td></tr></table>'
+	};
+
+	var box = makeBox(1, 1);	
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F469;&#x200D;&#x1F680;<a href="https://www.howmanypeopleareinspacerightnow.com/">Astronauts</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('div')
+		.html("<p style='font-size:200%;font-weight:bold'>" + astronautsData.Amount + "</p><p>people are in space now.</p><p>&nbsp;</p>" + astronautsData.CountryHtml)
+});
+
+//////////////////////////////////////////////////
+
+modules.push(function backlog() {
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4CB;Backlog')
+	var table = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('table')
+		.style('text-align', 'right');
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Audiobooks:")
+	row
+		.append('td')
+		.text('30')
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Downloads:")
+	row
+		.append('td')
+		.text('23')
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Films:")
+	row
+		.append('td')
+		.text('6');
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Games:")
+	row
+		.append('td')
+		.text('1');
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Work Inbox:")
+	row
+		.append('td')
+		.text('15');
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("YouTube:")
+	row
+		.append('td')
+		.text('42');
+});
+
+//////////////////////////////////////////////////
+
+
+
+			createPage();
+
+		</script>
+	</body>
+</html>
