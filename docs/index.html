@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>13:14 9-Apr - Ephemeral</title>		
+		<title>14:14 9-Apr - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -511,117 +511,16 @@ modules.push(function tv() {
 
 //////////////////////////////////////////////////
 
-modules.push(function backlog() {
-	var box = makeBox(1, 2);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F4CB;Backlog')
-	var table = box
-		.append('div')
-		.attr('class', 'inside')
-		.append('table')
-		.style('text-align', 'right');
-
-	var row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Audiobooks:");
-	row
-		.append('td')
-		.text('13')
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Books:");
-	row
-		.append('td')
-		.text('14');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Films:");
-	row
-		.append('td')
-		.text('359');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Games:");
-	row
-		.append('td')
-		.text('10');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("TV:");
-	row
-		.append('td')
-		.text('178');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("YouTube:");
-	row
-		.append('td')
-		.text('3');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.html('&nbsp;');
-	row
-		.append('td')
-		.html('&nbsp;');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Downloaded Files:");
-	row
-		.append('td')
-		.text('12');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Steam Wishlist:");
-	row
-		.append('td')
-		.text('149');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Work Inbox:");
-	row
-		.append('td')
-		.text('75');
-});
+console.log('Error in backlog module: The server is not available. Contact your administrator if this condition persists.');
 
 //////////////////////////////////////////////////
 
 modules.push(function youtube() {
 
     var data = [
-{ id: 'HnzNZ0Mdx4I', title: "Ahsoka | Teaser Trailer | Disney+", label: "Ahsoka | Teaser Trailer | Disney+ by Star Wars 2 days ago 1 minute, 52 seconds 8,592,949 views" },
-{ id: 'jaVdD4Z8UCs', title: "SIDHU MOOSE WALA : Mera Na (Official Video) Feat. Burna Boy \u0026 Steel Banglez | Navkaran Brar", label: "SIDHU MOOSE WALA : Mera Na (Official Video) Feat. Burna Boy \u0026 Steel Banglez | Navkaran Brar by Sidhu Moose Wala 2 days ago 3 minutes, 21 seconds 19,502,979 views" },
-{ id: 'eswCb9ImUyY', title: "Indiana Jones and the Dial of Destiny | Official Trailer", label: "Indiana Jones and the Dial of Destiny | Official Trailer by Lucasfilm 2 days ago 2 minutes, 9 seconds 7,481,518 views" },
+{ id: 'HnzNZ0Mdx4I', title: "Ahsoka | Teaser Trailer | Disney+", label: "Ahsoka | Teaser Trailer | Disney+ by Star Wars 2 days ago 1 minute, 52 seconds 8,615,704 views" },
+{ id: 'jaVdD4Z8UCs', title: "SIDHU MOOSE WALA : Mera Na (Official Video) Feat. Burna Boy \u0026 Steel Banglez | Navkaran Brar", label: "SIDHU MOOSE WALA : Mera Na (Official Video) Feat. Burna Boy \u0026 Steel Banglez | Navkaran Brar by Sidhu Moose Wala 2 days ago 3 minutes, 21 seconds 19,661,898 views" },
+{ id: 'eswCb9ImUyY', title: "Indiana Jones and the Dial of Destiny | Official Trailer", label: "Indiana Jones and the Dial of Destiny | Official Trailer by Lucasfilm 2 days ago 2 minutes, 9 seconds 7,497,276 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -1302,9 +1201,9 @@ modules.push(function crypto() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '88.2',
+		Percent:  '87.9',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-gibbous.html" title="Waning Gibbous on the night between 9 April and 10 April">Waning Gibbous</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.882&p=2.815&r=5.888',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.879&p=2.977&r=6.049',
 		Location: '11609021'
 	}
 
@@ -1440,7 +1339,7 @@ modules.push(function twitter() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Izzy">Izzy</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23UFC287">#UFC287</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%22Happy+Easter%22">Happy Easter</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Adesanya">Adesanya</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23TOHSPOILERS">#TOHSPOILERS</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Izzy">Izzy</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23UFC287">#UFC287</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%22Happy+Easter%22">Happy Easter</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23TOHSPOILERS">#TOHSPOILERS</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Adesanya">Adesanya</a></td></tr></table>';
 	var title = 'United States';
 	var box = makeBox(1, 1);
 	box
