@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>09:26 4-Jul - Ephemeral</title>		
+		<title>09:37 4-Jul - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -511,117 +511,16 @@ modules.push(function tv() {
 
 //////////////////////////////////////////////////
 
-modules.push(function backlog() {
-	var box = makeBox(1, 2);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F4CB;Backlog')
-	var table = box
-		.append('div')
-		.attr('class', 'inside')
-		.append('table')
-		.style('text-align', 'right');
-
-	var row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Audiobooks:");
-	row
-		.append('td')
-		.text('12')
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Books:");
-	row
-		.append('td')
-		.text('14');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Films:");
-	row
-		.append('td')
-		.text('364');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Games:");
-	row
-		.append('td')
-		.text('9');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("TV:");
-	row
-		.append('td')
-		.text('177');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("YouTube:");
-	row
-		.append('td')
-		.text('3');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.html('&nbsp;');
-	row
-		.append('td')
-		.html('&nbsp;');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Downloaded Files:");
-	row
-		.append('td')
-		.text('21');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Steam Wishlist:");
-	row
-		.append('td')
-		.text('0');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Work Inbox:");
-	row
-		.append('td')
-		.text('28');
-});
+console.log('Error in backlog module: Retrieving the COM class factory for component with CLSID {0006F03A-0000-0000-C000-000000000046} failed due to the following error: 80080005 Server execution failed (0x80080005 (CO_E_SERVER_EXEC_FAILURE)).');
 
 //////////////////////////////////////////////////
 
 modules.push(function youtube() {
 
     var data = [
-{ id: 'Ivr3wwd7Tug', title: "POCHETTINO's FIRST WORDS 🔵 | Exclusive Interview as Head Coach of Chelsea FC", label: "POCHETTINO's FIRST WORDS 🔵 | Exclusive Interview as Head Coach of Chelsea FC by Chelsea Football Club 13 hours ago 15 minutes 246,444 views" },
-{ id: '9SbgmM3mSps', title: "Overture Teaser: The Final Feast | Genshin Impact", label: "Overture Teaser: The Final Feast | Genshin Impact by Genshin Impact 1 day ago 3 minutes, 43 seconds 3,246,220 views" },
-{ id: 'jkZmOAIFhYU', title: "Slim - Daily Duppy | GRM Daily", label: "Slim - Daily Duppy | GRM Daily by GRM Daily 1 day ago 3 minutes, 48 seconds 307,722 views" },
+{ id: 'Ivr3wwd7Tug', title: "POCHETTINO's FIRST WORDS 🔵 | Exclusive Interview as Head Coach of Chelsea FC", label: "POCHETTINO's FIRST WORDS 🔵 | Exclusive Interview as Head Coach of Chelsea FC by Chelsea Football Club 13 hours ago 15 minutes 248,844 views" },
+{ id: '9SbgmM3mSps', title: "Overture Teaser: The Final Feast | Genshin Impact", label: "Overture Teaser: The Final Feast | Genshin Impact by Genshin Impact 1 day ago 3 minutes, 43 seconds 3,250,969 views" },
+{ id: 'jkZmOAIFhYU', title: "Slim - Daily Duppy | GRM Daily", label: "Slim - Daily Duppy | GRM Daily by GRM Daily 1 day ago 3 minutes, 48 seconds 308,627 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -1243,7 +1142,7 @@ modules.push(function moon() {
 	var moonData = {
 		Percent:  '98.7',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-gibbous.html" title="Waning Gibbous on the night between 4 July and 5 July">Waning Gibbous</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.987&p=2.592&r=5.351',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.987&p=2.588&r=5.350',
 		Location: '11609021'
 	}
 
@@ -1351,7 +1250,7 @@ modules.push(function word() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Threads">Threads</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23Wimbledon">#Wimbledon</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23IndependenceDay">#IndependenceDay</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%22Happy+4th+of+July%22">Happy 4th of July</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Bairstow">Bairstow</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Threads">Threads</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%234thofJuly">#4thofJuly</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23IndependenceDay">#IndependenceDay</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%22Johnny+Mercer%22">Johnny Mercer</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Byker+Grove%22">Byker Grove</a></td></tr></table>';
 	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
