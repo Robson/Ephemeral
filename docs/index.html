@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>14:37 22-Jul - Ephemeral</title>		
+		<title>15:38 22-Jul - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -619,9 +619,9 @@ modules.push(function backlog() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'cfX1QlfxTBI', title: "The Drake \u0026 Central Cee \&quot;On The Radar\&quot; Freestyle", label: "The Drake \u0026 Central Cee \&quot;On The Radar\&quot; Freestyle by On The Radar Radio 17 hours ago 4 minutes, 54 seconds 2,163,255 views" },
-{ id: '7GqFWaC6C68', title: "HIGHLIGHTS from Lionel Messi’s Inter Miami debut vs. Cruz Azul | ESPN FC", label: "HIGHLIGHTS from Lionel Messi’s Inter Miami debut vs. Cruz Azul | ESPN FC by ESPN FC 11 hours ago 4 minutes, 5 seconds 2,309,909 views" },
-{ id: 'Fe7XoPrUFIA', title: "HIGHLIGHTS: Cruz Azul vs. Inter Miami CF | July 21, 2023 (Lionel Messi's Inter Miami Debut)", label: "HIGHLIGHTS: Cruz Azul vs. Inter Miami CF | July 21, 2023 (Lionel Messi's Inter Miami Debut) by Major League Soccer 10 hours ago 8 minutes, 8 seconds 1,170,739 views" },
+{ id: 'cfX1QlfxTBI', title: "The Drake \u0026 Central Cee \&quot;On The Radar\&quot; Freestyle", label: "The Drake \u0026 Central Cee \&quot;On The Radar\&quot; Freestyle by On The Radar Radio 18 hours ago 4 minutes, 54 seconds 2,274,201 views" },
+{ id: '7GqFWaC6C68', title: "HIGHLIGHTS from Lionel Messi’s Inter Miami debut vs. Cruz Azul | ESPN FC", label: "HIGHLIGHTS from Lionel Messi’s Inter Miami debut vs. Cruz Azul | ESPN FC by ESPN FC 12 hours ago 4 minutes, 5 seconds 2,502,939 views" },
+{ id: 'Fe7XoPrUFIA', title: "HIGHLIGHTS: Cruz Azul vs. Inter Miami CF | July 21, 2023 (Lionel Messi's Inter Miami Debut)", label: "HIGHLIGHTS: Cruz Azul vs. Inter Miami CF | July 21, 2023 (Lionel Messi's Inter Miami Debut) by Major League Soccer 11 hours ago 8 minutes, 8 seconds 1,286,262 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -1242,9 +1242,9 @@ modules.push(function crypto() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '19.6',
+		Percent:  '19.9',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 22 July and 23 July">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.196&p=0.771&r=0.790',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.199&p=0.598&r=0.615',
 		Location: '11609021'
 	}
 
@@ -1351,11 +1351,59 @@ modules.push(function word() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in twitter module: This is usually a temporary error during hostname resolution and means that the local server did not receive a response from an authoritative server. (trends24.in:443)');
+modules.push(function twitter() {
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Coutts">Coutts</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=Edwin">Edwin</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23NUFC">#NUFC</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23DanWoottonExposed">#DanWoottonExposed</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23WAshes">#WAshes</a></td></tr></table>';
+	var title = 'United Kingdom';
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.style('text-align', 'center')
+		.html(title);
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in twitter module: This is usually a temporary error during hostname resolution and means that the local server did not receive a response from an authoritative server. (trends24.in:443)');
+modules.push(function twitter() {
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22Jack+Smith%22">Jack Smith</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23SkylosFairLaunch">#SkylosFairLaunch</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23TrumpIndictment">#TrumpIndictment</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23ProtectMyFreedomToVote">#ProtectMyFreedomToVote</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Subway">Subway</a></td></tr></table>';
+	var title = 'United States';
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.style('text-align', 'center')
+		.html(title);
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
 
 //////////////////////////////////////////////////
 
