@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>17:38 3-Sep - Ephemeral</title>		
+		<title>18:38 3-Sep - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -474,117 +474,16 @@ modules.push(function tv() {
 
 //////////////////////////////////////////////////
 
-modules.push(function backlog() {
-	var box = makeBox(1, 2);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F4CB;Backlog')
-	var table = box
-		.append('div')
-		.attr('class', 'inside')
-		.append('table')
-		.style('text-align', 'right');
-
-	var row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Audiobooks:");
-	row
-		.append('td')
-		.text('12')
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Books:");
-	row
-		.append('td')
-		.text('14');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Films:");
-	row
-		.append('td')
-		.text('370');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Games:");
-	row
-		.append('td')
-		.text('9');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("TV:");
-	row
-		.append('td')
-		.text('178');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("YouTube:");
-	row
-		.append('td')
-		.text('3');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.html('&nbsp;');
-	row
-		.append('td')
-		.html('&nbsp;');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Downloaded Files:");
-	row
-		.append('td')
-		.text('30');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Steam Wishlist:");
-	row
-		.append('td')
-		.text('0');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Work Inbox:");
-	row
-		.append('td')
-		.text('21');
-});
+console.log('Error in backlog module: The server is not available. Contact your administrator if this condition persists.');
 
 //////////////////////////////////////////////////
 
 modules.push(function youtube() {
 
     var data = [
-{ id: 'NBPmXsU_KIg', title: "SEVEN Goal Thriller! | Al-Ittihad v Al-Hilal Highlights (2023-24 Saudi Professional League)", label: "SEVEN Goal Thriller! | Al-Ittihad v Al-Hilal Highlights (2023-24 Saudi Professional League) by DAZN UK 1 day ago 9 minutes, 8 seconds 78,651 views" },
-{ id: '8-aEr4WRPYk', title: "Kylie Minogue - Tension (Official Video)", label: "Kylie Minogue - Tension (Official Video) by Kylie Minogue 2 days ago 3 minutes, 38 seconds 840,112 views" },
-{ id: 'B3c2YvdjHN8', title: "UEFA Champions League 2023/24 Group Stage Draw: Man United to face Bayern Munich", label: "UEFA Champions League 2023/24 Group Stage Draw: Man United to face Bayern Munich by TNT Sports Streamed 2 days ago 2 hours, 1 minute 685,020 views" },
+{ id: 'PvUrLTP1GqE', title: "HIGHLIGHTS! Liam Smith vs Chris Eubank Jr 2 | The Rematch", label: "HIGHLIGHTS! Liam Smith vs Chris Eubank Jr 2 | The Rematch by Sky Sports Boxing 11 hours ago 2 minutes 476,884 views" },
+{ id: 'iXf0IuzcJpw', title: "Liam Smith vs. Chris Eubank Jr 2 • FULL POST FIGHT PRESS CONFERENCE | Boxxer \u0026 Sky Sports Boxing", label: "Liam Smith vs. Chris Eubank Jr 2 • FULL POST FIGHT PRESS CONFERENCE | Boxxer \u0026 Sky Sports Boxing by Seconds Out 17 hours ago 18 minutes 515,233 views" },
+{ id: 'K0IlOKTPrBo', title: "HIGHLIGHTS | Real Madrid 2-1 Getafe | Jude Bellingham lights up Bernabéu with late winning goal", label: "HIGHLIGHTS | Real Madrid 2-1 Getafe | Jude Bellingham lights up Bernabéu with late winning goal by Viaplay Sports UK 1 day ago 7 minutes, 16 seconds 426,465 views" },
 ];
 
     var box = makeBox(2, 2);
@@ -1203,9 +1102,9 @@ modules.push(function crypto() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '82.2',
+		Percent:  '81.8',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-gibbous.html" title="Waning Gibbous on the night between 3 September and 4 September">Waning Gibbous</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.822&p=3.029&r=6.205',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.818&p=3.172&r=0.066',
 		Location: '11609021'
 	}
 
@@ -1313,7 +1212,7 @@ modules.push(function word() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Havertz">Havertz</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23ARSMUN">#ARSMUN</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Rashford">Rashford</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Arsenal">Arsenal</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Martial">Martial</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Havertz">Havertz</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23ARSMUN">#ARSMUN</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Rashford">Rashford</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Arsenal">Arsenal</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Maguire">Maguire</a></td></tr></table>';
 	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
@@ -1341,7 +1240,7 @@ modules.push(function twitter() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23BrokeNissanBoys">#BrokeNissanBoys</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=Lithuania">Lithuania</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%22Team+USA%22">Team USA</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Havertz">Havertz</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Burning+Man%22">Burning Man</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23Choofairlaunch">#Choofairlaunch</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=Havertz">Havertz</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23ARSMUN">#ARSMUN</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23brokenissanboys">#brokenissanboys</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Rashford">Rashford</a></td></tr></table>';
 	var title = 'United States';
 	var box = makeBox(1, 1);
 	box
