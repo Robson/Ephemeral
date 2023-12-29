@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>02:24 29-Dec - Ephemeral</title>		
+		<title>03:37 29-Dec - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -474,16 +474,117 @@ modules.push(function tv() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in backlog module: Retrieving the COM class factory for component with CLSID {0006F03A-0000-0000-C000-000000000046} failed due to the following error: 80080005 Server execution failed (0x80080005 (CO_E_SERVER_EXEC_FAILURE)).');
+modules.push(function backlog() {
+	var box = makeBox(1, 2);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4CB;Backlog')
+	var table = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('table')
+		.style('text-align', 'right');
+
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Audiobooks:");
+	row
+		.append('td')
+		.text('12')
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Books:");
+	row
+		.append('td')
+		.text('14');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Films:");
+	row
+		.append('td')
+		.text('161');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Games:");
+	row
+		.append('td')
+		.text('7');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("TV:");
+	row
+		.append('td')
+		.text('175');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("YouTube:");
+	row
+		.append('td')
+		.text('5');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.html('&nbsp;');
+	row
+		.append('td')
+		.html('&nbsp;');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Downloaded Files:");
+	row
+		.append('td')
+		.text('26');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Steam Wishlist:");
+	row
+		.append('td')
+		.text('0');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Work Inbox:");
+	row
+		.append('td')
+		.text('24');
+});
 
 //////////////////////////////////////////////////
 
 modules.push(function youtube() {
 
     var data = [
-{ id: '5hIqXjAmo6k', title: "American 777 insane landing at London Heathrow!", label: "American 777 insane landing at London Heathrow! by BIG JET TV 210,203 views 1 day ago 57 seconds" },
-{ id: 'gv1EvWKCTfA', title: "SURPRISE MAIN CHRISTMAS PRESENTS FOR THE GIRLS!", label: "SURPRISE MAIN CHRISTMAS PRESENTS FOR THE GIRLS! by The Ingham Family 98,361 views 1 day ago 48 minutes" },
-{ id: 'J2EG0olwPxc', title: "Luke Littler becomes YOUNGEST player to reach last 16 of the WDC! 😱🎯", label: "Luke Littler becomes YOUNGEST player to reach last 16 of the WDC! 😱🎯 by Sky Sports Darts 51,751 views 1 day ago 4 minutes, 32 seconds" },
+{ id: '5hIqXjAmo6k', title: "American 777 insane landing at London Heathrow!", label: "American 777 insane landing at London Heathrow! by BIG JET TV 212,934 views 1 day ago 57 seconds" },
+{ id: 'gv1EvWKCTfA', title: "SURPRISE MAIN CHRISTMAS PRESENTS FOR THE GIRLS!", label: "SURPRISE MAIN CHRISTMAS PRESENTS FOR THE GIRLS! by The Ingham Family 99,318 views 1 day ago 48 minutes" },
+{ id: 'J2EG0olwPxc', title: "Luke Littler becomes YOUNGEST player to reach last 16 of the WDC! 😱🎯", label: "Luke Littler becomes YOUNGEST player to reach last 16 of the WDC! 😱🎯 by Sky Sports Darts 52,344 views 1 day ago 4 minutes, 32 seconds" },
 ];
 
     var box = makeBox(2, 2);
@@ -1102,9 +1203,9 @@ modules.push(function crypto() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '95.5',
+		Percent:  '95.3',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-gibbous.html" title="Waning Gibbous on the night between 28 December and 29 December">Waning Gibbous</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.955&p=3.011&r=0.055',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.953&p=2.699&r=6.020',
 		Location: '11609021'
 	}
 
@@ -1212,7 +1313,7 @@ modules.push(function word() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Arsenal">Arsenal</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23ARSWHU">#ARSWHU</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Martinelli">Martinelli</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Arteta">Arteta</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Pistons">Pistons</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Arsenal">Arsenal</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22West+Ham%22">West Ham</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Pistons">Pistons</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23ARSWHU">#ARSWHU</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Martinelli">Martinelli</a></td></tr></table>';
 	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
@@ -1240,7 +1341,7 @@ modules.push(function twitter() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Pistons">Pistons</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=Celtics">Celtics</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Maine">Maine</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Browns">Browns</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Njoku">Njoku</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Pistons">Pistons</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=Flacco">Flacco</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Browns">Browns</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Celtics">Celtics</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Jets">Jets</a></td></tr></table>';
 	var title = 'United States';
 	var box = makeBox(1, 1);
 	box
