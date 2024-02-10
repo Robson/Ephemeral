@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>20:09 10-Feb - Ephemeral</title>		
+		<title>21:09 10-Feb - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -474,117 +474,16 @@ modules.push(function tv() {
 
 //////////////////////////////////////////////////
 
-modules.push(function backlog() {
-	var box = makeBox(1, 2);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F4CB;Backlog')
-	var table = box
-		.append('div')
-		.attr('class', 'inside')
-		.append('table')
-		.style('text-align', 'right');
-
-	var row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Audiobooks:");
-	row
-		.append('td')
-		.text('12')
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Books:");
-	row
-		.append('td')
-		.text('14');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Films:");
-	row
-		.append('td')
-		.text('164');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Games:");
-	row
-		.append('td')
-		.text('8');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("TV:");
-	row
-		.append('td')
-		.text('156');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("YouTube:");
-	row
-		.append('td')
-		.text('4');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.html('&nbsp;');
-	row
-		.append('td')
-		.html('&nbsp;');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Downloaded Files:");
-	row
-		.append('td')
-		.text('37');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Steam Wishlist:");
-	row
-		.append('td')
-		.text('0');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Work Inbox:");
-	row
-		.append('td')
-		.text('36');
-});
+console.log('Error in backlog module: Retrieving the COM class factory for component with CLSID {0006F03A-0000-0000-C000-000000000046} failed due to the following error: 80080005 Server execution failed (0x80080005 (CO_E_SERVER_EXEC_FAILURE)).');
 
 //////////////////////////////////////////////////
 
 modules.push(function youtube() {
 
     var data = [
-{ id: 'Cb1Dv565f2I', title: "I Survived 50 Hours in Apple Vision Pro", label: "I Survived 50 Hours in Apple Vision Pro by Ryan Trahan 4,516,222 views 1 day ago 22 minutes" },
-{ id: 'OPJzFkN6H0Q', title: "Who Is The Smartest BETA SQUAD Member?", label: "Who Is The Smartest BETA SQUAD Member? by Chunkz 622,707 views 1 day ago 16 minutes" },
-{ id: 'Y6q833eG1Fw', title: "Sanremo 2024 - Angelina Mango con Il quartetto d'archi canta \&quot;La rondine\&quot;", label: "Sanremo 2024 - Angelina Mango con Il quartetto d'archi canta \&quot;La rondine\&quot; by Rai 1,882,985 views 9 hours ago 5 minutes, 22 seconds" },
+{ id: 'Cb1Dv565f2I', title: "I Survived 50 Hours in Apple Vision Pro", label: "I Survived 50 Hours in Apple Vision Pro by Ryan Trahan 4,618,563 views 1 day ago 22 minutes" },
+{ id: 'OPJzFkN6H0Q', title: "Who Is The Smartest BETA SQUAD Member?", label: "Who Is The Smartest BETA SQUAD Member? by Chunkz 638,444 views 1 day ago 16 minutes" },
+{ id: 'Y6q833eG1Fw', title: "Sanremo 2024 - Angelina Mango con Il quartetto d'archi canta \&quot;La rondine\&quot;", label: "Sanremo 2024 - Angelina Mango con Il quartetto d'archi canta \&quot;La rondine\&quot; by Rai 2,090,684 views 10 hours ago 5 minutes, 22 seconds" },
 ];
 
     var box = makeBox(2, 2);
@@ -1193,9 +1092,9 @@ modules.push(function crypto() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '1.3',
+		Percent:  '1.4',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 10 February and 11 February">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.013&p=5.495&r=5.249',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.014&p=5.506&r=5.274',
 		Location: '11609021'
 	}
 
@@ -1303,7 +1202,7 @@ modules.push(function word() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23MaskedSingerUK">#MaskedSingerUK</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23NUFC">#NUFC</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Leverkusen">Leverkusen</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23ENGvWAL">#ENGvWAL</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Harry+Kane%22">Harry Kane</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23MaskedSingerUK">#MaskedSingerUK</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23NUFC">#NUFC</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Bayern">Bayern</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%22Harry+Kane%22">Harry Kane</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%23ENGvWAL">#ENGvWAL</a></td></tr></table>';
 	var title = 'United Kingdom';
 	var box = makeBox(1, 1);
 	box
@@ -1331,7 +1230,7 @@ modules.push(function twitter() {
 //////////////////////////////////////////////////
 
 modules.push(function twitter() {
-	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22Chris+Wallace%22">Chris Wallace</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23TuckerPutinPart2">#TuckerPutinPart2</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%24GALA">$GALA</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Leverkusen">Leverkusen</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Bayern">Bayern</a></td></tr></table>';
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%22Chris+Wallace%22">Chris Wallace</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23TuckerPutinPart2">#TuckerPutinPart2</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=Bayern">Bayern</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=%23LGRW">#LGRW</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Leverkusen">Leverkusen</a></td></tr></table>';
 	var title = 'United States';
 	var box = makeBox(1, 1);
 	box
