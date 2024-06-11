@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>09:40 11-Jun - Ephemeral</title>		
+		<title>10:40 11-Jun - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -240,39 +240,376 @@
 
 ////////////////////////////////////////////////// boxes
 			
-console.log('Error in bbccombine module: No such host is known. (feeds.bbci.co.uk:80)');
+modules.push(function bbcCombine() {
+	var html = '<table style="margin:0 10px"><tr><td style="vertical-align:top"><b>UK</b><br/><ul><li class="ttt" data-tt="<b>Tories to pledge further 2p National Insurance cut in manifesto</b><br/>Rishi Sunak claims another Tory government would help working people &quot;keep more of the money you earn&quot;." style="font-weight:bold"><a href="https://www.bbc.com/news/articles/c8005jp0g71o">Tories to pledge further 2p National Insurance cut in manifesto</a></li><li class="ttt" data-tt="<b>Labour pledges 100,000 urgent child dental appointments</b><br/>Labour says it plans to clear dental treatment backlogs and introduced supervised tooth cleaning."><a href="https://www.bbc.com/news/articles/crgglpvze3no">Labour pledges 100,000 urgent child dental appointments</a></li><li class="ttt" data-tt="<b>Unemployment rate highest for more than two years</b><br/>The rate has risen to 4.4%, official figures show, the highest figure since September 2021."><a href="https://www.bbc.com/news/articles/c2881jmwjlmo">Unemployment rate highest for more than two years</a></li></ul></td><td><a href="https://www.bbc.com/news/articles/c8005jp0g71o"><img src="https://ichef.bbci.co.uk/news/1024/branded_news/0657/live/53262180-278b-11ef-b466-c5657cd003f5.jpg" class="ttt" data-tt="Close up of Rishi Sunak&#x27;s face as he speaks during a neighbourhood watch meeting at a pub in Horsham, West Sussex" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>US & Canada</b><br/><ul><li class="ttt" data-tt="<b>Jury begins deliberating in historic Hunter Biden case</b><br/>The fate of the US president\'s son now lies in the hands of 12 jurors in Delaware." style="font-weight:bold"><a href="https://www.bbc.com/news/articles/cldd97ql25do">Jury begins deliberating in historic Hunter Biden case</a></li><li class="ttt" data-tt="<b>Blinken in Middle East pushes Gaza ceasefire deal</b><br/>The top US diplomat will urge Arab leaders to push Hamas to accept a ceasefire-for-hostage agreement."><a href="https://www.bbc.com/news/articles/c722vw7g41wo">Blinken in Middle East pushes Gaza ceasefire deal</a></li><li class="ttt" data-tt="<b>Baltimore shipping channel reopens after bridge collapse</b><br/>The US Army Corps of Engineers said the area was &quot;safe for transit&quot;, nearly three months after the disaster."><a href="https://www.bbc.com/news/articles/cnkk2d1ezzyo">Baltimore shipping channel reopens after bridge collapse</a></li></ul></td><td><a href="https://www.bbc.com/news/articles/cldd97ql25do"><img src="https://ichef.bbci.co.uk/news/1024/branded_news/0722/live/31888bc0-27b9-11ef-a4e2-89abf0601881.jpg" class="ttt" data-tt="Hunter Biden and his wife Melissa" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>World</b><br/><ul><li class="ttt" data-tt="<b>UN Security Council backs US Israel-Gaza ceasefire plan</b><br/>The proposal sets out conditions for a &quot;complete ceasefire&quot; and the release of hostages held by Hamas." style="font-weight:bold"><a href="https://www.bbc.com/news/articles/cw448x7lxggo">UN Security Council backs US Israel-Gaza ceasefire plan</a></li><li class="ttt" data-tt="<b>Netanyahu walks tightrope as US urges Gaza ceasefire deal</b><br/>Secretary of State Blinken\'s Middle East mission collides with Israeli politics, Jeremy Bowen says."><a href="https://www.bbc.com/news/articles/c511vl9yjwwo">Netanyahu walks tightrope as US urges Gaza ceasefire deal</a></li><li class="ttt" data-tt="<b>Apple brings ChatGPT to iPhones in AI overhaul</b><br/>The company has been slower to roll out generative AI features than rivals including Google and Microsoft."><a href="https://www.bbc.com/news/articles/c4nn5mejl89o">Apple brings ChatGPT to iPhones in AI overhaul</a></li></ul></td><td><a href="https://www.bbc.com/news/articles/cw448x7lxggo"><img src="https://ichef.bbci.co.uk/news/1024/branded_news/6c8e/live/987c4020-2763-11ef-9d0a-ef8fa1b61375.jpg" class="ttt" data-tt="Children climb through debris in Gaza" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>Formula 1</b><br/><ul><li class="ttt" data-tt="<b>F1 Q&A after Canada: Ricciardo and Sainz future plus Perez at Red Bull</b><br/>BBC F1 correspondent Andrew Benson answers your questions following the Canadian Grand Prix." style="font-weight:bold"><a href="https://www.bbc.com/sport/formula1/articles/cz99q58lmvro">F1 Q&A after Canada: Ricciardo and Sainz future plus Perez at Red Bull</a></li><li class="ttt" data-tt="<b>\'Russell rues missed opportunity but big picture positive for Mercedes\'</b><br/>George Russell finished third at the Canadian Grand Prix and left Montreal with mixed feelings despite Mercedes\' significant progress."><a href="https://www.bbc.com/sport/formula1/articles/c5115gpev51o">\'Russell rues missed opportunity but big picture positive for Mercedes\'</a></li><li class="ttt" data-tt="<b>Verstappen wins gripping wet-dry race in Canada</b><br/>Red Bull’s Max Verstappen wins a gripping wet-dry Canadian Grand Prix that developed into a five-car battle for the lead over the final 10 laps."><a href="https://www.bbc.com/sport/formula1/articles/c1wwvpejw07o">Verstappen wins gripping wet-dry race in Canada</a></li></ul></td><td><a href="https://www.bbc.com/sport/formula1/articles/cz99q58lmvro"><img src="https://ichef.bbci.co.uk/news/1024/branded_sport/9076/live/1235d740-26b1-11ef-80aa-699d54c46324.jpg" class="ttt" data-tt="Image of the 2024 F1 drivers" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>Technology</b><br/><ul><li class="ttt" data-tt="<b>Apple brings ChatGPT to iPhones in AI overhaul</b><br/>The company has been slower to roll out generative AI features than rivals including Google and Microsoft." style="font-weight:bold"><a href="https://www.bbc.com/news/articles/c4nn5mejl89o">Apple brings ChatGPT to iPhones in AI overhaul</a></li><li class="ttt" data-tt="<b>Genetic testing firm 23andMe investigated over hack</b><br/>Criminals gained access to 6.9 million records when the firm was hacked in October 2023."><a href="https://www.bbc.com/news/articles/c3gg17pq5y9o">Genetic testing firm 23andMe investigated over hack</a></li><li class="ttt" data-tt="<b>O-type blood donors needed after London cyber-attack</b><br/>The NHS says last week\'s cyber-attack means blood cannot be sorted at the same frequency."><a href="https://www.bbc.com/news/articles/c2eeg9gygyno">O-type blood donors needed after London cyber-attack</a></li></ul></td><td><a href="https://www.bbc.com/news/articles/c4nn5mejl89o"><img src="https://ichef.bbci.co.uk/news/1024/branded_news/1b13/live/1589a5d0-2764-11ef-9d0a-ef8fa1b61375.jpg" class="ttt" data-tt="Apple boss Tim Cook pictured on-stage at WWDC 2024" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr></table>';
+	var box = makeBox(3, 2);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4F0;<a href="https://www.bbc.co.uk/news">BBC News</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in weather module: No such host is known. (www.timeanddate.com:443)');
+modules.push(function weather() {
+    var weatherLocation = "11609021";
+
+    var data={"copyright":"Contents are strictly for use by timeanddate.com","units":{"temp":"°C","prec":"mm","wind":"mph","baro":"mbar"},"detail":[{"hl":true,"hls":"10 Jun – 16 Jun","date":1718064E6,"ts":"Tue, 11","ds":"Tue, 11 Jun","icon":18,"desc":"Sprinkles. Cloudy.","temp":15,"templow":7,"cf":14,"wind":6,"wd":330,"hum":59,"pc":56,"rain":2},{"date":17181504E5,"ts":"Wed, 12","ds":"Wed, 12 Jun","icon":18,"desc":"Sprinkles. Cloudy.","temp":16,"templow":8,"cf":16,"wind":7,"wd":210,"hum":54,"pc":23,"rain":1.5 },{"date":17182368E5,"ts":"Thu, 13","ds":"Thu, 13 Jun","icon":33,"desc":"Showers late. Overcast.","temp":15,"templow":7,"cf":11,"wind":17,"wd":190,"hum":66,"pc":63,"rain":3.1 },{"date":17183232E5,"ts":"Fri, 14","ds":"Fri, 14 Jun","icon":18,"desc":"Drizzle. Overcast.","temp":17,"templow":11,"cf":17,"wind":15,"wd":220,"hum":57,"pc":55,"rain":3},{"date":17184096E5,"ts":"Sat, 15","ds":"Sat, 15 Jun","icon":18,"desc":"Sprinkles. Overcast.","temp":17,"templow":9,"cf":16,"wind":17,"wd":220,"hum":63,"pc":45,"rain":2.3 },{"date":1718496E6,"ts":"Sun, 16","ds":"Sun, 16 Jun","icon":22,"desc":"Thunderstorms. Overcast.","temp":16,"templow":9,"cf":12,"wind":12,"wd":190,"hum":86,"pc":64,"rain":11.8 },{"hl":true,"hls":"17 Jun – 23 Jun","date":17185824E5,"ts":"Mon, 17","ds":"Mon, 17 Jun","icon":33,"desc":"Passing showers. Broken clouds.","temp":19,"templow":10,"cf":19,"wind":15,"wd":220,"hum":51,"pc":40,"rain":1.6 },{"date":17186688E5,"ts":"Tue, 18","ds":"Tue, 18 Jun","icon":33,"desc":"Showers late. Partly cloudy.","temp":18,"templow":9,"cf":17,"wind":10,"wd":230,"hum":73,"pc":52,"rain":2.6 },{"date":17187552E5,"ts":"Wed, 19","ds":"Wed, 19 Jun","icon":2,"desc":"Mostly sunny.","temp":18,"templow":10,"cf":18,"wind":9,"wd":280,"hum":59,"pc":5},{"date":17188416E5,"ts":"Thu, 20","ds":"Thu, 20 Jun","icon":4,"desc":"Afternoon clouds.","temp":19,"templow":10,"cf":19,"wind":6,"wd":200,"hum":58,"pc":5},{"date":1718928E6,"ts":"Fri, 21","ds":"Fri, 21 Jun","icon":33,"desc":"Passing showers. Partly cloudy.","temp":19,"templow":10,"cf":19,"wind":9,"wd":200,"hum":61,"pc":67,"rain":0.2 },{"date":17190144E5,"ts":"Sat, 22","ds":"Sat, 22 Jun","icon":2,"desc":"Decreasing cloudiness.","temp":20,"templow":10,"cf":19,"wind":12,"wd":190,"hum":71,"pc":6},{"date":17191008E5,"ts":"Sun, 23","ds":"Sun, 23 Jun","icon":4,"desc":"Increasing cloudiness.","temp":20,"templow":12,"cf":19,"wind":13,"wd":180,"hum":65,"pc":6},{"hl":true,"hls":"24 Jun – 30 Jun","date":17191872E5,"ts":"Mon, 24","ds":"Mon, 24 Jun","icon":33,"desc":"Passing showers. Breaks of sun late.","temp":21,"templow":14,"cf":20,"wind":3,"wd":190,"hum":89,"pc":66,"rain":3.8 },{"date":17192736E5,"ts":"Tue, 25","ds":"Tue, 25 Jun","icon":33,"desc":"Passing showers. Mostly cloudy.","temp":21,"templow":14,"cf":21,"wind":13,"wd":190,"hum":89,"pc":57,"rain":1.6 }],"grid":{"temp":{"low":7,"high":21,"range":14},"prec":{"high":11.8},"time":86400000,"sections":15},"conv":{"prec":{"offset":0,"scale":1},"temp":{"offset":0,"scale":1},"wind":{"offset":0,"scale":0.869},"baro":{"offset":0,"scale":1}}};
+
+
+    var box = makeBox(2, 2);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#127746;<a href="https://www.timeanddate.com/weather/@' + weatherLocation + '/ext">Weather</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div');
+    var table = inside
+        .append('table');
+
+    for (var day of data.detail.slice(0, 7)) {
+        var row = table
+            .append('tr');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .style('font-weight', 'bold')
+            .html(day.ds.split(',')[0] + ':&nbsp;');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html(day.templow + '&#xb0;');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html('to');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html(day.temp + '&#xb0;');
+        row
+            .append('td')
+            .style('text-align', 'center')
+            .append('img')
+            .attr('src', 'https://c.tadst.com/gfx/w/svg/wt-' + day.icon + '.svg')
+            .attr('width', '32px')
+            .attr('height', '32px');
+        row
+            .append('td')
+            .style('text-align', 'left')
+            .html(day.desc)
+    }
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in astronomy module: No such host is known. (apod.nasa.gov:443)');
+modules.push(function astronomy() {
+	var imageData = {
+		Source:    'https://apod.nasa.gov/apod/image/2406/RhoAntares_Stocks_1080.jpg',
+		Title:     'Colorful Stars and Clouds near Rho Ophiuchi',
+		LinkImage: 'https://apod.nasa.gov/apod/image/2406/RhoAntares_Stocks_2560.jpg',
+		LinkPage:  'https://apod.nasa.gov/apod/ap240611.html'
+	}
+
+	if (!imageData.Source.endsWith('/')) {
+		var box = makeBox(2, 2);
+		box
+			.append('div')
+			.attr('class', 'title')
+			.html('&#x1F680;<a href="https://apod.nasa.gov/apod/astropix.html">Astronomy Picture of the Day</a>')
+		box = box
+			.append('div')
+			.attr('class', 'inside');
+		var inside = box
+			.append('div');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', imageData.LinkImage)
+			.append('img')
+			.style('width', 'auto')
+			.style('height', 'auto')
+			.style('max-width', '400px')
+			.style('max-height', '320px')
+			.attr('src', imageData.Source);
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', imageData.LinkPage)
+			.html(imageData.Title);
+	}
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in nature module: No such host is known. (www.outdoorphotographer.com:443)');
+console.log('Error in nature module: The remote server returned an error: (404) Not Found.');
 
 //////////////////////////////////////////////////
 
-console.log('Error in wikipedia module: No such host is known. (en.wikipedia.org:443)');
+modules.push(function wikipedia() {
+	var pictureData = {
+		Source:   'http://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Zhou_Fang._Court_Ladies_Playing_Double-sixes._Freer_Gallery_of_Art.jpg/600px-Zhou_Fang._Court_Ladies_Playing_Double-sixes._Freer_Gallery_of_Art.jpg',
+		Title:    'Zhou Fang (Tang dynasty)',
+		LinkPage: 'https://en.wikipedia.org/wiki//wiki/Zhou_Fang_(Tang_dynasty)',
+		Description: '    <b><a href="https://en.wikipedia.org/wiki/Zhou_Fang_(Tang_dynasty)" title="Zhou Fang (Tang dynasty)">Zhou Fang</a></b> was a Chinese painter during the <a href="https://en.wikipedia.org/wiki/Tang_dynasty" title="Tang dynasty">Tang dynasty</a>, living in the capital of <a href="https://en.wikipedia.org/wiki/Chang%27an" title="Chang&#39;an">Chang\'an</a> (modern <a href="https://en.wikipedia.org/wiki/Xi%27an" title="Xi&#39;an">Xi\'an</a>) during the 8th century. He came from a noble background and this was reflected in his works. He personally painted for the emperor and the themes of his artwork covered religious subjects and everyday life. This <a href="https://en.wikipedia.org/wiki/Silk_painting" title="Silk painting">ink-and-color-on-silk painting</a>, titled <i>Court Ladies Playing Double-sixes</i>, measures 30.5&#160;cm ×&#160;69.1&#160;cm (12.0&#160;in ×&#160;27.2&#160;in) and depicts members of the emperor\'s household playing the board game <i><a href="https://en.wikipedia.org/wiki/Liubo" title="Liubo">liubo</a></i>. It now hangs in the <a href="https://en.wikipedia.org/wiki/Freer_Gallery_of_Art" title="Freer Gallery of Art">Freer Gallery of Art</a> in Washington, D.C.<small style="display: block; margin-top: 0.8em;">Painting credit: <a href="https://en.wikipedia.org/wiki/Zhou_Fang_(Tang_dynasty)" title="Zhou Fang (Tang dynasty)">Zhou Fang</a></small>'
+	}
+
+	if (pictureData.Source.length > 0) {
+		var box = makeBox(2, 3);
+		box
+			.append('div')
+			.attr('class', 'title')
+			.html('&#x1F9E9;Wikipedia Picture of the Day')
+		box = box
+			.append('div')
+			.attr('class', 'inside');
+		var inside = box
+			.append('div');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', pictureData.Source)
+			.append('img')
+			.style('width', 'auto')
+			.style('height', 'auto')
+			.style('max-width', '400px')
+			.style('max-height', '320px')
+			.attr('src', pictureData.Source);
+		/*
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', pictureData.LinkPage)
+			.html(pictureData.Title);
+		*/
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.style('overflow', 'hidden')
+			.style('margin', '5px')
+			.style('display', '-webkit-box')
+			.style('-webkit-line-clamp', '6')
+			.style('-webkit-box-orient', 'vertical')
+			.html(pictureData.Description);
+	}
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in tv module: No such host is known. (www.freesat.co.uk:443)');
+modules.push(function tv() {
+
+    var tvData = [{"channelid":560,"offset":0,"event":[{"name":"Breakfast","description":"The latest news, sport, business and weather from the BBC\u0027s Breakfast team. [S] [HD]","startTime":1718082000,"duration":12600,"svcId":560,"evtId":25118,"image":"\/ms\/img\/epg\/rb\/ae0c-p0fxfnwr.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718092800,"availabilityEnd":1718181000,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m00202fg\u0026ui_id=4.0.0"}},{"name":"Morning Live","description":"Join Gethin Jones, Helen Skelton, Michelle Ackerley and the team for conversation, advice and tips to make your day that little bit easier. [S] [HD]","startTime":1718094600,"duration":4500,"svcId":560,"evtId":25119,"image":"\/ms\/img\/epg\/rb\/ae0c-p0gxpcd4.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718099085,"availabilityEnd":1749635085,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m00202fj\u0026ui_id=4.0.0"},"seriesNo":6,"episodeNo":32},{"name":"Scam Interceptors","description":"2\/20. The Interceptors face a nail-biting race to pull one woman out of the clutches of the scammers. [S] [HD]","startTime":1718099100,"duration":1800,"svcId":560,"evtId":25262,"image":"\/ms\/img\/epg\/rb\/ae0c-p0j160hj.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1717995600,"availabilityEnd":1749531600,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m00203gd\u0026ui_id=4.0.0"},"seriesNo":5,"episodeNo":2},{"name":"Homes Under the Hammer","description":"11\/30. Dion struggles to find fault with a mid-terrace in Stoke, but could there be any hidden nasties? Another terrace in Staffordshire requires more attention! [S] [HD]","startTime":1718100900,"duration":3600,"svcId":560,"evtId":25215,"image":"\/ms\/img\/epg\/rb\/ae0c-p0j225dw.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718104495,"availabilityEnd":1749640495,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m002045c\u0026ui_id=4.0.0"},"seriesNo":40,"episodeNo":11},{"name":"Bargain Hunt","description":"Natasha is in Harrogate with experts Richard Madley and Roo Irvine and the teams. Natasha soaks up the atmosphere of the fair while giving her top tips on how to bag a bargain. [S] [HD]","startTime":1718104500,"duration":2700,"svcId":560,"evtId":25120,"image":"\/ms\/img\/epg\/rb\/fec6-p0bzjn9r.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718107201,"availabilityEnd":1720699201,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0016cnx\u0026ui_id=4.0.0"},"seriesNo":61},{"name":"BBC News at One including BBC...","description":"...London News. The latest national and international news from the BBC. [S] [HD]","startTime":1718107200,"duration":3600,"svcId":560,"evtId":25426,"image":"\/ms\/img\/epg\/rb\/fec6-p0fk7mhm.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718110800,"availabilityEnd":1718197200,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m00202fl\u0026ui_id=4.0.0"},"episodeNo":52},{"name":"Rip Off Britain","description":"9\/16. Gloria Hunniford, Julia Somerville and Angela Rippon offer advice on consumer rights. [S] [HD]","startTime":1718110800,"duration":1800,"svcId":560,"evtId":25216,"image":"\/ms\/img\/epg\/rb\/fec6-p0ggs5hq.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718112612,"availabilityEnd":1720704612,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0017ps9\u0026ui_id=4.0.0"},"seriesNo":36,"episodeNo":9},{"name":"Animal Park","description":"2\/15. Ben Fogle and Kate Humble are in Longleat, where they hear the news of a very naughty wolf who is leading the pack astray. [S,AD] [HD]","startTime":1718112600,"duration":1800,"svcId":560,"evtId":25217,"image":"\/ms\/img\/epg\/rb\/fec6-p0g4d5nk.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1691503215,"availabilityEnd":1724506204,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001ph4t\u0026ui_id=4.0.0"},"seriesNo":35,"episodeNo":2},{"name":"Escape to the Country","description":"9\/55. Having spent 30 years living and working in Hong Kong, today\u0027s escapee teams up with Jonnie Irwin in North Yorkshire with a house-hunting budget of \u00a3350,000. [S,AD] [HD]","startTime":1718114400,"duration":2700,"svcId":560,"evtId":25122,"image":"\/ms\/img\/epg\/rb\/fec6-p0d7by40.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718117087,"availabilityEnd":1720709087,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m001cb2m\u0026ui_id=4.0.0"},"seriesNo":45,"episodeNo":9},{"name":"Garden Rescue","description":"16\/35. Charlie and Lee are in Southampton to design a fun, colourful, sociable garden with a tropical taste for Michelle. [S] [HD]","startTime":1718117100,"duration":2700,"svcId":560,"evtId":25123,"image":"\/ms\/img\/epg\/rb\/ae0c-p0ftyyhk.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1687188608,"availabilityEnd":1720711805,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001n390\u0026ui_id=4.0.0"},"seriesNo":8,"episodeNo":16},{"name":"New: The Finish Line","description":"27\/30. Roman Kemp, with sidekick Sarah Greene, hosts the quiz show where knowledge equals speed. [S] [HD]","startTime":1718119800,"duration":2700,"svcId":560,"evtId":25218,"image":"\/ms\/img\/epg\/rb\/ae0c-p0j1y3s9.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718122498,"availabilityEnd":1752596014,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m002045g\u0026ui_id=4.0.0"},"seriesNo":2,"episodeNo":27},{"name":"Pointless","description":"38\/54. The quiz returns for another series in which contestants try to score as few points as possible by coming up with the answers no-one else could think of. [S] [HD]","startTime":1718122500,"duration":2700,"svcId":560,"evtId":25124,"image":"\/ms\/img\/epg\/rb\/ae0c-p0g2n1yg.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1691514000,"availabilityEnd":1723050000,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001phdm\u0026ui_id=4.0.0"},"seriesNo":29,"episodeNo":38},{"name":"BBC News","description":"The latest national and international news from the BBC. [S] [HD]","startTime":1718125200,"duration":1800,"svcId":560,"evtId":25125,"image":"\/ms\/img\/epg\/rb\/fec6-p0fj0hp3.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718127030,"availabilityEnd":1718213430,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m00202fn\u0026ui_id=4.0.0"},"episodeNo":52},{"name":"BBC London News","description":"The latest news, sport and weather from London. [S] [HD]","startTime":1718127000,"duration":1500,"svcId":560,"evtId":25126,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dkt7rv.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718128695,"availabilityEnd":1718215095,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m00202fq\u0026ui_id=4.0.0"},"episodeNo":72},{"name":"Party Election Broadcast by the...","description":"...Labour Party. A party election broadcast by the Labour Party for the general election on 4 July. [S] [HD]","startTime":1718128500,"duration":300,"svcId":560,"evtId":25461,"image":"\/ms\/img\/epg\/rb\/fec6-p09c8xg1.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718128960,"availabilityEnd":1720720960,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0020c7s\u0026ui_id=4.0.0"}},{"name":"The One Show","description":"Lauren Laverne and Jermaine Jenas bring you the stories that matter from across the country. [S] [HD]","startTime":1718128800,"duration":1800,"svcId":560,"evtId":25219,"image":"\/ms\/img\/epg\/rb\/fec6-p0g8slx0.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718130645,"availabilityEnd":1720722645,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m002045j\u0026ui_id=4.0.0"}},{"name":"EastEnders","description":"Bianca issues an ultimatum, Cindy is inspired by a chance encounter, and Sharon takes matters into her own hands. [S,AD] [HD]","startTime":1718130600,"duration":1800,"svcId":560,"evtId":25265,"image":"\/ms\/img\/epg\/rb\/fec6-p0j23fdz.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718082000,"availabilityEnd":1806469200,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m00204jq\u0026ui_id=4.0.0"},"episodeNo":6924},{"name":"Sort Your Life Out with Stacey...","description":"...Solomon. 4\/6. Stacey and her gang - organiser Dilly, carpenter Rob and cleaner Iwan - challenge the Daniels family to sort their life out in seven days. [S,AD] [HD]","startTime":1718132400,"duration":3600,"svcId":560,"evtId":25266,"image":"\/ms\/img\/epg\/rb\/ae0c-p0f28xwz.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1709928000,"availabilityEnd":1740203940,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001j7wz\u0026ui_id=4.0.0"},"seriesNo":3,"episodeNo":4},{"name":"The Great British Sewing Bee","description":"4\/10. It\u0027s Reduce, Reuse and Recycle week, and the sewers create a quilted bag, use textile waste to create a new garment and give wedding dresses a new lease of life. [S,AD] [HD]","startTime":1718136000,"duration":3600,"svcId":560,"evtId":25267,"image":"\/ms\/img\/epg\/rb\/ae0c-p0j23lb1.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718139595,"availabilityEnd":1753390683,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=_DTT_m00204js\u0026ui_id=4.0.0"},"seriesNo":16,"episodeNo":4},{"name":"BBC News and Weather","description":"The latest national and international news, with reports from BBC correspondents worldwide. [S] [HD]","startTime":1718139600,"duration":1800,"svcId":560,"evtId":25127,"image":"\/ms\/img\/epg\/rb\/fec6-p0fjvy7w.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718141490,"availabilityEnd":1718227890,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m00202fs\u0026ui_id=4.0.0"},"episodeNo":52},{"name":"BBC London News","description":"The latest news, sport and weather from London. [S] [HD]","startTime":1718141400,"duration":600,"svcId":560,"evtId":25128,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dkt7rv.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718141850,"availabilityEnd":1718228250,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m00202fv\u0026ui_id=4.0.0"},"episodeNo":62},{"name":"Tokyo Vice","description":"9\/10. Sato considers the future of Chihara-kai. Contains some strong language and prolonged violent scenes. [S,AD] [HD]","startTime":1718142000,"duration":3000,"svcId":560,"evtId":25268,"image":"\/ms\/img\/epg\/rb\/ae0c-p0hx5rlc.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1715662800,"availabilityEnd":1747262508,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001z73t\u0026ui_id=4.0.0"},"seriesNo":2,"episodeNo":9},{"name":"Tokyo Vice","description":"10\/10. Sato makes a huge power play. Contains strong language and some upsetting scenes. [S,AD] [HD]","startTime":1718145000,"duration":3900,"svcId":560,"evtId":25269,"image":"\/ms\/img\/epg\/rb\/fec6-p0hx5rpg.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1715662800,"availabilityEnd":1747262508,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001z73w\u0026ui_id=4.0.0"},"seriesNo":2,"episodeNo":10},{"name":"Weather for the Week Ahead","description":"Detailed weather forecast. [S] [HD]","startTime":1718148900,"duration":300,"svcId":560,"evtId":25130,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dc8npj.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718149198,"availabilityEnd":1718755238,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m00202fx\u0026ui_id=4.0.0"}},{"name":"BBC News","description":"BBC One joins the BBC\u0027s rolling news channel for a night of news. [S] [HD]","startTime":1718149200,"duration":19200,"svcId":560,"evtId":25131,"image":"\/ms\/img\/epg\/rb\/fec6-p0g6cmtt.jpg","hasTstv":false,"episodeNo":72}]},{"channelid":700,"offset":0,"event":[{"name":"Bargain Hunt","description":"Fine antiques abound on today\u0027s Bargain Hunt, when Charlie Ross tours a Georgian townhouse, now a museum in the heart of York. [S,AD] [HD]","startTime":1718084700,"duration":2700,"svcId":700,"evtId":16819,"image":"\/ms\/img\/epg\/rb\/ae0c-p0j1wykl.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718020801,"availabilityEnd":1749556801,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m002043d\u0026ui_id=4.0.0"},"seriesNo":68},{"name":"Clive Myrie\u0027s Caribbean Adventure","description":"8\/15. Clive helps some Cuban cowboys set up a unique race, finds out how farmers are fighting back against ever-stronger hurricanes and learns how to roll the perfect cigar. [S] [HD]","startTime":1718087400,"duration":1800,"svcId":700,"evtId":16820,"image":"\/ms\/img\/epg\/rb\/fec6-p0hzrwfd.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1716786000,"availabilityEnd":1779857940,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001zpn2\u0026ui_id=4.0.0"},"seriesNo":1,"episodeNo":8},{"name":"The Great British Sewing Bee","description":"3\/10. It\u0027s Week 3 of The Great British Sewing Bee, and it\u0027s Holiday Week. [S,AD,SL] [HD]","startTime":1718089200,"duration":3600,"svcId":700,"evtId":16821,"image":"\/ms\/img\/epg\/rb\/ae0c-p0j0zftn.jpg","hasTstv":false,"seriesNo":16,"episodeNo":3},{"name":"BBC News","description":"Twenty-four hours a day, the latest national and international stories as they break. [S] [HD]","startTime":1718092800,"duration":11700,"svcId":700,"evtId":16822,"image":"\/ms\/img\/epg\/rb\/fec6-p0g6j1tq.jpg","hasTstv":false},{"name":"Politics Live","description":"The big political issues of the day. [S] [HD]","startTime":1718104500,"duration":2700,"svcId":700,"evtId":16823,"image":"\/ms\/img\/epg\/rb\/ae0c-p09819qp.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718107285,"availabilityEnd":1720699285,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m002059q\u0026ui_id=4.0.0"}},{"name":"Impossible","description":"2\/30. The quiz show where players must avoid Impossible answers to stay in the competition. Twelve people start today\u0027s show, but how many of them will survive to face the \u00a310,000 question? [S] [HD]","startTime":1718107200,"duration":2700,"svcId":700,"evtId":16824,"image":"\/ms\/img\/epg\/rb\/ae0c-p04lwpn2.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718110015,"availabilityEnd":1720702015,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m000t9bk\u0026ui_id=4.0.0"},"seriesNo":8,"episodeNo":2},{"name":"Mastermind","description":"27\/31. Clive Myrie asks the questions in another semi-final. The specialist subjects are the X-Files, the history of York Minster, England at the Cricket World Cup and the Brooklyn Bridge. [S] [HD]","startTime":1718109900,"duration":1800,"svcId":700,"evtId":16825,"image":"\/ms\/img\/epg\/rb\/ae0c-p0btvm7m.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1709704800,"availabilityEnd":1954303140,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0015gjn\u0026ui_id=4.0.0"},"seriesNo":2021,"episodeNo":27},{"name":"Five Bedrooms","description":"5\/8. Ben\u0027s birthday bliss is cut short, as is a hook-up for Harry, with awkward outcomes. [S,AD] [HD]","startTime":1718111700,"duration":2700,"svcId":700,"evtId":16826,"image":"\/ms\/img\/epg\/rb\/ae0c-p0g8bytd.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1693544400,"availabilityEnd":1725197384,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=p0fw1sfn\u0026ui_id=4.0.0"},"seriesNo":4,"episodeNo":5},{"name":"Stanley Tucci: Searching for Italy","description":"1\/8. Stanley Tucci visits the Veneto, home to the \u0027floating city\u0027 of Venice. [S,AD] [HD]","startTime":1718114400,"duration":2700,"svcId":700,"evtId":16827,"image":"\/ms\/img\/epg\/rb\/fec6-p0d3fmqm.jpg","hasTstv":false,"seriesNo":2,"episodeNo":1},{"name":"The Farmers\u0027 Country Showdown","description":"4\/20. Dairy farmers Jo and Alex return to Ashbourne Show with their prize-winning Jersey cows. Shire horse breeder John and daughter Catherine also hope for rosette success. [S] [HD]","startTime":1718117100,"duration":1800,"svcId":700,"evtId":16828,"image":"\/ms\/img\/epg\/rb\/ae0c-p0bbdx7k.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718118862,"availabilityEnd":1720710862,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m001849f\u0026ui_id=4.0.0"},"seriesNo":12,"episodeNo":4},{"name":"Big Cats about the House","description":"2\/3. Documentary series. Maya the jaguar is now a boisterous toddler and pushes the Clark family over the edge. Giles visits Costa Rica to find out what is happening to jaguars. [S,AD] [HD]","startTime":1718118900,"duration":3600,"svcId":700,"evtId":16829,"image":"\/ms\/img\/epg\/rb\/ae0c-p061q887.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718122477,"availabilityEnd":1720714477,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=b09xjby0\u0026ui_id=4.0.0"},"seriesNo":1,"episodeNo":2},{"name":"Flog It!","description":"Antiques series. Paul Martin introduces a collection of the best finds from the show\u0027s travels to Lulworth Castle, Chiddingstone Castle and Wrest Park. [S] [HD]","startTime":1718122500,"duration":2700,"svcId":700,"evtId":16830,"image":"\/ms\/img\/epg\/rb\/ae0c-p02tfltr.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718125157,"availabilityEnd":1720717157,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=b05njzc6\u0026ui_id=4.0.0"},"seriesNo":13,"episodeNo":20},{"name":"Richard Osman\u0027s House of Games","description":"72\/100. Kevin Eldon, Sarah Keyworth, Laila Rouass and John Whaite test their general knowledge skills on this week\u0027s House of Games. [S] [HD]","startTime":1718125200,"duration":1800,"svcId":700,"evtId":16831,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dlycvq.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718126980,"availabilityEnd":1720718980,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m001g6kr\u0026ui_id=4.0.0"},"seriesNo":6,"episodeNo":72},{"name":"Clive Myrie\u0027s Caribbean Adventure","description":"12\/15. On the east coast of Barbados, Clive checks out the world\u0027s oldest rum distillery, helps out on an organic farm, tries some cliff-top yoga and meets a Bajan spoken word poet. [S] [HD]","startTime":1718127000,"duration":1800,"svcId":700,"evtId":16832,"image":"\/ms\/img\/epg\/rb\/ae0c-p0hzs9gj.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1716786000,"availabilityEnd":1779857940,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001zpp1\u0026ui_id=4.0.0"},"seriesNo":1,"episodeNo":12},{"name":"Nile: Earth\u0027s Great Rivers","description":"2\/3. A look at the astonishing wildlife, landscapes and people of the Nile. From elephants and leopards to ancient wonders, its great length is a lifeline for wildlife and cultures. [S,AD] [HD]","startTime":1718128800,"duration":3600,"svcId":700,"evtId":16833,"image":"\/ms\/img\/epg\/rb\/ae0c-p07j592q.jpg","hasTstv":false,"seriesNo":1,"episodeNo":2},{"name":"Springwatch","description":"10\/12. Iolo Williams is at the Dorset coast and Portland Bill bird observatory - a hotspot for seeing and recording returning avian migrants. [S] [HD]","startTime":1718132400,"duration":3600,"svcId":700,"evtId":16834,"image":"\/ms\/img\/epg\/rb\/ae0c-p0j24vd0.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718136055,"availabilityEnd":1749844855,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m002059t\u0026ui_id=4.0.0"},"seriesNo":36,"episodeNo":10},{"name":"On Thin Ice: Putin v Greenpeace","description":"5\/6. Footage of the 2013 illegal boarding must be smuggled out in time for a crucial hearing. Contains some strong language. [S,AD] [HD]","startTime":1718136000,"duration":1800,"svcId":700,"evtId":16835,"image":"\/ms\/img\/epg\/rb\/ae0c-p0j2p9kf.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1717909200,"availabilityEnd":1749445200,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001ztq8\u0026ui_id=4.0.0"},"seriesNo":1,"episodeNo":5},{"name":"On Thin Ice: Putin v Greenpeace","description":"6\/6. A Beatle joins the fight and the protestors get out on bail as 2013 draws to a close. Contains some strong language. [S,AD] [HD]","startTime":1718137800,"duration":1800,"svcId":700,"evtId":16836,"image":"\/ms\/img\/epg\/rb\/fec6-p0j2pb0k.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1717909200,"availabilityEnd":1749445200,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001ztqb\u0026ui_id=4.0.0"},"seriesNo":1,"episodeNo":6},{"name":"Meet the Richardsons","description":"4\/6. The Richardsons finally get invited to the showbiz event of the year, the Jonathan Ross Halloween party. Contains some strong language. [S,AD] [HD]","startTime":1718139600,"duration":1800,"svcId":700,"evtId":16837,"image":"\/ms\/img\/epg\/rb\/ae0c-p0hy3ly8.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1716267600,"availabilityEnd":1747803600,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001z7x9\u0026ui_id=4.0.0"},"seriesNo":1,"episodeNo":4},{"name":"Newsnight","description":"The day\u0027s important national and international news stories. With Kirsty Wark. [S] [HD]","startTime":1718141400,"duration":1800,"svcId":700,"evtId":16838,"image":"\/ms\/img\/epg\/rb\/ae0c-p0j101sb.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718143290,"availabilityEnd":1749679290,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m002059w\u0026ui_id=4.0.0"}},{"name":"Weather","description":"Weather bulletin. [S] [HD]","startTime":1718143200,"duration":300,"svcId":700,"evtId":16839,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dc8npj.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1718143525,"availabilityEnd":1718229925,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m002059y\u0026ui_id=4.0.0"}},{"name":"Effie Gray","description":"Dakota Fanning stars as Effie Gray, who at 19 became the wife of John Ruskin (Greg Wise). Deals with adult themes. [2014] [S] [HD]","startTime":1718143500,"duration":6000,"svcId":700,"evtId":16840,"image":"\/ms\/img\/epg\/rb\/ae0c-p05m6cbx.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1633456800,"availabilityEnd":1722466799,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b06km7fb\u0026ui_id=4.0.0"}},{"name":"Hidden Treasures of the...","description":"...National Trust. 5\/6. Benjamin Disraeli\u0027s gates get an upgrade, and there\u0027s a revamp for a Reynolds masterpiece. [S,AD,SL] [HD]","startTime":1718149500,"duration":3600,"svcId":700,"evtId":16841,"image":"\/ms\/img\/epg\/rb\/ae0c-p0hvlc15.jpg","hasTstv":false,"seriesNo":2,"episodeNo":5},{"name":"David \u0026 Jay\u0027s Touring Toolshed","description":"9\/15. Sir David Jason and Jay Blades help a creative veteran to learn carpentry to build her own memorial bench and discover that leatherwork is harder than it looks. [S,AD,SL] [HD]","startTime":1718153100,"duration":1800,"svcId":700,"evtId":16842,"image":"\/ms\/img\/epg\/rb\/ae0c-p0h58bkt.jpg","hasTstv":false,"seriesNo":1,"episodeNo":9},{"name":"The Outlaws","description":"2\/5. As the police investigate the crime and Rani\u0027s involvement, the other outlaws don\u0027t know who they can trust. Contains some strong language and adult humour. [S,AD,SL] [HD]","startTime":1718154900,"duration":3600,"svcId":700,"evtId":16843,"image":"\/ms\/img\/epg\/rb\/ae0c-p0hzjddc.jpg","hasTstv":false,"seriesNo":3,"episodeNo":2},{"name":"This is BBC Two","description":"Highlights of programmes on BBC Two. [HD]","startTime":1718158500,"duration":11700,"svcId":700,"evtId":16844,"image":"\/ms\/img\/epg\/rb\/ae0c-p0bvs8dg.jpg","hasTstv":false}]},{"channelid":1500,"offset":0,"event":[{"name":"Escape to the Chateau","description":"From the discovery of the old 19th-century wash house to the pepper pot tower library, we revisit some of the Strawbridges\u0027 best moments at the chateau from series seven of the show.  [S]","startTime":1718079300,"duration":300,"svcId":1500,"evtId":25601,"image":"\/ms\/img\/epg\/rb\/5d52-414294809.l.png","hasTstv":false},{"name":"Frasier","description":"The Gift Horse: As Martin\u0027s 65th birthday approaches, Frasier and Niles attempt to outdo each other with their gifts for their father. (S5 Ep2)  [AD,S]","startTime":1718079600,"duration":1800,"svcId":1500,"evtId":25205,"image":"\/ms\/img\/epg\/rb\/5d52-641489.l.png","hasTstv":false,"seriesNo":5,"episodeNo":2},{"name":"Countdown","description":"Colin Murray and Rachel Riley host as contestants race against the clock to pit their wits against vowels, consonants and numbers. Sam Quek joins Susie Dent in Dictionary Corner.  [S]","startTime":1718081400,"duration":2400,"svcId":1500,"evtId":25206,"image":"\/ms\/img\/epg\/rb\/5d52-9511488.l.png","hasTstv":false},{"name":"Cheers","description":"Showdown Part 2: Sam and Diane must get to grips with their feelings for each other when Diane\u0027s romance with Sam\u0027s brother Derek looks as though it\u0027s becoming more serious. (S1 Ep22\/22)  [S]","startTime":1718083800,"duration":1500,"svcId":1500,"evtId":25207,"image":"\/ms\/img\/epg\/rb\/5d52-48859.l.png","hasTstv":false,"seriesNo":1,"episodeNo":22},{"name":"Cheers","description":"Power Play: Sam and Diane have finally found each other, but it looks as though their romance could be doomed from the start. (S2 Ep1\/22)  [S]","startTime":1718085300,"duration":1500,"svcId":1500,"evtId":25208,"image":"\/ms\/img\/epg\/rb\/5d52-85931.l.png","hasTstv":false,"seriesNo":2,"episodeNo":1},{"name":"Everybody Loves Raymond","description":"Golf for It: Robert and Ray end up on a big guilt trip when they decide not to help Marie with a home project so that they can land a prime spot on the golf course. (S8 Ep23)  [AD,S]","startTime":1718086800,"duration":1500,"svcId":1500,"evtId":25209,"image":"\/ms\/img\/epg\/rb\/5d52-5161864.l.png","hasTstv":false,"seriesNo":8,"episodeNo":23},{"name":"Everybody Loves Raymond","description":"The Home: Frank and Marie announce that they\u0027re moving into a retirement home and sell their house to Robert and Amy. (S9 Ep1)  [AD,S]","startTime":1718088300,"duration":1500,"svcId":1500,"evtId":25210,"image":"\/ms\/img\/epg\/rb\/5d52-5391902.l.png","hasTstv":false,"seriesNo":9,"episodeNo":1},{"name":"Everybody Loves Raymond","description":"Not So Fast: Ray and Debra are shocked to discover that Frank and Marie are going to be thrown out of their apartment. (S9 Ep2)  [AD,S]","startTime":1718089800,"duration":1800,"svcId":1500,"evtId":25301,"image":"\/ms\/img\/epg\/rb\/5d52-5396609.l.png","hasTstv":false,"seriesNo":9,"episodeNo":2},{"name":"Everybody Loves Raymond","description":"Angry Sex: Ray discovers that Debra becomes more passionate when she argues with Marie, so he concocts a series of lies in an attempt to boost his love life. (S9 Ep3)  [AD,S]","startTime":1718091600,"duration":1800,"svcId":1500,"evtId":25302,"image":"\/ms\/img\/epg\/rb\/5d52-5403504.l.png","hasTstv":false,"seriesNo":9,"episodeNo":3},{"name":"Frasier","description":"Kenny on the Couch: Frasier is jealous when his depressed station manager finds more comfort in Martin\u0027s advice than Frasier\u0027s psychiatry. Niles and Daphne study yoga. (S10 Ep17)  [AD,S]","startTime":1718093400,"duration":1800,"svcId":1500,"evtId":25303,"image":"\/ms\/img\/epg\/rb\/5d52-1989900.l.png","hasTstv":false,"seriesNo":10,"episodeNo":17},{"name":"Frasier","description":"Roe to Perdition: The Crane brothers find their social influence growing, thanks to a Russian backstreet caviar dealer. (S10 Ep18)  [AD,S]","startTime":1718095200,"duration":1800,"svcId":1500,"evtId":25304,"image":"\/ms\/img\/epg\/rb\/5d52-1996651.l.png","hasTstv":false,"seriesNo":10,"episodeNo":18},{"name":"Frasier","description":"Some Assembly Required: Frasier turns his hand to DIY and interior design when he helps out with a local homebuilding scheme. Unfortunately, his plans are rather too grand. (S10 Ep19)  [AD,S]","startTime":1718097000,"duration":1800,"svcId":1500,"evtId":25305,"image":"\/ms\/img\/epg\/rb\/5d52-1996390.l.png","hasTstv":false,"seriesNo":10,"episodeNo":19},{"name":"Frasier","description":"Farewell, Nervosa: Frasier and Niles search for a new coffee house when they are annoyed by a street singer (Elvis Costello) who starts playing at Caf\u00e9 Nervosa. (S10 Ep20)  [AD,S]","startTime":1718098800,"duration":1800,"svcId":1500,"evtId":25306,"image":"\/ms\/img\/epg\/rb\/5d52-2011237.l.png","hasTstv":false,"seriesNo":10,"episodeNo":20},{"name":"Ramsay\u0027s Kitchen Nightmares USA","description":"Gordon Ramsay visits Long Beach in California to save Nino\u0027s, a failing Italian family restaurant that opened in 1958 and is now under the misguided leadership of eldest son, Nino. (S6 Ep9)  [S]","startTime":1718100600,"duration":3300,"svcId":1500,"evtId":25307,"image":"\/ms\/img\/epg\/rb\/5d52-385264901.l.png","hasTstv":false,"seriesNo":5,"episodeNo":10},{"name":"Channel 4 News Summary","description":"Channel 4\u0027s midday news summary.  [S]","startTime":1718103900,"duration":300,"svcId":1500,"evtId":25308,"image":"\/ms\/img\/epg\/rb\/5d52-9511809.l.png","hasTstv":false},{"name":"Ramsay\u0027s Kitchen Nightmares USA","description":"Gordon\u0027s in Norwalk, Ohio, for the first of two visits to the Mill Street Bistro, where the owner claims that he has the best menu between New York and LA but the diners disagree. (S6 Ep10)  [S]","startTime":1718104200,"duration":3600,"svcId":1500,"evtId":25309,"image":"\/ms\/img\/epg\/rb\/5d52-385263325.l.png","hasTstv":false,"seriesNo":5,"episodeNo":11},{"name":"Car S.O.S","description":"BMW 2002 Turbo: In the West Midlands, Tim Shaw and Fuzz Townshend rescue one of Tim\u0027s all-time favourites: a BMW 2002 Turbo, which has been rusting away on its owner\u0027s driveway. (S4 Ep7\/10)  [AD,S]","startTime":1718107800,"duration":3600,"svcId":1500,"evtId":25310,"image":"\/ms\/img\/epg\/rb\/5d52-208983039.l.png","hasTstv":false,"seriesNo":4,"episodeNo":3},{"name":"Countdown","description":"Colin Murray and Rachel Riley host as contestants race against the clock to pit their wits against vowels, consonants and numbers. Sam Quek joins Susie Dent in Dictionary Corner.  [S]","startTime":1718111400,"duration":3000,"svcId":1500,"evtId":25311,"image":"\/ms\/img\/epg\/rb\/5d52-9511812.l.png","hasTstv":false},{"name":"A Place in the Sun","description":"Laura Hamilton helps Nikki and her mum Rosaline find the perfect holiday home with bags of character and a pool, in the medieval town of Sarlat in France, for Nikki\u0027s budget of \u00a3250k.  [S]","startTime":1718114400,"duration":3600,"svcId":1500,"evtId":25312,"image":"\/ms\/img\/epg\/rb\/5d52-8632141.l.png","hasTstv":false},{"name":"A Place in the Sun","description":"The new run continues. Bob and Vida want a bolthole on the west coast of the Peloponnese that one day could become their permanent home. Can Laura Hamilton find the one for their \u00a3300k?  [S]","startTime":1718118000,"duration":3600,"svcId":1500,"evtId":25313,"image":"\/ms\/img\/epg\/rb\/5d52-9511819.l.png","hasTstv":false},{"name":"Sun, Sea and Selling Houses","description":"The new series continues. In Alicante, the Rodriguez sisters help Sharon and Paul find their ideal home. In Calp, the Aldertons go all out to find Lynda and John a perfect pad. (S7 Ep7\/20)  [S]","startTime":1718121600,"duration":3600,"svcId":1500,"evtId":25314,"image":"\/ms\/img\/epg\/rb\/5d52-9511832.l.png","hasTstv":false,"seriesNo":7,"episodeNo":7},{"name":"Four in a Bed","description":"The second visit of the week is to the Aberlour Hotel in Moray, where the B\u0026Bers are in good spirits at a distillery. But there\u0027s a hangover at feedback time.  [S]","startTime":1718125200,"duration":1800,"svcId":1500,"evtId":25315,"image":"\/ms\/img\/epg\/rb\/5d52-8197715.l.png","hasTstv":false},{"name":"The Simpsons","description":"Last Tap Dance in Springfield: Lisa takes up dancing but discovers that she\u0027s not very good at it. Bart and Milhouse duck out of their camping trip and hide out in the mall. (S11 Ep20\/22)  [AD,S]","startTime":1718127000,"duration":1800,"svcId":1500,"evtId":25316,"image":"\/ms\/img\/epg\/rb\/5d52-388282068.l.png","hasTstv":false,"seriesNo":11,"episodeNo":20},{"name":"Channel 4 News","description":"Channel 4\u0027s flagship news programme. Including the weather.  [S]","startTime":1718128800,"duration":3300,"svcId":1500,"evtId":25317,"image":"\/ms\/img\/epg\/rb\/5d52-9511846.l.png","hasTstv":false},{"name":"Party Election Broadcast","description":"A party election broadcast by Plaid Cymru.  [S]","startTime":1718132100,"duration":300,"svcId":1500,"evtId":25840,"image":"\/ms\/img\/epg\/rb\/5d52-news.genre.l.png","hasTstv":false},{"name":"New: Bake Off: The Professionals","description":"The teams make custard tarts, cotton cheesecakes, and carnival structures adorned with exotic desserts. Who\u0027ll have egg on their face and be going home for good? (S9 Ep2\/10)  [AD,S]","startTime":1718132400,"duration":3600,"svcId":1500,"evtId":25318,"image":"\/ms\/img\/epg\/rb\/5d52-9511851.l.png","hasTstv":false,"seriesNo":9,"episodeNo":2},{"name":"New: The Fall: Skydive Murder Plot","description":"True crime doc. When a skydiver\u0027s two parachutes fail in a nightmare skydive, somehow, miraculously, she survives. But clearly this wasn\u0027t an accident. The prime suspect: her husband. (Ep1)  [AD,S]","startTime":1718136000,"duration":3600,"svcId":1500,"evtId":25319,"image":"\/ms\/img\/epg\/rb\/5d52-documen.genre.l.png","hasTstv":false,"seriesNo":1,"episodeNo":1},{"name":"New: Queenie","description":"New Year, Old Problems: Sharp drama based on Candice Carty-Williams\u0027 novel. A long line of rejection and betrayal brings Queenie to breaking point as the past catches up with her. (Ep5\/8)  [AD,S]","startTime":1718139600,"duration":2100,"svcId":1500,"evtId":25320,"image":"\/ms\/img\/epg\/rb\/5d52-drama.genre.l.png","hasTstv":false,"seriesNo":1,"episodeNo":5},{"name":"New: Queenie","description":"She\u0027s Royal: Drama. Queenie goes to therapy, as the true extent of her childhood trauma becomes clear. (Ep6\/8)  [AD,S]","startTime":1718141700,"duration":1800,"svcId":1500,"evtId":25321,"image":"\/ms\/img\/epg\/rb\/5d52-drama.genre.l.png","hasTstv":false,"seriesNo":1,"episodeNo":6},{"name":"New: The Rest Is Politics:...","description":"...Election Special: As the UK prepares to go to the polls, Alastair Campbell and Rory Stewart discuss, dissect and deconstruct the biggest news stories from the campaign trail. (Ep3)  [S]","startTime":1718143500,"duration":3900,"svcId":1500,"evtId":25322,"image":"\/ms\/img\/epg\/rb\/5d52-politic.genre.l.png","hasTstv":false},{"name":"New: Walter Presents: The Silence","description":"Potent Croatian and Ukrainian drama. Is there a connection between the murders of teenage girls in Osijek and a woman searching for her niece in Kyiv? In Ukrainian\/Croatian\/subs. (S1 Ep1)  [S]","startTime":1718147400,"duration":3600,"svcId":1500,"evtId":25323,"image":"\/ms\/img\/epg\/rb\/5d52-9511921.l.png","hasTstv":false,"seriesNo":1,"episodeNo":1},{"name":"Imposter: The Man Who Came Back...","description":"...from the Dead: The documentary concludes. Still behind bars, Rossi accuses his prosecutor of cannibalism. But extradition continues as Rossi returns to Utah to face trial. (Ep4\/4)  [AD,S]","startTime":1718151000,"duration":3300,"svcId":1500,"evtId":25515,"image":"\/ms\/img\/epg\/rb\/5d52-9426964.l.png","hasTstv":false,"seriesNo":1,"episodeNo":4},{"name":"Taskmasterclass","description":"It\u0027s the greatest contest on TV. But is there any point to Taskmaster\u0027s pointless tasks? Greg Davies and Alex Horne reveal the method behind the madness, with Guz Khan, Jo Brand and more.  [AD,S,SL]","startTime":1718154300,"duration":3300,"svcId":1500,"evtId":25324,"image":"\/ms\/img\/epg\/rb\/5d52-game.genre.l.png","hasTstv":false},{"name":"We Are Lady Parts","description":"It\u0027s Britney B****: Anarchic comedy. A top music manager has her eye on Lady Parts. Meanwhile, the band\u0027s attempts to make peace with their Gen Z rivals lead to outright chaos. (S2 Ep3\/6)  [AD,S,SL]","startTime":1718157600,"duration":1800,"svcId":1500,"evtId":25326,"image":"\/ms\/img\/epg\/rb\/5d52-9487396.l.png","hasTstv":false,"seriesNo":2,"episodeNo":3},{"name":"We Are Lady Parts","description":"Don\u0027t Let Me Be Misunderstood: Anarchic comedy. The girls find themselves at difficult personal crossroads. With a major offer on the table, the band face an unthinkable choice. (S2 Ep4\/6)  [AD,S,SL]","startTime":1718159400,"duration":1800,"svcId":1500,"evtId":25327,"image":"\/ms\/img\/epg\/rb\/5d52-9487404.l.png","hasTstv":false,"seriesNo":2,"episodeNo":4},{"name":"Iris Prize Best British Shorts","description":"Lemon: Iris Prize-nominated short film. A taxi driver dreaming of a different life faces a chaotic night of business around the streets of London. Strong language.  [AD,S]","startTime":1718161200,"duration":1200,"svcId":1500,"evtId":25482,"image":"\/ms\/img\/epg\/rb\/5d52-drama.genre.l.png","hasTstv":false},{"name":"Britain\u0027s Most Luxurious Hotels","description":"An exclusive look into Hampshire\u0027s elite country house hotel, Chewton Glen, as little VIPs flock with their celeb parents for half-term and staff prepare for an extravagant party. (Ep3\/3)  [AD,S,SL]","startTime":1718162400,"duration":3300,"svcId":1500,"evtId":25328,"image":"\/ms\/img\/epg\/rb\/5d52-documen.genre.l.png","hasTstv":false,"seriesNo":1,"episodeNo":3}]}];
+
+    var box = makeBox(2, 3);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#x1F4FA;<a href="https://www.freesat.co.uk/tv-guide">TV</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div')
+        .style('text-align', 'left');
+
+    var channels = { 560: "BBC 1", 700: "BBC 2", 1500: "Channel 4" };
+
+    var today = new Date();
+    var primeTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 18, 0, 0);
+    var unixStart = (+primeTime) / 1000;
+    var unixEnd = unixStart + 60 * 60 * 6;
+    var first = true;
+
+    for (var channel of tvData) {
+        if (!first) {
+            first = false;
+        } else {
+            inside
+                .append('br');
+        }
+
+        inside
+            .append('p')
+            .append('b')
+            .text(channels[channel.channelid]);
+        var list = inside
+            .append('ul');
+        for (var event of channel.event) {
+            console.log(event);
+            if (+event.startTime >= unixStart && +event.startTime < unixEnd) {
+                list
+                    .append('li')
+                    .attr('class', 'ttt')
+                    .attr('data-tt', '<img src=\"https://fdp-sv15-image-v1-0.gcprod1.freetime-platform.net/270x180-0' + event.image + '\" /><br/><b>' + event.name + '</b><br/>' + (+event.duration / 60) + ' minutes<br/>' + event.description)
+                    .html('<span class="code">' + new Date(+event.startTime * 1000).toLocaleTimeString('en-GB').substr(0, 5) + "</span> - " + event.name);
+            }
+        }
+    }
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in backlog module: No such host is known. (store.steampowered.com:443)');
+modules.push(function backlog() {
+	var box = makeBox(1, 2);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4CB;Backlog')
+	var table = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('table')
+		.style('text-align', 'right');
+
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Audiobooks:");
+	row
+		.append('td')
+		.text('12')
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Books:");
+	row
+		.append('td')
+		.text('14');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Films:");
+	row
+		.append('td')
+		.text('199');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Games:");
+	row
+		.append('td')
+		.text('7');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("TV:");
+	row
+		.append('td')
+		.text('127');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("YouTube:");
+	row
+		.append('td')
+		.text('4');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Downloads:");
+	row
+		.append('td')
+		.text('14');
+
+	if (+"0" > 0) {
+		row = table
+			.append('tr');
+		row
+			.append('td')
+			.text("Steam Wishlist:");
+		row
+			.append('td')
+			.text('0');
+	}
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in youtube module: No such host is known. (www.youtube.com:443)');
+modules.push(function youtube() {
+
+    var data = [
+{ id: 'RXeOiIDNNek', title: "WWDC 2024 — June 10 | Apple", label: "WWDC 2024 — June 10 | Apple by Apple 7,489,575 views Streamed 14 hours ago 1 hour, 43 minutes" },
+{ id: 'y1-w1kUGuz8', title: "Kalki 2898 AD Trailer - Telugu | Prabhas | Amitabh Bachchan | Kamal Haasan | Deepika | Nag Ashwin", label: "Kalki 2898 AD Trailer - Telugu | Prabhas | Amitabh Bachchan | Kamal Haasan | Deepika | Nag Ashwin by Vyjayanthi Network 11,693,934 views 19 hours ago 3 minutes, 3 seconds" },
+{ id: 'AkU-zDT1Fbc', title: "Destiny 2 | The Journey Ahead", label: "Destiny 2 | The Journey Ahead by Destiny 2 824,976 views 18 hours ago 5 minutes, 42 seconds" },
+];
+
+    var box = makeBox(2, 2);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#x1F4FC;<a href="https://www.youtube.com/feed/trending">YouTube Trending</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div');
+    var table = inside
+        .append('table')
+        .style('width', '80%')
+        .style('margin', '0 auto');
+
+    var count = 0;
+    for (var video of data) {
+        var row = table
+            .append('tr');
+        row
+            .append('td')
+            .append('a')
+            .attr('href', "https://www.youtube.com/watch?v=" + video.id)
+            .append('img')
+            .attr('src', 'https://i.ytimg.com/vi/' + video.id + '/hqdefault.jpg')
+            .style('width', (480 / 4) + 'px')
+            .style('height', (360 / 4) + 'px')
+            .style('text-align', 'right')
+            .attr('title', video.label);
+        row
+            .append('td')
+            .style('text-align', 'left')
+            .html(++count + '<br/><a href="https://www.youtube.com/watch?v=' + video.id + '">' + video.title + '</a>');
+    }
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in f1 module: No such host is known. (www.formula1.com:443)');
+console.log('Error in f1 module: The remote server returned an error: (404) Not Found.');
 
 //////////////////////////////////////////////////
 
@@ -298,39 +635,294 @@ modules.push(function media() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in singles module: No such host is known. (www.officialcharts.com:443)');
+console.log('Error in singles module: The remote server returned an error: (403) Forbidden.');
 
 //////////////////////////////////////////////////
 
-console.log('Error in vanguard module: No such host is known. (markets.ft.com:443)');
+modules.push(function vanguard() {
+
+	var data = [{ number: 210.47, tooltip: "Mon, Jun 10, 2024<br/>£210.47"},
+{ number: 210.26, tooltip: "Fri, Jun 07, 2024<br/>£210.26"},
+{ number: 210.10, tooltip: "Thu, Jun 06, 2024<br/>£210.10"},
+{ number: 209.82, tooltip: "Wed, Jun 05, 2024<br/>£209.82"},
+{ number: 207.73, tooltip: "Tue, Jun 04, 2024<br/>£207.73"},
+{ number: 208.43, tooltip: "Mon, Jun 03, 2024<br/>£208.43"},
+{ number: 208.26, tooltip: "Fri, May 31, 2024<br/>£208.26"},
+{ number: 206.91, tooltip: "Thu, May 30, 2024<br/>£206.91"},
+{ number: 207.87, tooltip: "Wed, May 29, 2024<br/>£207.87"},
+{ number: 209.08, tooltip: "Tue, May 28, 2024<br/>£209.08"},
+{ number: 209.50, tooltip: "Fri, May 24, 2024<br/>£209.50"},
+{ number: 209.23, tooltip: "Thu, May 23, 2024<br/>£209.23"},
+{ number: 210.23, tooltip: "Wed, May 22, 2024<br/>£210.23"},
+{ number: 211.05, tooltip: "Tue, May 21, 2024<br/>£211.05"},
+{ number: 211.35, tooltip: "Mon, May 20, 2024<br/>£211.35"},
+{ number: 211.15, tooltip: "Fri, May 17, 2024<br/>£211.15"},
+{ number: 211.39, tooltip: "Thu, May 16, 2024<br/>£211.39"},
+{ number: 211.61, tooltip: "Wed, May 15, 2024<br/>£211.61"},
+{ number: 210.56, tooltip: "Tue, May 14, 2024<br/>£210.56"},
+{ number: 210.12, tooltip: "Mon, May 13, 2024<br/>£210.12"},
+].reverse();
+
+	var vanguardDates = {
+		"Latest":      "Mon, Jun 10, 2024",
+		"vs Day":      "Fri, Jun 07, 2024",
+		"vs Week":     "Mon, Jun 03, 2024",
+		"vs Month":    "Mon, May 13, 2024",
+		"vs Year":     ""
+	}
+
+	var vanguardValues = {
+		"Latest":      "£210.47/share",
+		'vs Day':      "+0.10%",
+		'vs Week':     "+0.98%",
+		'vs Month':    "+0.17%",
+		'vs Year':     "+17.37%"
+	};
+
+	var box = makeBox(3, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#128200;<a href="https://www.vanguardinvestor.co.uk">Vanguard</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');		
+	var insideLeft = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('left', 0)
+		.style('width', '37%');
+	insideLeft
+		.append('p')
+		.append('a')
+		.attr('href', 'https://www.vanguardinvestor.co.uk/investments/vanguard-ftse-global-all-cap-index-fund-gbp-acc')
+		.html('FTSE Global All Cap<br/>Index Fund - Acc');
+	insideLeft
+		.append('p')
+		.html('&nbsp;');
+	var table = insideLeft
+		.append('table');	
+	
+	for (var item of Object.keys(vanguardValues)) {
+		var row = table
+			.append('tr')
+			.style('font-weight', item.startsWith("Latest") ? "bold" : "normal");
+		if (vanguardDates[item].length > 0) {
+			row
+				.attr('class', 'ttt')
+				.attr('data-tt', vanguardDates[item])
+        }
+		row
+			.append('td')
+			.style('text-align', 'left')
+			.html(item + ':&nbsp;');
+		row
+			.append('td')
+			.style('text-align', 'right')
+			.attr('class', 'code')
+			.html(vanguardValues[item]);
+	}
+
+	var insideRight = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('right', 0)
+		.style('width', '66%');
+	var chart = createLineChart(400, 150, insideRight, data, 2);
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in crypto module: No such host is known. (query1.finance.yahoo.com:443)');
+console.log('Error in crypto module: The remote server returned an error: (429) Too Many Requests.');
 
 //////////////////////////////////////////////////
 
-console.log('Error in moon module: No such host is known. (www.timeanddate.com:443)');
+modules.push(function moon() {
+	var moonData = {
+		Percent:  '24.4',
+		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 11 June and 12 June">Waxing Crescent</a>',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.244&p=0.941&r=0.968',
+		Location: '11609021'
+	}
+
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#127769;<a href="https://www.timeanddate.com/moon/@' + moonData.Location + '">Moon</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');	
+	var inside = box
+		.append('div');
+	inside
+		.append('img')
+		.attr('src', moonData.Image)
+		.attr('width', '75%')
+		.attr('height', '75%');		
+	inside
+		.append('p')
+		.html(moonData.Type + ' (' + moonData.Percent + '%)');	
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in sun module: No such host is known. (www.timeanddate.com:443)');
+modules.push(function sun() {
+	var sunData = {
+		Rise:     '04:44',
+		Set:      '21:27',
+		Location: '11609021'
+	};
+
+	var box = makeBox(1, 1);	
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#128262;<a href="https://www.timeanddate.com/sun/@' + sunData.Location + '">Sun</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div');	
+	var table = inside
+		.append('table')
+		.style('width', '150px');
+	var row = table
+		.append('tr')
+		.style('font-size', '300%');
+	row
+		.append('td')
+		.html('&#127748;')
+	row
+		.append('td')
+		.html('&#127751;')
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.html('Rise')
+	row
+		.append('td')
+		.html('Set')
+var row = table
+		.append('tr');
+	row
+		.append('td')
+		.html(sunData.Rise)
+	row
+		.append('td')
+		.html(sunData.Set)
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in word module: No such host is known. (www.merriam-webster.com:443)');
+modules.push(function word() {
+	var wordData = {
+		Word:       '',
+		Definition: '<p>To foment something, such as hostility or opposition, is to cause it, or try to cause it, to grow or develop. <em>Foment</em> is used synonymously with <a href="https://www.merriam-webster.com/dictionary/incite">incite</a>.</p>'
+	}
+
+	var clean = wordData.Definition.replace(/<[^>]+>/g, '');
+
+	var box = makeBox(clean.length > 250 ? 2 : 1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4DC;<a href="https://www.merriam-webster.com/word-of-the-day">Word of the Day</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');	
+	var inside = box
+		.append('div');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.append('a')
+		.attr('href', 'https://www.merriam-webster.com/dictionary/' + wordData.Word)
+		.text(wordData.Word);
+	inside
+		.append('div')
+		.style('padding', '5px')
+		.html(wordData.Definition);	
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in twitter module: No such host is known. (trends24.in:443)');
+modules.push(function twitter() {
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=%23loveIsland">#loveIsland</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%23panorama">#panorama</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23SoccerAid">#SoccerAid</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Harriet">Harriet</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=Apple">Apple</a></td></tr></table>';
+	var title = 'United Kingdom';
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.style('text-align', 'center')
+		.html(title);
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in twitter module: No such host is known. (trends24.in:443)');
+modules.push(function twitter() {
+	var html =  '<table><tr><td style="text-align: right">1</td><td><a href="https://twitter.com/search?q=Druski">Druski</a></td></tr><tr><td style="text-align: right">2</td><td><a href="https://twitter.com/search?q=%22Kevin+Hart%22">Kevin Hart</a></td></tr><tr><td style="text-align: right">3</td><td><a href="https://twitter.com/search?q=%23WeLoveYouNicki">#WeLoveYouNicki</a></td></tr><tr><td style="text-align: right">4</td><td><a href="https://twitter.com/search?q=Enchanting">Enchanting</a></td></tr><tr><td style="text-align: right">5</td><td><a href="https://twitter.com/search?q=%22Victoria+Monet%22">Victoria Monet</a></td></tr></table>';
+	var title = 'United States';
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.style('text-align', 'center')
+		.html(title);
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in astronauts module: No such host is known. (www.howmanypeopleareinspacerightnow.com:443)');
+modules.push(function astronauts() {
+	var astronautsData = {
+		Amount:      '10',
+		CountryHtml: '<table><tr><td><img class="flag ttt" data-tt="usa" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-usa.jpg" /></td><td><img class="flag ttt" data-tt="russia" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-russia.jpg" /></td><td><img class="flag ttt" data-tt="china" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-china.jpg" /></td><td><img class="flag ttt" data-tt="germany" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-germany.jpg" /></td></tr><tr style="vertical-align:top"><td>3</td><td>3</td><td>3</td><td>1</td></tr></table>'
+	};
+
+	var box = makeBox(1, 1);	
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F469;&#x200D;&#x1F680;<a href="https://www.howmanypeopleareinspacerightnow.com/">Astronauts</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('div')
+		.html("<p style='font-size:200%;font-weight:bold'>" + astronautsData.Amount + "</p><p>people are in space now.</p><p>&nbsp;</p>" + astronautsData.CountryHtml)
+});
 
 //////////////////////////////////////////////////
 
