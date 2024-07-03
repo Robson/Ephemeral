@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>22:11 3-Jul - Ephemeral</title>		
+		<title>22:40 3-Jul - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -513,6 +513,7 @@ modules.push(function backlog() {
 		.append('td')
 		.text('248');
 
+	/*
 	row = table
 		.append('tr');
 	row
@@ -521,6 +522,7 @@ modules.push(function backlog() {
 	row
 		.append('td')
 		.text('7');
+	*/
 
 	row = table
 		.append('tr');
@@ -531,6 +533,7 @@ modules.push(function backlog() {
 		.append('td')
 		.text('123');
 
+	/*
 	row = table
 		.append('tr');
 	row
@@ -539,6 +542,7 @@ modules.push(function backlog() {
 	row
 		.append('td')
 		.text('4');
+	*/
 
 	row = table
 		.append('tr');
@@ -566,9 +570,9 @@ modules.push(function backlog() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'hxLpUL5mA7c', title: "dark souls w/ enemies, bosses \u0026 loot RANDOMIZED🪦ORNSTEIN \u0026 SMOUGH", label: "dark souls w/ enemies, bosses \u0026 loot RANDOMIZED🪦ORNSTEIN \u0026 SMOUGH by NormalAdultLuke 34,925 views 2 weeks ago 54 minutes" },
-{ id: 'ZftqbYsqufE', title: "If you love F-Zero you're required to see this", label: "If you love F-Zero you're required to see this by NormalAdultLuke 19,433 views 3 weeks ago 19 minutes" },
-{ id: 'WTQtpo4xwV4', title: "dark souls w/ enemies, bosses \u0026 loot RANDOMIZED🪦SEN'S FORTRESS", label: "dark souls w/ enemies, bosses \u0026 loot RANDOMIZED🪦SEN'S FORTRESS by NormalAdultLuke 34,279 views 3 weeks ago 49 minutes" },
+{ id: 'hxLpUL5mA7c', title: "dark souls w/ enemies, bosses \u0026 loot RANDOMIZED🪦ORNSTEIN \u0026 SMOUGH", label: "dark souls w/ enemies, bosses \u0026 loot RANDOMIZED🪦ORNSTEIN \u0026 SMOUGH by NormalAdultLuke 34,934 views 2 weeks ago 54 minutes" },
+{ id: 'ZftqbYsqufE', title: "If you love F-Zero you're required to see this", label: "If you love F-Zero you're required to see this by NormalAdultLuke 19,470 views 3 weeks ago 19 minutes" },
+{ id: 'WTQtpo4xwV4', title: "dark souls w/ enemies, bosses \u0026 loot RANDOMIZED🪦SEN'S FORTRESS", label: "dark souls w/ enemies, bosses \u0026 loot RANDOMIZED🪦SEN'S FORTRESS by NormalAdultLuke 34,327 views 3 weeks ago 49 minutes" },
 ];
 
     var box = makeBox(2, 2);
@@ -605,22 +609,6 @@ modules.push(function youtube() {
             .style('text-align', 'left')
             .html(++count + '<br/><a href="https://www.youtube.com/watch?v=' + video.id + '">' + video.title + '</a>');
     }
-});
-
-//////////////////////////////////////////////////
-
-modules.push(function f1() {
-	var html =  "The season has finished :(";
-	var box = makeBox(1, 1);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F3C1;<a href="https://www.formula1.com/en/racing/2023.html">Next F1 Race</a>')
-	box = box
-		.append('div')
-		.attr('class', 'inside')
-		.append('div')
-		.html(html);
 });
 
 //////////////////////////////////////////////////
@@ -754,9 +742,9 @@ console.log('Error in crypto module: The remote server returned an error: (429) 
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '5.1',
+		Percent:  '5.0',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-crescent.html" title="Waning Crescent on the night between 3 July and 4 July">Waning Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.051&p=3.026&r=6.014',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.050&p=3.105&r=6.091',
 		Location: '11609021'
 	}
 
@@ -859,62 +847,6 @@ modules.push(function word() {
 		.append('div')
 		.style('padding', '5px')
 		.html(wordData.Definition);	
-});
-
-//////////////////////////////////////////////////
-
-modules.push(function twitter() {
-	var html =  '<table></table>';
-	var title = 'United Kingdom';
-	var box = makeBox(1, 1);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
-	box = box
-		.append('div')
-		.attr('class', 'inside');
-	var inside = box
-		.append('div')
-		.attr('class', 'condensed')
-		.style('text-align', 'left');
-	inside
-		.append('p')
-		.style('font-weight', 'bold')
-		.style('text-align', 'center')
-		.html(title);
-	inside
-		.append('div')
-		.style('text-align', 'left')
-		.html(html);
-});
-
-//////////////////////////////////////////////////
-
-modules.push(function twitter() {
-	var html =  '<table></table>';
-	var title = 'United States';
-	var box = makeBox(1, 1);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F426;<a href="https://twitter.com/explore/tabs/trending">Twitter Trending</a>')
-	box = box
-		.append('div')
-		.attr('class', 'inside');
-	var inside = box
-		.append('div')
-		.attr('class', 'condensed')
-		.style('text-align', 'left');
-	inside
-		.append('p')
-		.style('font-weight', 'bold')
-		.style('text-align', 'center')
-		.html(title);
-	inside
-		.append('div')
-		.style('text-align', 'left')
-		.html(html);
 });
 
 //////////////////////////////////////////////////
