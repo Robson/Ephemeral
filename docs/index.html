@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>16:32 3-Aug - Ephemeral</title>		
+		<title>17:32 3-Aug - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -474,105 +474,16 @@ modules.push(function tv() {
 
 //////////////////////////////////////////////////
 
-modules.push(function backlog() {
-	var box = makeBox(1, 2);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F4CB;Backlog')
-	var table = box
-		.append('div')
-		.attr('class', 'inside')
-		.append('table')
-		.style('text-align', 'right');
-
-	var row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Audiobooks:");
-	row
-		.append('td')
-		.text('12')
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Books:");
-	row
-		.append('td')
-		.text('14');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Films:");
-	row
-		.append('td')
-		.text('266');
-
-	/*
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Games:");
-	row
-		.append('td')
-		.text('7');
-	*/
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("TV:");
-	row
-		.append('td')
-		.text('74');
-
-	/*
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("YouTube:");
-	row
-		.append('td')
-		.text('5');
-	*/
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Downloads:");
-	row
-		.append('td')
-		.text('47');
-
-	if (+"0" > 0) {
-		row = table
-			.append('tr');
-		row
-			.append('td')
-			.text("Steam Wishlist:");
-		row
-			.append('td')
-			.text('0');
-	}
-});
+console.log('Error in backlog module: The message filter indicated that the application is busy. (0x8001010A (RPC_E_SERVERCALL_RETRYLATER))');
 
 //////////////////////////////////////////////////
 
 modules.push(function youtube() {
 
     var data = [
-{ id: 'huGd4efgdPA', title: "Charli xcx - Guess featuring Billie Eilish (official video)", label: "Charli xcx - Guess featuring Billie Eilish (official video) by Charli xcx 4,509,026 views 1 day ago 2 minutes, 41 seconds" },
-{ id: 'EeJ8n5PxFGE', title: "Jordan Adetunji - KEHLANI REMIX (feat. Kehlani) [Official Video]", label: "Jordan Adetunji - KEHLANI REMIX (feat. Kehlani) [Official Video] by Jordan Adetunji 492,110 views 1 day ago 3 minutes, 32 seconds" },
-{ id: 'd27ZeFK8hbM', title: "Shelly-Ann Fraser-Pryce \u0026 Sha'Carri Richardson THROW DOWN  In Women's 100 Meters || 2024 Olympics", label: "Shelly-Ann Fraser-Pryce \u0026 Sha'Carri Richardson THROW DOWN  In Women's 100 Meters || 2024 Olympics by Total Running Productions 1,185,125 views 19 hours ago 8 minutes, 45 seconds" },
+{ id: 'huGd4efgdPA', title: "Charli xcx - Guess featuring Billie Eilish (official video)", label: "Charli xcx - Guess featuring Billie Eilish (official video) by Charli xcx 4,591,761 views 1 day ago 2 minutes, 41 seconds" },
+{ id: 'EeJ8n5PxFGE', title: "Jordan Adetunji - KEHLANI REMIX (feat. Kehlani) [Official Video]", label: "Jordan Adetunji - KEHLANI REMIX (feat. Kehlani) [Official Video] by Jordan Adetunji 512,049 views 1 day ago 3 minutes, 32 seconds" },
+{ id: 'd27ZeFK8hbM', title: "Shelly-Ann Fraser-Pryce \u0026 Sha'Carri Richardson THROW DOWN  In Women's 100 Meters || 2024 Olympics", label: "Shelly-Ann Fraser-Pryce \u0026 Sha'Carri Richardson THROW DOWN  In Women's 100 Meters || 2024 Olympics by Total Running Productions 1,248,294 views 20 hours ago 8 minutes, 45 seconds" },
 ];
 
     var box = makeBox(2, 2);
@@ -745,7 +656,7 @@ modules.push(function moon() {
 	var moonData = {
 		Percent:  '0.8',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-crescent.html" title="Waning Crescent on the night between 3 August and 4 August">Waning Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.008&p=3.105&r=5.781',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.008&p=3.118&r=5.774',
 		Location: '11609021'
 	}
 
