@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>12:23 22-Aug - Ephemeral</title>		
+		<title>12:26 22-Aug - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -362,47 +362,6 @@ modules.push(function astronomy() {
 
 //////////////////////////////////////////////////
 
-modules.push(function nature() {
-	var natureData = {
-		Source:   'https://cdn2.outdoorphotographer.com/cdn-cgi/imagedelivery/sSchzRUzM8GSUMXmxPIruA/www.outdoorphotographer.com/2023/05/Farewell-to-the-Kings-Robert-Henderson.jpeg/w=1024',
-		Title:    'w=1024',
-		LinkPage: 'https://www.outdoorphotographer.com/blog/photo-of-the-day-by-robert-henderson-17/'
-	}
-
-	if (natureData.Source.length > 0) {
-		var box = makeBox(2, 2);
-		box
-			.append('div')
-			.attr('class', 'title')
-			.html('&#x26FA;<a href="https://www.outdoorphotographer.com/blog/category/photo-of-the-day/">Outdoor Photo of the Day</a>')
-		box = box
-			.append('div')
-			.attr('class', 'inside');
-		var inside = box
-			.append('div');
-		inside
-			.append('p')
-			.append('a')
-			.attr('href', natureData.Source)
-			.append('img')
-			.style('width', 'auto')
-			.style('height', 'auto')
-			.style('max-width', '400px')
-			.style('max-height', '320px')
-			.attr('src', natureData.Source);
-		inside
-			.append('p')
-			.html('&nbsp;');
-		inside
-			.append('p')
-			.append('a')
-			.attr('href', natureData.LinkPage)
-			.html(natureData.Title);
-	}
-});
-
-//////////////////////////////////////////////////
-
 modules.push(function wikipedia() {
 	var pictureData = {
 		Source:   'http://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Symphorichthys_spilurus_-_Wilhelma_01.jpg/500px-Symphorichthys_spilurus_-_Wilhelma_01.jpg',
@@ -511,16 +470,105 @@ modules.push(function tv() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in backlog module: The message filter indicated that the application is busy. (0x8001010A (RPC_E_SERVERCALL_RETRYLATER))');
+modules.push(function backlog() {
+	var box = makeBox(1, 2);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4CB;Backlog')
+	var table = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('table')
+		.style('text-align', 'right');
+
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Audiobooks:");
+	row
+		.append('td')
+		.text('12')
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Books:");
+	row
+		.append('td')
+		.text('14');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Films:");
+	row
+		.append('td')
+		.text('277');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Games:");
+	row
+		.append('td')
+		.text('7');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("TV:");
+	row
+		.append('td')
+		.text('73');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("YouTube:");
+	row
+		.append('td')
+		.text('5');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Downloads:");
+	row
+		.append('td')
+		.text('114');
+
+	if (+"0" > 0) {
+		row = table
+			.append('tr');
+		row
+			.append('td')
+			.text("Steam Wishlist:");
+		row
+			.append('td')
+			.text('0');
+	}
+});
 
 //////////////////////////////////////////////////
 
 modules.push(function youtube() {
 
     var data = [
-{ id: 'Sl6en1NPTYM', title: "Taylor Swift - I Can Do It With A Broken Heart (Official Video)", label: "Taylor Swift - I Can Do It With A Broken Heart (Official Video) by Taylor Swift 8,180,427 views 1 day ago 3 minutes, 43 seconds" },
-{ id: '23bfrbYs5ww', title: "When I met the most famous Cristiano", label: "When I met the most famous Cristiano by UR · Cristiano 12,822,977 views 22 hours ago 1 minute, 3 seconds" },
-{ id: 'Vwa0HenQMi4', title: "Eminem - Somebody Save Me (feat. Jelly Roll) [Official Music Video]", label: "Eminem - Somebody Save Me (feat. Jelly Roll) [Official Music Video] by EminemMusic 2,549,032 views 20 hours ago 4 minutes, 18 seconds" },
+{ id: 'I74FAkaL1Fk', title: "Discover EVERYTHING about us. Who will win?", label: "Discover EVERYTHING about us. Who will win? by UR · Cristiano 12,844,377 views 22 hours ago 2 minutes, 56 seconds" },
+{ id: 'Sl6en1NPTYM', title: "Taylor Swift - I Can Do It With A Broken Heart (Official Video)", label: "Taylor Swift - I Can Do It With A Broken Heart (Official Video) by Taylor Swift 8,185,970 views 1 day ago 3 minutes, 43 seconds" },
+{ id: '23bfrbYs5ww', title: "When I met the most famous Cristiano", label: "When I met the most famous Cristiano by UR · Cristiano 12,940,253 views 22 hours ago 1 minute, 3 seconds" },
 ];
 
     var box = makeBox(2, 2);
@@ -693,7 +741,7 @@ modules.push(function moon() {
 	var moonData = {
 		Percent:  '89.5',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-gibbous.html" title="Waning Gibbous on the night between 22 August and 23 August">Waning Gibbous</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.895&p=2.236&r=5.405',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.895&p=2.240&r=5.409',
 		Location: '11609021'
 	}
 
