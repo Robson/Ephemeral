@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>21:21 7-Sep - Ephemeral</title>		
+		<title>22:21 7-Sep - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -470,105 +470,16 @@ modules.push(function tv() {
 
 //////////////////////////////////////////////////
 
-modules.push(function backlog() {
-	var box = makeBox(1, 1);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F4CB;Backlog')
-	var table = box
-		.append('div')
-		.attr('class', 'inside')
-		.append('table')
-		.style('text-align', 'right');
-
-	var row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Audiobooks:");
-	row
-		.append('td')
-		.text('12')
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Books:");
-	row
-		.append('td')
-		.text('14');
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Films:");
-	row
-		.append('td')
-		.text('304');
-
-	/*
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Games:");
-	row
-		.append('td')
-		.text('7');
-	*/
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("TV:");
-	row
-		.append('td')
-		.text('73');
-
-	/*
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("YouTube:");
-	row
-		.append('td')
-		.text('5');
-	*/
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Downloads:");
-	row
-		.append('td')
-		.text('54');
-
-	if (+"0" > 0) {
-		row = table
-			.append('tr');
-		row
-			.append('td')
-			.text("Steam Wishlist:");
-		row
-			.append('td')
-			.text('0');
-	}
-});
+console.log('Error in backlog module: The message filter indicated that the application is busy. (0x8001010A (RPC_E_SERVERCALL_RETRYLATER))');
 
 //////////////////////////////////////////////////
 
 modules.push(function youtube() {
 
     var data = [
-{ id: 'HkGjoRPpWqA', title: "Two Steps Ahead", label: "Two Steps Ahead by Nikocado Avocado 11,684,859 views 18 hours ago 25 minutes" },
-{ id: 'aRcUVhVlSHg', title: "Men Vs Women Survive The Wilderness For $500,000", label: "Men Vs Women Survive The Wilderness For $500,000 by MrBeast 11,889,734 views 4 hours ago 31 minutes" },
-{ id: '_aVcGg9oEqg', title: "Green Bay Packers vs. Philadelphia Eagles Game Highlights | 2024 NFL Season", label: "Green Bay Packers vs. Philadelphia Eagles Game Highlights | 2024 NFL Season by NFL 2,582,772 views 16 hours ago 15 minutes" },
+{ id: 'HkGjoRPpWqA', title: "Two Steps Ahead", label: "Two Steps Ahead by Nikocado Avocado 12,623,113 views 19 hours ago 25 minutes" },
+{ id: 'aRcUVhVlSHg', title: "Men Vs Women Survive The Wilderness For $500,000", label: "Men Vs Women Survive The Wilderness For $500,000 by MrBeast 14,195,213 views 5 hours ago 31 minutes" },
+{ id: '_aVcGg9oEqg', title: "My Daughter Survives WORLD'S TINIEST HOUSE", label: "My Daughter Survives WORLD'S TINIEST HOUSE by Jordan Matter 2,196,550 views 7 hours ago 59 minutes" },
 ];
 
     var box = makeBox(2, 2);
@@ -738,9 +649,9 @@ console.log('Error in crypto module: The remote server returned an error: (429) 
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '19.1',
+		Percent:  '19.5',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waxing-crescent.html" title="Waxing Crescent on the night between 7 September and 8 September">Waxing Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.191&p=6.014&r=5.956',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.195&p=5.972&r=5.914',
 		Location: '11609021'
 	}
 
