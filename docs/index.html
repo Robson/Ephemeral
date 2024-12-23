@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>18:48 23-Dec - Ephemeral</title>		
+		<title>19:02 23-Dec - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -240,36 +240,377 @@
 
 ////////////////////////////////////////////////// boxes
 			
-console.log('Error in bbccombine module: No such host is known. (feeds.bbci.co.uk:80)');
+modules.push(function bbcCombine() {
+	var html = '<table style="margin:0 10px"><tr><td style="vertical-align:top"><b>UK</b><br/><ul><li class="ttt" data-tt="<b>UK economy had zero growth between July and September</b><br/>The downward revision will be a blow to Labour which has made boosting the economy its top priority." style="font-weight:bold"><a href="https://www.bbc.com/news/articles/c78631e4gygo">UK economy had zero growth between July and September</a></li><li class="ttt" data-tt="<b>Mauritius says talks with UK over Chagos Islands are stuck over money</b><br/>The deputy PM said the UK was &quot;quibbling&quot; over the sum to be handed over to Mauritius."><a href="https://www.bbc.com/news/articles/cj49qjypqv4o">Mauritius says talks with UK over Chagos Islands are stuck over money</a></li><li class="ttt" data-tt="<b>Some Morrisons shops back to normal after discount \'nightmare\'</b><br/>The supermarket has been advertising cheap deals, including 10p vegetables, ahead of Christmas."><a href="https://www.bbc.com/news/articles/cdjg8kz8jj3o">Some Morrisons shops back to normal after discount \'nightmare\'</a></li></ul></td><td><a href="https://www.bbc.com/news/articles/c78631e4gygo"><img src="https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/905f/live/529e1c20-c0b2-11ef-87fc-b930bc0c5494.jpg" class="ttt" data-tt="A young Asian woman wearing an apron looking concerned at a laptop screen with a bar restaurant behind her" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>US & Canada</b><br/><ul><li class="ttt" data-tt="<b>Biden commutes most federal death sentences</b><br/>The president condemns the murderers but says the death penalty at federal level &quot;must stop&quot;." style="font-weight:bold"><a href="https://www.bbc.com/news/articles/cgkxe4xlvgxo">Biden commutes most federal death sentences</a></li><li class="ttt" data-tt="<b>Luigi Mangione pleads not guilty to murdering healthcare CEO</b><br/>The 26-year-old suspect is facing separate federal charges that could lead to a death sentence."><a href="https://www.bbc.com/news/articles/cwypvd9kdewo">Luigi Mangione pleads not guilty to murdering healthcare CEO</a></li><li class="ttt" data-tt="<b>Man arrested over death of woman set on fire on New York subway</b><br/>The woman fatally set alight on a Brooklyn train was attacked by a man she is not believed to have known."><a href="https://www.bbc.com/news/articles/clygk48nxgzo">Man arrested over death of woman set on fire on New York subway</a></li></ul></td><td><a href="https://www.bbc.com/news/articles/cgkxe4xlvgxo"><img src="https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/1fa1/live/f2a00e10-c11e-11ef-b76e-9de78285d5f5.jpg" class="ttt" data-tt="Joe Biden stands side-eye on to the camera, and gesticulates in front of a microphone against a blue curtained backdrop. He wears a navy blazer and white and blue tie." style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>World</b><br/><ul><li class="ttt" data-tt="<b>Biden commutes most federal death sentences</b><br/>The president condemns the murderers but says the death penalty at federal level &quot;must stop&quot;." style="font-weight:bold"><a href="https://www.bbc.com/news/articles/cgkxe4xlvgxo">Biden commutes most federal death sentences</a></li><li class="ttt" data-tt="<b>Luigi Mangione pleads not guilty to murdering healthcare CEO</b><br/>The 26-year-old suspect is facing separate federal charges that could lead to a death sentence."><a href="https://www.bbc.com/news/articles/cwypvd9kdewo">Luigi Mangione pleads not guilty to murdering healthcare CEO</a></li><li class="ttt" data-tt="<b>Hollywood stars support Blake Lively over legal complaint</b><br/>Lively\'s co-stars from 2005 film The Sisterhood of the Traveling Pants say they &quot;stand with her&quot;."><a href="https://www.bbc.com/news/articles/c8dqy828dl3o">Hollywood stars support Blake Lively over legal complaint</a></li></ul></td><td><a href="https://www.bbc.com/news/articles/cgkxe4xlvgxo"><img src="https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/1fa1/live/f2a00e10-c11e-11ef-b76e-9de78285d5f5.jpg" class="ttt" data-tt="Joe Biden stands side-eye on to the camera, and gesticulates in front of a microphone against a blue curtained backdrop. He wears a navy blazer and white and blue tie." style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>Formula 1</b><br/><ul><li class="ttt" data-tt="<b>Frenchman Hadjar gets final F1 seat for 2025</b><br/>Frenchman Isack Hadjar is promoted to Red Bull\'s second team to race alongside Japanese Yuki Tsunoda during the 2025 Formula 1 season." style="font-weight:bold"><a href="https://www.bbc.com/sport/formula1/articles/crmnxweg781o">Frenchman Hadjar gets final F1 seat for 2025</a></li><li class="ttt" data-tt="<b>Lawson replaces Perez at Red Bull for 2025</b><br/>New Zealander Liam Lawson will race for Red Bull alongside Max Verstappen following the team\'s decision to ditch Sergio Perez."><a href="https://www.bbc.com/sport/formula1/articles/c89xd0k55gwo">Lawson replaces Perez at Red Bull for 2025</a></li><li class="ttt" data-tt="<b>Bottas returning to Mercedes as reserve driver</b><br/>Valtteri Bottas is returning to Mercedes as their reserve driver for 2025, having been released by Audi-owned Sauber at the end of this season."><a href="https://www.bbc.com/sport/formula1/articles/cy4pj0j9z98o">Bottas returning to Mercedes as reserve driver</a></li></ul></td><td><a href="https://www.bbc.com/sport/formula1/articles/crmnxweg781o"><img src="https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/facb/live/0cc367c0-beb7-11ef-addc-4536c4252544.jpg" class="ttt" data-tt="Isack Hadjar" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>Technology</b><br/><ul><li class="ttt" data-tt="<b>Some Morrisons shops back to normal after discount \'nightmare\'</b><br/>The supermarket has been advertising cheap deals, including 10p vegetables, ahead of Christmas." style="font-weight:bold"><a href="https://www.bbc.com/news/articles/cdjg8kz8jj3o">Some Morrisons shops back to normal after discount \'nightmare\'</a></li><li class="ttt" data-tt="<b>Google suggests fixes to its search monopoly</b><br/>Google proposed new limits after a judge ruled Google illegally crushed competition in search."><a href="https://www.bbc.com/news/articles/c2kxpn2k08do">Google suggests fixes to its search monopoly</a></li><li class="ttt" data-tt="<b>Sega considering Netflix-like game subscription service</b><br/>It\'s another sign the industry is moving away from owning games - some fear that means gamers having to &quot;shell out more.&quot;"><a href="https://www.bbc.com/news/articles/ckgnj7e8028o">Sega considering Netflix-like game subscription service</a></li></ul></td><td><a href="https://www.bbc.com/news/articles/cdjg8kz8jj3o"><img src="https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/d8a3/live/f8ef5be0-c12d-11ef-aff0-072ce821b6ab.jpg" class="ttt" data-tt="Sign on the front of a Morrisons supermarket" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr></table>';
+	var box = makeBox(3, 2);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4F0;<a href="https://www.bbc.co.uk/news">BBC News</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in weather module: No such host is known. (www.timeanddate.com:443)');
+modules.push(function weather() {
+    var weatherLocation = "11609021";
+
+    var data={"copyright":"Contents are strictly for use by timeanddate.com","units":{"temp":"°C","prec":"mm","wind":"mph","baro":"mbar"},"detail":[{"hl":true,"hls":"23 Dec – 29 Dec","date":1734912E6,"ts":"Mon, 23","ds":"Mon, 23 Dec","icon":18,"desc":"Sprinkles late. Increasing cloudiness.","temp":9,"templow":3,"cf":3,"wind":8,"wd":240,"hum":85,"pc":69,"rain":1.9 },{"date":17349984E5,"ts":"Tue, 24","ds":"Tue, 24 Dec","icon":18,"desc":"Sprinkles early. Overcast.","temp":13,"templow":8,"cf":11,"wind":7,"wd":230,"hum":90,"pc":22,"rain":0.4 },{"date":17350848E5,"ts":"Wed, 25","ds":"Wed, 25 Dec","icon":2,"desc":"Mostly sunny.","temp":11,"templow":6,"cf":8,"wind":6,"wd":240,"hum":93,"pc":3},{"date":17351712E5,"ts":"Thu, 26","ds":"Thu, 26 Dec","icon":18,"desc":"Sprinkles late. Afternoon clouds.","temp":10,"templow":7,"cf":9,"wind":3,"wd":350,"hum":94,"pc":16,"rain":0.4 },{"date":17352576E5,"ts":"Fri, 27","ds":"Fri, 27 Dec","icon":6,"desc":"Mostly cloudy.","temp":10,"templow":6,"cf":8,"wind":4,"wd":90,"hum":92,"pc":2},{"date":1735344E6,"ts":"Sat, 28","ds":"Sat, 28 Dec","icon":7,"desc":"Overcast.","temp":9,"templow":4,"cf":8,"wind":1,"wd":240,"hum":96,"pc":1},{"date":17354304E5,"ts":"Sun, 29","ds":"Sun, 29 Dec","icon":6,"desc":"Broken clouds.","temp":6,"templow":1,"cf":2,"wind":6,"wd":170,"hum":93,"pc":0},{"hl":true,"hls":"30 Dec – 5 Jan","date":17355168E5,"ts":"Mon, 30","ds":"Mon, 30 Dec","icon":7,"desc":"Overcast.","temp":7,"templow":0,"cf":3,"wind":9,"wd":170,"hum":92,"pc":6},{"date":17356032E5,"ts":"Tue, 31","ds":"Tue, 31 Dec","icon":19,"desc":"Rain. Cloudy.","temp":8,"templow":5,"cf":5,"wind":11,"wd":180,"hum":95,"pc":72,"rain":11.3 },{"date":17356896E5,"ts":"Wed, 1","ds":"Wed, 1 Jan","icon":4,"desc":"Increasing cloudiness.","temp":7,"templow":3,"cf":4,"wind":12,"wd":190,"hum":81,"pc":6},{"date":1735776E6,"ts":"Thu, 2","ds":"Thu, 2 Jan","icon":18,"desc":"Light rain. Decreasing cloudiness.","temp":7,"templow":3,"cf":3,"wind":17,"wd":220,"hum":85,"pc":62,"rain":6.1 },{"date":17358624E5,"ts":"Fri, 3","ds":"Fri, 3 Jan","icon":18,"desc":"Sprinkles late. Scattered clouds.","temp":8,"templow":4,"cf":3,"wind":16,"wd":220,"hum":74,"pc":48,"rain":1.4 },{"date":17359488E5,"ts":"Sat, 4","ds":"Sat, 4 Jan","icon":18,"desc":"Sprinkles early. Broken clouds.","temp":8,"templow":4,"cf":3,"wind":19,"wd":250,"hum":75,"pc":57,"rain":0.8 },{"date":17360352E5,"ts":"Sun, 5","ds":"Sun, 5 Jan","icon":18,"desc":"Sprinkles early. Decreasing cloudiness.","temp":8,"templow":4,"cf":4,"wind":15,"wd":300,"hum":76,"pc":58,"rain":0.7 },{"hl":true,"hls":"6 Jan – 12 Jan","date":17361216E5,"ts":"Mon, 6","ds":"Mon, 6 Jan","icon":1,"desc":"Sunny.","temp":9,"templow":3,"cf":6,"wind":10,"wd":280,"hum":83,"pc":5}],"grid":{"temp":{"low":0,"high":13,"range":13},"prec":{"high":11.3},"time":86400000,"sections":15},"conv":{"prec":{"offset":0,"scale":1},"temp":{"offset":0,"scale":1},"wind":{"offset":0,"scale":0.869},"baro":{"offset":0,"scale":1}}};
+
+
+    var box = makeBox(2, 2);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#127746;<a href="https://www.timeanddate.com/weather/@' + weatherLocation + '/ext">Weather</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div');
+    var table = inside
+        .append('table');
+
+    for (var day of data.detail.slice(0, 7)) {
+        var row = table
+            .append('tr');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .style('font-weight', 'bold')
+            .html(day.ds.split(',')[0] + ':&nbsp;');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html(day.templow + '&#xb0;');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html('to');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html(day.temp + '&#xb0;');
+        row
+            .append('td')
+            .style('text-align', 'center')
+            .append('img')
+            .attr('src', 'https://c.tadst.com/gfx/w/svg/wt-' + day.icon + '.svg')
+            .attr('width', '32px')
+            .attr('height', '32px');
+        row
+            .append('td')
+            .style('text-align', 'left')
+            .html(day.desc)
+    }
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in astronomy module: No such host is known. (apod.nasa.gov:443)');
+modules.push(function astronomy() {
+	var imageData = {
+		Source:    'https://apod.nasa.gov/apod/image/2412/AuroraTree_Zhang_960.jpg',
+		Title:     'Christmas Tree Aurora',
+		LinkImage: 'https://apod.nasa.gov/apod/image/2412/AuroraTree_Zhang_1537.jpg',
+		LinkPage:  'https://apod.nasa.gov/apod/ap241223.html'
+	}
+
+	if (!imageData.Source.endsWith('/')) {
+		var box = makeBox(2, 2);
+		box
+			.append('div')
+			.attr('class', 'title')
+			.html('&#x1F680;<a href="https://apod.nasa.gov/apod/astropix.html">Astronomy Picture of the Day</a>')
+		box = box
+			.append('div')
+			.attr('class', 'inside');
+		var inside = box
+			.append('div');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', imageData.LinkImage)
+			.append('img')
+			.style('width', 'auto')
+			.style('height', 'auto')
+			.style('max-width', '400px')
+			.style('max-height', '320px')
+			.attr('src', imageData.Source);
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', imageData.LinkPage)
+			.html(imageData.Title);
+	}
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in wikipedia module: No such host is known. (en.wikipedia.org:443)');
+modules.push(function wikipedia() {
+	var pictureData = {
+		Source:   'http://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/George_N._Barnard_by_Mathew_Brady.jpg/250px-George_N._Barnard_by_Mathew_Brady.jpg',
+		Title:    'George N. Barnard',
+		LinkPage: 'https://en.wikipedia.org/wiki//wiki/George_N._Barnard',
+		Description: '    <b><a href="https://en.wikipedia.org/wiki/George_N._Barnard" title="George N. Barnard">George Norman Barnard</a></b> (December&#160;23, 1819&#160;– February&#160;4, 1902) was an American photographer who was one of the first to use <a href="https://en.wikipedia.org/wiki/Daguerreotype" title="Daguerreotype">daguerreotype</a>, the first commercially available form of photography, in the United States. A fire in 1853 destroyed the <a href="https://en.wikipedia.org/wiki/Grain_elevator" title="Grain elevator">grain elevators</a> in <a href="https://en.wikipedia.org/wiki/Oswego,_New_York" title="Oswego, New York">Oswego, New York</a>, an event Barnard photographed. Historians consider these some of the first "news" photographs. Barnard also photographed <a href="https://en.wikipedia.org/wiki/Abraham_Lincoln" title="Abraham Lincoln">Abraham Lincoln</a>\'s <a href="https://en.wikipedia.org/wiki/First_inauguration_of_Abraham_Lincoln" title="First inauguration of Abraham Lincoln">1861 inauguration</a>. Barnard is best known for <a href="https://en.wikipedia.org/wiki/American_Civil_War" title="American Civil War">American Civil War</a> era photos. He was the official army photographer for the <a href="https://en.wikipedia.org/wiki/Military_Division_of_the_Mississippi" title="Military Division of the Mississippi">Military Division of the Mississippi</a> commanded by Union general <a href="https://en.wikipedia.org/wiki/William_Tecumseh_Sherman" title="William Tecumseh Sherman">William T. Sherman</a>; his 1866 book, <i>Photographic Views of Sherman\'s Campaign</i>, showed the devastation of the war. This photograph, by <a href="https://en.wikipedia.org/wiki/Mathew_Brady" title="Mathew Brady">Mathew Brady</a>, shows Barnard <abbr title="circa">c.</abbr><span style="white-space:nowrap;">&#8201;1865</span>.<small style="display: block; margin-top: 0.8em;">Photograph credit: <a href="https://en.wikipedia.org/wiki/Mathew_Brady" title="Mathew Brady">Mathew Brady</a>; restored by <a href="https://en.wikipedia.org/wiki/User:Adam_Cuerden" title="User:Adam Cuerden">Adam Cuerden</a></small>'
+	}
+
+	if (pictureData.Source.length > 0) {
+		var box = makeBox(2, 3);
+		box
+			.append('div')
+			.attr('class', 'title')
+			.html('&#x1F9E9;Wikipedia Picture of the Day')
+		box = box
+			.append('div')
+			.attr('class', 'inside');
+		var inside = box
+			.append('div');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', pictureData.Source)
+			.append('img')
+			.style('width', 'auto')
+			.style('height', 'auto')
+			.style('max-width', '400px')
+			.style('max-height', '320px')
+			.attr('src', pictureData.Source);
+		/*
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', pictureData.LinkPage)
+			.html(pictureData.Title);
+		*/
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.style('overflow', 'hidden')
+			.style('margin', '5px')
+			.style('display', '-webkit-box')
+			.style('-webkit-line-clamp', '6')
+			.style('-webkit-box-orient', 'vertical')
+			.html(pictureData.Description);
+	}
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in tv module: No such host is known. (www.freesat.co.uk:443)');
+modules.push(function tv() {
+
+    var tvData = [{"channelid":560,"offset":0,"event":[{"name":"Breakfast","description":"The latest news, sport, business and weather from the BBC\u0027s Breakfast team. [S] [HD]","startTime":1734933600,"duration":10800,"svcId":560,"evtId":30172,"image":"\/ms\/img\/epg\/rb\/ae0c-p0fxfnwr.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734944430,"availabilityEnd":1735030830,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026cyf\u0026ui_id=4.0.0"}},{"name":"Room on the Broom","description":"Animated film based on Julia Donaldson\u0027s picture book. A kind witch invites a surprising collection of animals to join her on her broom, much to the frustration of her cat. [S,AD] [HD]","startTime":1734944400,"duration":1500,"svcId":560,"evtId":30173,"image":"\/ms\/img\/epg\/rb\/fec6-p07y5wf4.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1576486800,"availabilityEnd":1892008740,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=p0102qfj\u0026ui_id=4.0.0"}},{"name":"The Gruffalo","description":"Animation based on the classic children\u0027s book written by Julia Donaldson, telling the magical tale of a mouse who takes a walk through the woods in search of a nut. [S,AD] [HD]","startTime":1734945900,"duration":1800,"svcId":560,"evtId":30174,"image":"\/ms\/img\/epg\/rb\/ae0c-p07y5vvr.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1576486800,"availabilityEnd":1892008740,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b00pk64x\u0026ui_id=4.0.0"}},{"name":"Pok\u00e9mon: Detective Pikachu","description":"When detective Harry Goodman mysteriously disappears, his 21-year-old son Tim joins forces with wisecracking supersleuth Detective Pikachu to find out what happened to him. [2019] [S,AD] [HD]","startTime":1734947700,"duration":5700,"svcId":560,"evtId":30175,"image":"\/ms\/img\/epg\/rb\/ae0c-p0h4mdm9.jpg","hasTstv":false},{"name":"The Boss Baby","description":"Seven-year-old Tim Templeton finds that his new baby brother has been sent to save the world from a dastardly scheme cooked up by the CEO of Puppy Company. [2017] [S,AD] [HD]","startTime":1734953400,"duration":5400,"svcId":560,"evtId":30176,"image":"\/ms\/img\/epg\/rb\/fec6-p07xplfq.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734958799,"availabilityEnd":1737550799,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m000csn6\u0026ui_id=4.0.0"}},{"name":"BBC News at One including BBC...","description":"...London News. The latest national and international news from the BBC. [S] [HD]","startTime":1734958800,"duration":2700,"svcId":560,"evtId":30177,"image":"\/ms\/img\/epg\/rb\/fec6-p0fk7mhm.jpg","hasTstv":false,"episodeNo":191},{"name":"The Great British Sewing Bee...","description":"...Celebrity Christmas Special. Four celebrities put their sewing skills to the test in this year\u0027s Christmas Sewing Bee. [S,AD] [HD]","startTime":1734961500,"duration":3600,"svcId":560,"evtId":30180,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k92pp6.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734645625,"availabilityEnd":1766181625,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m00263fq\u0026ui_id=4.0.0"},"episodeNo":17},{"name":"Wallace \u0026 Gromit: A Matter of...","description":"...Loaf and Death. Wallace and Gromit\u0027s business faces danger when a killer starts targeting local bakers. [S,AD] [HD]","startTime":1734965100,"duration":1800,"svcId":560,"evtId":30181,"image":"\/ms\/img\/epg\/rb\/fec6-p08q8m6y.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1661698200,"availabilityEnd":1769903940,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b00g8hbw\u0026ui_id=4.0.0"}},{"name":"Coco","description":"Despite his family\u0027s ancestral ban on music, young Miguel dreams of becoming a musician like his idol, Ernesto de la Cruz. He sets off for the Land of the Dead in search of Ernesto. [2017] [S,AD] [HD]","startTime":1734966900,"duration":5700,"svcId":560,"evtId":30182,"image":"\/ms\/img\/epg\/rb\/ae0c-p0915mw0.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734972717,"availabilityEnd":1737564717,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m000qq5v\u0026ui_id=4.0.0"}},{"name":"Ghostbusters","description":"After losing university funding, a group of paranormal investigators become ghost exterminators and find business is booming in New York City. [1984] [S,AD] [HD]","startTime":1734972600,"duration":6000,"svcId":560,"evtId":30183,"image":"\/ms\/img\/epg\/rb\/ae0c-p0gygrpr.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734978603,"availabilityEnd":1737570603,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m001gncm\u0026ui_id=4.0.0"}},{"name":"BBC News","description":"The latest national and international news from the BBC. [S] [HD]","startTime":1734978600,"duration":1200,"svcId":560,"evtId":30184,"image":"\/ms\/img\/epg\/rb\/fec6-p0fj0hp3.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734979800,"availabilityEnd":1735066200,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026cyn\u0026ui_id=4.0.0"},"episodeNo":191},{"name":"BBC London News","description":"The latest news, sport and weather from London. [S] [HD]","startTime":1734979800,"duration":600,"svcId":560,"evtId":30185,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dkt7rv.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734980280,"availabilityEnd":1735066680,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026d1p\u0026ui_id=4.0.0"},"episodeNo":267},{"name":"Would I Lie to You? At Christmas","description":"Rob Brydon hosts a festive edition of the award-winning comedy panel show, with Lee Mack and David Mitchell joined by Jimmy Carr, Laura Smyth, Rustie Lee and Lenny Rush. [S] [HD]","startTime":1734980400,"duration":1800,"svcId":560,"evtId":30186,"image":"\/ms\/img\/epg\/rb\/fec6-p0k9x1gr.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734982228,"availabilityEnd":1766518228,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026cys\u0026ui_id=4.0.0"},"seriesNo":18},{"name":"EastEnders","description":"Things are about to get a lot more complicated for one Walford resident, Yolande continues to shut out her family, and Stacey takes some much needed advice. [S,AD] [HD]","startTime":1734982200,"duration":1800,"svcId":560,"evtId":30187,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kb96rr.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734933600,"availabilityEnd":1806469200,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0026cyw\u0026ui_id=4.0.0"},"episodeNo":7035},{"name":"Celebrity Escape to the Country","description":"3\/6. West End superstar Alfie Boe swaps the spotlight for house-hunting in Sussex with Ginny Buckley. They also switch gears for a friendly tractor race at a local vintage club. [S] [HD]","startTime":1734984000,"duration":3600,"svcId":560,"evtId":30188,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k95fhr.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734987645,"availabilityEnd":1767470405,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026cyy\u0026ui_id=4.0.0"},"seriesNo":2,"episodeNo":3},{"name":"Strike: The Ink Black Heart","description":"3\/4. Robin and Strike make a major breakthrough, but Edie\u0027s killer claims another victim. Contains some strong language. [S,AD] [HD]","startTime":1734987600,"duration":3600,"svcId":560,"evtId":30189,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k93hb4.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734328800,"availabilityEnd":1765864800,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0025ydp\u0026ui_id=4.0.0"},"seriesNo":7,"episodeNo":3},{"name":"BBC News and Weather","description":"The latest national and international news, with reports from BBC correspondents worldwide. [S] [HD]","startTime":1734991200,"duration":1800,"svcId":560,"evtId":30190,"image":"\/ms\/img\/epg\/rb\/fec6-p0fjvy7w.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734993090,"availabilityEnd":1735079490,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026cz0\u0026ui_id=4.0.0"},"episodeNo":191},{"name":"BBC London News","description":"The latest news, sport and weather from London. [S] [HD]","startTime":1734993000,"duration":600,"svcId":560,"evtId":30191,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dkt7rv.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734993510,"availabilityEnd":1735079910,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026d1k\u0026ui_id=4.0.0"},"episodeNo":229},{"name":"Not Going Out Christmas Special","description":"Lee makes a big effort to create the perfect Christmas for his family by inviting a lonely, old pensioner into their home for dinner. Contains adult humour. [S,AD] [HD]","startTime":1734993600,"duration":2400,"svcId":560,"evtId":30192,"image":"\/ms\/img\/epg\/rb\/ae0c-p0gz3vlk.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1703457900,"availabilityEnd":1916456340,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001tvp9\u0026ui_id=4.0.0"},"episodeNo":22},{"name":"Wham!: Last Christmas Unwrapped","description":"This Christmas special tells the story of how George Michael and Andrew Ridgeley\u0027s Wham! turned one song into a cultural phenomenon. [S,AD] [HD]","startTime":1734996000,"duration":3600,"svcId":560,"evtId":30193,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k9fdp4.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734212167,"availabilityEnd":1891922340,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m00263v9\u0026ui_id=4.0.0"}},{"name":"Lost at Christmas","description":"Two strangers become stranded in the Scottish Highlands and decide to team up in order to get home for Christmas. Contains language which some may find offensive. [2020] [S] [HD]","startTime":1734999600,"duration":6000,"svcId":560,"evtId":30194,"image":"\/ms\/img\/epg\/rb\/fec6-p0b7jyls.jpg","hasTstv":false},{"name":"Weather for the Week Ahead","description":"Detailed weather forecast. [S] [HD]","startTime":1735005600,"duration":300,"svcId":560,"evtId":30195,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dc8npj.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735005855,"availabilityEnd":1735612474,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026cz4\u0026ui_id=4.0.0"}},{"name":"BBC News","description":"BBC One joins the BBC\u0027s rolling news channel for a night of news. [S] [HD]","startTime":1735005900,"duration":14100,"svcId":560,"evtId":30196,"image":"\/ms\/img\/epg\/rb\/fec6-p0g6cmtt.jpg","hasTstv":false,"episodeNo":267}]},{"channelid":700,"offset":0,"event":[{"name":"A Lot Like Christmas","description":"Christmas tree farmer Jessica gets unexpected advice from Clay, who works for her rivals. [2021] [S] [HD]","startTime":1734934500,"duration":5100,"svcId":700,"evtId":21734,"image":"\/ms\/img\/epg\/rb\/ae0c-p0gp4yk7.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1732966162,"availabilityEnd":1737531581,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001s8c8\u0026ui_id=4.0.0"}},{"name":"The Repair Shop: Favourite Fixes","description":"6\/7. Bill Paterson looks back at some favourite toy fixes, including a cuddly keepsake that\u0027s provided comfort for both a father and son, and a tinplate rocket in need of a boost. [S,AD,SL] [HD]","startTime":1734939600,"duration":3600,"svcId":700,"evtId":21735,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k8lt7c.jpg","hasTstv":false,"seriesNo":23,"episodeNo":6},{"name":"Animal Park Christmas Special","description":"5\/5. Ben and Kate deliver a huge festive treat to the zebras, while Megan and Hamza check if the reindeer are ready for take-off. [S,AD] [HD]","startTime":1734943200,"duration":2700,"svcId":700,"evtId":21736,"image":"\/ms\/img\/epg\/rb\/fec6-p0k93kh5.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734328800,"availabilityEnd":1765864800,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0025z95\u0026ui_id=4.0.0"},"seriesNo":37,"episodeNo":5},{"name":"Easter Parade","description":"Charming Irving Berlin musical about a despondent dancer who, ditched by his partner, sets about making a star of a chorus girl. Starring Judy Garland and Fred Astaire. [1948] [S]","startTime":1734945900,"duration":6000,"svcId":700,"evtId":21737,"image":"\/ms\/img\/epg\/rb\/fec6-p09c8b91.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734951895,"availabilityEnd":1737543895,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b0078bmx\u0026ui_id=4.0.0"}},{"name":"Meet Me in St Louis","description":"A colourful musical about the everyday adventures and romantic entanglements of the Smith family in St Louis. Starring Judy Garland. [1944] [S] [HD]","startTime":1734951900,"duration":6600,"svcId":700,"evtId":21738,"image":"\/ms\/img\/epg\/rb\/ae0c-p09b39kj.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734958475,"availabilityEnd":1737550475,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m000qxbt\u0026ui_id=4.0.0"}},{"name":"Homes Under the Hammer","description":"8\/10. Featuring a three-bedroom semi in Sneyd Green in Stoke-on-Trent, a piece of land in Leyland, Lancashire, and a four-bedroom semi in Low Hill in Wolverhampton. [S,AD] [HD]","startTime":1734958500,"duration":1800,"svcId":700,"evtId":21739,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dlchfp.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734960308,"availabilityEnd":1737552308,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m000w0zf\u0026ui_id=4.0.0"},"seriesNo":36,"episodeNo":8},{"name":"Bargain Hunt: Toy Special","description":"The teams gallop around a huge toy fair at Sandown Park Racecourse in Surrey, with experts Thomas Forrester and Tim Weeks. [S] [HD]","startTime":1734960300,"duration":2700,"svcId":700,"evtId":21740,"image":"\/ms\/img\/epg\/rb\/ae0c-p0gwczgq.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734963009,"availabilityEnd":1737555009,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001tc9y\u0026ui_id=4.0.0"},"seriesNo":67},{"name":"Move Over, Darling","description":"Romantic caper about a man with a new wife who encounters much confusion when his previous wife - presumed dead after a plane crash five years earlier - reappears. [1963] [S] [HD]","startTime":1734963000,"duration":6000,"svcId":700,"evtId":21741,"image":"\/ms\/img\/epg\/rb\/fec6-p0by40sr.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734969059,"availabilityEnd":1737561059,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b00ky4xq\u0026ui_id=4.0.0"}},{"name":"Calamity Jane","description":"Wild West musical about the roughest, toughest gal in the town of Deadwood. [1953] [S] [HD]","startTime":1734969000,"duration":6000,"svcId":700,"evtId":21742,"image":"\/ms\/img\/epg\/rb\/ae0c-p091r12k.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734974953,"availabilityEnd":1737566953,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m000qxbw\u0026ui_id=4.0.0"}},{"name":"Dad\u0027s Army: Battle of the Giants","description":"Captain Mainwaring tries to get out of attending a big church parade when the Home Guard are ordered to wear their medals from previous conflicts. [S]","startTime":1734975000,"duration":3600,"svcId":700,"evtId":21743,"image":"\/ms\/img\/epg\/rb\/fec6-p0dn46ry.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734978600,"availabilityEnd":1737570600,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b0547647\u0026ui_id=4.0.0"},"episodeNo":5},{"name":"Keeping Up Appearances: The...","description":"...Father Christmas Suit. Seasonal special of the sitcom. Hyacinth decides that Richard should help distribute gifts to the old folk at the church hall dressed as Father Christmas. [S]","startTime":1734978600,"duration":1800,"svcId":700,"evtId":21744,"image":"\/ms\/img\/epg\/rb\/fec6-p0dtlvyq.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734980427,"availabilityEnd":1737572427,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=b007c65w\u0026ui_id=4.0.0"},"episodeNo":3},{"name":"Richard Osman\u0027s Festive House...","description":"...of Games. 1\/10. Jim Howick, Matt Morsia, Rebecca Lucy Taylor and Susan Wokoma test their general knowledge skills for a special festive show in Richard Osman\u0027s Festive House of Games. [S] [HD]","startTime":1734980400,"duration":1800,"svcId":700,"evtId":21745,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kbd7z0.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734982242,"availabilityEnd":1767468616,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026ct2\u0026ui_id=4.0.0"},"seriesNo":10,"episodeNo":1},{"name":"Celebrity Mastermind","description":"1\/14. Clive Myrie puts Jennie Bond, Des Clarke, Nabil Abdulrashid and Abby Cook to the test in the classic quiz where celebrities brave the famous black chair. [S] [HD]","startTime":1734982200,"duration":1800,"svcId":700,"evtId":21746,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kbd8f6.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734984066,"availabilityEnd":1769543941,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026ct5\u0026ui_id=4.0.0"},"seriesNo":19,"episodeNo":1},{"name":"Only Connect: Royal Special","description":"1\/8. Victoria Coren Mitchell hosts the quiz where knowledge only gets you so far. Two teams from previous series return for a battle royal, and the questions are as tricky as ever. [S] [HD]","startTime":1734984000,"duration":1800,"svcId":700,"evtId":21747,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kb9z95.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734985881,"availabilityEnd":1767385816,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026ct8\u0026ui_id=4.0.0"},"seriesNo":34,"episodeNo":1},{"name":"Christmas University Challenge","description":"1\/10. Christmas University Challenge 2024 begins with a match between graduates of Warwick and Durham. Yomi Adegoke and Carla Denyer are team captains, and Amol Rajan asks the questions. [S] [HD]","startTime":1734985800,"duration":1800,"svcId":700,"evtId":21748,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kbcyrn.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734987697,"availabilityEnd":1767474048,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026ctc\u0026ui_id=4.0.0"},"seriesNo":2028,"episodeNo":1},{"name":"The Hairy Bikers: You\u0027ll Never...","description":"...Ride Alone. An emotional ride. Si King celebrates the life of biker brother and best mate Dave Myers - with memories of great food and good times, and an epic motorcycle convoy. [S,AD] [HD]","startTime":1734987600,"duration":3600,"svcId":700,"evtId":21749,"image":"\/ms\/img\/epg\/rb\/fec6-p0kb1yyb.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734991312,"availabilityEnd":1766527312,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=_DTT_m0026ctg\u0026ui_id=4.0.0"}},{"name":"Mackenzie Crook Remembers......","description":"...Detectorists. Mackenzie Crook shares what inspired him to write his hit series Detectorists. [S] [HD]","startTime":1734991200,"duration":1200,"svcId":700,"evtId":21750,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k948rc.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734992477,"availabilityEnd":1766528477,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026ctj\u0026ui_id=4.0.0"}},{"name":"Detectorists","description":"1\/6. After a chance encounter, Lance and Andy journey towards the discovery of a lifetime. Contains some strong language. [S,AD] [HD]","startTime":1734992400,"duration":1800,"svcId":700,"evtId":21751,"image":"\/ms\/img\/epg\/rb\/fec6-p027bhgg.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1576746000,"availabilityEnd":1797660000,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b04jy45z\u0026ui_id=4.0.0"},"seriesNo":1,"episodeNo":1},{"name":"Detectorists: Christmas Special...","description":"...2015. Lance hasn\u0027t found anything in ages. Russell thinks he knows why - the Curse of the Gold. Contains some strong language. [S,AD] [HD]","startTime":1734994200,"duration":1800,"svcId":700,"evtId":21752,"image":"\/ms\/img\/epg\/rb\/ae0c-p03bv7sv.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1576746000,"availabilityEnd":1797660000,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b06tdq5d\u0026ui_id=4.0.0"},"episodeNo":3},{"name":"The Haunting","description":"Infamous in the annals of the haunted, Hill House has attracted a group of four investigators, who spend the night to uncover the terrifying truth. Contains horror. [1963] [S] [HD]","startTime":1734996000,"duration":6600,"svcId":700,"evtId":21753,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k5sd3c.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735002610,"availabilityEnd":1737594610,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026ctl\u0026ui_id=4.0.0"}},{"name":"Countryfile","description":"Sammi Kinghorn and Matt Baker explore the Peak District, the first national park created by the transformative National Parks and Access to the Countryside Act of 1949. [S,SL] [HD]","startTime":1735002600,"duration":3300,"svcId":700,"evtId":21754,"image":"\/ms\/img\/epg\/rb\/fec6-p0kbwd4g.jpg","hasTstv":false},{"name":"Amazing Hotels: Life Beyond the...","description":"...Lobby. Rob and Monica travel to Lapland to work in freezing temperatures at a Sami-owned hotel. [S,AD,SL] [HD]","startTime":1735005900,"duration":3600,"svcId":700,"evtId":21755,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k7hd7q.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734674400,"availabilityEnd":1766210400,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=_DTT_m0021zdp\u0026ui_id=4.0.0"},"seriesNo":7,"episodeNo":8},{"name":"Renaissance: The Blood and the...","description":"...Beauty. 3\/3. Michelangelo\u0027s rivalry with Raphael reaches new heights in Rome, while a violent religious schism engulfs Europe and makes the artist question everything. [S,AD,SL] [HD]","startTime":1735009500,"duration":3600,"svcId":700,"evtId":21756,"image":"\/ms\/img\/epg\/rb\/fec6-p0k6zlhb.jpg","hasTstv":false,"seriesNo":1,"episodeNo":3}]},{"channelid":1500,"offset":0,"event":[]}];
+
+    var box = makeBox(2, 3);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#x1F4FA;<a href="https://www.freesat.co.uk/tv-guide">TV</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div')
+        .style('text-align', 'left');
+
+    var channels = { 560: "BBC 1", 700: "BBC 2", 1500: "Channel 4" };
+
+    var today = new Date();
+    var primeTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 18, 0, 0);
+    var unixStart = (+primeTime) / 1000;
+    var unixEnd = unixStart + 60 * 60 * 6;
+    var first = true;
+
+    for (var channel of tvData) {
+        if (!first) {
+            first = false;
+        } else {
+            inside
+                .append('br');
+        }
+
+        inside
+            .append('p')
+            .append('b')
+            .text(channels[channel.channelid]);
+        var list = inside
+            .append('ul');
+        for (var event of channel.event) {
+            console.log(event);
+            if (+event.startTime >= unixStart && +event.startTime < unixEnd) {
+                list
+                    .append('li')
+                    .attr('class', 'ttt')
+                    .attr('data-tt', '<img src=\"https://fdp-sv15-image-v1-0.gcprod1.freetime-platform.net/270x180-0' + event.image + '\" /><br/><b>' + event.name + '</b><br/>' + (+event.duration / 60) + ' minutes<br/>' + event.description)
+                    .html('<span class="code">' + new Date(+event.startTime * 1000).toLocaleTimeString('en-GB').substr(0, 5) + "</span> - " + event.name);
+            }
+        }
+    }
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in backlog module: No such host is known. (store.steampowered.com:443)');
+modules.push(function backlog() {
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4CB;Backlog')
+	var table = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('table')
+		.style('text-align', 'right');
+
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Audiobooks:");
+	row
+		.append('td')
+		.text('12')
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Books:");
+	row
+		.append('td')
+		.text('14');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Films:");
+	row
+		.append('td')
+		.text('406');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Games:");
+	row
+		.append('td')
+		.text('7');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("TV:");
+	row
+		.append('td')
+		.text('77');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("YouTube:");
+	row
+		.append('td')
+		.text('4');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Downloads:");
+	row
+		.append('td')
+		.text('37');
+
+	if (+"0" > 0) {
+		row = table
+			.append('tr');
+		row
+			.append('td')
+			.text("Steam Wishlist:");
+		row
+			.append('td')
+			.text('0');
+	}
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in youtube module: No such host is known. (www.youtube.com:443)');
+modules.push(function youtube() {
+
+    var data = [
+{ id: 'SigG47fXeHk', title: "HIGHLIGHTS! Oleksandr Usyk vs Tyson Fury 2 🥊", label: "HIGHLIGHTS! Oleksandr Usyk vs Tyson Fury 2 🥊 by Sky Sports Boxing 892,344 views 1 day ago 3 minutes, 4 seconds" },
+{ id: 'vzSg82wN_1E', title: "Opening his DREAM Christmas Present", label: "Opening his DREAM Christmas Present by The Royalty Family 3,907,536 views 1 day ago 31 minutes" },
+{ id: 'v6jhjjVy5Ls', title: "The Dark Side of Counter-Strike 2", label: "The Dark Side of Counter-Strike 2 by Coffeezilla 2,150,995 views 19 hours ago 39 minutes" },
+];
+
+    var box = makeBox(2, 2);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#x1F4FC;<a href="https://www.youtube.com/feed/trending">YouTube Trending</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div');
+    var table = inside
+        .append('table')
+        .style('width', '80%')
+        .style('margin', '0 auto');
+
+    var count = 0;
+    for (var video of data) {
+        var row = table
+            .append('tr');
+        row
+            .append('td')
+            .append('a')
+            .attr('href', "https://www.youtube.com/watch?v=" + video.id)
+            .append('img')
+            .attr('src', 'https://i.ytimg.com/vi/' + video.id + '/hqdefault.jpg')
+            .style('width', (480 / 4) + 'px')
+            .style('height', (360 / 4) + 'px')
+            .style('text-align', 'right')
+            .attr('title', video.label);
+        row
+            .append('td')
+            .style('text-align', 'left')
+            .html(++count + '<br/><a href="https://www.youtube.com/watch?v=' + video.id + '">' + video.title + '</a>');
+    }
+});
 
 //////////////////////////////////////////////////
 
 modules.push(function media() {
-	var html = '<p style="font-weight:bold;padding:10px 0 0 0">Audiobooks</p><ul><li><a href="https://www.google.com/search?q=Audiobooks+-+The Turbulent Term of Tyke Tyler (Gene Kemp, 1977)">The Turbulent Term of Tyke Tyler (Gene Kemp, 1977)</a></li><li><a href="https://www.google.com/search?q=Audiobooks+-+Around the World in 80 Days (Jules Verne, 1873)">Around the World in 80 Days (Jules Verne, 1873)</a></li><li><a href="https://www.google.com/search?q=Audiobooks+-+Animal Farm (George Orwell, 1945)">Animal Farm (George Orwell, 1945)</a></li><li><a href="https://www.google.com/search?q=Audiobooks+-+Sherlock Holmes: A Study in Scarlet (Arthur Conan Doyle, 1887)">Sherlock Holmes: A Study in Scarlet (Arthur Conan Doyle, 1887)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">Books</p><ul><li><a href="https://www.google.com/search?q=Books+-+Strong Female Character (Fern Brady, 2023)">Strong Female Character (Fern Brady, 2023)</a></li><li><a href="https://www.google.com/search?q=Books+-+Foster (Claire Keegan, 2010)">Foster (Claire Keegan, 2010)</a></li><li><a href="https://www.google.com/search?q=Books+-+Impulse Buy (Jae, 2024)">Impulse Buy (Jae, 2024)</a></li><li><a href="https://www.google.com/search?q=Books+-+Bachelorette Number Twelve (Jae, 2024)">Bachelorette Number Twelve (Jae, 2024)</a></li><li><a href="https://www.google.com/search?q=Books+-+The Monkey\'s Paw (W.W. Jacobs, 1902)">The Monkey\'s Paw (W.W. Jacobs, 1902)</a></li><li><a href="https://www.google.com/search?q=Books+-+Fire Season (Philip Connors, 2011)">Fire Season (Philip Connors, 2011)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">Films</p><ul><li><a href="https://www.google.com/search?q=Films+-+Outrage (1950)">Outrage (1950)</a></li><li><a href="https://www.google.com/search?q=Films+-+Celia (1989)">Celia (1989)</a></li><li><a href="https://www.google.com/search?q=Films+-+Cathy Come Home (1966)">Cathy Come Home (1966)</a></li><li><a href="https://www.google.com/search?q=Films+-+Miranda (2002)">Miranda (2002)</a></li><li><a href="https://www.google.com/search?q=Films+-+Portrait d\'une jeune fille de la fin des années 60 à Bruxelles (1994)">Portrait d\'une jeune fille de la fin des années 60 à Bruxelles (1994)</a></li><li><a href="https://www.google.com/search?q=Films+-+Anora (2024)">Anora (2024)</a></li><li><a href="https://www.google.com/search?q=Films+-+Vagabond (1985)">Vagabond (1985)</a></li><li><a href="https://www.google.com/search?q=Films+-+Last Year at Marienbad (1961)">Last Year at Marienbad (1961)</a></li><li><a href="https://www.google.com/search?q=Films+-+No Vacancy (1999)">No Vacancy (1999)</a></li><li><a href="https://www.google.com/search?q=Films+-+Friends & Family Christmas (2023)">Friends & Family Christmas (2023)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">Games</p><ul><li><a href="https://www.google.com/search?q=Games+-+A Little to the Left: Seeing Stars (2024)">A Little to the Left: Seeing Stars (2024)</a></li><li><a href="https://www.google.com/search?q=Games+-+A Little to the Left: Cupboards & Drawers (2023)">A Little to the Left: Cupboards & Drawers (2023)</a></li><li><a href="https://www.google.com/search?q=Games+-+A Little to the Left (2022)">A Little to the Left (2022)</a></li><li><a href="https://www.google.com/search?q=Games+-+Wilmot\'s Warehouse (2019)">Wilmot\'s Warehouse (2019)</a></li><li><a href="https://www.google.com/search?q=Games+-+Taiji (2022)">Taiji (2022)</a></li><li><a href="https://www.google.com/search?q=Games+-+The Witness (2016)">The Witness (2016)</a></li><li><a href="https://www.google.com/search?q=Games+-+Red Dead Redemption 2 (2019)">Red Dead Redemption 2 (2019)</a></li><li><a href="https://www.google.com/search?q=Games+-+20 Small Mazes (2024)">20 Small Mazes (2024)</a></li><li><a href="https://www.google.com/search?q=Games+-+Dishonored: The Brigmore Witches (2013)">Dishonored: The Brigmore Witches (2013)</a></li><li><a href="https://www.google.com/search?q=Games+-+Infra (2016)">Infra (2016)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">TV</p><ul><li><a href="https://www.google.com/search?q=TV+-+Ludwig (S1, 2024)">Ludwig (S1, 2024)</a></li><li><a href="https://www.google.com/search?q=TV+-+Buffy the Vampire Slayer (S5, 2001)">Buffy the Vampire Slayer (S5, 2001)</a></li><li><a href="https://www.google.com/search?q=TV+-+Flowers (S1-2, 2016-2018)">Flowers (S1-2, 2016-2018)</a></li><li><a href="https://www.google.com/search?q=TV+-+House of the Dragon (S2, 2024)">House of the Dragon (S2, 2024)</a></li><li><a href="https://www.google.com/search?q=TV+-+Normal People (S1, 2020)">Normal People (S1, 2020)</a></li><li><a href="https://www.google.com/search?q=TV+-+Derry Girls (S1-3, 2018-2022)">Derry Girls (S1-3, 2018-2022)</a></li><li><a href="https://www.google.com/search?q=TV+-+Lost Boys & Fairies (S1, 2024)">Lost Boys & Fairies (S1, 2024)</a></li><li><a href="https://www.google.com/search?q=TV+-+Extras (S1-2, 2005-2006)">Extras (S1-2, 2005-2006)</a></li><li><a href="https://www.google.com/search?q=TV+-+Inside No. 9 (S9, 2024)">Inside No. 9 (S9, 2024)</a></li><li><a href="https://www.google.com/search?q=TV+-+Atypical (S1-4, 2017-2021)">Atypical (S1-4, 2017-2021)</a></li></ul>';
+	var html = '<p style="font-weight:bold;padding:10px 0 0 0">Audiobooks</p><ul><li><a href="https://www.google.com/search?q=Audiobooks+-+The Turbulent Term of Tyke Tyler (Gene Kemp, 1977)">The Turbulent Term of Tyke Tyler (Gene Kemp, 1977)</a></li><li><a href="https://www.google.com/search?q=Audiobooks+-+Around the World in 80 Days (Jules Verne, 1873)">Around the World in 80 Days (Jules Verne, 1873)</a></li><li><a href="https://www.google.com/search?q=Audiobooks+-+Animal Farm (George Orwell, 1945)">Animal Farm (George Orwell, 1945)</a></li><li><a href="https://www.google.com/search?q=Audiobooks+-+Sherlock Holmes: A Study in Scarlet (Arthur Conan Doyle, 1887)">Sherlock Holmes: A Study in Scarlet (Arthur Conan Doyle, 1887)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">Books</p><ul><li><a href="https://www.google.com/search?q=Books+-+Strong Female Character (Fern Brady, 2023)">Strong Female Character (Fern Brady, 2023)</a></li><li><a href="https://www.google.com/search?q=Books+-+Foster (Claire Keegan, 2010)">Foster (Claire Keegan, 2010)</a></li><li><a href="https://www.google.com/search?q=Books+-+Impulse Buy (Jae, 2024)">Impulse Buy (Jae, 2024)</a></li><li><a href="https://www.google.com/search?q=Books+-+Bachelorette Number Twelve (Jae, 2024)">Bachelorette Number Twelve (Jae, 2024)</a></li><li><a href="https://www.google.com/search?q=Books+-+The Monkey\'s Paw (W.W. Jacobs, 1902)">The Monkey\'s Paw (W.W. Jacobs, 1902)</a></li><li><a href="https://www.google.com/search?q=Books+-+Fire Season (Philip Connors, 2011)">Fire Season (Philip Connors, 2011)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">Films</p><ul><li><a href="https://www.google.com/search?q=Films+-+La Cérémonie (1995)">La Cérémonie (1995)</a></li><li><a href="https://www.google.com/search?q=Films+-+Outrage (1950)">Outrage (1950)</a></li><li><a href="https://www.google.com/search?q=Films+-+Celia (1989)">Celia (1989)</a></li><li><a href="https://www.google.com/search?q=Films+-+Cathy Come Home (1966)">Cathy Come Home (1966)</a></li><li><a href="https://www.google.com/search?q=Films+-+Miranda (2002)">Miranda (2002)</a></li><li><a href="https://www.google.com/search?q=Films+-+Portrait d\'une jeune fille de la fin des années 60 à Bruxelles (1994)">Portrait d\'une jeune fille de la fin des années 60 à Bruxelles (1994)</a></li><li><a href="https://www.google.com/search?q=Films+-+Anora (2024)">Anora (2024)</a></li><li><a href="https://www.google.com/search?q=Films+-+Vagabond (1985)">Vagabond (1985)</a></li><li><a href="https://www.google.com/search?q=Films+-+Last Year at Marienbad (1961)">Last Year at Marienbad (1961)</a></li><li><a href="https://www.google.com/search?q=Films+-+No Vacancy (1999)">No Vacancy (1999)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">Games</p><ul><li><a href="https://www.google.com/search?q=Games+-+A Little to the Left: Seeing Stars (2024)">A Little to the Left: Seeing Stars (2024)</a></li><li><a href="https://www.google.com/search?q=Games+-+A Little to the Left: Cupboards & Drawers (2023)">A Little to the Left: Cupboards & Drawers (2023)</a></li><li><a href="https://www.google.com/search?q=Games+-+A Little to the Left (2022)">A Little to the Left (2022)</a></li><li><a href="https://www.google.com/search?q=Games+-+Wilmot\'s Warehouse (2019)">Wilmot\'s Warehouse (2019)</a></li><li><a href="https://www.google.com/search?q=Games+-+Taiji (2022)">Taiji (2022)</a></li><li><a href="https://www.google.com/search?q=Games+-+The Witness (2016)">The Witness (2016)</a></li><li><a href="https://www.google.com/search?q=Games+-+Red Dead Redemption 2 (2019)">Red Dead Redemption 2 (2019)</a></li><li><a href="https://www.google.com/search?q=Games+-+20 Small Mazes (2024)">20 Small Mazes (2024)</a></li><li><a href="https://www.google.com/search?q=Games+-+Dishonored: The Brigmore Witches (2013)">Dishonored: The Brigmore Witches (2013)</a></li><li><a href="https://www.google.com/search?q=Games+-+Infra (2016)">Infra (2016)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">TV</p><ul><li><a href="https://www.google.com/search?q=TV+-+Ludwig (S1, 2024)">Ludwig (S1, 2024)</a></li><li><a href="https://www.google.com/search?q=TV+-+Buffy the Vampire Slayer (S5, 2001)">Buffy the Vampire Slayer (S5, 2001)</a></li><li><a href="https://www.google.com/search?q=TV+-+Flowers (S1-2, 2016-2018)">Flowers (S1-2, 2016-2018)</a></li><li><a href="https://www.google.com/search?q=TV+-+House of the Dragon (S2, 2024)">House of the Dragon (S2, 2024)</a></li><li><a href="https://www.google.com/search?q=TV+-+Normal People (S1, 2020)">Normal People (S1, 2020)</a></li><li><a href="https://www.google.com/search?q=TV+-+Derry Girls (S1-3, 2018-2022)">Derry Girls (S1-3, 2018-2022)</a></li><li><a href="https://www.google.com/search?q=TV+-+Lost Boys & Fairies (S1, 2024)">Lost Boys & Fairies (S1, 2024)</a></li><li><a href="https://www.google.com/search?q=TV+-+Extras (S1-2, 2005-2006)">Extras (S1-2, 2005-2006)</a></li><li><a href="https://www.google.com/search?q=TV+-+Inside No. 9 (S9, 2024)">Inside No. 9 (S9, 2024)</a></li><li><a href="https://www.google.com/search?q=TV+-+Atypical (S1-4, 2017-2021)">Atypical (S1-4, 2017-2021)</a></li></ul>';
 	var box = makeBox(2, 4);
 	box
 		.append('div')
@@ -290,31 +631,238 @@ modules.push(function media() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in singles module: No such host is known. (www.officialcharts.com:443)');
+console.log('Error in singles module: The remote server returned an error: (403) Forbidden.');
 
 //////////////////////////////////////////////////
 
-console.log('Error in vanguard module: No such host is known. (markets.ft.com:443)');
+modules.push(function vanguard() {
+
+	var data = [{ number: 227.51, tooltip: "Fri, Dec 20, 2024<br/>£227.51"},
+{ number: 226.11, tooltip: "Thu, Dec 19, 2024<br/>£226.11"},
+{ number: 225.27, tooltip: "Wed, Dec 18, 2024<br/>£225.27"},
+{ number: 229.87, tooltip: "Tue, Dec 17, 2024<br/>£229.87"},
+{ number: 231.35, tooltip: "Mon, Dec 16, 2024<br/>£231.35"},
+{ number: 232.38, tooltip: "Fri, Dec 13, 2024<br/>£232.38"},
+{ number: 231.64, tooltip: "Thu, Dec 12, 2024<br/>£231.64"},
+{ number: 231.49, tooltip: "Wed, Dec 11, 2024<br/>£231.49"},
+{ number: 230.42, tooltip: "Tue, Dec 10, 2024<br/>£230.42"},
+{ number: 230.46, tooltip: "Mon, Dec 09, 2024<br/>£230.46"},
+{ number: 232.17, tooltip: "Fri, Dec 06, 2024<br/>£232.17"},
+{ number: 231.52, tooltip: "Thu, Dec 05, 2024<br/>£231.52"},
+{ number: 232.51, tooltip: "Wed, Dec 04, 2024<br/>£232.51"},
+{ number: 232.38, tooltip: "Tue, Dec 03, 2024<br/>£232.38"},
+{ number: 232.08, tooltip: "Mon, Dec 02, 2024<br/>£232.08"},
+{ number: 230.09, tooltip: "Fri, Nov 29, 2024<br/>£230.09"},
+{ number: 229.48, tooltip: "Thu, Nov 28, 2024<br/>£229.48"},
+{ number: 229.52, tooltip: "Wed, Nov 27, 2024<br/>£229.52"},
+{ number: 231.74, tooltip: "Tue, Nov 26, 2024<br/>£231.74"},
+{ number: 231.78, tooltip: "Mon, Nov 25, 2024<br/>£231.78"},
+].reverse();
+
+	var vanguardDates = {
+		"Latest":      "Fri, Dec 20, 2024",
+		"vs Day":      "Thu, Dec 19, 2024",
+		"vs Week":     "Fri, Dec 13, 2024",
+		"vs Month":    "Mon, Nov 25, 2024",
+		"vs Year":     ""
+	}
+
+	var vanguardValues = {
+		"Latest":      "£227.51/share",
+		'vs Day':      "+0.62%",
+		'vs Week':     "-2.10%",
+		'vs Month':    "-1.84%",
+		'vs Year':     "+19.12%"
+	};
+
+	var box = makeBox(3, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#128200;<a href="https://www.vanguardinvestor.co.uk">Vanguard</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');		
+	var insideLeft = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('left', 0)
+		.style('width', '37%');
+	insideLeft
+		.append('p')
+		.append('a')
+		.attr('href', 'https://www.vanguardinvestor.co.uk/investments/vanguard-ftse-global-all-cap-index-fund-gbp-acc')
+		.html('FTSE Global All Cap<br/>Index Fund - Acc');
+	insideLeft
+		.append('p')
+		.html('&nbsp;');
+	var table = insideLeft
+		.append('table');	
+	
+	for (var item of Object.keys(vanguardValues)) {
+		var row = table
+			.append('tr')
+			.style('font-weight', item.startsWith("Latest") ? "bold" : "normal");
+		if (vanguardDates[item].length > 0) {
+			row
+				.attr('class', 'ttt')
+				.attr('data-tt', vanguardDates[item])
+        }
+		row
+			.append('td')
+			.style('text-align', 'left')
+			.html(item + ':&nbsp;');
+		row
+			.append('td')
+			.style('text-align', 'right')
+			.attr('class', 'code')
+			.html(vanguardValues[item]);
+	}
+
+	var insideRight = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('right', 0)
+		.style('width', '66%');
+	var chart = createLineChart(400, 150, insideRight, data, 2);
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in crypto module: No such host is known. (query1.finance.yahoo.com:443)');
+console.log('Error in crypto module: The remote server returned an error: (429) Too Many Requests.');
 
 //////////////////////////////////////////////////
 
-console.log('Error in moon module: No such host is known. (www.timeanddate.com:443)');
+modules.push(function moon() {
+	var moonData = {
+		Percent:  '42.0',
+		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-crescent.html" title="Waning Crescent on the night between 23 December and 24 December">Waning Crescent</a>',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.420&p=3.635&r=0.469',
+		Location: '11609021'
+	}
+
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#127769;<a href="https://www.timeanddate.com/moon/@' + moonData.Location + '">Moon</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');	
+	var inside = box
+		.append('div');
+	inside
+		.append('img')
+		.attr('src', moonData.Image)
+		.attr('width', '75%')
+		.attr('height', '75%');		
+	inside
+		.append('p')
+		.html(moonData.Type + ' (' + moonData.Percent + '%)');	
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in sun module: No such host is known. (www.timeanddate.com:443)');
+modules.push(function sun() {
+	var sunData = {
+		Rise:     '08:14',
+		Set:      '15:56',
+		Location: '11609021'
+	};
+
+	var box = makeBox(1, 1);	
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#128262;<a href="https://www.timeanddate.com/sun/@' + sunData.Location + '">Sun</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div');	
+	var table = inside
+		.append('table')
+		.style('width', '150px');
+	var row = table
+		.append('tr')
+		.style('font-size', '300%');
+	row
+		.append('td')
+		.html('&#127748;')
+	row
+		.append('td')
+		.html('&#127751;')
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.html('Rise')
+	row
+		.append('td')
+		.html('Set')
+var row = table
+		.append('tr');
+	row
+		.append('td')
+		.html(sunData.Rise)
+	row
+		.append('td')
+		.html(sunData.Set)
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in word module: No such host is known. (www.merriam-webster.com:443)');
+modules.push(function word() {
+	var wordData = {
+		Word:       '',
+		Definition: '<p><em>Delectation</em> is a formal word for a feeling of delight or enjoyment. It can also be used to refer to the source of such feelings.</p>'
+	}
+
+	var clean = wordData.Definition.replace(/<[^>]+>/g, '');
+
+	var box = makeBox(clean.length > 250 ? 2 : 1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4DC;<a href="https://www.merriam-webster.com/word-of-the-day">Word of the Day</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');	
+	var inside = box
+		.append('div');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.append('a')
+		.attr('href', 'https://www.merriam-webster.com/dictionary/' + wordData.Word)
+		.text(wordData.Word);
+	inside
+		.append('div')
+		.style('padding', '5px')
+		.html(wordData.Definition);	
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in astronauts module: No such host is known. (www.howmanypeopleareinspacerightnow.com:443)');
+modules.push(function astronauts() {
+	var astronautsData = {
+		Amount:      '10',
+		CountryHtml: '<table><tr><td><img class="flag ttt" data-tt="usa" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-usa.jpg" /></td><td><img class="flag ttt" data-tt="russia" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-russia.jpg" /></td><td><img class="flag ttt" data-tt="china" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-china.jpg" /></td><td><img class="flag ttt" data-tt="germany" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-germany.jpg" /></td></tr><tr style="vertical-align:top"><td>3</td><td>3</td><td>3</td><td>1</td></tr></table>'
+	};
+
+	var box = makeBox(1, 1);	
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F469;&#x200D;&#x1F680;<a href="https://www.howmanypeopleareinspacerightnow.com/">Astronauts</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('div')
+		.html("<p style='font-size:200%;font-weight:bold'>" + astronautsData.Amount + "</p><p>people are in space now.</p><p>&nbsp;</p>" + astronautsData.CountryHtml)
+});
 
 //////////////////////////////////////////////////
 
