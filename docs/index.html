@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>16:41 25-Dec - Ephemeral</title>		
+		<title>17:02 25-Dec - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -240,31 +240,372 @@
 
 ////////////////////////////////////////////////// boxes
 			
-console.log('Error in bbccombine module: No such host is known. (feeds.bbci.co.uk:80)');
+modules.push(function bbcCombine() {
+	var html = '<table style="margin:0 10px"><tr><td style="vertical-align:top"><b>UK</b><br/><ul><li class="ttt" data-tt="<b>King praises health workers and calls for unity after riots</b><br/>His Christmas Day message follows a year that saw him and the Princess of Wales treated for cancer." style="font-weight:bold"><a href="https://www.bbc.com/news/articles/cg4zn4y7vpgo">King praises health workers and calls for unity after riots</a></li><li class="ttt" data-tt="<b>Cancer survivor wishes King and Kate well at Sandringham service</b><br/>The Christmas service is a big event in the royal calendar, bringing together the Royal Family for a public appearance."><a href="https://www.bbc.com/news/articles/c878rz9qr0zo">Cancer survivor wishes King and Kate well at Sandringham service</a></li><li class="ttt" data-tt="<b>Man shot dead by armed police on Christmas Eve</b><br/>West Mercia Police refers itself to the policing watchdog after a man was shot in Redditch."><a href="https://www.bbc.com/news/articles/cp31zejz0nno">Man shot dead by armed police on Christmas Eve</a></li></ul></td><td><a href="https://www.bbc.com/news/articles/cg4zn4y7vpgo"><img src="https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/bd01/live/33151570-c157-11ef-b200-e594162e2327.jpg" class="ttt" data-tt="Fitzrovia Chapel in central London used as a location to record the 2024 King&#x27;s Christmas message" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>US & Canada</b><br/><ul><li class="ttt" data-tt="<b>Greenland and the Panama Canal aren\'t for sale. Why is Trump threatening to take them?</b><br/>Trump\'s promises to use America\'s strength to its advantage helped propel him twice to the White House." style="font-weight:bold"><a href="https://www.bbc.com/news/articles/c1lnzzd1zrmo">Greenland and the Panama Canal aren\'t for sale. Why is Trump threatening t...</a></li><li class="ttt" data-tt="<b>Why do US sports play on Christmas Day?</b><br/>Sport takes a break around much of the world this Christmas, but not in the US where Netflix expects a record audience for its first festive NFL games and a half-time show by Beyonce."><a href="https://www.bbc.com/sport/articles/cvgpvpk7zx5o">Why do US sports play on Christmas Day?</a></li><li class="ttt" data-tt="<b>Weather and airport delays disrupt American Christmas travel</b><br/>While Americans on the east coast brace for snow, on the west coast some are facing flooding and high surf warnings."><a href="https://www.bbc.com/news/articles/cy095ykjpzzo">Weather and airport delays disrupt American Christmas travel</a></li></ul></td><td><a href="https://www.bbc.com/news/articles/c1lnzzd1zrmo"><img src="https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/fcf8/live/80c8fd90-c251-11ef-8c65-07a414099579.jpg" class="ttt" data-tt="Donald Trump speaks at a Turning Point conference in Arizona." style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>World</b><br/><ul><li class="ttt" data-tt="<b>Dozens survive Kazakhstan passenger plane crash</b><br/>Kazakh authorities say 38 people were killed in the incident in western Kazakhstan." style="font-weight:bold"><a href="https://www.bbc.com/news/articles/cjwl1e6895qo">Dozens survive Kazakhstan passenger plane crash</a></li><li class="ttt" data-tt="<b>Zelensky condemns \'inhumane\' Christmas Day attack</b><br/>Russia has launched a major missile and drone attack on Ukraine\'s energy infrastructure."><a href="https://www.bbc.com/news/articles/cvgrn2xxqeno">Zelensky condemns \'inhumane\' Christmas Day attack</a></li><li class="ttt" data-tt="<b>Ukraine\'s war stamps put humour, patriotism and swearing in the post</b><br/>Ukraine\'s war stamps, some with swear words, boost morale at home and promote its image abroad."><a href="https://www.bbc.com/news/articles/cly4w8z28xzo">Ukraine\'s war stamps put humour, patriotism and swearing in the post</a></li></ul></td><td><a href="https://www.bbc.com/news/articles/cjwl1e6895qo"><img src="https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/cb98/live/b1234f30-c29d-11ef-959c-41ad31a78463.jpg" class="ttt" data-tt="A drone view shows the crash site of an Azerbaijan Airlines passenger plane near the city of Aktau, Kazakhstan" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>Formula 1</b><br/><ul><li class="ttt" data-tt="<b>Frenchman Hadjar gets final F1 seat for 2025</b><br/>Frenchman Isack Hadjar is promoted to Red Bull\'s second team to race alongside Japanese Yuki Tsunoda during the 2025 Formula 1 season." style="font-weight:bold"><a href="https://www.bbc.com/sport/formula1/articles/crmnxweg781o">Frenchman Hadjar gets final F1 seat for 2025</a></li><li class="ttt" data-tt="<b>Lawson replaces Perez at Red Bull for 2025</b><br/>New Zealander Liam Lawson will race for Red Bull alongside Max Verstappen following the team\'s decision to ditch Sergio Perez."><a href="https://www.bbc.com/sport/formula1/articles/c89xd0k55gwo">Lawson replaces Perez at Red Bull for 2025</a></li><li class="ttt" data-tt="<b>Bottas returning to Mercedes as reserve driver</b><br/>Valtteri Bottas is returning to Mercedes as their reserve driver for 2025, having been released by Audi-owned Sauber at the end of this season."><a href="https://www.bbc.com/sport/formula1/articles/cy4pj0j9z98o">Bottas returning to Mercedes as reserve driver</a></li></ul></td><td><a href="https://www.bbc.com/sport/formula1/articles/crmnxweg781o"><img src="https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/facb/live/0cc367c0-beb7-11ef-addc-4536c4252544.jpg" class="ttt" data-tt="Isack Hadjar" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr><tr><td style="vertical-align:top"><b>Technology</b><br/><ul><li class="ttt" data-tt="<b>Morrisons Christmas delays extend to second day</b><br/>The supermarket says its systems are back to normal after pre-Christmas chaos on Monday." style="font-weight:bold"><a href="https://www.bbc.com/news/articles/cn8g24qn87no">Morrisons Christmas delays extend to second day</a></li><li class="ttt" data-tt="<b>Brazil shuts BYD factory site over \'slavery\' conditions</b><br/>More than 160 workers have been rescued from the car factory, according to local prosecutors."><a href="https://www.bbc.com/news/articles/c8xj9jp57r2o">Brazil shuts BYD factory site over \'slavery\' conditions</a></li><li class="ttt" data-tt="<b>Morrisons apologises after discount and delivery issues</b><br/>The supermarket has been advertising cheap deals, including 10p vegetables, ahead of Christmas."><a href="https://www.bbc.com/news/articles/cdjg8kz8jj3o">Morrisons apologises after discount and delivery issues</a></li></ul></td><td><a href="https://www.bbc.com/news/articles/cn8g24qn87no"><img src="https://ichef.bbci.co.uk/ace/branded_news/1200/cpsprodpb/31ea/live/a9d41fd0-c1d9-11ef-ad94-73cffd90711a.jpg" class="ttt" data-tt="The exterior sign of a Morrisons supermarket, white text with a yellow corn logo, on brick wall" style="height:auto;width:auto;max-height:125px;max-width:125px;"/></a></td></tr></table>';
+	var box = makeBox(3, 2);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4F0;<a href="https://www.bbc.co.uk/news">BBC News</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in weather module: No such host is known. (www.timeanddate.com:443)');
+modules.push(function weather() {
+    var weatherLocation = "11609021";
+
+    var data={"copyright":"Contents are strictly for use by timeanddate.com","units":{"temp":"°C","prec":"mm","wind":"mph","baro":"mbar"},"detail":[{"hl":true,"hls":"23 Dec – 29 Dec","date":17350848E5,"ts":"Wed, 25","ds":"Wed, 25 Dec","icon":4,"desc":"Increasing cloudiness.","temp":11,"templow":5,"cf":8,"wind":6,"wd":240,"hum":92,"pc":0},{"date":17351712E5,"ts":"Thu, 26","ds":"Thu, 26 Dec","icon":2,"desc":"Mostly sunny.","temp":9,"templow":5,"cf":8,"wind":2,"wd":190,"hum":94,"pc":0},{"date":17352576E5,"ts":"Fri, 27","ds":"Fri, 27 Dec","icon":7,"desc":"Cloudy.","temp":9,"templow":5,"cf":7,"wind":4,"wd":230,"hum":93,"pc":2},{"date":1735344E6,"ts":"Sat, 28","ds":"Sat, 28 Dec","icon":18,"desc":"Sprinkles late. Overcast.","temp":9,"templow":5,"cf":7,"wind":7,"wd":220,"hum":91,"pc":43,"rain":0.9 },{"date":17354304E5,"ts":"Sun, 29","ds":"Sun, 29 Dec","icon":18,"desc":"Sprinkles late. Mostly cloudy.","temp":9,"templow":4,"cf":5,"wind":15,"wd":230,"hum":83,"pc":23,"rain":0.7 },{"hl":true,"hls":"30 Dec – 5 Jan","date":17355168E5,"ts":"Mon, 30","ds":"Mon, 30 Dec","icon":18,"desc":"Sprinkles. Overcast.","temp":10,"templow":8,"cf":7,"wind":9,"wd":290,"hum":82,"pc":38,"rain":2.4 },{"date":17356032E5,"ts":"Tue, 31","ds":"Tue, 31 Dec","icon":18,"desc":"Sprinkles late. Overcast.","temp":11,"templow":7,"cf":7,"wind":28,"wd":230,"hum":82,"pc":22,"rain":0.3 },{"date":17356896E5,"ts":"Wed, 1","ds":"Wed, 1 Jan","icon":33,"desc":"Light showers. Overcast.","temp":12,"templow":3,"cf":3,"wind":20,"wd":250,"hum":81,"pc":54,"rain":3.8 },{"date":1735776E6,"ts":"Thu, 2","ds":"Thu, 2 Jan","icon":2,"desc":"Mostly sunny.","temp":7,"templow":3,"cf":5,"wind":6,"wd":310,"hum":60,"pc":44,"rain":0.4 },{"date":17358624E5,"ts":"Fri, 3","ds":"Fri, 3 Jan","icon":2,"desc":"Mostly sunny.","temp":5,"templow":1,"cf":1,"wind":11,"wd":250,"hum":65,"pc":6},{"date":17359488E5,"ts":"Sat, 4","ds":"Sat, 4 Jan","icon":18,"desc":"Sprinkles late. Overcast.","temp":5,"templow":1,"cf":2,"wind":6,"wd":120,"hum":61,"pc":42,"rain":0.1 },{"date":17360352E5,"ts":"Sun, 5","ds":"Sun, 5 Jan","icon":20,"desc":"Heavy rain. Overcast.","temp":5,"templow":1,"cf":-1,"wind":21,"wd":80,"hum":98,"pc":87,"rain":24.4 ,"snow":18.3 },{"hl":true,"hls":"6 Jan – 12 Jan","date":17361216E5,"ts":"Mon, 6","ds":"Mon, 6 Jan","icon":19,"desc":"Rain. Overcast.","temp":5,"templow":2,"cf":5,"wind":3,"wd":0,"hum":100,"pc":70,"rain":13.2 },{"date":1736208E6,"ts":"Tue, 7","ds":"Tue, 7 Jan","icon":18,"desc":"Light rain. Cloudy.","temp":6,"templow":4,"cf":0,"wind":20,"wd":20,"hum":82,"pc":62,"rain":6},{"date":17362944E5,"ts":"Wed, 8","ds":"Wed, 8 Jan","icon":4,"desc":"Afternoon clouds.","temp":6,"templow":4,"cf":3,"wind":7,"wd":230,"hum":79,"pc":6}],"grid":{"temp":{"low":1,"high":12,"range":11},"prec":{"high":42.7},"time":86400000,"sections":15},"conv":{"prec":{"offset":0,"scale":1},"temp":{"offset":0,"scale":1},"wind":{"offset":0,"scale":0.869},"baro":{"offset":0,"scale":1}}};
+
+
+    var box = makeBox(2, 2);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#127746;<a href="https://www.timeanddate.com/weather/@' + weatherLocation + '/ext">Weather</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div');
+    var table = inside
+        .append('table');
+
+    for (var day of data.detail.slice(0, 7)) {
+        var row = table
+            .append('tr');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .style('font-weight', 'bold')
+            .html(day.ds.split(',')[0] + ':&nbsp;');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html(day.templow + '&#xb0;');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html('to');
+        row
+            .append('td')
+            .style('text-align', 'right')
+            .attr('class', 'code')
+            .html(day.temp + '&#xb0;');
+        row
+            .append('td')
+            .style('text-align', 'center')
+            .append('img')
+            .attr('src', 'https://c.tadst.com/gfx/w/svg/wt-' + day.icon + '.svg')
+            .attr('width', '32px')
+            .attr('height', '32px');
+        row
+            .append('td')
+            .style('text-align', 'left')
+            .html(day.desc)
+    }
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in astronomy module: No such host is known. (apod.nasa.gov:443)');
+modules.push(function astronomy() {
+	var imageData = {
+		Source:    'https://apod.nasa.gov/apod/image/2412/IceHalos_Fous_960.jpg',
+		Title:     'Diamond Dust Sky Eye',
+		LinkImage: 'https://apod.nasa.gov/apod/image/2412/IceHalos_Fous_5568.jpg',
+		LinkPage:  'https://apod.nasa.gov/apod/ap241225.html'
+	}
+
+	if (!imageData.Source.endsWith('/')) {
+		var box = makeBox(2, 2);
+		box
+			.append('div')
+			.attr('class', 'title')
+			.html('&#x1F680;<a href="https://apod.nasa.gov/apod/astropix.html">Astronomy Picture of the Day</a>')
+		box = box
+			.append('div')
+			.attr('class', 'inside');
+		var inside = box
+			.append('div');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', imageData.LinkImage)
+			.append('img')
+			.style('width', 'auto')
+			.style('height', 'auto')
+			.style('max-width', '400px')
+			.style('max-height', '320px')
+			.attr('src', imageData.Source);
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', imageData.LinkPage)
+			.html(imageData.Title);
+	}
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in wikipedia module: No such host is known. (en.wikipedia.org:443)');
+modules.push(function wikipedia() {
+	var pictureData = {
+		Source:   'http://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Kefermarkt_Kirche_Fl%C3%BCgelaltar_Geburt_02.jpg/400px-Kefermarkt_Kirche_Fl%C3%BCgelaltar_Geburt_02.jpg',
+		Title:    'Kefermarkt altarpiece',
+		LinkPage: 'https://en.wikipedia.org/wiki//wiki/Kefermarkt_altarpiece',
+		Description: '    The <b><a href="https://en.wikipedia.org/wiki/Kefermarkt_altarpiece" title="Kefermarkt altarpiece">Kefermarkt altarpiece</a></b> is a richly decorated wooden <a href="https://en.wikipedia.org/wiki/Altarpiece" title="Altarpiece">altarpiece</a> in the <a href="https://en.wikipedia.org/wiki/Gothic_art" title="Gothic art">Late Gothic style</a> in the parish church of <a href="https://en.wikipedia.org/wiki/Kefermarkt" title="Kefermarkt">Kefermarkt</a> in <a href="https://en.wikipedia.org/wiki/Upper_Austria" title="Upper Austria">Upper Austria</a>. Commissioned by the knight Christoph von Zelking, it was completed around 1497. <a href="https://en.wikipedia.org/wiki/Saint_Peter" title="Saint Peter">Saints Peter</a>, <a href="https://en.wikipedia.org/wiki/Wolfgang_of_Regensburg" title="Wolfgang of Regensburg">Wolfgang</a> and <a href="https://en.wikipedia.org/wiki/Saint_Christopher" title="Saint Christopher">Christopher</a> are depicted in the central section. The wing panels depict scenes from the life of <a href="https://en.wikipedia.org/wiki/Mary,_mother_of_Jesus" title="Mary, mother of Jesus">Mary</a>, and the altarpiece also has an intricate superstructure and two side figures of <a href="https://en.wikipedia.org/wiki/Saint_George" title="Saint George">Saints George</a> and <a href="https://en.wikipedia.org/wiki/Saint_Florian" title="Saint Florian">Florian</a>. The identity of its maker, known by the <a href="https://en.wikipedia.org/wiki/Notname" title="Notname">notname</a> <i>Master of the Kefermarkt Altarpiece</i>, is unknown, but at least two skilled sculptors appear to have created the main statuary. Throughout the centuries, it has been altered and lost its original paint and <a href="https://en.wikipedia.org/wiki/Gilding" title="Gilding">gilding</a>; a major restoration was undertaken in the 19th century under the direction of <a href="https://en.wikipedia.org/wiki/Adalbert_Stifter" title="Adalbert Stifter">Adalbert Stifter</a>. The altarpiece has been described as "one of the greatest achievements in late-medieval sculpture in the German-speaking area". This image shows the upper-left wing panel of the Kefermarkt altarpiece, depicting the <a href="https://en.wikipedia.org/wiki/Nativity_of_Jesus" title="Nativity of Jesus">birth of Christ</a>. Mary is portrayed kneeling in devotion in front of the <a href="https://en.wikipedia.org/wiki/Christ_Child" title="Christ Child">infant Christ</a>, who is placed before her on a fold of her dress. On the other side, <a href="https://en.wikipedia.org/wiki/Saint_Joseph" title="Saint Joseph">Joseph</a> is also kneeling in front of the child. Above Mary, on the roof of the building behind them, are two angels playing a <a href="https://en.wikipedia.org/wiki/Mandolin" title="Mandolin">mandolin</a> and a <a href="https://en.wikipedia.org/wiki/Lute" title="Lute">lute</a>. The <a href="https://en.wikipedia.org/wiki/Annunciation_to_the_shepherds" title="Annunciation to the shepherds">annunciation to the shepherds</a> can be seen in the background.<small style="display: block; margin-top: 0.8em;">Sculpture credit: Master of the Kefermarkt Altarpiece; photographed by <a href="https://en.wikipedia.orghttps://commons.wikimedia.org/wiki/User:Uoaei1" class="extiw" title="c:User:Uoaei1">Uoaei1</a></small>'
+	}
+
+	if (pictureData.Source.length > 0) {
+		var box = makeBox(2, 3);
+		box
+			.append('div')
+			.attr('class', 'title')
+			.html('&#x1F9E9;Wikipedia Picture of the Day')
+		box = box
+			.append('div')
+			.attr('class', 'inside');
+		var inside = box
+			.append('div');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', pictureData.Source)
+			.append('img')
+			.style('width', 'auto')
+			.style('height', 'auto')
+			.style('max-width', '400px')
+			.style('max-height', '320px')
+			.attr('src', pictureData.Source);
+		/*
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.append('a')
+			.attr('href', pictureData.LinkPage)
+			.html(pictureData.Title);
+		*/
+		inside
+			.append('p')
+			.html('&nbsp;');
+		inside
+			.append('p')
+			.style('overflow', 'hidden')
+			.style('margin', '5px')
+			.style('display', '-webkit-box')
+			.style('-webkit-line-clamp', '6')
+			.style('-webkit-box-orient', 'vertical')
+			.html(pictureData.Description);
+	}
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in tv module: No such host is known. (www.freesat.co.uk:443)');
+modules.push(function tv() {
+
+    var tvData = [{"channelid":560,"offset":0,"event":[{"name":"Breakfast","description":"The latest news, sport, business and weather from the BBC\u0027s Breakfast team. [S] [HD]","startTime":1735106400,"duration":10800,"svcId":560,"evtId":30388,"image":"\/ms\/img\/epg\/rb\/ae0c-p0fxfnwr.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735117247,"availabilityEnd":1735203647,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=_DTT_m0026ffl\u0026ui_id=4.0.0"}},{"name":"Trolls Holiday in Harmony","description":"Queen Poppy plans the first annual Trolls Kingdom Secret Holiday Gift Swap - but what do you give to the best gift giver ever? [S] [HD]","startTime":1735117200,"duration":1200,"svcId":560,"evtId":30389,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dmhzmr.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735118561,"availabilityEnd":1737710561,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001gnt3\u0026ui_id=4.0.0"}},{"name":"Superworm","description":"An animated comedy for all the family about Superworm, a super-long and super-strong worm. Based on the picture book written by Julia Donaldson and illustrated by Axel Scheffler. [S,AD] [HD]","startTime":1735118400,"duration":1800,"svcId":560,"evtId":30390,"image":"\/ms\/img\/epg\/rb\/fec6-p0b8rp7r.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1671980220,"availabilityEnd":1892008740,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0012w40\u0026ui_id=4.0.0"}},{"name":"The Gruffalo\u0027s Child","description":"Animated film based on the classic children\u0027s picture book. A little Gruffalo ignores her father\u0027s warnings and tiptoes out into the snow in search of the Big Bad Mouse... [S,AD] [HD]","startTime":1735120200,"duration":1500,"svcId":560,"evtId":30391,"image":"\/ms\/img\/epg\/rb\/ae0c-p07y5w51.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1576486800,"availabilityEnd":1892008740,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b018nrhm\u0026ui_id=4.0.0"}},{"name":"Christmas Morning Service from...","description":"...Halifax Minster. A traditional Christmas celebration of carols and readings, live from Halifax Minster. [S] [HD]","startTime":1735121700,"duration":3900,"svcId":560,"evtId":30392,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k95jyz.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735125561,"availabilityEnd":1766661561,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0026ffn\u0026ui_id=4.0.0"}},{"name":"Toy Story 3","description":"Family animation. With their owner, Andy, leaving home for university, the toys fear for their future. Escaping being thrown away as rubbish, they arrive at a childcare centre. [2010] [S,AD] [HD]","startTime":1735125600,"duration":5700,"svcId":560,"evtId":30393,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k8xqlr.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735131386,"availabilityEnd":1737723386,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b0138zyr\u0026ui_id=4.0.0"}},{"name":"Minions: The Rise of Gru","description":"Eleven-year-old Gru dreams of becoming a supervillain. [2022] [S,AD] [HD]","startTime":1735131300,"duration":4800,"svcId":560,"evtId":30394,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k8xsw2.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735136278,"availabilityEnd":1737728278,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0026d54\u0026ui_id=4.0.0"}},{"name":"BBC News","description":"The latest national and international news from the BBC. [S] [HD]","startTime":1735136100,"duration":900,"svcId":560,"evtId":30395,"image":"\/ms\/img\/epg\/rb\/fec6-p0fk7mhm.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735137045,"availabilityEnd":1735223445,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0026ffq\u0026ui_id=4.0.0"},"episodeNo":193},{"name":"Weather","description":"The latest weather forecast. [S] [HD]","startTime":1735137000,"duration":300,"svcId":560,"evtId":30396,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dc8npj.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735137291,"availabilityEnd":1735223691,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m001txh1\u0026ui_id=4.0.0"},"episodeNo":16},{"name":"Tiddler","description":"A little fish with a big imagination. Tiddler\u0027s always telling tall tales - but this time, his stories will take him on a great adventure. A heartwarming Julia Donaldson classic. [S,AD] [HD]","startTime":1735137300,"duration":1500,"svcId":560,"evtId":30397,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k99zbm.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735138800,"availabilityEnd":1892905200,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026dm6\u0026ui_id=4.0.0"}},{"name":"The King\u0027s Christmas Broadcast","description":"HM King Charles III delivers his annual Christmas message to the nation and the Commonwealth. [S,AD] [HD]","startTime":1735138800,"duration":600,"svcId":560,"evtId":30398,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kdv1ht.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735139400,"availabilityEnd":1737754200,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026d1w\u0026ui_id=4.0.0"}},{"name":"The Weakest Link: Christmas...","description":"...Special. 4\/14. A festive line-up of celebrities compete to win up to \u00a350,000 for their chosen charity. [S] [HD]","startTime":1735139400,"duration":2700,"svcId":560,"evtId":30399,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k9x9q1.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735142294,"availabilityEnd":1775415247,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0026ffv\u0026ui_id=4.0.0"},"seriesNo":5,"episodeNo":4},{"name":"Strictly Come Dancing Christmas...","description":"...Special. Join Tess Daly and Claudia Winkleman as six stars test out their festive footwork in a bid to impress the judges and be crowned Christmas Champion 2024. [S,AD] [HD]","startTime":1735142100,"duration":4500,"svcId":560,"evtId":30400,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kd0mm5.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735146838,"availabilityEnd":1766682838,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026d22\u0026ui_id=4.0.0"},"seriesNo":25},{"name":"Doctor Who: Joy to the World","description":"When Joy opens a secret doorway to the Time Hotel, she discovers danger, dinosaurs and the Doctor. But a deadly plan is unfolding across the earth, just in time for Christmas. [S,AD] [HD]","startTime":1735146600,"duration":3600,"svcId":560,"evtId":30401,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kb1rlw.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735145938,"availabilityEnd":1766686328,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=_DTT_m0026d24\u0026ui_id=4.0.0"},"episodeNo":3},{"name":"Wallace \u0026 Gromit: Vengeance...","description":"...Most Fowl. Wallace invents a \u0027smart gnome\u0027 that has a mind of its own - or does it? [2024] [S,AD] [HD]","startTime":1735150200,"duration":4800,"svcId":560,"evtId":30402,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kdz9r9.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735155022,"availabilityEnd":1766691022,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=_DTT_m0022179\u0026ui_id=4.0.0"}},{"name":"EastEnders","description":"Secrets and lies are revealed in spectacular fashion on Christmas Day. [S,AD] [HD]","startTime":1735155000,"duration":1800,"svcId":560,"evtId":30403,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kb1vy9.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735156857,"availabilityEnd":1806469200,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026ffy\u0026ui_id=4.0.0"},"episodeNo":7037},{"name":"Call the Midwife","description":"1\/2. The funfair comes to Poplar, adding a burst of colour to the festive season, but there are other less welcome visitors to the borough, including Hong Kong flu and escaped prisoners. [S,AD] [HD]","startTime":1735156800,"duration":3600,"svcId":560,"evtId":30404,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kb99tb.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735160528,"availabilityEnd":1864533600,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=_DTT_m0026fg0\u0026ui_id=4.0.0"},"seriesNo":28,"episodeNo":1},{"name":"Gavin \u0026 Stacey: The Finale","description":"Find out what happened after Nessa\u0027s marriage proposal to Smithy. Contains adult humour. [S,AD] [HD]","startTime":1735160400,"duration":5700,"svcId":560,"evtId":30405,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kcdr16.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735166318,"availabilityEnd":1766702318,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=_DTT_m0026dmr\u0026ui_id=4.0.0"},"episodeNo":9},{"name":"EastEnders","description":"The drama of Christmas Day continues for the residents of Albert Square. [S,AD] [HD]","startTime":1735166100,"duration":1800,"svcId":560,"evtId":30406,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kbb964.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735168092,"availabilityEnd":1806469200,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026fg4\u0026ui_id=4.0.0"},"episodeNo":7038},{"name":"Mrs Brown\u0027s Boys Christmas Special","description":"1\/2. Agnes fails to convince the gang she\u0027s not grumpy at Christmas again, while Cathy unites the Finglas community for a festive good cause. Contains some strong language. [S,AD] [HD]","startTime":1735167900,"duration":1800,"svcId":560,"evtId":30407,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kb1lvg.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735169882,"availabilityEnd":1767308431,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026f9r\u0026ui_id=4.0.0"},"seriesNo":21,"episodeNo":1},{"name":"BBC News","description":"The latest national and international news, with reports from BBC correspondents worldwide. [S] [HD]","startTime":1735169700,"duration":900,"svcId":560,"evtId":30408,"image":"\/ms\/img\/epg\/rb\/fec6-p0fjvy7w.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735170870,"availabilityEnd":1735257270,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026fg6\u0026ui_id=4.0.0"},"episodeNo":193},{"name":"Weather","description":"The latest weather forecast. [S] [HD]","startTime":1735170600,"duration":300,"svcId":560,"evtId":30746,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dc8npj.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735171021,"availabilityEnd":1735257421,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026xcf\u0026ui_id=4.0.0"},"episodeNo":17},{"name":"On Christmas Night","description":"As Christmas Day draws to a close, Kate Garraway tells the story of the first Christmas from Luke\u0027s Gospel, when angels appeared before shepherds, proclaiming the news of Jesus\u0027s birth. [S] [HD]","startTime":1735170900,"duration":300,"svcId":560,"evtId":30409,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kbhp30.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735171367,"availabilityEnd":1766707367,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026fg8\u0026ui_id=4.0.0"}},{"name":"Marry Me","description":"A singer marries a stranger picked in the crowd at one of her concerts. [2022] [S,AD] [HD]","startTime":1735171200,"duration":6300,"svcId":560,"evtId":30410,"image":"\/ms\/img\/epg\/rb\/fec6-p0h2n6pq.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735177682,"availabilityEnd":1737769682,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m001tvg6\u0026ui_id=4.0.0"}},{"name":"Weather for the Week Ahead","description":"Detailed weather forecast. [S] [HD]","startTime":1735177500,"duration":300,"svcId":560,"evtId":30411,"image":"\/ms\/img\/epg\/rb\/ae0c-p0dc8npj.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735177960,"availabilityEnd":1735782760,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026fgb\u0026ui_id=4.0.0"}},{"name":"BBC News","description":"BBC One joins the BBC\u0027s rolling news channel for a night of news. [S] [HD]","startTime":1735177800,"duration":15000,"svcId":560,"evtId":30412,"image":"\/ms\/img\/epg\/rb\/fec6-p0g6cmtt.jpg","hasTstv":false,"episodeNo":269}]},{"channelid":700,"offset":0,"event":[{"name":"This is BBC Two","description":"Highlights of programmes on BBC Two. [HD]","startTime":1735102200,"duration":5700,"svcId":700,"evtId":21842,"image":"\/ms\/img\/epg\/rb\/ae0c-p0bvs8dg.jpg","hasTstv":false},{"name":"Bargain Hunt: Christmas Special","description":"Yule love this seasonal episode of Bargain Hunt, with a sackful of profits and Christmas cheer, co-presented by Eric Knowles and Father Christmas. [S] [HD]","startTime":1735107900,"duration":2700,"svcId":700,"evtId":21779,"image":"\/ms\/img\/epg\/rb\/ae0c-p0k8b8ny.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1734699600,"availabilityEnd":1766235600,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0026357\u0026ui_id=4.0.0"},"seriesNo":71},{"name":"The Gruffalo and Me: The...","description":"...Remarkable Julia Donaldson. A celebration of the life and work of Julia Donaldson and the remarkable cast of characters that have sprung from her imagination. [S,AD] [HD]","startTime":1735110600,"duration":3000,"svcId":700,"evtId":21780,"image":"\/ms\/img\/epg\/rb\/ae0c-p090j0lk.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735113630,"availabilityEnd":1737705630,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m000qrxj\u0026ui_id=4.0.0"}},{"name":"Carols from King\u0027s","description":"A celebration of Christmas from the candlelit Chapel of King\u0027s College, Cambridge. [S] [HD]","startTime":1735113600,"duration":4500,"svcId":700,"evtId":21781,"image":"\/ms\/img\/epg\/rb\/ae0c-p0b7vzqc.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735067762,"availabilityEnd":1766603762,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0026d1r\u0026ui_id=4.0.0"}},{"name":"The Frozen North: Our Wild...","description":"...Adventures. 2\/8. BBC Wildlife presenters look back on their adventures in the frozen regions of the Arctic. [S,AD] [HD]","startTime":1735118100,"duration":3600,"svcId":700,"evtId":21782,"image":"\/ms\/img\/epg\/rb\/ae0c-p09h53vj.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735121703,"availabilityEnd":1737713703,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m000w76s\u0026ui_id=4.0.0"},"episodeNo":2},{"name":"Wallace \u0026 Gromit: The Wrong...","description":"...Trousers. Oscar-winning claymation. Wallace and his canine companion Gromit become embroiled in a jewellery heist after a mysterious penguin rents a room in their house. [1993] [S,AD] [HD]","startTime":1735121700,"duration":1800,"svcId":700,"evtId":21783,"image":"\/ms\/img\/epg\/rb\/fec6-p0910ff6.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1661603400,"availabilityEnd":1769903940,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b08nfjwt\u0026ui_id=4.0.0"}},{"name":"Wallace \u0026 Gromit: A Grand Day Out","description":"The first of Nick Park\u0027s award-winning claymations. Inventor Wallace and his dog Gromit blast off in a homemade rocket to find out if the moon is really made of cheese. [1992] [S,AD] [HD]","startTime":1735123500,"duration":1200,"svcId":700,"evtId":21784,"image":"\/ms\/img\/epg\/rb\/ae0c-p08xl16f.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1661606700,"availabilityEnd":1769903940,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b01pzqj3\u0026ui_id=4.0.0"}},{"name":"High Society","description":"Musical comedy. Time is short if playboy CK Dexter-Haven is to reclaim his former wife before she remarries. Cynical reporter Mike Connor is covering the wedding. [1956] [S] [HD]","startTime":1735124700,"duration":6300,"svcId":700,"evtId":21785,"image":"\/ms\/img\/epg\/rb\/fec6-p09rbf3v.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735131090,"availabilityEnd":1737723090,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m000pyh8\u0026ui_id=4.0.0"}},{"name":"Swan Lake from English National...","description":"...Ballet. More than 100 dancers are spellbinding in this stunning and magical production of Tchaikovsky\u0027s Swan Lake, filmed at London\u0027s Royal Albert Hall. [S] [HD]","startTime":1735131000,"duration":7800,"svcId":700,"evtId":21786,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kb1ngv.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735138799,"availabilityEnd":1892872740,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=m0026d1t\u0026ui_id=4.0.0"}},{"name":"The King\u0027s Christmas Broadcast","description":"HM King Charles III delivers his annual Christmas message to the nation and the Commonwealth. [S,AD,SL] [HD]","startTime":1735138800,"duration":600,"svcId":700,"evtId":21787,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kdv1ht.jpg","hasTstv":false},{"name":"Some Like It Hot","description":"Comic masterpiece from Billy Wilder. Musicians Joe and Jerry accidentally witness the St Valentine\u0027s Day massacre and attempt to make a getaway by joining an all-girl jazz band. [1959] [S] [HD]","startTime":1735139400,"duration":6900,"svcId":700,"evtId":21788,"image":"\/ms\/img\/epg\/rb\/ae0c-p07xth98.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735146473,"availabilityEnd":1737738473,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m000cryx\u0026ui_id=4.0.0"}},{"name":"North by Northwest","description":"Classic, darkly comic Hitchcock thriller in which an adman is pursued both by spies, who mistake him for a double agent, and by the police, who think he is an assassin. [1959] [S] [HD]","startTime":1735146300,"duration":8100,"svcId":700,"evtId":21789,"image":"\/ms\/img\/epg\/rb\/fec6-p08sfq1r.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735154391,"availabilityEnd":1737746391,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=b025ydrv\u0026ui_id=4.0.0"}},{"name":"The Musical Classics of...","description":"...Morecombe and Wise. Ernie Wise introduces highlights from shows in which Morecambe and Wise mix music with comedy. [S] [HD]","startTime":1735154400,"duration":2100,"svcId":700,"evtId":21790,"image":"\/ms\/img\/epg\/rb\/ae0c-p0hj9lsj.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735156503,"availabilityEnd":1737748503,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=m0026d1y\u0026ui_id=4.0.0"},"episodeNo":20},{"name":"The Morecambe and Wise...","description":"...Christmas Show 1977. Eric Morecambe and Ernie Wise star with Paul Eddington, Richard Briers, Penelope Keith, Elton John, Francis Matthews, Angharad Rees, Kenneth Kendall and Arthur Lowe. [S]","startTime":1735156500,"duration":3900,"svcId":700,"evtId":21791,"image":"\/ms\/img\/epg\/rb\/fec6-p0gvnq1m.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1702620000,"availabilityEnd":1799992800,"mediaAvailable":true,"mediaLocation":"channel=919\u0026programmeid=b00xb6rp\u0026ui_id=4.0.0"},"episodeNo":18},{"name":"From Roger Moore with Love","description":"Friends, family and co-stars share memories of legendary British icon Roger Moore. Contains some strong language. [S,AD] [HD]","startTime":1735160400,"duration":4800,"svcId":700,"evtId":21792,"image":"\/ms\/img\/epg\/rb\/fec6-p0kdzmk3.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735165358,"availabilityEnd":1892931720,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=_DTT_m0026d20\u0026ui_id=4.0.0"}},{"name":"The Lady in the Van","description":"The true story of Miss Shepherd, who lived in a van in Alan Bennett\u0027s drive. Contains some strong language. [S,AD] [HD]","startTime":1735165200,"duration":6000,"svcId":700,"evtId":21793,"image":"\/ms\/img\/epg\/rb\/fec6-p08h7068.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735171357,"availabilityEnd":1737763357,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=b06wcqyr\u0026ui_id=4.0.0"}},{"name":"The Duchess","description":"The tumultuous life story of the 18th-century Duchess of Devonshire (Keira Knightley). Contains some scenes of a sexual nature. [2008] [S,AD] [HD]","startTime":1735171200,"duration":6300,"svcId":700,"evtId":21794,"image":"\/ms\/img\/epg\/rb\/ae0c-p08lbk1x.jpg","hasTstv":true,"tstv":{"sid":919,"availabilityStart":1735177468,"availabilityEnd":1737769468,"mediaAvailable":false,"mediaLocation":"channel=919\u0026programmeid=b016r10h\u0026ui_id=4.0.0"}},{"name":"Signed: Strictly Come Dancing...","description":"...Christmas Special. Six stars test out their festive footwork to become Christmas Champion 2024. With signing. [S,AD,SL] [HD]","startTime":1735177500,"duration":4500,"svcId":700,"evtId":21795,"image":"\/ms\/img\/epg\/rb\/ae0c-p0jvlfnc.jpg","hasTstv":false,"seriesNo":25,"episodeNo":1},{"name":"Doctor Who: Joy to the World","description":"When Joy opens a secret doorway to the Time Hotel, she discovers danger, dinosaurs and the Doctor. But a deadly plan is unfolding across the earth, just in time for Christmas. [S,AD,SL] [HD]","startTime":1735182000,"duration":3300,"svcId":700,"evtId":21796,"image":"\/ms\/img\/epg\/rb\/ae0c-p0kb1rlw.jpg","hasTstv":false,"episodeNo":3},{"name":"Asia","description":"2\/7. Asia is the most mountainous continent on earth. From the tropical south to its barren centre, its highest places are home to some of our planet\u0027s most remarkable wildlife. [S,AD,SL] [HD]","startTime":1735185300,"duration":3600,"svcId":700,"evtId":21797,"image":"\/ms\/img\/epg\/rb\/fec6-p0k1fwfy.jpg","hasTstv":false,"episodeNo":2}]},{"channelid":1500,"offset":0,"event":[]}];
+
+    var box = makeBox(2, 3);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#x1F4FA;<a href="https://www.freesat.co.uk/tv-guide">TV</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div')
+        .style('text-align', 'left');
+
+    var channels = { 560: "BBC 1", 700: "BBC 2", 1500: "Channel 4" };
+
+    var today = new Date();
+    var primeTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 18, 0, 0);
+    var unixStart = (+primeTime) / 1000;
+    var unixEnd = unixStart + 60 * 60 * 6;
+    var first = true;
+
+    for (var channel of tvData) {
+        if (!first) {
+            first = false;
+        } else {
+            inside
+                .append('br');
+        }
+
+        inside
+            .append('p')
+            .append('b')
+            .text(channels[channel.channelid]);
+        var list = inside
+            .append('ul');
+        for (var event of channel.event) {
+            console.log(event);
+            if (+event.startTime >= unixStart && +event.startTime < unixEnd) {
+                list
+                    .append('li')
+                    .attr('class', 'ttt')
+                    .attr('data-tt', '<img src=\"https://fdp-sv15-image-v1-0.gcprod1.freetime-platform.net/270x180-0' + event.image + '\" /><br/><b>' + event.name + '</b><br/>' + (+event.duration / 60) + ' minutes<br/>' + event.description)
+                    .html('<span class="code">' + new Date(+event.startTime * 1000).toLocaleTimeString('en-GB').substr(0, 5) + "</span> - " + event.name);
+            }
+        }
+    }
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in backlog module: No such host is known. (store.steampowered.com:443)');
+modules.push(function backlog() {
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4CB;Backlog')
+	var table = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('table')
+		.style('text-align', 'right');
+
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Audiobooks:");
+	row
+		.append('td')
+		.text('12')
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Books:");
+	row
+		.append('td')
+		.text('14');
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Films:");
+	row
+		.append('td')
+		.text('408');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Games:");
+	row
+		.append('td')
+		.text('7');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("TV:");
+	row
+		.append('td')
+		.text('77');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("YouTube:");
+	row
+		.append('td')
+		.text('4');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Downloads:");
+	row
+		.append('td')
+		.text('41');
+
+	if (+"0" > 0) {
+		row = table
+			.append('tr');
+		row
+			.append('td')
+			.text("Steam Wishlist:");
+		row
+			.append('td')
+			.text('0');
+	}
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in youtube module: No such host is known. (www.youtube.com:443)');
+modules.push(function youtube() {
+
+    var data = [
+{ id: 'PlJSWoKEIkI', title: "£1,700pcm To Live In A Conservatory In Clapham?", label: "£1,700pcm To Live In A Conservatory In Clapham? by Housing Horrors 62,696 views 4 weeks ago 1 minute, 5 seconds – play Short" },
+{ id: 'PlJSWoKEIkI', title: "Kids Write Swear Words On Walls Of House 😳", label: "Kids Write Swear Words On Walls Of House 😳 by Housing Horrors 31,228 views 1 month ago 1 minute, 1 second – play Short" },
+{ id: 'pf4LrLpNivY', title: "Is This 1 Bed Flat Even Legal?", label: "Is This 1 Bed Flat Even Legal? by Housing Horrors 3,630 views 12 days ago 1 minute, 7 seconds" },
+];
+
+    var box = makeBox(2, 2);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#x1F4FC;<a href="https://www.youtube.com/feed/trending">YouTube Trending</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div');
+    var table = inside
+        .append('table')
+        .style('width', '80%')
+        .style('margin', '0 auto');
+
+    var count = 0;
+    for (var video of data) {
+        var row = table
+            .append('tr');
+        row
+            .append('td')
+            .append('a')
+            .attr('href', "https://www.youtube.com/watch?v=" + video.id)
+            .append('img')
+            .attr('src', 'https://i.ytimg.com/vi/' + video.id + '/hqdefault.jpg')
+            .style('width', (480 / 4) + 'px')
+            .style('height', (360 / 4) + 'px')
+            .style('text-align', 'right')
+            .attr('title', video.label);
+        row
+            .append('td')
+            .style('text-align', 'left')
+            .html(++count + '<br/><a href="https://www.youtube.com/watch?v=' + video.id + '">' + video.title + '</a>');
+    }
+});
 
 //////////////////////////////////////////////////
 
@@ -290,31 +631,240 @@ modules.push(function media() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in singles module: No such host is known. (www.officialcharts.com:443)');
+console.log('Error in singles module: The remote server returned an error: (403) Forbidden.');
 
 //////////////////////////////////////////////////
 
-console.log('Error in vanguard module: No such host is known. (markets.ft.com:443)');
+modules.push(function vanguard() {
+
+	var data = [{ number: 230.58, tooltip: "Tue, Dec 24, 2024<br/>£230.58"},
+{ number: 229.20, tooltip: "Mon, Dec 23, 2024<br/>£229.20"},
+{ number: 227.51, tooltip: "Fri, Dec 20, 2024<br/>£227.51"},
+{ number: 226.11, tooltip: "Thu, Dec 19, 2024<br/>£226.11"},
+{ number: 225.27, tooltip: "Wed, Dec 18, 2024<br/>£225.27"},
+{ number: 229.87, tooltip: "Tue, Dec 17, 2024<br/>£229.87"},
+{ number: 231.35, tooltip: "Mon, Dec 16, 2024<br/>£231.35"},
+{ number: 232.38, tooltip: "Fri, Dec 13, 2024<br/>£232.38"},
+{ number: 231.64, tooltip: "Thu, Dec 12, 2024<br/>£231.64"},
+{ number: 231.49, tooltip: "Wed, Dec 11, 2024<br/>£231.49"},
+{ number: 230.42, tooltip: "Tue, Dec 10, 2024<br/>£230.42"},
+{ number: 230.46, tooltip: "Mon, Dec 09, 2024<br/>£230.46"},
+{ number: 232.17, tooltip: "Fri, Dec 06, 2024<br/>£232.17"},
+{ number: 231.52, tooltip: "Thu, Dec 05, 2024<br/>£231.52"},
+{ number: 232.51, tooltip: "Wed, Dec 04, 2024<br/>£232.51"},
+{ number: 232.38, tooltip: "Tue, Dec 03, 2024<br/>£232.38"},
+{ number: 232.08, tooltip: "Mon, Dec 02, 2024<br/>£232.08"},
+{ number: 230.09, tooltip: "Fri, Nov 29, 2024<br/>£230.09"},
+{ number: 229.48, tooltip: "Thu, Nov 28, 2024<br/>£229.48"},
+{ number: 229.52, tooltip: "Wed, Nov 27, 2024<br/>£229.52"},
+{ number: 231.74, tooltip: "Tue, Nov 26, 2024<br/>£231.74"},
+{ number: 231.78, tooltip: "Mon, Nov 25, 2024<br/>£231.78"},
+].reverse();
+
+	var vanguardDates = {
+		"Latest":      "Tue, Dec 24, 2024",
+		"vs Day":      "Mon, Dec 23, 2024",
+		"vs Week":     "Tue, Dec 17, 2024",
+		"vs Month":    "Mon, Nov 25, 2024",
+		"vs Year":     ""
+	}
+
+	var vanguardValues = {
+		"Latest":      "£230.58/share",
+		'vs Day':      "+0.60%",
+		'vs Week':     "+0.31%",
+		'vs Month':    "-0.52%",
+		'vs Year':     "+20.73%"
+	};
+
+	var box = makeBox(3, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#128200;<a href="https://www.vanguardinvestor.co.uk">Vanguard</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');		
+	var insideLeft = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('left', 0)
+		.style('width', '37%');
+	insideLeft
+		.append('p')
+		.append('a')
+		.attr('href', 'https://www.vanguardinvestor.co.uk/investments/vanguard-ftse-global-all-cap-index-fund-gbp-acc')
+		.html('FTSE Global All Cap<br/>Index Fund - Acc');
+	insideLeft
+		.append('p')
+		.html('&nbsp;');
+	var table = insideLeft
+		.append('table');	
+	
+	for (var item of Object.keys(vanguardValues)) {
+		var row = table
+			.append('tr')
+			.style('font-weight', item.startsWith("Latest") ? "bold" : "normal");
+		if (vanguardDates[item].length > 0) {
+			row
+				.attr('class', 'ttt')
+				.attr('data-tt', vanguardDates[item])
+        }
+		row
+			.append('td')
+			.style('text-align', 'left')
+			.html(item + ':&nbsp;');
+		row
+			.append('td')
+			.style('text-align', 'right')
+			.attr('class', 'code')
+			.html(vanguardValues[item]);
+	}
+
+	var insideRight = box
+		.append('div')
+		.style('display', 'inline')
+		.style('position', 'absolute')
+		.style('right', 0)
+		.style('width', '66%');
+	var chart = createLineChart(400, 150, insideRight, data, 2);
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in crypto module: No such host is known. (query1.finance.yahoo.com:443)');
+console.log('Error in crypto module: The remote server returned an error: (429) Too Many Requests.');
 
 //////////////////////////////////////////////////
 
-console.log('Error in moon module: No such host is known. (www.timeanddate.com:443)');
+modules.push(function moon() {
+	var moonData = {
+		Percent:  '25.1',
+		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-crescent.html" title="Waning Crescent on the night between 25 December and 26 December">Waning Crescent</a>',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.251&p=2.891&r=6.038',
+		Location: '11609021'
+	}
+
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#127769;<a href="https://www.timeanddate.com/moon/@' + moonData.Location + '">Moon</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');	
+	var inside = box
+		.append('div');
+	inside
+		.append('img')
+		.attr('src', moonData.Image)
+		.attr('width', '75%')
+		.attr('height', '75%');		
+	inside
+		.append('p')
+		.html(moonData.Type + ' (' + moonData.Percent + '%)');	
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in sun module: No such host is known. (www.timeanddate.com:443)');
+modules.push(function sun() {
+	var sunData = {
+		Rise:     '08:15',
+		Set:      '15:57',
+		Location: '11609021'
+	};
+
+	var box = makeBox(1, 1);	
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#128262;<a href="https://www.timeanddate.com/sun/@' + sunData.Location + '">Sun</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div');	
+	var table = inside
+		.append('table')
+		.style('width', '150px');
+	var row = table
+		.append('tr')
+		.style('font-size', '300%');
+	row
+		.append('td')
+		.html('&#127748;')
+	row
+		.append('td')
+		.html('&#127751;')
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.html('Rise')
+	row
+		.append('td')
+		.html('Set')
+var row = table
+		.append('tr');
+	row
+		.append('td')
+		.html(sunData.Rise)
+	row
+		.append('td')
+		.html(sunData.Set)
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in word module: No such host is known. (www.merriam-webster.com:443)');
+modules.push(function word() {
+	var wordData = {
+		Word:       '',
+		Definition: '<p><em>Evergreen</em> in its figurative uses describes something, such as a plot, that retains its freshness or interest over a long period of time, or something, such as an issue or concern, that is universally and continually relevant. In botany, <em>evergreen</em> describes foliage that remains green and functional through more than one growing season.</p>'
+	}
+
+	var clean = wordData.Definition.replace(/<[^>]+>/g, '');
+
+	var box = makeBox(clean.length > 250 ? 2 : 1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4DC;<a href="https://www.merriam-webster.com/word-of-the-day">Word of the Day</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside');	
+	var inside = box
+		.append('div');
+	inside
+		.append('p')
+		.style('font-weight', 'bold')
+		.append('a')
+		.attr('href', 'https://www.merriam-webster.com/dictionary/' + wordData.Word)
+		.text(wordData.Word);
+	inside
+		.append('div')
+		.style('padding', '5px')
+		.html(wordData.Definition);	
+});
 
 //////////////////////////////////////////////////
 
-console.log('Error in astronauts module: No such host is known. (www.howmanypeopleareinspacerightnow.com:443)');
+modules.push(function astronauts() {
+	var astronautsData = {
+		Amount:      '10',
+		CountryHtml: '<table><tr><td><img class="flag ttt" data-tt="usa" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-usa.jpg" /></td><td><img class="flag ttt" data-tt="russia" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-russia.jpg" /></td><td><img class="flag ttt" data-tt="china" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-china.jpg" /></td><td><img class="flag ttt" data-tt="germany" src="https://www.howmanypeopleareinspacerightnow.com/app/flags/flag-germany.jpg" /></td></tr><tr style="vertical-align:top"><td>3</td><td>3</td><td>3</td><td>1</td></tr></table>'
+	};
+
+	var box = makeBox(1, 1);	
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F469;&#x200D;&#x1F680;<a href="https://www.howmanypeopleareinspacerightnow.com/">Astronauts</a>')
+	box = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('div')
+		.html("<p style='font-size:200%;font-weight:bold'>" + astronautsData.Amount + "</p><p>people are in space now.</p><p>&nbsp;</p>" + astronautsData.CountryHtml)
+});
 
 //////////////////////////////////////////////////
 
