@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>12:54 6-Jan - Ephemeral</title>		
+		<title>13:00 6-Jan - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -470,16 +470,105 @@ modules.push(function tv() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in backlog module: Sorry, we couldn’t find C:\Users\Robson\Google Drive\#MessyFolders\Everything\Everything.xlsb. Is it possible that it was moved, renamed or deleted?');
+modules.push(function backlog() {
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4CB;Backlog')
+	var table = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('table')
+		.style('text-align', 'right');
+
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Audiobooks:");
+	row
+		.append('td')
+		.text('12')
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Books:");
+	row
+		.append('td')
+		.text('14');
+
+	//row = table
+	//	.append('tr');
+	//row
+	//	.append('td')
+	//	.text("Films:");
+	//row
+	//	.append('td')
+	//	.text('{{COUNT_FILMS}}');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Games:");
+	row
+		.append('td')
+		.text('7');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("TV:");
+	row
+		.append('td')
+		.text('77');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("YouTube:");
+	row
+		.append('td')
+		.text('4');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Downloads:");
+	row
+		.append('td')
+		.text('6');
+
+	if (+"0" > 0) {
+		row = table
+			.append('tr');
+		row
+			.append('td')
+			.text("Steam Wishlist:");
+		row
+			.append('td')
+			.text('0');
+	}
+});
 
 //////////////////////////////////////////////////
 
 modules.push(function youtube() {
 
     var data = [
-{ id: 'bHYAVWfwNlk', title: "I Watched LUKE LITTLER Become World Champion!", label: "I Watched LUKE LITTLER Become World Champion! by angryginge13 426,246 views 1 day ago 25 minutes" },
-{ id: '-0Ai_f6_DVM', title: "FEEDING STARVING CELEBRITIES FT. MADELINE ARGY", label: "FEEDING STARVING CELEBRITIES FT. MADELINE ARGY by Quenlin Blackwell 982,393 views 1 day ago 55 minutes" },
-{ id: 'G72kLpKx4NQ', title: "Drake Embarrassed Himself Again", label: "Drake Embarrassed Himself Again by fantano 655,272 views 1 day ago 9 minutes, 21 seconds" },
+{ id: '8Br2JTsBCCk', title: "I ATTEMPTED TO BUY A WRECKED PORSCHE CARRERA GT", label: "I ATTEMPTED TO BUY A WRECKED PORSCHE CARRERA GT by Mat Armstrong MK2 1,763,124 views 19 hours ago 37 minutes" },
+{ id: 'U9HTM9JBBO4', title: "Nikki Glaser Opening Monologue | 82nd Annual Golden Globes", label: "Nikki Glaser Opening Monologue | 82nd Annual Golden Globes by Golden Globes 1,057,547 views 11 hours ago 10 minutes" },
+{ id: 'G72kLpKx4NQ', title: "WHAT A GAME 😲 | Liverpool 2-2 Manchester United | Premier League Highlights", label: "WHAT A GAME 😲 | Liverpool 2-2 Manchester United | Premier League Highlights by Sky Sports Premier League 1,586,778 views 18 hours ago 3 minutes, 19 seconds" },
 ];
 
     var box = makeBox(2, 2);
@@ -629,7 +718,7 @@ modules.push(function moon() {
 	var moonData = {
 		Percent:  '44.9',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/first-quarter.html" title="First Quarter on the night between 6 January and 7 January">First Quarter</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.449&p=0.238&r=0.266',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.449&p=0.235&r=0.263',
 		Location: '11609021'
 	}
 
