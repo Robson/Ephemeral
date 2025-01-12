@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>21:59 12-Jan - Ephemeral</title>		
+		<title>22:31 12-Jan - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -434,6 +434,52 @@ modules.push(function tv() {
 
 //////////////////////////////////////////////////
 
+modules.push(function youtube() {
+
+    var data = [
+{ id: 'SM66GDRyIVY', title: "I Helped 2,000 People Walk Again", label: "I Helped 2,000 People Walk Again by MrBeast 27,222,604 views 1 day ago 15 minutes" },
+{ id: 'WSKKzzYJxv0', title: "skibidi toilet - season 25 (all episodes)", label: "skibidi toilet - season 25 (all episodes) by DaFuq!?Boom! 9,491,182 views 20 hours ago 51 minutes" },
+{ id: '8_P-lBmHDxs', title: "HIGHLIGHTS | Trent and Chiesa on the scoresheet! | Liverpool v Accrington Stanley | FA Cup 24/25", label: "HIGHLIGHTS | Trent and Chiesa on the scoresheet! | Liverpool v Accrington Stanley | FA Cup 24/25 by ITV Sport 372,890 views 1 day ago 5 minutes, 4 seconds" },
+];
+
+    var box = makeBox(2, 2);
+    box
+        .append('div')
+        .attr('class', 'title')
+        .html('&#x1F4FC;<a href="https://www.youtube.com/feed/trending">YouTube Trending</a>')
+    box = box
+        .append('div')
+        .attr('class', 'inside');
+    var inside = box
+        .append('div');
+    var table = inside
+        .append('table')
+        .style('width', '80%')
+        .style('margin', '0 auto');
+
+    var count = 0;
+    for (var video of data) {
+        var row = table
+            .append('tr');
+        row
+            .append('td')
+            .append('a')
+            .attr('href', "https://www.youtube.com/watch?v=" + video.id)
+            .append('img')
+            .attr('src', 'https://i.ytimg.com/vi/' + video.id + '/hqdefault.jpg')
+            .style('width', (480 / 4) + 'px')
+            .style('height', (360 / 4) + 'px')
+            .style('text-align', 'right')
+            .attr('title', video.label);
+        row
+            .append('td')
+            .style('text-align', 'left')
+            .html(++count + '<br/><a href="https://www.youtube.com/watch?v=' + video.id + '">' + video.title + '</a>');
+    }
+});
+
+//////////////////////////////////////////////////
+
 modules.push(function vanguard() {
 
 	var data = [{ number: 230.49, tooltip: "Fri, Jan 10, 2025<br/>£230.49"},
@@ -528,57 +574,11 @@ modules.push(function vanguard() {
 
 //////////////////////////////////////////////////
 
-modules.push(function youtube() {
-
-    var data = [
-{ id: '3w4GxZh6hCY', title: "HIGHLIGHTS | Trent and Chiesa on the scoresheet! | Liverpool v Accrington Stanley | FA Cup 24/25", label: "HIGHLIGHTS | Trent and Chiesa on the scoresheet! | Liverpool v Accrington Stanley | FA Cup 24/25 by ITV Sport 370,477 views 1 day ago 5 minutes, 4 seconds" },
-{ id: 'bubNPYhj7sc', title: "HIGHLIGHTS | Grealish scores in rout! | Man City v Salford City | FA Cup 24/25", label: "HIGHLIGHTS | Grealish scores in rout! | Man City v Salford City | FA Cup 24/25 by ITV Sport 269,637 views 1 day ago 3 minutes, 53 seconds" },
-{ id: '8_P-lBmHDxs', title: "Liverpool v Accrington Stanley | Key Moments | Third Round | Emirates FA Cup 2024-25", label: "Liverpool v Accrington Stanley | Key Moments | Third Round | Emirates FA Cup 2024-25 by The Emirates FA Cup 2,050,516 views 1 day ago 2 minutes, 19 seconds" },
-];
-
-    var box = makeBox(2, 2);
-    box
-        .append('div')
-        .attr('class', 'title')
-        .html('&#x1F4FC;<a href="https://www.youtube.com/feed/trending">YouTube Trending</a>')
-    box = box
-        .append('div')
-        .attr('class', 'inside');
-    var inside = box
-        .append('div');
-    var table = inside
-        .append('table')
-        .style('width', '80%')
-        .style('margin', '0 auto');
-
-    var count = 0;
-    for (var video of data) {
-        var row = table
-            .append('tr');
-        row
-            .append('td')
-            .append('a')
-            .attr('href', "https://www.youtube.com/watch?v=" + video.id)
-            .append('img')
-            .attr('src', 'https://i.ytimg.com/vi/' + video.id + '/hqdefault.jpg')
-            .style('width', (480 / 4) + 'px')
-            .style('height', (360 / 4) + 'px')
-            .style('text-align', 'right')
-            .attr('title', video.label);
-        row
-            .append('td')
-            .style('text-align', 'left')
-            .html(++count + '<br/><a href="https://www.youtube.com/watch?v=' + video.id + '">' + video.title + '</a>');
-    }
-});
-
-//////////////////////////////////////////////////
-
 modules.push(function moon() {
 	var moonData = {
 		Percent:  '98.6',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waxing-gibbous.html" title="Waxing Gibbous on the night between 12 January and 13 January">Waxing Gibbous</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.986&p=0.903&r=0.538',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.986&p=0.765&r=0.391',
 		Location: '11609021'
 	}
 
