@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>13:09 12-Jan - Ephemeral</title>		
+		<title>13:19 12-Jan - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -262,64 +262,6 @@ modules.push(function bbcCombine() {
 
 //////////////////////////////////////////////////
 
-modules.push(function weather() {
-    var weatherLocation = "11609021";
-
-    var data={"copyright":"Contents are strictly for use by timeanddate.com","units":{"temp":"°C","prec":"mm","wind":"mph","baro":"mbar"},"detail":[{"hl":true,"hls":"6 Jan – 12 Jan","date":173664E7,"ts":"Sun, 12","ds":"Sun, 12 Jan","icon":2,"desc":"Decreasing cloudiness.","temp":5,"templow":-1,"cf":2,"wind":7,"wd":170,"hum":85,"pc":3},{"hl":true,"hls":"13 Jan – 19 Jan","date":17367264E5,"ts":"Mon, 13","ds":"Mon, 13 Jan","icon":7,"desc":"Overcast.","temp":6,"templow":1,"cf":1,"wind":12,"wd":190,"hum":82,"pc":4},{"date":17368128E5,"ts":"Tue, 14","ds":"Tue, 14 Jan","icon":7,"desc":"Overcast.","temp":9,"templow":4,"cf":7,"wind":7,"wd":250,"hum":88,"pc":14,"rain":0.1 },{"date":17368992E5,"ts":"Wed, 15","ds":"Wed, 15 Jan","icon":2,"desc":"Decreasing cloudiness.","temp":10,"templow":3,"cf":7,"wind":5,"wd":220,"hum":83,"pc":0},{"date":17369856E5,"ts":"Thu, 16","ds":"Thu, 16 Jan","icon":1,"desc":"Sunny.","temp":9,"templow":0,"cf":7,"wind":6,"wd":200,"hum":81,"pc":0},{"date":1737072E6,"ts":"Fri, 17","ds":"Fri, 17 Jan","icon":1,"desc":"Sunny.","temp":9,"templow":2,"cf":5,"wind":9,"wd":170,"hum":82,"pc":0},{"date":17371584E5,"ts":"Sat, 18","ds":"Sat, 18 Jan","icon":2,"desc":"Scattered clouds.","temp":8,"templow":2,"cf":4,"wind":12,"wd":190,"hum":83,"pc":0},{"date":17372448E5,"ts":"Sun, 19","ds":"Sun, 19 Jan","icon":7,"desc":"Overcast.","temp":9,"templow":5,"cf":6,"wind":15,"wd":160,"hum":87,"pc":4},{"hl":true,"hls":"20 Jan – 26 Jan","date":17373312E5,"ts":"Mon, 20","ds":"Mon, 20 Jan","icon":7,"desc":"Cloudy.","temp":8,"templow":6,"cf":4,"wind":17,"wd":130,"hum":70,"pc":6},{"date":17374176E5,"ts":"Tue, 21","ds":"Tue, 21 Jan","icon":18,"desc":"Sprinkles. Partly cloudy.","temp":8,"templow":5,"cf":4,"wind":21,"wd":180,"hum":69,"pc":50,"rain":0.8 },{"date":1737504E6,"ts":"Wed, 22","ds":"Wed, 22 Jan","icon":18,"desc":"Sprinkles. Overcast.","temp":8,"templow":5,"cf":5,"wind":14,"wd":250,"hum":74,"pc":66,"rain":3.2 },{"date":17375904E5,"ts":"Thu, 23","ds":"Thu, 23 Jan","icon":19,"desc":"Rain. Overcast.","temp":9,"templow":6,"cf":5,"wind":21,"wd":210,"hum":77,"pc":72,"rain":9.9 },{"date":17376768E5,"ts":"Fri, 24","ds":"Fri, 24 Jan","icon":18,"desc":"Sprinkles late. Morning clouds.","temp":8,"templow":5,"cf":4,"wind":11,"wd":260,"hum":68,"pc":55,"rain":0.3 },{"date":17377632E5,"ts":"Sat, 25","ds":"Sat, 25 Jan","icon":2,"desc":"Mostly sunny.","temp":6,"templow":1,"cf":2,"wind":8,"wd":270,"hum":61,"pc":6},{"date":17378496E5,"ts":"Sun, 26","ds":"Sun, 26 Jan","icon":18,"desc":"Sprinkles late. Afternoon clouds.","temp":5,"templow":0,"cf":2,"wind":12,"wd":190,"hum":73,"pc":54,"rain":1.5 }],"grid":{"temp":{"low":-1,"high":10,"range":11},"prec":{"high":9.9},"time":86400000,"sections":15},"conv":{"prec":{"offset":0,"scale":1},"temp":{"offset":0,"scale":1},"wind":{"offset":0,"scale":0.869},"baro":{"offset":0,"scale":1}}};
-
-
-    var box = makeBox(2, 2);
-    box
-        .append('div')
-        .attr('class', 'title')
-        .html('&#127746;<a href="https://www.timeanddate.com/weather/@' + weatherLocation + '/ext">Weather</a>')
-    box = box
-        .append('div')
-        .attr('class', 'inside');
-    var inside = box
-        .append('div');
-    var table = inside
-        .append('table');
-
-    for (var day of data.detail.slice(0, 7)) {
-        var row = table
-            .append('tr');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .style('font-weight', 'bold')
-            .html(day.ds.split(',')[0] + ':&nbsp;');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .attr('class', 'code')
-            .html(day.templow + '&#xb0;');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .attr('class', 'code')
-            .html('to');
-        row
-            .append('td')
-            .style('text-align', 'right')
-            .attr('class', 'code')
-            .html(day.temp + '&#xb0;');
-        row
-            .append('td')
-            .style('text-align', 'center')
-            .append('img')
-            .attr('src', 'https://c.tadst.com/gfx/w/svg/wt-' + day.icon + '.svg')
-            .attr('width', '32px')
-            .attr('height', '32px');
-        row
-            .append('td')
-            .style('text-align', 'left')
-            .html(day.desc)
-    }
-});
-
-//////////////////////////////////////////////////
-
 modules.push(function astronomy() {
 	var imageData = {
 		Source:    'https://apod.nasa.gov/apod/image/2501/Mimas_Cassini_960.jpg',
@@ -566,9 +508,9 @@ modules.push(function backlog() {
 modules.push(function youtube() {
 
     var data = [
-{ id: '3w4GxZh6hCY', title: "HIGHLIGHTS | Trent and Chiesa on the scoresheet! | Liverpool v Accrington Stanley | FA Cup 24/25", label: "HIGHLIGHTS | Trent and Chiesa on the scoresheet! | Liverpool v Accrington Stanley | FA Cup 24/25 by ITV Sport 328,451 views 22 hours ago 5 minutes, 4 seconds" },
-{ id: 'k0Yw7nW-wXI', title: "Liverpool v Accrington Stanley | Key Moments | Third Round | Emirates FA Cup 2024-25", label: "Liverpool v Accrington Stanley | Key Moments | Third Round | Emirates FA Cup 2024-25 by The Emirates FA Cup 1,837,925 views 22 hours ago 2 minutes, 19 seconds" },
-{ id: '8_P-lBmHDxs', title: "I Helped 2,000 People Walk Again", label: "I Helped 2,000 People Walk Again by MrBeast 21,820,653 views 20 hours ago 15 minutes" },
+{ id: '3w4GxZh6hCY', title: "HIGHLIGHTS | Trent and Chiesa on the scoresheet! | Liverpool v Accrington Stanley | FA Cup 24/25", label: "HIGHLIGHTS | Trent and Chiesa on the scoresheet! | Liverpool v Accrington Stanley | FA Cup 24/25 by ITV Sport 330,286 views 22 hours ago 5 minutes, 4 seconds" },
+{ id: 'k0Yw7nW-wXI', title: "Liverpool v Accrington Stanley | Key Moments | Third Round | Emirates FA Cup 2024-25", label: "Liverpool v Accrington Stanley | Key Moments | Third Round | Emirates FA Cup 2024-25 by The Emirates FA Cup 1,844,907 views 22 hours ago 2 minutes, 19 seconds" },
+{ id: '8_P-lBmHDxs', title: "I Helped 2,000 People Walk Again", label: "I Helped 2,000 People Walk Again by MrBeast 21,933,868 views 20 hours ago 15 minutes" },
 ];
 
     var box = makeBox(2, 2);
@@ -609,11 +551,25 @@ modules.push(function youtube() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in media module: The message filter indicated that the application is busy. (0x8001010A (RPC_E_SERVERCALL_RETRYLATER))');
-
-//////////////////////////////////////////////////
-
-console.log('Error in singles module: The remote server returned an error: (403) Forbidden.');
+modules.push(function media() {
+	var html = '<p style="font-weight:bold;padding:10px 0 0 0">Audiobooks</p><ul><li><a href="https://www.google.com/search?q=Audiobooks+-+The Turbulent Term of Tyke Tyler (Gene Kemp, 1977)">The Turbulent Term of Tyke Tyler (Gene Kemp, 1977)</a></li><li><a href="https://www.google.com/search?q=Audiobooks+-+Around the World in 80 Days (Jules Verne, 1873)">Around the World in 80 Days (Jules Verne, 1873)</a></li><li><a href="https://www.google.com/search?q=Audiobooks+-+Animal Farm (George Orwell, 1945)">Animal Farm (George Orwell, 1945)</a></li><li><a href="https://www.google.com/search?q=Audiobooks+-+Sherlock Holmes: A Study in Scarlet (Arthur Conan Doyle, 1887)">Sherlock Holmes: A Study in Scarlet (Arthur Conan Doyle, 1887)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">Books</p><ul><li><a href="https://www.google.com/search?q=Books+-+Strong Female Character (Fern Brady, 2023)">Strong Female Character (Fern Brady, 2023)</a></li><li><a href="https://www.google.com/search?q=Books+-+Foster (Claire Keegan, 2010)">Foster (Claire Keegan, 2010)</a></li><li><a href="https://www.google.com/search?q=Books+-+Impulse Buy (Jae, 2024)">Impulse Buy (Jae, 2024)</a></li><li><a href="https://www.google.com/search?q=Books+-+Bachelorette Number Twelve (Jae, 2024)">Bachelorette Number Twelve (Jae, 2024)</a></li><li><a href="https://www.google.com/search?q=Books+-+The Monkey\'s Paw (W.W. Jacobs, 1902)">The Monkey\'s Paw (W.W. Jacobs, 1902)</a></li><li><a href="https://www.google.com/search?q=Books+-+Fire Season (Philip Connors, 2011)">Fire Season (Philip Connors, 2011)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">Films</p><ul><li><a href="https://www.google.com/search?q=Films+-+One Sings, the Other Doesn\'t (1977)">One Sings, the Other Doesn\'t (1977)</a></li><li><a href="https://www.google.com/search?q=Films+-+The Private Life of a Cat (1946)">The Private Life of a Cat (1946)</a></li><li><a href="https://www.google.com/search?q=Films+-+Certain Women (2016)">Certain Women (2016)</a></li><li><a href="https://www.google.com/search?q=Films+-+Girls of the Night (1961)">Girls of the Night (1961)</a></li><li><a href="https://www.google.com/search?q=Films+-+I Saw the TV Glow (2024)">I Saw the TV Glow (2024)</a></li><li><a href="https://www.google.com/search?q=Films+-+Hayley Wagner, Star (1999)">Hayley Wagner, Star (1999)</a></li><li><a href="https://www.google.com/search?q=Films+-+The Lovely Bones (2009)">The Lovely Bones (2009)</a></li><li><a href="https://www.google.com/search?q=Films+-+The Cabinet of Dr. Caligari (1920)">The Cabinet of Dr. Caligari (1920)</a></li><li><a href="https://www.google.com/search?q=Films+-+Olivia (1951)">Olivia (1951)</a></li><li><a href="https://www.google.com/search?q=Films+-+Mirror (1975)">Mirror (1975)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">Games</p><ul><li><a href="https://www.google.com/search?q=Games+-+Agent A (2019)">Agent A (2019)</a></li><li><a href="https://www.google.com/search?q=Games+-+Sizeable (2021)">Sizeable (2021)</a></li><li><a href="https://www.google.com/search?q=Games+-+Inbento (2019)">Inbento (2019)</a></li><li><a href="https://www.google.com/search?q=Games+-+A Little to the Left: Seeing Stars (2024)">A Little to the Left: Seeing Stars (2024)</a></li><li><a href="https://www.google.com/search?q=Games+-+A Little to the Left: Cupboards & Drawers (2023)">A Little to the Left: Cupboards & Drawers (2023)</a></li><li><a href="https://www.google.com/search?q=Games+-+A Little to the Left (2022)">A Little to the Left (2022)</a></li><li><a href="https://www.google.com/search?q=Games+-+Wilmot\'s Warehouse (2019)">Wilmot\'s Warehouse (2019)</a></li><li><a href="https://www.google.com/search?q=Games+-+Taiji (2022)">Taiji (2022)</a></li><li><a href="https://www.google.com/search?q=Games+-+The Witness (2016)">The Witness (2016)</a></li><li><a href="https://www.google.com/search?q=Games+-+Red Dead Redemption 2 (2019)">Red Dead Redemption 2 (2019)</a></li></ul><p style="font-weight:bold;padding:10px 0 0 0">TV</p><ul><li><a href="https://www.google.com/search?q=TV+-+Ludwig (S1, 2024)">Ludwig (S1, 2024)</a></li><li><a href="https://www.google.com/search?q=TV+-+Buffy the Vampire Slayer (S5, 2001)">Buffy the Vampire Slayer (S5, 2001)</a></li><li><a href="https://www.google.com/search?q=TV+-+Flowers (S1-2, 2016-2018)">Flowers (S1-2, 2016-2018)</a></li><li><a href="https://www.google.com/search?q=TV+-+House of the Dragon (S2, 2024)">House of the Dragon (S2, 2024)</a></li><li><a href="https://www.google.com/search?q=TV+-+Normal People (S1, 2020)">Normal People (S1, 2020)</a></li><li><a href="https://www.google.com/search?q=TV+-+Derry Girls (S1-3, 2018-2022)">Derry Girls (S1-3, 2018-2022)</a></li><li><a href="https://www.google.com/search?q=TV+-+Lost Boys & Fairies (S1, 2024)">Lost Boys & Fairies (S1, 2024)</a></li><li><a href="https://www.google.com/search?q=TV+-+Extras (S1-2, 2005-2006)">Extras (S1-2, 2005-2006)</a></li><li><a href="https://www.google.com/search?q=TV+-+Inside No. 9 (S9, 2024)">Inside No. 9 (S9, 2024)</a></li><li><a href="https://www.google.com/search?q=TV+-+Atypical (S1-4, 2017-2021)">Atypical (S1-4, 2017-2021)</a></li></ul>';
+	var box = makeBox(2, 4);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F3AC;Recently Completed Media')
+	box = box
+		.append('div')
+		.attr('class', 'inside');
+	var inside = box
+		.append('div')
+		.attr('class', 'condensed')
+		.style('text-align', 'left');
+	inside
+		.append('div')
+		.style('text-align', 'left')
+		.html(html);
+});
 
 //////////////////////////////////////////////////
 
@@ -711,15 +667,11 @@ modules.push(function vanguard() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in crypto module: The remote server returned an error: (429) Too Many Requests.');
-
-//////////////////////////////////////////////////
-
 modules.push(function moon() {
 	var moonData = {
 		Percent:  '97.5',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waxing-gibbous.html" title="Waxing Gibbous on the night between 12 January and 13 January">Waxing Gibbous</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.975&p=0.646&r=0.375',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.975&p=0.668&r=0.397',
 		Location: '11609021'
 	}
 
