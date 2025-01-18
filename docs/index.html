@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>21:32 18-Jan - Ephemeral</title>		
+		<title>22:32 18-Jan - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -437,9 +437,9 @@ modules.push(function tv() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'itpcsQQvgAQ', title: "Nintendo Switch 2 – First-look trailer", label: "Nintendo Switch 2 – First-look trailer by Nintendo of America 18,078,208 views 2 days ago 2 minutes, 22 seconds" },
-{ id: 'Kb3IP7daiKY', title: "Amad Diallo Nets 12 Minute Hat-Trick ⭐ | Man United 3-1 Southampton | Premier League Highlights", label: "Amad Diallo Nets 12 Minute Hat-Trick ⭐ | Man United 3-1 Southampton | Premier League Highlights by TNT Sports 411,738 views 1 day ago 3 minutes" },
-{ id: '-y49sNywb8U', title: "Central Cee \u0026 21 Savage - GBP (Official Music Video)", label: "Central Cee \u0026 21 Savage - GBP (Official Music Video) by Lyrical Lemonade 3,695,638 views 1 day ago 3 minutes, 14 seconds" },
+{ id: 'itpcsQQvgAQ', title: "Nintendo Switch 2 – First-look trailer", label: "Nintendo Switch 2 – First-look trailer by Nintendo of America 18,135,960 views 2 days ago 2 minutes, 22 seconds" },
+{ id: '_Cu9Df_9Zvg', title: "Central Cee \u0026 21 Savage - GBP (Official Music Video)", label: "Central Cee \u0026 21 Savage - GBP (Official Music Video) by Lyrical Lemonade 3,770,159 views 1 day ago 3 minutes, 14 seconds" },
+{ id: '-y49sNywb8U', title: "Amad Diallo Nets 12 Minute Hat-Trick ⭐ | Man United 3-1 Southampton | Premier League Highlights", label: "Amad Diallo Nets 12 Minute Hat-Trick ⭐ | Man United 3-1 Southampton | Premier League Highlights by TNT Sports 412,997 views 2 days ago 3 minutes" },
 ];
 
     var box = makeBox(2, 2);
@@ -577,9 +577,9 @@ modules.push(function vanguard() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '76.6',
+		Percent:  '76.3',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-gibbous.html" title="Waning Gibbous on the night between 18 January and 19 January">Waning Gibbous</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.766&p=4.201&r=1.035',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.763&p=4.204&r=1.037',
 		Location: '11609021'
 	}
 
@@ -706,7 +706,96 @@ modules.push(function astronauts() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in backlog module: The message filter indicated that the application is busy. (0x8001010A (RPC_E_SERVERCALL_RETRYLATER))');
+modules.push(function backlog() {
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4CB;Backlog')
+	var table = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('table')
+		.style('text-align', 'right');
+
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Audiobooks:");
+	row
+		.append('td')
+		.text('12')
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Books:");
+	row
+		.append('td')
+		.text('14');
+
+	//row = table
+	//	.append('tr');
+	//row
+	//	.append('td')
+	//	.text("Films:");
+	//row
+	//	.append('td')
+	//	.text('{{COUNT_FILMS}}');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Games:");
+	row
+		.append('td')
+		.text('7');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("TV:");
+	row
+		.append('td')
+		.text('77');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("YouTube:");
+	row
+		.append('td')
+		.text('5');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Downloads:");
+	row
+		.append('td')
+		.text('19');
+
+	if (+"0" > 0) {
+		row = table
+			.append('tr');
+		row
+			.append('td')
+			.text("Steam Wishlist:");
+		row
+			.append('td')
+			.text('0');
+	}
+});
 
 //////////////////////////////////////////////////
 
