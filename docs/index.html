@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>01:59 27-Jan - Ephemeral</title>		
+		<title>02:59 27-Jan - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -386,9 +386,9 @@ modules.push(function tv() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'mS2rJ2bIzwQ', title: "SIDEMEN AMONG US BUT WE ADD A NEW ROLE EVERY SINGLE GAME (2 HOUR SPECIAL)", label: "SIDEMEN AMONG US BUT WE ADD A NEW ROLE EVERY SINGLE GAME (2 HOUR SPECIAL) by MoreSidemen 3,812,788 views 1 day ago 2 hours, 13 minutes" },
-{ id: 'sF5LYGgKbUA', title: "Every Minute One Person Is Eliminated", label: "Every Minute One Person Is Eliminated by MrBeast 40,705,719 views 1 day ago 34 minutes" },
-{ id: 'MfgWDyJ2z0M', title: "HIGHLIGHTS | Real Valladolid 0-3 Real Madrid | Kylian Mbappé scores first hat-trick for Real Madrid", label: "HIGHLIGHTS | Real Valladolid 0-3 Real Madrid | Kylian Mbappé scores first hat-trick for Real Madrid by Premier Sports 284,712 views 1 day ago 5 minutes" },
+{ id: 'mS2rJ2bIzwQ', title: "SIDEMEN AMONG US BUT WE ADD A NEW ROLE EVERY SINGLE GAME (2 HOUR SPECIAL)", label: "SIDEMEN AMONG US BUT WE ADD A NEW ROLE EVERY SINGLE GAME (2 HOUR SPECIAL) by MoreSidemen 3,884,214 views 1 day ago 2 hours, 13 minutes" },
+{ id: 'sF5LYGgKbUA', title: "Every Minute One Person Is Eliminated", label: "Every Minute One Person Is Eliminated by MrBeast 41,083,271 views 1 day ago 34 minutes" },
+{ id: 'MfgWDyJ2z0M', title: "HIGHLIGHTS | Real Valladolid 0-3 Real Madrid | Kylian Mbappé scores first hat-trick for Real Madrid", label: "HIGHLIGHTS | Real Valladolid 0-3 Real Madrid | Kylian Mbappé scores first hat-trick for Real Madrid by Premier Sports 286,515 views 1 day ago 5 minutes" },
 ];
 
     var box = makeBox(2, 2);
@@ -527,9 +527,9 @@ modules.push(function vanguard() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '7.2',
+		Percent:  '7.0',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-crescent.html" title="Waning Crescent on the night between 26 January and 27 January">Waning Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.072&p=3.703&r=0.708',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.070&p=3.699&r=0.706',
 		Location: '11609021'
 	}
 
@@ -656,7 +656,96 @@ modules.push(function astronauts() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in backlog module: The message filter indicated that the application is busy. (0x8001010A (RPC_E_SERVERCALL_RETRYLATER))');
+modules.push(function backlog() {
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4CB;Backlog')
+	var table = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('table')
+		.style('text-align', 'right');
+
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Audiobooks:");
+	row
+		.append('td')
+		.text('12')
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Books:");
+	row
+		.append('td')
+		.text('14');
+
+	//row = table
+	//	.append('tr');
+	//row
+	//	.append('td')
+	//	.text("Films:");
+	//row
+	//	.append('td')
+	//	.text('{{COUNT_FILMS}}');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Games:");
+	row
+		.append('td')
+		.text('14');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("TV:");
+	row
+		.append('td')
+		.text('77');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("YouTube:");
+	row
+		.append('td')
+		.text('5');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Downloads:");
+	row
+		.append('td')
+		.text('28');
+
+	if (+"0" > 0) {
+		row = table
+			.append('tr');
+		row
+			.append('td')
+			.text("Steam Wishlist:");
+		row
+			.append('td')
+			.text('0');
+	}
+});
 
 //////////////////////////////////////////////////
 
