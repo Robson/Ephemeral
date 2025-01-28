@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>01:59 28-Jan - Ephemeral</title>		
+		<title>02:59 28-Jan - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -386,9 +386,9 @@ modules.push(function tv() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'cp47boI0_Vo', title: "I BOUGHT A WRECKED RANGE ROVER SVR \u0026 ATTEMPTED TO REBUILD IT IN 7 DAYS", label: "I BOUGHT A WRECKED RANGE ROVER SVR \u0026 ATTEMPTED TO REBUILD IT IN 7 DAYS by Mat Armstrong 2,846,718 views 1 day ago 56 minutes" },
-{ id: 'mS2rJ2bIzwQ', title: "SIDEMEN AMONG US BUT WE ADD A NEW ROLE EVERY SINGLE GAME (2 HOUR SPECIAL)", label: "SIDEMEN AMONG US BUT WE ADD A NEW ROLE EVERY SINGLE GAME (2 HOUR SPECIAL) by MoreSidemen 5,527,244 views 2 days ago 2 hours, 13 minutes" },
-{ id: '0H13iN_LCuY', title: "China's DeepSeek triggers global tech sell-off", label: "China's DeepSeek triggers global tech sell-off by CNBC Television 1,407,772 views 13 hours ago 8 minutes, 23 seconds" },
+{ id: 'cp47boI0_Vo', title: "I BOUGHT A WRECKED RANGE ROVER SVR \u0026 ATTEMPTED TO REBUILD IT IN 7 DAYS", label: "I BOUGHT A WRECKED RANGE ROVER SVR \u0026 ATTEMPTED TO REBUILD IT IN 7 DAYS by Mat Armstrong 2,874,912 views 1 day ago 56 minutes" },
+{ id: 'mS2rJ2bIzwQ', title: "SIDEMEN AMONG US BUT WE ADD A NEW ROLE EVERY SINGLE GAME (2 HOUR SPECIAL)", label: "SIDEMEN AMONG US BUT WE ADD A NEW ROLE EVERY SINGLE GAME (2 HOUR SPECIAL) by MoreSidemen 5,582,568 views 2 days ago 2 hours, 13 minutes" },
+{ id: '0H13iN_LCuY', title: "China's DeepSeek triggers global tech sell-off", label: "China's DeepSeek triggers global tech sell-off by CNBC Television 1,467,992 views 14 hours ago 8 minutes, 23 seconds" },
 ];
 
     var box = makeBox(2, 2);
@@ -526,9 +526,9 @@ modules.push(function vanguard() {
 
 modules.push(function moon() {
 	var moonData = {
-		Percent:  '2.7',
+		Percent:  '2.6',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waning-crescent.html" title="Waning Crescent on the night between 27 January and 28 January">Waning Crescent</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.027&p=3.434&r=0.544',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.026&p=3.477&r=0.592',
 		Location: '11609021'
 	}
 
@@ -655,96 +655,7 @@ modules.push(function astronauts() {
 
 //////////////////////////////////////////////////
 
-modules.push(function backlog() {
-	var box = makeBox(1, 1);
-	box
-		.append('div')
-		.attr('class', 'title')
-		.html('&#x1F4CB;Backlog')
-	var table = box
-		.append('div')
-		.attr('class', 'inside')
-		.append('table')
-		.style('text-align', 'right');
-
-	var row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Audiobooks:");
-	row
-		.append('td')
-		.text('12')
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Books:");
-	row
-		.append('td')
-		.text('14');
-
-	//row = table
-	//	.append('tr');
-	//row
-	//	.append('td')
-	//	.text("Films:");
-	//row
-	//	.append('td')
-	//	.text('{{COUNT_FILMS}}');
-
-	/*
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Games:");
-	row
-		.append('td')
-		.text('10');
-	*/
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("TV:");
-	row
-		.append('td')
-		.text('77');
-
-	/*
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("YouTube:");
-	row
-		.append('td')
-		.text('5');
-	*/
-
-	row = table
-		.append('tr');
-	row
-		.append('td')
-		.text("Downloads:");
-	row
-		.append('td')
-		.text('14');
-
-	if (+"0" > 0) {
-		row = table
-			.append('tr');
-		row
-			.append('td')
-			.text("Steam Wishlist:");
-		row
-			.append('td')
-			.text('0');
-	}
-});
+console.log('Error in backlog module: The message filter indicated that the application is busy. (0x8001010A (RPC_E_SERVERCALL_RETRYLATER))');
 
 //////////////////////////////////////////////////
 
