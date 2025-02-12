@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>01:36 12-Feb - Ephemeral</title>		
+		<title>01:40 12-Feb - Ephemeral</title>		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -386,8 +386,8 @@ modules.push(function tv() {
 modules.push(function youtube() {
 
     var data = [
-{ id: 'KDorKy-13ak', title: "Kendrick Lamar's Apple Music Super Bowl Halftime Show", label: "Kendrick Lamar's Apple Music Super Bowl Halftime Show by NFL 38,019,305 views 1 day ago 13 minutes, 25 seconds" },
-{ id: 'cmSPwZIZu6Y', title: "Friendship | Official Trailer HD | A24", label: "Friendship | Official Trailer HD | A24 by A24 1,228,168 views 11 hours ago 2 minutes, 9 seconds" },
+{ id: 'KDorKy-13ak', title: "Kendrick Lamar's Apple Music Super Bowl Halftime Show", label: "Kendrick Lamar's Apple Music Super Bowl Halftime Show by NFL 38,084,032 views 1 day ago 13 minutes, 25 seconds" },
+{ id: 'cmSPwZIZu6Y', title: "Friendship | Official Trailer HD | A24", label: "Friendship | Official Trailer HD | A24 by A24 1,237,105 views 11 hours ago 2 minutes, 9 seconds" },
 { id: '0vGA2n3EiFo', title: "We Tried Not to Laugh at YOUR VIDEOS", label: "We Tried Not to Laugh at YOUR VIDEOS by George Clarkey 343,035 views 1 day ago 36 minutes" },
 ];
 
@@ -531,7 +531,7 @@ modules.push(function moon() {
 	var moonData = {
 		Percent:  '99.6',
 		Type:     '<a href="https://www.timeanddate.com/astronomy/moon/waxing-gibbous.html" title="Waxing Gibbous on the night between 11 February and 12 February">Waxing Gibbous</a>',
-		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.996&p=0.413&r=6.167',
+		Image:    'https://www.timeanddate.com/scripts/moon.php?i=0.996&p=0.402&r=6.154',
 		Location: '11609021'
 	}
 
@@ -658,7 +658,96 @@ modules.push(function astronauts() {
 
 //////////////////////////////////////////////////
 
-console.log('Error in backlog module: The message filter indicated that the application is busy. (0x8001010A (RPC_E_SERVERCALL_RETRYLATER))');
+modules.push(function backlog() {
+	var box = makeBox(1, 1);
+	box
+		.append('div')
+		.attr('class', 'title')
+		.html('&#x1F4CB;Backlog')
+	var table = box
+		.append('div')
+		.attr('class', 'inside')
+		.append('table')
+		.style('text-align', 'right');
+
+	var row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Audiobooks:");
+	row
+		.append('td')
+		.text('12')
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Books:");
+	row
+		.append('td')
+		.text('14');
+
+	//row = table
+	//	.append('tr');
+	//row
+	//	.append('td')
+	//	.text("Films:");
+	//row
+	//	.append('td')
+	//	.text('{{COUNT_FILMS}}');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Games:");
+	row
+		.append('td')
+		.text('11');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("TV:");
+	row
+		.append('td')
+		.text('83');
+
+	/*
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("YouTube:");
+	row
+		.append('td')
+		.text('5');
+	*/
+
+	row = table
+		.append('tr');
+	row
+		.append('td')
+		.text("Downloads:");
+	row
+		.append('td')
+		.text('14');
+
+	if (+"0" > 0) {
+		row = table
+			.append('tr');
+		row
+			.append('td')
+			.text("Steam Wishlist:");
+		row
+			.append('td')
+			.text('0');
+	}
+});
 
 //////////////////////////////////////////////////
 
